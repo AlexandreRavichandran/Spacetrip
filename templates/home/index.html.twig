@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Accueil{% endblock %}
+
+{% block body %}
+<div class="container mt-2">
+    <div class="jumbotron">
+        <h1 class="display-3">PROPULSEZ VOUS AVEC SPACETRIP !</h1>
+        <p class="lead"> Vous êtes-vous déjà demandé ce qu'il y avait au-dessus de vous? Avez-vous toujours révé d'aller dans l'espace ? Passez du rêve à la réalité avec SPACETRIP* !</p>
+        <hr class="my-4">
+        <p>* Les voyageurs de SPACETRIP doivent respecter certaines conditions pour parciiper aux voyages(Voir les détails sur les fiches voyages.) </p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+        </p>
+    </div>
+</div>
+<div class="container mt-4">
+    <h1> Les prochains voyages </h1>
+    <div class="row mb-2">
+        <div class="col-6">
+            <div class="card mb-3">
+                <h3 class="card-header text-center"> Titre 1 </h3>
+                <div class="card-body mb-2">
+                    <h6 class="card-subtitle text-muted text-center"> Date </h6>
+                </div>
+                <img src="https://placehold.it/300x300" alt="" class="w-75 text-center mb-4 ml-auto mr-auto">
+                <div class="card-footer text-muted text-center">
+                    <a href="#" class="card-link"> En savoir plus</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card mb-3">
+                <h3 class="card-header text-center"> Titre 1 </h3>
+                <div class="card-body mb-2">
+                    <h6 class="card-subtitle text-muted text-center"> Date </h6>
+                </div>
+                <img src="https://placehold.it/300x300" alt="" class="w-75 text-center mb-4 ml-auto mr-auto">
+                <div class="card-footer text-muted text-center">
+                    <a href="#" class="card-link"> En savoir plus</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
