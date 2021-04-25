@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Trip;
+use App\Repository\SpacecraftRepository;
 use App\Repository\TripRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,10 +30,12 @@ class TripController extends AbstractController
      * @Route("/trips/{name}", name="app_trip_show", methods={"GET"})
      * @return Response
      */
-    public function show(Trip $trip): Response
+    public function show(Trip $trip, SpacecraftRepository $repo): Response
     {
+        $spacecraft = $repo->findOneById($trip->getSpacecraft());
         return $this->render('trip/show.html.twig', [
-            'trip' => $trip
+            'trip' => $trip,
+            'spacecraft' => $spacecraft
         ]);
     }
 }

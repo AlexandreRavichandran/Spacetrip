@@ -37,19 +37,19 @@
                 <img class="ml-auto mr-auto" src="http://placehold.it/200x200" alt="">
             </div>
             <div class="row mt-2">
-                <h4 class=" ml-auto mr-auto"> JFUIJEUIJI (TESLA)</h4>
+                <h4 class=" ml-auto mr-auto"> {{spacecraft.name}} ({{spacecraft.brand}})</h4>
             </div>
             <div class="row">
-                <p class="ml-auto mr-auto"> Note moyenne des utilisateurs : 4/5 </p>
+                <p class="ml-auto mr-auto"> Note moyenne des utilisateurs : {{spacecraft.rating}}/5 </p>
             </div>
             <div class="row">
-                <h5 class="ml-auto mr-auto"> Origine : Russe </h5>
+                <h5 class="ml-auto mr-auto"> Origine : {{spacecraft.nationality}} </h5>
             </div>
             <div class="row mt-2">
                 <h6 class="ml-auto mr-auto">Caracteristiques techniques : </h6>
                 <ul>
-                    <li class="text-center"> Vitesse : 4800 km/h </li>
-                    <li class="text-center"> Nombre de places : 3 sièges </li>
+                    <li class="text-center"> Vitesse : {{spacecraft.speed}} km/h </li>
+                    <li class="text-center"> Nombre de places : {{spacecraft.numberOfSeat}} sièges </li>
                 </ul>
             </div>
         </div>
