@@ -14,7 +14,7 @@ final class Version20210425140940 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Create Trip table ';
     }
 
     public function up(Schema $schema): void
