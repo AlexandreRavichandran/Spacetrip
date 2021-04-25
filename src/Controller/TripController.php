@@ -9,7 +9,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class TripController extends AbstractController
 {
     /**
+     * Show all trips available
      * @Route("/trips", name="app_trips_show", methods={"GET"})
+     * @return Response
      */
     public function index(): Response
     {
