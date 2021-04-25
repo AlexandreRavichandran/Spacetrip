@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les voyages{% endblock %}
+
+{% block body %}
+
+<div class="container mt-4 text-center tripBackground">
+    <h1> VOYAGE {{trip.name }}</h1>
+    <h4> A destination de {{trip.destination}}</h4>
+</div>
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-md-8 bg-success">
+            <h5 class="text-center"> Détails du voyage </h5>
+        </div>
+        <div class="col-md-4 bg-secondary">
+            <h5 class="text-center"> Le vaisseau </h5>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

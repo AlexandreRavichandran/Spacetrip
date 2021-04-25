@@ -1,0 +1,8 @@
+.tripBackground{
+    height: 200px;
+    background-image: url('http://placehold.it/1150x300');
+    background-repeat: no-repeat;
+    width: 100%;
+    padding-top: 20px;
+
+}
