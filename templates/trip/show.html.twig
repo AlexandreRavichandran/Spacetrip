@@ -5,17 +5,53 @@
 {% block body %}
 
 <div class="container mt-4 text-center tripBackground">
-    <h1> VOYAGE {{trip.name }}</h1>
-    <h4> A destination de {{trip.destination}}</h4>
+    <h1> VOYAGE {{trip.name}} - {{trip.destination}}</h1>
+    <h2> {{trip.departureAt|date('d-m-Y')}} - {{trip.arrivalAt|date('d-m-Y')}}</h2>
 </div>
-<div class="container">
-    <div class="row mt-4">
-        <div class="col-md-8 bg-success">
-            <h5 class="text-center"> Détails du voyage </h5>
+<div class="container mt-2">
+    <div class="row">
+        <div class="col-md-8 ">
+            <h3 class="text-center"> Détails du voyage </h3>
+            <div class="row">
+                <p>{{trip.description}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam consequuntur aliquid quasi officia, vitae eos ratione incidunt voluptate doloremque adipisci sit sed? Aliquid, consequuntur quos? Perspiciatis magnam tenetur voluptatum reprehenderit.
+                Magnam officiis id voluptatibus sunt perspiciatis hic illum error beatae quis repellendus, sit, soluta quaerat illo? Molestiae ipsum magnam officiis quaerat sed tenetur, inventore tempora quod, veniam odio quisquam labore.
+                Corporis fugiat facere officia aspernatur cum ullam consequuntur quis! Inventore sit similique nobis officia molestiae ex saepe ad tenetur perspiciatis autem. Asperiores vitae ratione tempora et nostrum odit aliquid repudiandae!
+                Eum, quam assumenda sunt tenetur consequatur iure ab beatae accusamus vitae minima molestias, nam, nostrum ad explicabo. Est, quasi similique. Commodi ad quam quas architecto, libero cum vel similique molestiae?
+                A perspiciatis quia laboriosam et nisi fuga obcaecati quos magni esse molestias quasi libero nobis voluptatem porro fugit nulla similique perferendis, beatae explicabo reprehenderit! Rem alias perspiciatis minus fugit corporis!</p>
+            </div>
+            <div class="row">
+                <p> <i class="bi bi-exclamation-diamond-fill"></i> La participation à ce voyage requiert un bon etat physique. Veuillez consulter un medecin avant de reserver le voyage</p>
+            </div>
+            {% if trip.availableSeatNumber <= 2 %}
+                <p class="text-center" style="color:red"> Il reste actuellement {{trip.availableSeatNumber}} place(s) disponibles. N'attendez plus pour reserver ! </p>
+            {% else %}
+                 <p class="text-center"> Nombre de places disponibles pour ce voyage : {{trip.availableSeatNumber}} </p>
+            {% endif %}
+            <div class="row">
+                <button class="btn btn-primary ml-auto mr-auto"> Reserver une place </button>
+            </div>
         </div>
-        <div class="col-md-4 bg-secondary">
-            <h5 class="text-center"> Le vaisseau </h5>
-            
+        <div class="col-md-4 ">
+            <h3 class="text-center"> Le vaisseau </h3>
+            <div class="row">
+                <img class="ml-auto mr-auto" src="http://placehold.it/200x200" alt="">
+            </div>
+            <div class="row mt-2">
+                <h4 class=" ml-auto mr-auto"> JFUIJEUIJI (TESLA)</h4>
+            </div>
+            <div class="row">
+                <p class="ml-auto mr-auto"> Note moyenne des utilisateurs : 4/5 </p>
+            </div>
+            <div class="row">
+                <h5 class="ml-auto mr-auto"> Origine : Russe </h5>
+            </div>
+            <div class="row mt-2">
+                <h6 class="ml-auto mr-auto">Caracteristiques techniques : </h6>
+                <ul>
+                    <li class="text-center"> Vitesse : 4800 km/h </li>
+                    <li class="text-center"> Nombre de places : 3 sièges </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">Spacetrip</a>
+    <a class="navbar-brand" href="{{path('app_home')}}">Spacetrip</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -9,8 +9,12 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{path('app_trip_index')}}"> Les voyages </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Documentation</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Documentation</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Les destinations possibles</a>
+                    <a class="dropdown-item" href="#">Les vaisseaux de Spacetrip</a>
+                </div>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
