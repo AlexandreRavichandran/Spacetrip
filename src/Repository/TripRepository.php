@@ -19,6 +19,20 @@ class TripRepository extends ServiceEntityRepository
         parent::__construct($registry, Trip::class);
     }
 
+    /**
+     * Select the two next trips to come
+     *
+     * @return array
+     */
+    public function findLatestTrips(): array
+    {
+        return $this
+            ->createQueryBuilder('t')
+            ->orderBy('t.departureAt', 'ASC')
+            ->setMaxResults(2)
+            ->getQuery()
+            ->getResult();
+    }
     // /**
     //  * @return Trip[] Returns an array of Trip objects
     //  */

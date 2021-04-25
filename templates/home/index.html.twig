@@ -17,30 +17,23 @@
 <div class="container mt-4">
     <h1> Les prochains voyages </h1>
     <div class="row mb-2">
+    {% for trip in trips %}
         <div class="col-6">
             <div class="card mb-3">
-                <h3 class="card-header text-center"> Titre 1 </h3>
+                <div class="card-header">
+                    <h4 class="text-center"> {{trip.name}}</h4>
+                    <h5 class="text-center"> {{trip.destination}}</h5>
+                </div>
                 <div class="card-body mb-2">
-                    <h4 class="card-subtitle text-muted text-center"> Date </h4>
+                    <h4 class="card-subtitle text-muted text-center"> {{trip.departureAt|date('d-m-Y')}} - {{trip.arrivalAt|date('d-m-Y')}} </h4>
                 </div>
                 <img src="https://placehold.it/300x300" alt="" class="text-center mb-4 ml-auto mr-auto">
                 <div class="card-footer text-muted text-center">
-                    <a href="#" class="card-link"> En savoir plus</a>
+                    <a href="{{path('app_trip_show',{'name':trip.name})}}" class="card-link"> En savoir plus</a>
                 </div>
             </div>
         </div>
-        <div class="col-6">
-            <div class="card mb-3">
-                <h3 class="card-header text-center"> Titre 1 </h3>
-                <div class="card-body mb-2">
-                    <h4 class="card-subtitle text-muted text-center"> Date </h4>
-                </div>
-                <img src="https://placehold.it/300x300" alt="" class="text-center mb-4 ml-auto mr-auto">
-                <div class="card-footer text-muted text-center">
-                    <a href="#" class="card-link"> En savoir plus</a>
-                </div>
-            </div>
-        </div>
+    {% endfor %}
     </div>
 </div>
 <div class="container mt-4">
