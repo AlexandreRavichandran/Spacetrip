@@ -28,7 +28,7 @@ class TripRepository extends ServiceEntityRepository
     {
         return $this
             ->createQueryBuilder('t')
-            ->orderBy('t.departureAt', 'ASC')
+            ->orderBy('t.departureAt', 'DESC')
             ->setMaxResults(2)
             ->getQuery()
             ->getResult();

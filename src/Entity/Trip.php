@@ -62,6 +62,12 @@ class Trip
      */
     private $reserved;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Spacecraft::class, inversedBy="trip")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $spacecraft;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -171,6 +177,18 @@ class Trip
     public function setReserved(bool $reserved): self
     {
         $this->reserved = $reserved;
+
+        return $this;
+    }
+
+    public function getSpacecraft(): ?Spacecraft
+    {
+        return $this->spacecraft;
+    }
+
+    public function setSpacecraft(?Spacecraft $spacecraft): self
+    {
+        $this->spacecraft = $spacecraft;
 
         return $this;
     }
