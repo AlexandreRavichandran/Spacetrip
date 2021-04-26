@@ -31,7 +31,28 @@ class AdminSpacecraftController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
         return $this->render('admin/spacecraft/create.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'action' => 'create'
+        ]);
+    }
+    /**
+     * Edit a spacecraft
+     * @Route("/admin/spacecrafts/edit/{id}", name="app_admin_spacecraft_edit")
+     * @return Response
+     */
+    public function editSpacecraft(Spacecraft $spacecraft, Request $request, EntityManagerInterface $em): Response
+    {
+        $form = $this->createForm(SpacecraftType::class, $spacecraft);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $spacecraft = $form->getData();
+            $em->flush();
+            return $this->redirectToRoute('app_admin_home');
+        }
+        return $this->render('admin/spacecraft/edit.html.twig', [
+            'form' => $form->createView(),
+            'spacecraft' => $spacecraft,
+            'action' => 'edit'
         ]);
     }
 }

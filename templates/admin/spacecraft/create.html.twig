@@ -5,25 +5,6 @@
 {% block body %}
 <div class="container mt-4">
     <h1> Creation d'un nouveau vaisseau</h1>
-
-    {{form_start(form)}}
-    <div class="row">
-        <div class="col">
-            {{form_row(form.name)}}
-            {{form_row(form.brand)}}
-            {{form_row(form.nationality)}}
-        </div>
-        <div class="col">
-            {{form_row(form.numberOfSeat)}}
-            {{form_row(form.speed)}}
-            {{form_row(form.price)}}
-        </div>
-    </div>
-        {{form_row(form.possibleDestination)}}
-        {{form_row(form.description)}}
-    <div class="row">
-        <button class="btn btn-primary w-25 ml-auto mr-auto">Créer un nouveau vaisseau</button>
-    </div>
-    {{form_end(form)}}
+    {% include('admin/spacecraft/partials/_form.html.twig')%}
 </div>
 {% endblock %}

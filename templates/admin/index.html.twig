@@ -20,18 +20,18 @@
                 <tbody>
                     {% for trip in trips %}
                     <tr class="table">
-                        <td>{{trip.name}} ({{trip.destination}})</td>
+                        <td><a href="#">{{trip.name}} ({{trip.destination}})</a></td>
                         <td>{{trip.availableSeatNumber}}</td>
-                        <td>{{trip.updatedAt|date('d-m-Y')}}</td>
+                        <td>{{trip.updatedAt|date('d-m-Y H:i:s')}}</td>
                         <td class="d-flex flex-row">
-                            <button class="btn btn-sm btn-warning"> Editer</button>
-                            <button class="btn btn-sm btn-danger ml-1"> Supprimer</button>
+                            <button class="btn btn-sm btn-warning">Editer</button>
+                            <button class="btn btn-sm btn-danger ml-1">Supprimer</button>
                         </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
-            <p class="text-right"><a href="">Voir Tout </a> |<a href="{{path('app_admin_trip_create')}}"> Ajouter un nouveau voyage</a></p>
+            <p class="text-right"><a class="btn btn-sm btn-secondary " href="">Voir Tout</a> | <a class="btn btn-sm btn-secondary" href="{{path('app_admin_trip_create')}}">Ajouter un nouveau voyage</a></p>
         </div>
         <div class="col-6">
             <h3 class="text-center"> Les derniers vaisseaux ajoutés/mis à jour</h3>
@@ -49,16 +49,16 @@
                     <tr class="table">
                         <td>{{spacecraft.name}} - {{spacecraft.brand}}({{spacecraft.nationality}})</td>
                         <td>{{spacecraft.price}}</td>
-                        <td>{{spacecraft.updatedAt|date('d-m-Y')}}</td>
+                        <td>{{spacecraft.updatedAt|date('d-m-Y H:i:s')}}</td>
                         <td class="d-flex flex-row">
-                            <button class="btn btn-sm btn-warning"> Editer </button>
-                            <button class="btn btn-sm btn-danger ml-1"> Supprimer</button>
+                        <a href="{{path('app_admin_spacecraft_edit',{'id':spacecraft.id})}}" class="btn btn-sm btn-warning">Editer</a>
+                        <a href="" class="btn btn-sm btn-danger ml-1">Supprimer</a>
                         </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
-            <p class="text-right"><a href="">Voir Tout </a> |<a href="{{path('app_admin_spacecraft_create')}}">Ajouter un nouveau vaisseau</a></p>
+            <p class="text-right"><a class="btn btn-sm btn-secondary" href="">Voir Tout</a> | <a class="btn btn-sm btn-secondary" href="{{path('app_admin_spacecraft_create')}}">Ajouter un nouveau vaisseau</a></p>
         </div>
     </div>
 </div>

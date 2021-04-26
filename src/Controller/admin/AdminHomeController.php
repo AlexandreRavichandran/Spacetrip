@@ -11,13 +11,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminHomeController extends AbstractController
 {
     /**
-     * @Route("/admin/home", name="admin_home")
+     * @Route("/admin/home", name="app_admin_home")
      */
     public function index(TripRepository $tripRepository, SpacecraftRepository $spacecraftRepository): Response
     {
 
-        $trips = $tripRepository->findLatestTrips('createdAt', 5);
-        $spacecrafts = $spacecraftRepository->findLatestSpacecrafts('createdAt', 5);
+        $trips = $tripRepository->findLatestTrips('updatedAt', 5);
+        $spacecrafts = $spacecraftRepository->findLatestSpacecrafts('updatedAt', 5);
         return $this->render('admin/index.html.twig', [
             'trips' => $trips,
             'spacecrafts' => $spacecrafts
