@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin-Modification d'un vaisseau{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1> Modification du vaisseau {{spacecraft.name}} - {{spacecraft.brand}}</h1>
+    {% include('admin/spacecraft/partials/_form.html.twig')%}
+</div>
+{% endblock %}
