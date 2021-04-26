@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\admin;
 
 
 use App\Entity\Trip;
@@ -11,14 +11,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class AdminController extends AbstractController
+class AdminTripController extends AbstractController
 {
     /**
      * Create a new Trip
-     * @Route("/admin/trips/create", name="app_admin_trips_create")
+     * @Route("/admin/trips/create", name="app_admin_trip_create")
      * @return Response
      */
-    public function create(Request $request, EntityManagerInterface $em): Response
+    public function createTrip(Request $request, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(TripType::class);
         $form->handleRequest($request);
@@ -29,6 +29,6 @@ class AdminController extends AbstractController
             $em->flush();
             return $this->redirectToRoute('app_trip_show', ['name' => $trip->getName()]);
         }
-        return $this->render('admin/index.html.twig', ['form' => $form->createView()]);
+        return $this->render('admin/trip/create.html.twig', ['form' => $form->createView()]);
     }
 }
