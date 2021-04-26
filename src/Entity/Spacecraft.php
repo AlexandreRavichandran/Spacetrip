@@ -2,16 +2,21 @@
 
 namespace App\Entity;
 
-use App\Repository\SpacecraftRepository;
 use DateTimeImmutable;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\SpacecraftRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=SpacecraftRepository::class)
  * @ORM\HasLifecycleCallbacks()
+ *  * @UniqueEntity(
+ *              fields={"name"},
+ *              message="Ce vaisseau existe déja dans la base."
+ *)
  */
 class Spacecraft
 {

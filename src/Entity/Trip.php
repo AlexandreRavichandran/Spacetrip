@@ -2,13 +2,19 @@
 
 namespace App\Entity;
 
-use App\Repository\TripRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\TripRepository;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=TripRepository::class)
  * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity(
+ *              fields={"name"},
+ *              message="Un voyage de ce nom existe déja. Veuillez choisir un nom different."
+ *)
  */
 class Trip
 {
