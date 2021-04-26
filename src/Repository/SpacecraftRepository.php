@@ -19,6 +19,23 @@ class SpacecraftRepository extends ServiceEntityRepository
         parent::__construct($registry, Spacecraft::class);
     }
 
+    /**
+     * Select the latest created spacetrips
+     * @return array
+     */
+    public function findLatestSpacecrafts($field, $limit = null): array
+    {
+        return $this
+            ->createQueryBuilder('t')
+            ->orderBy('t.' . $field, 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+
+
+
     // /**
     //  * @return Spacecraft[] Returns an array of Spacecraft objects
     //  */

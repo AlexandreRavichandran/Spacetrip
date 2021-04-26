@@ -20,19 +20,19 @@ class TripRepository extends ServiceEntityRepository
     }
 
     /**
-     * Select the two next trips to come
-     *
+     * Select the latest trips
      * @return array
      */
-    public function findLatestTrips(): array
+    public function findLatestTrips($field, $limit = null): array
     {
         return $this
             ->createQueryBuilder('t')
-            ->orderBy('t.departureAt', 'DESC')
-            ->setMaxResults(2)
+            ->orderBy('t.' . $field, 'DESC')
+            ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
     }
+
     // /**
     //  * @return Trip[] Returns an array of Trip objects
     //  */

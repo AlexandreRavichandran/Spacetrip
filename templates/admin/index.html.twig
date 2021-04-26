@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page administrateur{% endblock %}
+
+{% block body %}
+<div class="container-fluid mt-2">
+    <h1 class="text-center"> Récapitulatif </h1>
+    <div class="row">
+        <div class="col-6">
+            <h3 class="text-center"> Les derniers voyages crées/mis à jour</h3>
+            <table class="table table-hover border">
+                <thead>
+                    <tr>
+                        <th>Nom (Destination)</th>
+                        <th>Places restantes</th>
+                        <th>Dernière mise à jour</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for trip in trips %}
+                    <tr class="table">
+                        <td>{{trip.name}} ({{trip.destination}})</td>
+                        <td>{{trip.availableSeatNumber}}</td>
+                        <td>{{trip.updatedAt|date('d-m-Y')}}</td>
+                        <td class="d-flex flex-row">
+                            <button class="btn btn-sm btn-warning"> Editer</button>
+                            <button class="btn btn-sm btn-danger ml-1"> Supprimer</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <p class="text-right"><a href="">Voir Tout </a> |<a href="{{path('app_admin_trip_create')}}"> Ajouter un nouveau voyage</a></p>
+        </div>
+        <div class="col-6">
+            <h3 class="text-center"> Les derniers vaisseaux ajoutés/mis à jour</h3>
+            <table class="table table-hover border">
+                <thead>
+                    <tr>
+                        <th>Nom - Marque (Origine)</th>
+                        <th>Prix</th>
+                        <th>Dernière mise à jour</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for spacecraft in spacecrafts %}
+                    <tr class="table">
+                        <td>{{spacecraft.name}} - {{spacecraft.brand}}({{spacecraft.nationality}})</td>
+                        <td>{{spacecraft.price}}</td>
+                        <td>{{spacecraft.updatedAt|date('d-m-Y')}}</td>
+                        <td class="d-flex flex-row">
+                            <button class="btn btn-sm btn-warning"> Editer </button>
+                            <button class="btn btn-sm btn-danger ml-1"> Supprimer</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <p class="text-right"><a href="">Voir Tout </a> |<a href="{{path('app_admin_spacecraft_create')}}">Ajouter un nouveau vaisseau</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

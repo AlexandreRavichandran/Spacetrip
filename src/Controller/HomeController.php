@@ -16,7 +16,7 @@ class HomeController extends AbstractController
      */
     public function index(TripRepository $repo): Response
     {
-        $trips = $repo->findLatestTrips();
+        $trips = $repo->findLatestTrips('departureAt', 2);
         return $this->render('home/index.html.twig', [
             'trips' => $trips
         ]);
