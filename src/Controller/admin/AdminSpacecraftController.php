@@ -28,6 +28,7 @@ class AdminSpacecraftController extends AbstractController
             $spacecraft->setRating(3);
             $em->persist($spacecraft);
             $em->flush();
+            $this->addFlash('success', 'L\'ajout du nouveau vaisseau a été effectué avec succès.');
             return $this->redirectToRoute('app_home');
         }
         return $this->render('admin/spacecraft/create.html.twig', [
@@ -47,6 +48,7 @@ class AdminSpacecraftController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $spacecraft = $form->getData();
             $em->flush();
+            $this->addFlash('success', 'La modification du vaisseau a été effectué avec succès.');
             return $this->redirectToRoute('app_admin_home');
         }
         return $this->render('admin/spacecraft/edit.html.twig', [

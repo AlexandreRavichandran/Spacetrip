@@ -27,6 +27,7 @@ class AdminTripController extends AbstractController
             $trip = $form->getData();
             $em->persist($trip);
             $em->flush();
+            $this->addFlash('success', 'La création du nouveau voyage a été effectué avec succès.');
             return $this->redirectToRoute('app_trip_show', ['name' => $trip->getName()]);
         }
         return $this->render('admin/trip/create.html.twig', ['form' => $form->createView()]);
