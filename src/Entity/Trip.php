@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use App\Repository\TripRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=TripRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Trip
 {
@@ -54,6 +56,7 @@ class Trip
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * 
      */
     private $availableSeatNumber;
 
@@ -114,21 +117,32 @@ class Trip
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    /**
+     * Automatically set the creation date
+     * @ORM\PrePersist
+     * @return self
+     */
+    public function setCreatedAt(): self
     {
-        $this->createdAt = $createdAt;
+        $this->createdAt = new \DateTimeImmutable();
 
         return $this;
     }
+
 
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    /**
+     * Automatically set the updated date
+     * @ORM\PreUpdate
+     * @return self
+     */
+    public function setUpdatedAt(): self
     {
-        $this->updatedAt = $updatedAt;
+        $this->updatedAt = new \DateTimeImmutable();
 
         return $this;
     }

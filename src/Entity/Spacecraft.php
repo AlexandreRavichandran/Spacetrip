@@ -3,12 +3,15 @@
 namespace App\Entity;
 
 use App\Repository\SpacecraftRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=SpacecraftRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Spacecraft
 {
@@ -190,10 +193,14 @@ class Spacecraft
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    /**
+     * Set automatically the date of creation
+     * @ORM\PrePersist
+     * @return self
+     */
+    public function setCreatedAt(): self
     {
-        $this->createdAt = $createdAt;
-
+        $this->createdAt = new \DateTimeImmutable();
         return $this;
     }
 
@@ -202,9 +209,14 @@ class Spacecraft
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    /**
+     * Set automatically the date of update
+     * @ORM\PreUpdate
+     * @return self
+     */
+    public function setUpdatedAt(): self
     {
-        $this->updatedAt = $updatedAt;
+        $this->updatedAt = new DateTimeImmutable();
 
         return $this;
     }
