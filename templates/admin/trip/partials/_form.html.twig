@@ -2,11 +2,11 @@
     <div class="row">
         <div class="col">
        
-            {{form_row(form.name)}}
-            {{form_row(form.destination)}}
+            {{form_row(form.name, {'id': 'name'})}}
+            {{form_row(form.destination, {'id': 'description'})}}
         </div>
         <div class="col">
-            {{form_row(form.availableSeatNumber)}}
+            {{form_row(form.availableSeatNumber, {'id': 'available_seat_number'})}}
             {{form_row(form.spacecraft)}}
         </div>
     </div>
@@ -18,7 +18,7 @@
         <div class="col">
             <div class="row">
                 <div class="col text-center">
-                    {{form_row(form.reserved)}}
+                    {{form_row(form.reserved,{'id': 'reserved_button'})}}
                 </div>
             </div>
         </div>
