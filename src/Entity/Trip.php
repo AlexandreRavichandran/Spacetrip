@@ -143,6 +143,7 @@ class Trip
 
     /**
      * Automatically set the updated date
+     * @ORM\PrePersist
      * @ORM\PreUpdate
      * @return self
      */

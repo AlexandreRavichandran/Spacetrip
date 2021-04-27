@@ -216,12 +216,13 @@ class Spacecraft
 
     /**
      * Set automatically the date of update
+     * @ORM\PrePersist
      * @ORM\PreUpdate
      * @return self
      */
     public function setUpdatedAt(): self
     {
-        $this->updatedAt = new DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
 
         return $this;
     }

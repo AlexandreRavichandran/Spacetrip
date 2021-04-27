@@ -2,8 +2,10 @@
 
 namespace App\Controller\admin;
 
+use App\Entity\Trip;
 use App\Entity\Spacecraft;
 use App\Form\SpacecraftType;
+use App\Repository\TripRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,7 +31,7 @@ class AdminSpacecraftController extends AbstractController
             $em->persist($spacecraft);
             $em->flush();
             $this->addFlash('success', 'L\'ajout du nouveau vaisseau a été effectué avec succès.');
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_admin_home');
         }
         return $this->render('admin/spacecraft/create.html.twig', [
             'form' => $form->createView(),
@@ -56,5 +58,31 @@ class AdminSpacecraftController extends AbstractController
             'spacecraft' => $spacecraft,
             'action' => 'edit'
         ]);
+    }
+
+    /**
+     * Delete a spacecraft
+     * @Route("/admin/spacecrafts/{id}/delete", name="app_admin_spacecraft_delete") 
+     * @return Reponse
+     */
+    public function delete(Spacecraft $spacecraft, EntityManagerInterface $em, TripRepository $repo): Response
+    {
+        $trips = $repo->findBy(['spacecraft' => $spacecraft->getId()]);
+        if ($trips) {
+            $tripNames = [];
+            foreach ($trips as $trip) {
+                array_push($tripNames, $trip->getName());
+            }
+            $tripNames = implode(', ', $tripNames);
+            $this->addFlash('warning', 'Echec de la suppression : Ce vaisseau est associé aux voyages suivants :' . $tripNames . '. Veuillez modifier ces voyages avant la suppression de ce vaisseau.');
+            $this->redirectToRoute('app_admin_home');
+        } elseif (!$trips) {
+            $em->remove($spacecraft);
+            $em->flush();
+            $this->addFlash('success', 'La suppression du vaisseau a été effectué avec succès.');
+            return $this->redirectToRoute('app_admin_home');
+        }
+
+        return $this->redirectToRoute('app_admin_home');
     }
 }

@@ -52,7 +52,8 @@
                         <td>{{spacecraft.updatedAt|date('d-m-Y H:i:s')}}</td>
                         <td class="d-flex flex-row">
                         <a href="{{path('app_admin_spacecraft_edit',{'id':spacecraft.id})}}" class="btn btn-sm btn-warning">Editer</a>
-                        <a href="" class="btn btn-sm btn-danger ml-1">Supprimer</a>
+                        <a onclick="event.preventDefault(); confirm('Are you sure ?') && document.querySelector('#delete_link').click()"  class="btn btn-sm btn-danger ml-1"> Supprimer </a>
+                        <a id="delete_link" style="display:none;" href="{{path('app_admin_spacecraft_delete',{'id':spacecraft.id})}}"></a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -62,4 +63,9 @@
         </div>
     </div>
 </div>
+{% endblock %}
+{% block javascripts %}
+<script>
+
+</script>
 {% endblock %}
