@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation d'un voyage{% endblock %}
+
+{% block body %}
+<div class="container mt-3">
+    <div class="jumbotron">
+        <h1> Nouveau sur Spacetrip : Les reservations sur mesure ! </h1>
+        <p> Vous avez bien entendu ! Vous pouvez maintenant organiser vous meme votre voyage, choisir votre destination, voir les créneaux disponibles, choisir votre transport et préparer votre valise ! </p>
+    </div>
+</div>
+<div class="container mt-4">
+    {{form_start(form)}}
+    <div class="row">
+        {{form_row(form.reserved,{'attr': {'disabled': ''}})}}
+    </div>
+    <div class="row">
+        <div class="col">
+        {{form_row(form.name,{'attr': {'ReadOnly': '','placeholder':'VR - NOMUTIL - 1', 'value': 'VR - NOMUTIL - 1'}})}}
+        </div>
+        <div class="col">
+        {{form_row(form.description,{'attr': {'ReadOnly': '','placeholder':'Voyage réservé par NOMUTIL', 'value': 'Voyage réservé par NOMUTIL'}})}}
+        </div>
+        <div class="col">
+        {{form_row(form.availableSeatNumber, {'attr': {'ReadOnly': '','placeholder':'N/A', 'value': 'N/A'}})}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            {{form_row(form.destination)}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            {{form_row(form.departureAt)}}
+            {{form_row(form.arrivalAt)}}
+        </div>
+        <div class="col">
+            {{form_row(form.spacecraft)}}
+            <div class="row">
+            <img src="https://placehold.it/300x300" alt="" class="ml-auto mr-auto">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+           <button id="submit_button" class="btn btn-primary w-25 mt-3 ml-auto mr-auto">Reserver mon voyage</button>
+    </div>
+    {{form_end(form)}}
+</div>
+{% endblock %}
+{% block javascripts %}
+<script>
+    $(document).ready(function(){
+        $('#trip_departureAt_time_hour option[value="14"]').attr('selected','selected');
+        $('#trip_departureAt_time_minute option[value="30"]').attr('selected','selected');
+        $('#trip_departureAt_time_hour').attr('Disabled','');
+        $('#trip_departureAt_time_minute').attr('Disabled','');
+        $('#trip_arrivalAt_time_hour').attr('Disabled','');
+        $('#trip_arrivalAt_time_minute').attr('Disabled','');
+        $('#trip_arrivalAt_time_hour option[value="18"]').attr('selected','selected');
+        $('#trip_arrivalAt_time_minute option[value="00"]').attr('selected','selected');
+    
+    $('form[name=trip]').on('submit',function(){
+        $('#trip_departureAt_time_hour').removeAttr('Disabled','');
+        $('#trip_departureAt_time_minute').removeAttr('Disabled','');
+        $('#trip_arrivalAt_time_hour').removeAttr('Disabled','');
+        $('#trip_arrivalAt_time_minute').removeAttr('Disabled','');
+    })
+
+    });
+</script>
+{% endblock %}
