@@ -24,8 +24,8 @@
                         <td>{{trip.availableSeatNumber}}</td>
                         <td>{{trip.updatedAt|date('d-m-Y H:i:s')}}</td>
                         <td class="d-flex flex-row">
-                            <button class="btn btn-sm btn-warning">Editer</button>
-                            <button class="btn btn-sm btn-danger ml-1">Supprimer</button>
+                            <a href="{{path('app_admin_trip_edit',{'id':trip.id})}}" class="btn btn-sm btn-warning">Editer</a>
+                            <a href="" class="btn btn-sm btn-danger ml-1">Supprimer</a>
                         </td>
                     </tr>
                     {% endfor %}

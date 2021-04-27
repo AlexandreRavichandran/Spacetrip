@@ -5,34 +5,6 @@
 {% block body %}
 <div class="container mt-4">
     <h1> Creation d'un nouveau voyage</h1>
-    <div class="row">
-        <div class="col">
-        {{form_start(form)}}
-            {{form_row(form.name)}}
-            {{form_row(form.destination)}}
-        </div>
-        <div class="col">
-            {{form_row(form.availableSeatNumber)}}
-            {{form_row(form.spacecraft)}}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            {{form_row(form.departureAt)}}
-            {{form_row(form.arrivalAt)}}
-        </div>
-        <div class="col">
-            <div class="row">
-                <div class="col text-center">
-                    {{form_row(form.reserved)}}
-                </div>
-            </div>
-        </div>
-    </div>
-    {{form_row(form.description)}}
-    <div class="row">
-        <button class="btn btn-primary w-25 ml-auto mr-auto"> Creer un nouveau voyage </button>
-    </div>
-    {{form_end(form)}}
+    {% include('admin/trip/partials/_form.html.twig') %}
 </div>
 {% endblock %}

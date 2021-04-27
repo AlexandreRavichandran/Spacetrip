@@ -18,7 +18,7 @@ class AdminTripController extends AbstractController
      * @Route("/admin/trips/create", name="app_admin_trip_create")
      * @return Response
      */
-    public function createTrip(Request $request, EntityManagerInterface $em): Response
+    public function create(Request $request, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(TripType::class);
         $form->handleRequest($request);
@@ -30,6 +30,31 @@ class AdminTripController extends AbstractController
             $this->addFlash('success', 'La création du nouveau voyage a été effectué avec succès.');
             return $this->redirectToRoute('app_trip_show', ['name' => $trip->getName()]);
         }
-        return $this->render('admin/trip/create.html.twig', ['form' => $form->createView()]);
+        return $this->render('admin/trip/create.html.twig', [
+            'form' => $form->createView(),
+            'action' => 'create'
+        ]);
+    }
+
+    /**
+     * Edit a trip
+     * @Route("/admin/trips/{id}/edit", name="app_admin_trip_edit")
+     * @return Response
+     */
+    public function edit(Trip $trip, Request $request, EntityManagerInterface $em): Response
+    {
+        $form = $this->createForm(TripType::class, $trip);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $trip = $form->getData();
+            $em->flush();
+            $this->addFlash('success', 'La modification du voyage a été effectué avec succès.');
+            return $this->redirectToRoute('app_admin_home');
+        }
+        return $this->render('admin/trip/edit.html.twig', [
+            'action' => 'edit',
+            'form' => $form->createView(),
+            'trip' => $trip
+        ]);
     }
 }

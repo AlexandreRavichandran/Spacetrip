@@ -11,7 +11,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminHomeController extends AbstractController
 {
     /**
+     * Show latest updated trips and spacecrafts
      * @Route("/admin/home", name="app_admin_home")
+     * @return Response
      */
     public function index(TripRepository $tripRepository, SpacecraftRepository $spacecraftRepository): Response
     {

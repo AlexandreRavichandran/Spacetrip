@@ -18,7 +18,7 @@ class AdminSpacecraftController extends AbstractController
      * @Route("/admin/spacecrafts/create", name="app_admin_spacecraft_create")
      * @return Response
      */
-    public function createSpacecraft(request $request, EntityManagerInterface $em): Response
+    public function create(request $request, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(SpacecraftType::class);
         $form->handleRequest($request);
@@ -38,10 +38,10 @@ class AdminSpacecraftController extends AbstractController
     }
     /**
      * Edit a spacecraft
-     * @Route("/admin/spacecrafts/edit/{id}", name="app_admin_spacecraft_edit")
+     * @Route("/admin/spacecrafts/{id}/edit", name="app_admin_spacecraft_edit")
      * @return Response
      */
-    public function editSpacecraft(Spacecraft $spacecraft, Request $request, EntityManagerInterface $em): Response
+    public function edit(Spacecraft $spacecraft, Request $request, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(SpacecraftType::class, $spacecraft);
         $form->handleRequest($request);
