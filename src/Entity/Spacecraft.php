@@ -87,9 +87,15 @@ class Spacecraft
      */
     private $trip;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Feedback::class, mappedBy="spacecraft")
+     */
+    private $feedback;
+
     public function __construct()
     {
         $this->trip = new ArrayCollection();
+        $this->feedback = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -263,6 +269,36 @@ class Spacecraft
             // set the owning side to null (unless already changed)
             if ($trip->getSpacecraft() === $this) {
                 $trip->setSpacecraft(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Feedback[]
+     */
+    public function getFeedback(): Collection
+    {
+        return $this->feedback;
+    }
+
+    public function addFeedback(Feedback $feedback): self
+    {
+        if (!$this->feedback->contains($feedback)) {
+            $this->feedback[] = $feedback;
+            $feedback->setSpacecraft($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFeedback(Feedback $feedback): self
+    {
+        if ($this->feedback->removeElement($feedback)) {
+            // set the owning side to null (unless already changed)
+            if ($feedback->getSpacecraft() === $this) {
+                $feedback->setSpacecraft(null);
             }
         }
 
