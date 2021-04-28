@@ -13,7 +13,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass=SpacecraftRepository::class)
  * @ORM\HasLifecycleCallbacks()
- *  * @UniqueEntity(
+ * @UniqueEntity(
  *              fields={"name"},
  *              message="Ce vaisseau existe déja dans la base."
  *)

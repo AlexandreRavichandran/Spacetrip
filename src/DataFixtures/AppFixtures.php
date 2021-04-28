@@ -13,7 +13,7 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create("fr-FR");
-
+        $reserved = [true, false];
         for ($i = 0; $i <= 6; $i++) {
             $spacecraft = new Spacecraft;
             $spacecraft
@@ -36,7 +36,7 @@ class AppFixtures extends Fixture
                     ->setDepartureAt($faker->dateTimeAD())
                     ->setArrivalAt($faker->dateTimeAD())
                     ->setAvailableSeatNumber(mt_rand(0, 9))
-                    ->setReserved(false)
+                    ->setReserved($reserved[mt_rand(0, 1)])
                     ->setSpacecraft($spacecraft);
 
                 $manager->persist($trip);

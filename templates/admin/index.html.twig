@@ -10,22 +10,23 @@
             <h3 class="text-center"> Les derniers voyages crées/mis à jour</h3>
             <table class="table table-hover border">
                 <thead>
-                    <tr>
-                        <th>Nom (Destination)</th>
-                        <th>Places restantes</th>
-                        <th>Dernière mise à jour</th>
-                        <th>Actions</th>
+                    <tr class="table-primary">
+                        <th class="text-center">Nom (Destination)</th>
+                        <th class="text-center">Places restantes</th>
+                        <th class="text-center">Dernière mise à jour</th>
+                        <th class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for trip in trips %}
                     <tr class="table">
                         <td><a href="#">{{trip.name}} ({{trip.destination}})</a></td>
-                        <td>{{trip.availableSeatNumber}}</td>
+                        <td class="text-center">{{trip.availableSeatNumber}}</td>
                         <td>{{trip.updatedAt|date('d-m-Y H:i:s')}}</td>
                         <td class="d-flex flex-row">
                             <a href="{{path('app_admin_trip_edit',{'id':trip.id})}}" class="btn btn-sm btn-warning">Editer</a>
-                            <a href="" class="btn btn-sm btn-danger ml-1">Supprimer</a>
+                            <a onclick="event.preventDefault(); confirm('Etes vous sur de supprimer ce voyage de la base de données ? Cette action est irréversible.') && document.querySelector('#trip_delete_link').click()"  class="btn btn-sm btn-danger ml-1"> Supprimer </a>
+                            <a id="trip_delete_link" style="display:none;" href="{{path('app_admin_trip_delete',{'id':trip.id})}}"></a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -37,23 +38,23 @@
             <h3 class="text-center"> Les derniers vaisseaux ajoutés/mis à jour</h3>
             <table class="table table-hover border">
                 <thead>
-                    <tr>
-                        <th>Nom - Marque (Origine)</th>
-                        <th>Prix</th>
-                        <th>Dernière mise à jour</th>
-                        <th>Actions</th>
+                    <tr class="table-primary">
+                        <th class="text-center">Nom - Marque (Origine)</th>
+                        <th class="text-center"> Notation moyenne </th>
+                        <th class="text-center">Dernière mise à jour</th>
+                        <th class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for spacecraft in spacecrafts %}
                     <tr class="table">
                         <td>{{spacecraft.name}} - {{spacecraft.brand}}({{spacecraft.nationality}})</td>
-                        <td>{{spacecraft.price}}</td>
-                        <td>{{spacecraft.updatedAt|date('d-m-Y H:i:s')}}</td>
+                        <td class="text-center">{{spacecraft.rating}}</td>
+                        <td class="text-center">{{spacecraft.price}}</td>
                         <td class="d-flex flex-row">
                         <a href="{{path('app_admin_spacecraft_edit',{'id':spacecraft.id})}}" class="btn btn-sm btn-warning">Editer</a>
-                        <a onclick="event.preventDefault(); confirm('Are you sure ?') && document.querySelector('#delete_link').click()"  class="btn btn-sm btn-danger ml-1"> Supprimer </a>
-                        <a id="delete_link" style="display:none;" href="{{path('app_admin_spacecraft_delete',{'id':spacecraft.id})}}"></a>
+                        <a onclick="event.preventDefault(); confirm('Etes vous sur de supprimer ce vaisseau de la base de données ? Cette action est irréversible.') && document.querySelector('#spacecraft_delete_link').click()"  class="btn btn-sm btn-danger ml-1"> Supprimer </a>
+                        <a id="spacecraft_delete_link" style="display:none;" href="{{path('app_admin_spacecraft_delete',{'id':spacecraft.id})}}"></a>
                         </td>
                     </tr>
                     {% endfor %}

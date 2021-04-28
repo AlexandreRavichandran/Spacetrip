@@ -5,6 +5,7 @@ namespace App\Controller\admin;
 
 use App\Entity\Trip;
 use App\Form\TripType;
+use App\Repository\TripRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,6 +37,18 @@ class AdminTripController extends AbstractController
         ]);
     }
 
+    /**
+     * Delete a trip
+     * @Route("/admin/trips/{id}/delete", name="app_admin_trip_delete")
+     * @return Response
+     */
+    public function delete(Trip $trip, EntityManagerInterface $em): Response
+    {
+        $em->remove($trip);
+        $em->flush();
+        $this->addFlash('success', 'La suppression du voyage ' . $trip->getName() . ' a été effectué avec succès.');
+        return $this->redirectToRoute('app_admin_home');
+    }
     /**
      * Edit a trip
      * @Route("/admin/trips/{id}/edit", name="app_admin_trip_edit")
