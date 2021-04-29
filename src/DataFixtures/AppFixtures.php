@@ -2,20 +2,26 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Feedback;
 use Faker\Factory;
 use App\Entity\Trip;
 use App\Entity\User;
 use App\Entity\Spacecraft;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
+    }
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create("fr-FR");
         $reserved = [true, false];
-        for ($i = 0; $i <= 6; $i++) {
+        for ($i = 0; $i < 6; $i++) {
             $spacecraft = new Spacecraft;
             $spacecraft
                 ->setName($faker->word)
@@ -28,7 +34,9 @@ class AppFixtures extends Fixture
                 ->setSpeed($faker->randomFloat(3, 1000, 100000))
                 ->setRating(mt_rand(0, 5));
 
-            for ($j = 0; $j <= mt_rand(1, 5); $j++) {
+
+
+            for ($j = 0; $j < mt_rand(3, 5); $j++) {
                 $trip = new Trip;
                 $trip
                     ->setName($faker->word)
@@ -39,18 +47,32 @@ class AppFixtures extends Fixture
                     ->setAvailableSeatNumber(mt_rand(0, 9))
                     ->setReserved($reserved[mt_rand(0, 1)])
                     ->setSpacecraft($spacecraft);
-
                 $manager->persist($trip);
             }
+
+            for ($l = 0; $l <= mt_rand(0, 1); $l++) {
+                $user = new User;
+                $user->setEmail($faker->email)
+                    ->setFirstName($faker->firstName)
+                    ->setLastName($faker->lastName)
+                    ->setPassword($this->passwordEncoder->encodePassword($user, 'demo'));
+                $manager->persist($user);
+
+                for ($m = 0; $m <= mt_rand(0, 1); $m++) {
+                    $feedback = new Feedback;
+                    $feedback
+                        ->setSpacecraft($spacecraft)
+                        ->setUser($user)
+                        ->setContent($faker->sentence(6));
+                    $manager->persist($feedback);
+                }
+            }
+
+
             $manager->persist($spacecraft);
         }
 
-        $user = new User;
-        $user->setPassword('demo')
-            ->setEmail('thuvarahan771@gmail.com')
-            ->setFirstName('Alex')
-            ->setLastName('Ravi');
-        $manager->persist($user);
+
 
         $manager->flush();
     }
