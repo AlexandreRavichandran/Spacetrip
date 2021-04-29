@@ -2,9 +2,10 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Spacecraft;
 use Faker\Factory;
 use App\Entity\Trip;
+use App\Entity\User;
+use App\Entity\Spacecraft;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
@@ -43,6 +44,13 @@ class AppFixtures extends Fixture
             }
             $manager->persist($spacecraft);
         }
+
+        $user = new User;
+        $user->setPassword('demo')
+            ->setEmail('thuvarahan771@gmail.com')
+            ->setFirstName('Alex')
+            ->setLastName('Ravi');
+        $manager->persist($user);
 
         $manager->flush();
     }
