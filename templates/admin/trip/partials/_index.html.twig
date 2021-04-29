@@ -1,0 +1,26 @@
+<h3 class="text-center"> Les derniers voyages crées/mis à jour</h3>
+<table class="table table-hover border">
+    <thead>
+        <tr class="table-primary">
+            <th class="text-center">Nom (Destination)</th>
+            <th class="text-center">Places restantes</th>
+            <th class="text-center">Date mise à jour</th>
+            <th class="text-center">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for trip in trips %}
+        <tr class="table">
+            <td><a href="#">{{trip.name}} ({{trip.destination}})</a></td>
+            <td class="text-center">{{trip.availableSeatNumber}}</td>
+            <td>{{trip.updatedAt|date('d-m-Y H:i:s')}}</td>
+            <td class="d-flex flex-row">
+                <a href="{{path('app_admin_trip_edit',{'id':trip.id})}}" class="btn btn-sm btn-warning">Editer</a>
+                <a onclick="event.preventDefault(); confirm('Etes vous sur de supprimer ce voyage de la base de données ? Cette action est irréversible.') && document.querySelector('#trip_delete_link').click()"  class="btn btn-sm btn-danger ml-1"> Supprimer </a>
+                <a id="trip_delete_link" style="display:none;" href="{{path('app_admin_trip_delete',{'id':trip.id})}}"></a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<p class="text-right"><a class="btn btn-sm btn-secondary " href="">Voir Tout</a> | <a class="btn btn-sm btn-secondary" href="{{path('app_admin_trip_create')}}">Ajouter un nouveau voyage</a></p>
