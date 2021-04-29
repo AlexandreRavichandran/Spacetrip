@@ -23,7 +23,7 @@ class TripType extends AbstractType
                 'label' => 'Nom du voyage'
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'Description du voyage'
+                'label' => 'Description du voyage',
             ])
             ->add('destination', TextType::class, [
                 'label' => 'Destination du voyage'
@@ -38,7 +38,8 @@ class TripType extends AbstractType
                 'label' => 'Nombre de places disponibles'
             ])
             ->add('reserved', CheckboxType::class, [
-                'label' => 'Voyage reservé'
+                'label' => 'Voyage reservé',
+                'required' => false
             ])
             ->add('spacecraft', EntityType::class, [
                 'class' => Spacecraft::class,

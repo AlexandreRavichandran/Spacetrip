@@ -19,7 +19,7 @@
         {{form_row(form.name,{'attr': {'ReadOnly': '','placeholder':'VR - ' ~ app.user.userName ~' - 1', 'placeholder':'VR - ' ~ app.user.userName ~' - 1'}})}}
         </div>
         <div class="col">
-        {{form_row(form.description,{'attr': {'ReadOnly': '','placeholder':'Voyage réservé par ' ~ app.user.userName, 'value': 'Voyage réservé par ' ~ app.user.userName}})}}
+        {{form_row(form.description,{'attr': {'ReadOnly': '','placeholder':'Voyage réservé par ' ~ app.user.userName, 'value': 'Voyage réservé par ' ~ app.user.userName, 'class':'descriptionForm'}})}}
         </div>
         <div class="col">
         {{form_row(form.availableSeatNumber, {'attr': {'ReadOnly': '','placeholder':'N/A', 'value': 'N/A'}})}}

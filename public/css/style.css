@@ -10,3 +10,8 @@
 .loginForm{
     background-color: #dfe4ea;
 }
+
+.descriptionForm{
+    min-height: 43px;
+    max-height: 43px;
+}
