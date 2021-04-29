@@ -39,24 +39,14 @@
 <div class="container mt-4">
     <h1> Ils ont adoré !  </h1>
     <div class="row mt-2">
+    {% for feedback in feedbacks %}
         <div class="col">
             <blockquote class="blockquote text-center">
-                <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                <p class="mb-0">{{feedback.content}}</p>
+                <footer class="blockquote-footer">{{feedback.user.firstName}} {{feedback.user.lastName}}</footer>
             </blockquote>
         </div>
-        <div class="col">
-            <blockquote class="blockquote text-center">
-                <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-            </blockquote>
-        </div>
-        <div class="col">
-            <blockquote class="blockquote text-center">
-                <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-            </blockquote>
-        </div>
+    {% endfor %}
     </div>
 </div>
 {% endblock %}

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\FeedbackRepository;
 use App\Repository\TripRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,11 +15,13 @@ class HomeController extends AbstractController
      * @Route("/", name="app_home")
      * @return Response
      */
-    public function index(TripRepository $repo): Response
+    public function index(TripRepository $tripRepo, FeedbackRepository $feedbackRepo): Response
     {
-        $trips = $repo->findLatestTrips('departureAt', 2);
+        $trips = $tripRepo->findLatestTrips('departureAt', 2);
+        $feedbacks = $feedbackRepo->findBy([], null, 3);
         return $this->render('home/index.html.twig', [
-            'trips' => $trips
+            'trips' => $trips,
+            'feedbacks' => $feedbacks
         ]);
     }
 }
