@@ -47,7 +47,7 @@ class AdminTripController extends AbstractController
         $em->remove($trip);
         $em->flush();
         $this->addFlash('success', 'La suppression du voyage ' . $trip->getName() . ' a été effectué avec succès.');
-        return $this->redirectToRoute('app_admin_home');
+        return $this->redirectToRoute('app_admin_trip_home');
     }
     /**
      * Edit a trip
@@ -62,7 +62,7 @@ class AdminTripController extends AbstractController
             $trip = $form->getData();
             $em->flush();
             $this->addFlash('success', 'La modification du voyage a été effectué avec succès.');
-            return $this->redirectToRoute('app_admin_home');
+            return $this->redirectToRoute('app_admin_trip_home');
         }
         return $this->render('admin/trip/edit.html.twig', [
             'action' => 'edit',

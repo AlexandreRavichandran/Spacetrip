@@ -3,38 +3,27 @@
 {% block title %}Page administrateur{% endblock %}
 
 {% block body %}
-<div class="container-fluid mt-2">
+<div class="container mt-2">
     <h1 class="text-center"> Récapitulatif </h1>
     <div class="row">
     <ul class="nav nav-pills ml-auto mr-auto">
         <li class="nav-item">
-            <a class="nav-link " href="#">Derniers voyages crées/mis à jour</a>
+            <a class="nav-link {% if class is same as "trip" %} active {% endif %}" href="{{path('app_admin_trip_home')}}">Derniers voyages crées/mis à jour</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" href="#">Derniers vaisseaux crées/mis à jour</a>
+            <a class="nav-link {% if class is same as "spacecraft" %} active {% endif %}" href="{{path('app_admin_spacecraft_home')}}">Derniers vaisseaux crées/mis à jour</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Derniers commentaires</a>
+            <a class="nav-link {% if class is same as "user" %} active {% endif %}" href="{{path('app_admin_user_home')}}">Derniers commentaires</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Derniers utilisateurs</a>
+            <a class="nav-link {% if class is same as "feedback" %} active {% endif %}" href="{{path('app_admin_feedback_home')}}">Derniers utilisateurs</a>
         </li>
     </ul>
     </div>
-    <div class="row">
-        <div class="col-6">
-            {% include('admin/trip/partials/_index.html.twig')%}
-        </div>
-        <div class="col-6">
-            {% include('admin/spacecraft/partials/_index.html.twig')%}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-6">
-            {% include('admin/trip/partials/_index.html.twig')%}
-        </div>
-        <div class="col-6">
-            {% include('admin/spacecraft/partials/_index.html.twig')%}
+    <div class="row mt-3">
+        <div class="col">
+            {% include('admin/' ~ class ~ '/partials/_index.html.twig')%}
         </div>
     </div>
 </div>

@@ -1,0 +1,20 @@
+<h3 class="text-center"> Les derniers utilisateurs inscrits</h3>
+<table class="table table-hover border">
+    <thead>
+        <tr class="table-primary">
+            <th class="text-center">Nom</th>
+            <th class="text-center"> Prenom</th>
+            <th class="text-center">Email</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for user in users %}
+        <tr class="table">
+            <td>{{user.lastName}}</td>
+            <td class="text-center">{{user.firstName}}</td>
+            <td class="text-center">{{user.email}}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<p class="text-right"><a class="btn btn-sm btn-secondary" href="">Voir Tout</a></p>
