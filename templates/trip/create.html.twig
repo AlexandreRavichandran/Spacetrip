@@ -16,10 +16,10 @@
     </div>
     <div class="row">
         <div class="col">
-        {{form_row(form.name,{'attr': {'ReadOnly': '','placeholder':'VR - NOMUTIL - 1', 'value': 'VR - NOMUTIL - 1'}})}}
+        {{form_row(form.name,{'attr': {'ReadOnly': '','placeholder':'VR - ' ~ app.user.userName ~' - 1', 'placeholder':'VR - ' ~ app.user.userName ~' - 1'}})}}
         </div>
         <div class="col">
-        {{form_row(form.description,{'attr': {'ReadOnly': '','placeholder':'Voyage réservé par NOMUTIL', 'value': 'Voyage réservé par NOMUTIL'}})}}
+        {{form_row(form.description,{'attr': {'ReadOnly': '','placeholder':'Voyage réservé par ' ~ app.user.userName, 'value': 'Voyage réservé par ' ~ app.user.userName}})}}
         </div>
         <div class="col">
         {{form_row(form.availableSeatNumber, {'attr': {'ReadOnly': '','placeholder':'N/A', 'value': 'N/A'}})}}
@@ -42,8 +42,9 @@
             </div>
         </div>
     </div>
-    <div class="row">
-           <button id="submit_button" class="btn btn-primary w-25 mt-3 ml-auto mr-auto">Reserver mon voyage</button>
+    <div class="row mt-5">
+           <p>En cliquant sur "Reserver mon voyage", vous approuvez avoir votre bonne condition physique pour un voyage dans l'espace. Spacetrip se dénie de toute responsabilité en cas de problèmes de santé de votre part.</p>
+           <button id="submit_button" class="btn btn-primary w-25 mb-3 ml-auto mr-auto">Reserver mon voyage</button>
     </div>
     {{form_end(form)}}
 </div>

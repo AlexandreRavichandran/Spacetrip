@@ -28,12 +28,13 @@ class TripController extends AbstractController
     }
 
     /**
-     * Create a reserved trip
+     * Create a reserved trip for customers
      * @Route("/trips/create",name="app_trip_create")
      * @return Response
      */
     public function create(Request $request, EntityManagerInterface $em): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, "Veuillez vous connecter.");
         $trip = new Trip;
         $trip->setReserved(true);
         $form = $this->createForm(TripType::class, $trip);

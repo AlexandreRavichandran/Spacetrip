@@ -50,7 +50,7 @@
                     <tr class="table">
                         <td>{{spacecraft.name}} - {{spacecraft.brand}}({{spacecraft.nationality}})</td>
                         <td class="text-center">{{spacecraft.rating}}</td>
-                        <td class="text-center">{{spacecraft.price}}</td>
+                        <td class="text-center">{{spacecraft.updatedAt|date('d-m-Y H:i:s')}}</td>
                         <td class="d-flex flex-row">
                         <a href="{{path('app_admin_spacecraft_edit',{'id':spacecraft.id})}}" class="btn btn-sm btn-warning">Editer</a>
                         <a onclick="event.preventDefault(); confirm('Etes vous sur de supprimer ce vaisseau de la base de données ? Cette action est irréversible.') && document.querySelector('#spacecraft_delete_link').click()"  class="btn btn-sm btn-danger ml-1"> Supprimer </a>

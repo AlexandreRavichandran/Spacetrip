@@ -3,7 +3,7 @@
 {% block title %}Connexion{% endblock %}
 
 {% block body %}
-<div class="container w-25 ml-auto mr-auto border mt-5">
+<div class="container w-25 ml-auto mr-auto border mt-5 loginForm">
     <form method="post" class="">
         {% if error %}
             <div class="alert alert-danger mt-2 w-100 text-center ">{{ error.messageKey|trans(error.messageData, 'security','fr_FR') }}</div>
