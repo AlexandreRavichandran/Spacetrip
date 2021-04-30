@@ -3,10 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\FeedbackRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=FeedbackRepository::class)
+ * @ORM\HasLifecycleCallbacks
  */
 class Feedback
 {
@@ -32,6 +34,16 @@ class Feedback
      * @ORM\ManyToOne(targetEntity=Spacecraft::class, inversedBy="feedback")
      */
     private $spacecraft;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $rating;
 
 
     public function getContent(): ?string
@@ -66,6 +78,36 @@ class Feedback
     public function setSpacecraft(?Spacecraft $spacecraft): self
     {
         $this->spacecraft = $spacecraft;
+
+        return $this;
+    }
+
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+    /**
+     * Set automatically the creation date
+     * @ORM\PrePersist
+     * @param \DateTimeInterface $createdAt
+     * @return self
+     */
+    public function setCreatedAt(): self
+    {
+        $this->createdAt = new \DateTimeImmutable();
+
+        return $this;
+    }
+
+    public function getRating(): ?int
+    {
+        return $this->rating;
+    }
+
+    public function setRating(int $rating): self
+    {
+        $this->rating = $rating;
 
         return $this;
     }
