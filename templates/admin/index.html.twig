@@ -8,7 +8,7 @@
     <div class="row">
     <ul class="nav nav-pills ml-auto mr-auto">
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Derniers voyages</a>
+            <a class="nav-link dropdown-toggle {% if class is same as 'trip' %} active {% endif %}" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Derniers voyages</a>
             <div class="dropdown-menu">
                 <a class="dropdown-item {% if class is same as 'trip' and reserved == false %} active {% endif %}" href="{{path('app_admin_trip_home')}}">Derniers voyages crées/mis à jour</a>
                 <a class="dropdown-item {% if class is same as 'trip' and reserved == true %} active {% endif %}" href="{{path('app_admin_reserved_trips_home')}}">Derniers voyages reservés</a>
