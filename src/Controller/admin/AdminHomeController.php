@@ -19,10 +19,11 @@ class AdminHomeController extends AbstractController
      */
     public function showLatestTrips(TripRepository $repo): Response
     {
-        $trips = $repo->findLatestTrips('updatedAt', 5);
+        $trips = $repo->findBy(['reserved' => false], ['createdAt' => 'DESC'], 5);
         return $this->render('admin/index.html.twig', [
             'trips' => $trips,
-            'class' => 'trip'
+            'class' => 'trip',
+            'reserved' => false,
         ]);
     }
 
@@ -65,6 +66,21 @@ class AdminHomeController extends AbstractController
         return $this->render('admin/index.html.twig', [
             'feedbacks' => $feedbacks,
             'class' => 'feedback'
+        ]);
+    }
+
+    /**
+     * Show latest trips reserved by users
+     * @Route("/admin/home/reserved_trips", name="app_admin_reserved_trips_home")
+     * @return Response
+     */
+    public function showLatestReservedTrips(TripRepository $repo): Response
+    {
+        $trips = $repo->findBy(['reserved' => true], ['createdAt' => 'DESC'], 5);
+        return $this->render('admin/index.html.twig', [
+            'trips' => $trips,
+            'class' => 'trip',
+            'reserved' => true
         ]);
     }
 }

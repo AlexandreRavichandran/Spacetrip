@@ -3,17 +3,27 @@
     <thead>
         <tr class="table-primary">
             <th class="text-center">Nom (Destination)</th>
+            {% if reserved == true %}
+            <th class="text-center">Date de départ - Date d'arrivée</th>
+            <th class="text-center">Vaisseau</th>
+            {% else %}
             <th class="text-center">Places restantes</th>
             <th class="text-center">Date mise à jour</th>
+            {% endif %}
             <th class="text-center">Actions</th>
         </tr>
     </thead>
     <tbody>
     {% for trip in trips %}
         <tr class="table">
-            <td><a href="#">{{trip.name}} ({{trip.destination}})</a></td>
+        <td><a href="#">{{trip.name}} ({{trip.destination}})</a></td>
+            {% if reserved == true %}
+            <td class="text-center">{{trip.departureAt|date('d-m-Y H:i:s')}} - {{trip.arrivalAt|date('d-m-Y H:i:s')}}</td>
+            <td>{{trip.spacecraft.name}}</td>
+            {% else %}
             <td class="text-center">{{trip.availableSeatNumber}}</td>
             <td>{{trip.updatedAt|date('d-m-Y H:i:s')}}</td>
+            {% endif %}
             <td class="d-flex flex-row">
                 <a href="{{path('app_admin_trip_edit',{'id':trip.id})}}" class="btn btn-sm btn-warning">Editer</a>
                 <a onclick="event.preventDefault(); confirm('Etes vous sur de supprimer ce voyage de la base de données ? Cette action est irréversible.') && document.querySelector('#trip_delete_link').click()"  class="btn btn-sm btn-danger ml-1"> Supprimer </a>
