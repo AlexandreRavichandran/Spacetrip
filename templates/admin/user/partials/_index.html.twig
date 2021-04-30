@@ -5,6 +5,7 @@
             <th class="text-center">Nom</th>
             <th class="text-center"> Prenom</th>
             <th class="text-center">Email</th>
+            <th class="text-center">Date d'inscription</th>
         </tr>
     </thead>
     <tbody>
@@ -13,6 +14,7 @@
             <td>{{user.lastName}}</td>
             <td class="text-center">{{user.firstName}}</td>
             <td class="text-center">{{user.email}}</td>
+            <td class="text-center">{{user.createdAt|date('d-m-Y H:i:s')}}</td>
         </tr>
     {% endfor %}
     </tbody>

@@ -47,7 +47,7 @@ class AdminHomeController extends AbstractController
      */
     public function showLatestUsers(UserRepository $repo): Response
     {
-        $users = $repo->findBy([], null, 5);
+        $users = $repo->findBy([], ['createdAt' => 'DESC'], 5);
         return $this->render('admin/index.html.twig', [
             'users' => $users,
             'class' => 'user'
@@ -55,13 +55,13 @@ class AdminHomeController extends AbstractController
     }
 
     /**
-     * Show latest Feedbacks by users
+     * Show latest feedbacks by users
      * @Route("/admin/home/feedbacks", name="app_admin_feedback_home")
      * @return Response
      */
     public function showLatestFeedbacks(FeedbackRepository $repo): Response
     {
-        $feedbacks = $repo->findBy([], null, 5);
+        $feedbacks = $repo->findBy([], ['createdAt' => 'DESC'], 5);
         return $this->render('admin/index.html.twig', [
             'feedbacks' => $feedbacks,
             'class' => 'feedback'

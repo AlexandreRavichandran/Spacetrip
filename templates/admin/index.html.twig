@@ -3,7 +3,7 @@
 {% block title %}Page administrateur{% endblock %}
 
 {% block body %}
-<div class="container mt-2">
+<div class="container mt-5">
     <h1 class="text-center"> Récapitulatif </h1>
     <div class="row">
     <ul class="nav nav-pills ml-auto mr-auto">
@@ -14,10 +14,10 @@
             <a class="nav-link {% if class is same as "spacecraft" %} active {% endif %}" href="{{path('app_admin_spacecraft_home')}}">Derniers vaisseaux crées/mis à jour</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {% if class is same as "user" %} active {% endif %}" href="{{path('app_admin_user_home')}}">Derniers commentaires</a>
+            <a class="nav-link {% if class is same as "user" %} active {% endif %}" href="{{path('app_admin_user_home')}}">Derniers utilisateurs</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {% if class is same as "feedback" %} active {% endif %}" href="{{path('app_admin_feedback_home')}}">Derniers utilisateurs</a>
+            <a class="nav-link {% if class is same as "feedback" %} active {% endif %}" href="{{path('app_admin_feedback_home')}}">Derniers commentairres</a>
         </li>
     </ul>
     </div>
