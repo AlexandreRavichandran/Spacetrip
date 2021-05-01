@@ -77,10 +77,11 @@ class AdminHomeController extends AbstractController
     public function showLatestReservedTrips(TripRepository $repo): Response
     {
         $trips = $repo->findBy(['reserved' => true], ['createdAt' => 'DESC'], 5);
+
         return $this->render('admin/index.html.twig', [
             'trips' => $trips,
             'class' => 'trip',
-            'reserved' => true
+            'reserved' => true,
         ]);
     }
 }
