@@ -21,7 +21,7 @@ class TripController extends AbstractController
      */
     public function index(TripRepository $repo): Response
     {
-        $trips = $repo->findAll();
+        $trips = $repo->findBy(['reserved' => false]);
         return $this->render('trip/index.html.twig', [
             'trips' => $trips
         ]);
@@ -32,11 +32,12 @@ class TripController extends AbstractController
      * @Route("/trips/create",name="app_trip_create")
      * @return Response
      */
-    public function create(Request $request, EntityManagerInterface $em): Response
+    public function create(Request $request, EntityManagerInterface $em, TripRepository $repo): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER', null, "Veuillez vous connecter.");
         $trip = new Trip;
-        $trip->setReserved(true);
+        $user = $this->getUser();
+        $trips = count($repo->findNumberOfTrips($user->getEmail())) + 1;
         $form = $this->createForm(TripType::class, $trip);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -47,7 +48,8 @@ class TripController extends AbstractController
             return $this->redirectToRoute('app_admin_home');
         }
         return $this->render('trip/create.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'trips' => $trips
         ]);
     }
 

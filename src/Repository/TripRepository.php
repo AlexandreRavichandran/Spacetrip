@@ -19,16 +19,19 @@ class TripRepository extends ServiceEntityRepository
         parent::__construct($registry, Trip::class);
     }
 
+
+
     /**
-     * Select the latest trips
+     * Function to return all trips created by a user
+
      * @return array
      */
-    public function findLatestTrips($field, $limit = null): array
+    public function findNumberOfTrips($user): array
     {
         return $this
             ->createQueryBuilder('t')
-            ->orderBy('t.' . $field, 'DESC')
-            ->setMaxResults($limit)
+            ->andWhere('t.name LIKE :user')
+            ->setParameter('user', '%' . $user . '%')
             ->getQuery()
             ->getResult();
     }
