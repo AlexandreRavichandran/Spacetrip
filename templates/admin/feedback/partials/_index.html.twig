@@ -16,9 +16,9 @@
             <td>{{feedback.user.lastName}} - {{feedback.user.firstName}}</td>
             <td class="text-center">{{feedback.spacecraft.name}}</td>
             <td class="text-center">{{feedback.content}}</td>
-            <td class="text-center">{{feedback.rating}}</td>
+            <td class="text-center">{{feedback.rating}}/5</td>
         </tr>
     {% endfor %}
     </tbody>
 </table>
-<p class="text-right"><a class="btn btn-sm btn-secondary" href="">Voir Tout</a></p>
+<p class="text-right"><a class="btn btn-sm btn-secondary" href="{{path('app_admin_feedback_show')}}">Voir Tout</a></p>

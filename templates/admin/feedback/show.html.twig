@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} [ADMIN] Liste des commentaires {% endblock %}
+
+{% block body %}
+<div class="container-fluid ml-auto mr-auto mt-5">
+    <h1 class="text-center"> Liste des commentaires </h1>
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center">Date</th>
+                    <th scope="col" class="text-center">Nom</th>
+                    <th scope="col" class="text-center">Prenom</th>
+                    <th scope="col" class="text-center">E-mail</th>
+                    <th scope="col" class="text-center">Vaisseau</th>
+                    <th scope="col" class="text-center">Note</th>
+                    <th scope="col" class="text-center">Commentaire</th>
+                    <th scope="col" class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for feedback in feedbacks %}
+                <tr>
+                    <td class="text-center" scope="col">{{feedback.createdAt|date('d/m/Y H:i:s')}}</td>
+                    <td class="text-center" scope="col">{{feedback.user.lastName}}</td>
+                    <td class="text-center" scope="col">{{feedback.user.firstName}}</td>
+                    <td class="text-center" scope="col"><a href="#">{{feedback.user.email}}</a></td>
+                    <td class="text-center" scope="col"><a href="">{{feedback.spacecraft.name}}</a></td>
+                    <td class="text-center" scope="col">{{feedback.rating}}/5</td>
+                    <td class="text-center" scope="col">{{feedback.content}}</td>
+                    <td scope="col">
+                        <a href="" class="btn btn-info btn-sm"> Contacter l'utilisateur </a>
+                        <a href="{{path('app_admin_feedback_delete',{'id':feedback.id})}}" class="btn btn-danger btn-sm"> Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+<script>
+
+</script>
+{% endblock %}
