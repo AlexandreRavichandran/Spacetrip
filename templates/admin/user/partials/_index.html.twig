@@ -6,6 +6,7 @@
             <th class="text-center"> Prenom</th>
             <th class="text-center">Email</th>
             <th class="text-center">Date d'inscription</th>
+            <th class="text-center">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -15,6 +16,10 @@
             <td class="text-center">{{user.firstName}}</td>
             <td class="text-center">{{user.email}}</td>
             <td class="text-center">{{user.createdAt|date('d-m-Y H:i:s')}}</td>
+            <td class="d-flex">
+                <a class="btn btn-info btn-sm" href="">Voir le profil</a>
+                <a class="btn btn-warning btn-sm ml-2" href="">Envoyer un message</a>
+            </td>
         </tr>
     {% endfor %}
     </tbody>
