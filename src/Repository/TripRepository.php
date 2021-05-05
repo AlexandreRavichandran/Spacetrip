@@ -22,8 +22,8 @@ class TripRepository extends ServiceEntityRepository
 
 
     /**
-     * Function to return all trips created by a user
-
+     * Function to return all trips created by a user (useful to set automatically the trip name when user create a trip)
+ 
      * @return array
      */
     public function findNumberOfTrips($user): array
