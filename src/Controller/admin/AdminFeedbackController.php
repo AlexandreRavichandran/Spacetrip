@@ -13,13 +13,13 @@ class AdminFeedbackController extends AbstractController
 {
     /**
      * Show all feedbacks
-     * @Route("/admin/feedbacks/show", name="app_admin_feedback_show")
+     * @Route("/admin/feedbacks", name="app_admin_feedback")
      */
     public function index(FeedbackRepository $repo): Response
     {
         $feedbacks = $repo->findAll();
 
-        return $this->render('admin/feedback/show.html.twig', [
+        return $this->render('admin/feedback/index.html.twig', [
             'feedbacks' => $feedbacks,
         ]);
     }
