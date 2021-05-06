@@ -5,6 +5,7 @@ namespace App\Controller\admin;
 use App\Entity\Trip;
 use App\Entity\Spacecraft;
 use App\Form\SpacecraftType;
+use App\Repository\SpacecraftRepository;
 use App\Repository\TripRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +15,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminSpacecraftController extends AbstractController
 {
-
+    /**
+     * Show all spacecrafts
+     * @Route("/admin/spacecrafts",name="app_admin_spacecraft_index")
+     * @param SpacecraftRepository $repo
+     * @return Response
+     */
+    public function index(SpacecraftRepository $repo): Response
+    {
+        $spacecrafts = $repo->findAll();
+        return $this->render('admin/spacecraft/index.html.twig', [
+            'spacecrafts' => $spacecrafts
+        ]);
+    }
     /**
      * Create a new Spacecraft
      * @Route("/admin/spacecrafts/create", name="app_admin_spacecraft_create")
@@ -31,7 +44,7 @@ class AdminSpacecraftController extends AbstractController
             $em->persist($spacecraft);
             $em->flush();
             $this->addFlash('success', 'L\'ajout du nouveau vaisseau a été effectué avec succès.');
-            return $this->redirectToRoute('app_admin_spacecraft_home');
+            return $this->redirectToRoute('app_admin_spacecraft_index');
         }
         return $this->render('admin/spacecraft/create.html.twig', [
             'form' => $form->createView(),
@@ -51,7 +64,7 @@ class AdminSpacecraftController extends AbstractController
             $spacecraft = $form->getData();
             $em->flush();
             $this->addFlash('success', 'La modification du vaisseau a été effectué avec succès.');
-            return $this->redirectToRoute('app_admin_spacecraft_home');
+            return $this->redirectToRoute('app_admin_spacecraft_index');
         }
         return $this->render('admin/spacecraft/edit.html.twig', [
             'form' => $form->createView(),
@@ -75,14 +88,14 @@ class AdminSpacecraftController extends AbstractController
             }
             $tripNames = implode(', ', $tripNames);
             $this->addFlash('warning', 'Echec de la suppression : Ce vaisseau est associé aux voyages suivants :' . $tripNames . '. Veuillez modifier ces voyages avant la suppression de ce vaisseau.');
-            $this->redirectToRoute('app_admin_spacecraft_home');
+            $this->redirectToRoute('app_admin_spacecraft_index');
         } elseif (!$trips) {
             $em->remove($spacecraft);
             $em->flush();
             $this->addFlash('success', 'La suppression du vaisseau a été effectué avec succès.');
-            return $this->redirectToRoute('app_admin_spacecraft_home');
+            return $this->redirectToRoute('app_admin_spacecraft_index');
         }
 
-        return $this->redirectToRoute('app_admin_spacecraft_home');
+        return $this->redirectToRoute('app_admin_spacecraft_index');
     }
 }
