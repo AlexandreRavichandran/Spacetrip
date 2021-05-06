@@ -17,7 +17,7 @@
             <td class="text-center">{{user.email}}</td>
             <td class="text-center">{{user.createdAt|date('d-m-Y H:i:s')}}</td>
             <td class="d-flex">
-                <a class="btn btn-info btn-sm" href="">Voir le profil</a>
+                <a class="btn btn-info btn-sm" href="{{path('app_admin_user_show',{'id':user.id})}}">Voir le profil</a>
                 <a class="btn btn-warning btn-sm ml-2" href="">Envoyer un message</a>
             </td>
         </tr>

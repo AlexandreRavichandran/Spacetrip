@@ -14,6 +14,7 @@ class AdminFeedbackController extends AbstractController
     /**
      * Show all feedbacks
      * @Route("/admin/feedbacks", name="app_admin_feedback_index")
+     * @return Response
      */
     public function index(FeedbackRepository $repo): Response
     {

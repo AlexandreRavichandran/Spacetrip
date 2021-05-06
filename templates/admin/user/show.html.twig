@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} [ADMIN] - Profil {{user.email}} {% endblock %}
+{% block body %}
+
+<div class="container mt-2">
+    <h1 class="text-center">Profil de {{user.email}}</h1>
+    <h4 class="text-center"> ({{user.firstName}} {{user.lastName}} )</h4>
+    <div class="row">
+        <div class="col-5">
+            <h5 class="text-center"> Ses informations personnelles </h5>
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <th scope="row">Nom</th>
+                        <td>{{user.lastName}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Prénom</th>
+                        <td>{{user.firstName}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Email</th>
+                        <td>{{user.email}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Date d'inscription</th>
+                        <td>{{user.createdAt|date('d/m/Y H:i:s')}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Date de dernière mise à jour</th>
+                        <td>{{user.updatedAt|date('d/m/Y H:i:s')}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-2">
+        
+        </div>
+        <div class="col-5">
+            <h5 class="text-center mb-2"> Ses derniers commentaires </h5>
+            <div class="row">
+                <div class="list-group">
+                    {% for feedback in feedbacks %}
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{feedback.spacecraft.name}}</h5>
+                        <small>{{feedback.createdAt|date('d/m/Y H:i:s')}}</small>
+                    </div>
+                    <p class="mb-1">{{feedback.content}}</p>
+                    {% endfor %}
+                </div>              
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <h5 class="text-center">Ses derniers voyages</h5>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
