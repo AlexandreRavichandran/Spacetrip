@@ -13,7 +13,7 @@ class AdminFeedbackController extends AbstractController
 {
     /**
      * Show all feedbacks
-     * @Route("/admin/feedbacks", name="app_admin_feedback")
+     * @Route("/admin/feedbacks", name="app_admin_feedback_index")
      */
     public function index(FeedbackRepository $repo): Response
     {

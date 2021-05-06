@@ -14,7 +14,7 @@ class AdminHomeController extends AbstractController
 {
     /**
      * Show latest updated trips
-     * @Route("/admin/home/trips", name="app_admin_trip_home")
+     * @Route("/admin/home/trips", name="app_admin_trip_show_latest")
      * @return Response
      */
     public function showLatestTrips(TripRepository $repo): Response
@@ -29,7 +29,7 @@ class AdminHomeController extends AbstractController
 
     /**
      * Show latest updated spacecrafts
-     * @Route("/admin/home/spacecrafts", name="app_admin_spacecraft_home")
+     * @Route("/admin/home/spacecrafts", name="app_admin_spacecraft_show_latest")
      * @return Response
      */
     public function showLatestSpacecrafts(SpacecraftRepository $repo): Response
@@ -43,7 +43,7 @@ class AdminHomeController extends AbstractController
 
     /**
      * Show Latest registrated users
-     * @Route("/admin/home/users", name="app_admin_user_home")
+     * @Route("/admin/home/users", name="app_admin_user_show_latest")
      * @return Response
      */
     public function showLatestUsers(UserRepository $repo): Response
@@ -57,7 +57,7 @@ class AdminHomeController extends AbstractController
 
     /**
      * Show latest feedbacks by users
-     * @Route("/admin/home/feedbacks", name="app_admin_feedback_home")
+     * @Route("/admin/home/feedbacks", name="app_admin_feedback_show_latest")
      * @return Response
      */
     public function showLatestFeedbacks(FeedbackRepository $repo): Response
@@ -71,7 +71,7 @@ class AdminHomeController extends AbstractController
 
     /**
      * Show latest trips reserved by users
-     * @Route("/admin/home/reserved_trips", name="app_admin_reserved_trips_home")
+     * @Route("/admin/home/reserved_trips", name="app_admin_reserved_trips_show_latest")
      * @return Response
      */
     public function showLatestReservedTrips(TripRepository $repo): Response

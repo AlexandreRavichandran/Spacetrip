@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} [ADMIN] Liste des commentaires {% endblock %}
+
+{% block body %}
+<div class="container-fluid ml-auto mr-auto mt-5">
+    <h1 class="text-center"> Liste des commentaires </h1>
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center">Date d'inscription</th>
+                    <th scope="col" class="text-center">Nom</th>
+                    <th scope="col" class="text-center">Prenom</th>
+                    <th scope="col" class="text-center">E-mail</th>
+                    <th scope="col" class="text-center">Nombre de commentaires</th>
+                    <th scope="col" class="text-center">Note moyenne</th>
+                    <th scope="col" class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td class="text-center" scope="col">{{user.createdAt|date('d/m/Y H:i:s')}}</td>
+                    <td class="text-center" scope="col">{{user.lastName}}</td>
+                    <td class="text-center" scope="col">{{user.firstName}}</td>
+                    <td class="text-center" scope="col"><a href="#">{{user.email}}</a></td>
+                    <td class="text-center" scope="col">{{user.feedback|length}} </td>
+                    <td class="text-center" scope="col"> Ecrire la moyenne </td>
+                    <td scope="col">
+                        <a href="" class="btn btn-primary btn-sm"> Voir le profil </a>
+                        <a href="" class="btn btn-info btn-sm"> Contacter l'utilisateur </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+<script>
+
+</script>
+{% endblock %}
