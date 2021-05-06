@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} [ADMIN] - Profil {{user.email}} {% endblock %}
+{% block title %} [ADMIN] Profil de {{user.email}} {% endblock %}
 {% block body %}
 
 <div class="container mt-2">
@@ -43,17 +43,19 @@
                 <div class="list-group">
                     {% for feedback in feedbacks %}
                     <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">{{feedback.spacecraft.name}}</h5>
+                        <h5 class="mb-1"><a href="#">{{feedback.spacecraft.name}}</a></h5>
                         <small>{{feedback.createdAt|date('d/m/Y H:i:s')}}</small>
                     </div>
                     <p class="mb-1">{{feedback.content}}</p>
+                    <p class="text-right">Note : {{feedback.rating}}/5</p>
                     {% endfor %}
                 </div>              
             </div>
         </div>
     </div>
+    <h5 class="text-center">Ses derniers voyages</h5>
     <div class="row">
-        <h5 class="text-center">Ses derniers voyages</h5>
+        
     </div>
 </div>
 
