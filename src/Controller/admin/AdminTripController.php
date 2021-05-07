@@ -15,6 +15,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AdminTripController extends AbstractController
 {
     /**
+     * Show all trips
+     * @Route("/admin/trips",name="app_admin_trip_index")
+     * @return Response
+     */
+    public function index(TripRepository $repo): Response
+    {
+        $trips = $repo->findBy(['reserved' => false]);
+        return $this->render('admin/trip/index.html.twig', [
+            'trips' => $trips
+        ]);
+    }
+    /**
      * Create a new Trip
      * @Route("/admin/trips/create", name="app_admin_trip_create")
      * @return Response
@@ -47,7 +59,7 @@ class AdminTripController extends AbstractController
         $em->remove($trip);
         $em->flush();
         $this->addFlash('success', 'La suppression du voyage ' . $trip->getName() . ' a été effectué avec succès.');
-        return $this->redirectToRoute('app_admin_trip_home');
+        return $this->redirectToRoute('app_admin_trip_index');
     }
     /**
      * Edit a trip
@@ -62,7 +74,7 @@ class AdminTripController extends AbstractController
             $trip = $form->getData();
             $em->flush();
             $this->addFlash('success', 'La modification du voyage a été effectué avec succès.');
-            return $this->redirectToRoute('app_admin_trip_home');
+            return $this->redirectToRoute('app_admin_trip_index');
         }
         return $this->render('admin/trip/edit.html.twig', [
             'action' => 'edit',

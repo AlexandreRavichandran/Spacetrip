@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}[ADMIN] Liste des voyages {% endblock %}
+
+{% block body %}
+<div class="container-fluid ml-auto mr-auto mt-5">
+    <h1 class="text-center"> Liste des voyages </h1>
+    <div class="row">
+        <p class="ml-auto mr-5"><a href="{{path('app_admin_trip_create')}}">Créer un nouveau voyage</a></p>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center">Date de creation</th>
+                    <th scope="col" class="text-center">Nom - Destination</th>
+                    <th scope="col" class="text-center">Date de départ</th>
+                    <th scope="col" class="text-center">Date d'arrivée</th>
+                    <th scope="col" class="text-center">Vaisseau</th>
+                    <th scope="col" class="text-center">Nombre de sièges restants</th>
+                    <th scope="col" class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for trip in trips %}
+                <tr>
+                    <td scope="col" class="text-center">{{trip.createdAt|date('d/m/Y H:i:s')}}</td>
+                    <td scope="col" class="text-center">{{trip.name}} - {{trip.destination}}</td>
+                    <td scope="col" class="text-center">{{trip.departureAt|date('d/m/Y H:i:s')}}</td>
+                    <td scope="col" class="text-center">{{trip.departureAt|date('d/m/Y H:i:s')}}</td>
+                    <td scope="col" class="text-center">{{trip.spacecraft.name}}</td>
+                    <td scope="col" class="text-center">{{trip.availableSeatNumber}}</td>
+                    <td scope="col">
+                        <a href="{{path('app_admin_trip_edit',{'id':trip.id})}}" class="btn btn-warning btn-sm">Editer</a>
+                        <a onclick="event.preventDefault(); confirm('Etes vous sur de supprimer ce voyage de la base de données ? Cette action est irréversible.') && document.querySelector('#trip_delete_link_{{trip.id}}').click()"  class="btn btn-sm btn-danger ml-1"> Supprimer </a>
+                        <a id="trip_delete_link_{{trip.id}}" style="display:none;" href="{{path('app_admin_trip_delete',{'id':trip.id})}}"></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+<script>
+
+</script>
+{% endblock %}
