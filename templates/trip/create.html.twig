@@ -12,14 +12,14 @@
 <div class="container mt-4">
     {{form_start(form)}}
     <div class="row">
-        {{form_row(form.reserved,{'attr': {'disabled': ''}})}}
+        {{form_row(form.reserved,{'attr': {'disabled': '','checked':''}})}}
     </div>
     <div class="row">
         <div class="col">
         {{form_row(form.name,{'attr': {'ReadOnly': '','value':'VR - ' ~ app.user.userName ~' - ' ~ trips}})}}
         </div>
         <div class="col">
-        {{form_row(form.description,{'attr': {'ReadOnly': '', 'value': 'Voyage réservé par ' ~ app.user.userName, 'class':'descriptionForm'}})}}
+        {{form_row(form.description,{'attr': {'ReadOnly': '','class':'descriptionForm'}})}}
         </div>
         <div class="col">
         {{form_row(form.availableSeatNumber, {'attr': {'ReadOnly': '','placeholder':'N/A', 'value': null}})}}
@@ -62,6 +62,7 @@
         $('#trip_departureAt_time_minute').attr('Disabled','');
         $('#trip_arrivalAt_time_hour').attr('Disabled','');
         $('#trip_arrivalAt_time_minute').attr('Disabled','');
+        $('.descriptionForm').html('Réservé par {{app.user.userName}}');
         $('#trip_arrivalAt_time_hour option[value="18"]').attr('selected','selected');
         $('#trip_arrivalAt_time_minute option[value="00"]').attr('selected','selected');
     
