@@ -8,7 +8,7 @@
     <div class="row">
     <ul class="nav nav-pills ml-auto mr-auto">
         <li class="nav-item">
-            <a class="nav-link" href="">Accueil</a>
+            <a class="nav-link {% if class is same as 'home' %} active {% endif %}" href="{{path('app_admin_home')}}">Accueil</a>
         </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle {% if class is same as 'trip' %} active {% endif %}" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Derniers voyages</a>

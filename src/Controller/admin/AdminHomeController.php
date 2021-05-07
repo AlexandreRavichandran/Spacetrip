@@ -13,6 +13,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminHomeController extends AbstractController
 {
     /**
+     * Show the admin homepage
+     * @Route("/admin/home",name="app_admin_home")
+     * @return Response
+     */
+    public function showDashboard(): Response
+    {
+        return $this->render('admin/index.html.twig', [
+            'class' => 'home'
+        ]);
+    }
+    /**
      * Show latest updated trips
      * @Route("/admin/home/trips", name="app_admin_trip_show_latest")
      * @return Response
@@ -77,7 +88,6 @@ class AdminHomeController extends AbstractController
     public function showLatestReservedTrips(TripRepository $repo): Response
     {
         $trips = $repo->findBy(['reserved' => true], ['createdAt' => 'DESC'], 5);
-
         return $this->render('admin/index.html.twig', [
             'trips' => $trips,
             'class' => 'trip',
