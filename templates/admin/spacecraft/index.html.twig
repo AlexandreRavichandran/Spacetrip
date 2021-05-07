@@ -6,7 +6,10 @@
 <div class="container-fluid ml-auto mr-auto mt-5">
     <h1 class="text-center"> Liste des vaisseaux </h1>
     <div class="row">
+        <a href="{{path('app_admin_spacecraft_show_latest')}}" class="btn btn-primary btn-md ml-5 rounded"><i class="bi bi-arrow-left"></i> Retour </a>
         <p class="ml-auto mr-5"><a href="{{path('app_admin_spacecraft_create')}}">Créer un nouveau vaisseau</a></p>
+    </div>
+    <div class="row mt-2">
         <table class="table table-hover">
             <thead>
                 <tr>
