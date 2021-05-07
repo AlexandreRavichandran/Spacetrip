@@ -35,8 +35,7 @@
                 <a id="trip_delete_link" style="display:none;" href="{{path('app_admin_trip_delete',{'id':trip.id})}}"></a>
             </td>
         </tr>
-
     {% endfor %}
     </tbody>
 </table>
-<p class="text-right"><a class="btn btn-sm btn-secondary " href="">Voir Tout</a> | <a class="btn btn-sm btn-secondary" href="{{path('app_admin_trip_create')}}">Ajouter un nouveau voyage</a></p>
+<p class="text-right"><a class="btn btn-sm btn-secondary " href="{{path('app_admin_trip_index')}}">Voir Tout</a> | <a class="btn btn-sm btn-secondary" href="{{path('app_admin_trip_create')}}">Ajouter un nouveau voyage</a></p>
