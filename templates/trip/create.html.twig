@@ -31,15 +31,50 @@
         </div>
     </div>
     <div class="row">
+    <div class="col">
+        <div class="row">
+            <img src="https://placehold.it/300x300" alt="" class="ml-auto mr-auto">
+        </div>
+        <div class="row">
+            <div class="col">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Marque - Origine</th>
+                            <td scope="col">Blablabla</td>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Note</th>
+                            <td>blablabla</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Destinations possibles</th>
+                            <td>blablabla</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Nombre de place disponibles</th>
+                            <td>Column content</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Vitesse</th>
+                            <td>Column content</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Prix</th>
+                            <td>Column content</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+            {{form_row(form.spacecraft)}}
+        </div>
         <div class="col">
             {{form_row(form.departureAt)}}
             {{form_row(form.arrivalAt)}}
-        </div>
-        <div class="col">
-            {{form_row(form.spacecraft)}}
-            <div class="row">
-            <img src="https://placehold.it/300x300" alt="" class="ml-auto mr-auto">
-            </div>
         </div>
     </div>
     <div class="row mt-5">
