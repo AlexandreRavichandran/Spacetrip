@@ -45,7 +45,7 @@ class TripController extends AbstractController
             $trip->setReserved(true);
             $em->persist($trip);
             $em->flush();
-            return $this->redirectToRoute('app_admin_trip_home');
+            return $this->redirectToRoute('app_admin_trip_index');
         }
         return $this->render('trip/create.html.twig', [
             'form' => $form->createView(),
