@@ -3,8 +3,13 @@
 {% block title %}Les voyages{% endblock %}
 
 {% block body %}
-
+<div class="container mt-4">
+    <div class="row">
+        <a href="{{path('app_trip_index')}}" class="btn btn-primary btn-md rounded"><i class="bi bi-arrow-left"></i> Retour</a>
+    </div>
+</div>
 <div class="container mt-4 text-center tripBackground">
+
     <h1> VOYAGE {{trip.name}} - {{trip.destination}}</h1>
     <h2> {{trip.departureAt|date('d-m-Y')}} - {{trip.arrivalAt|date('d-m-Y')}}</h2>
 </div>
