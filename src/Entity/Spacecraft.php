@@ -88,7 +88,7 @@ class Spacecraft
     private $trip;
 
     /**
-     * @ORM\OneToMany(targetEntity=Feedback::class, mappedBy="spacecraft")
+     * @ORM\OneToMany(targetEntity=Feedback::class, mappedBy="spacecraft", orphanRemoval=true)
      */
     private $feedback;
 

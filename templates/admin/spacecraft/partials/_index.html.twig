@@ -16,8 +16,8 @@
             <td class="text-center">{{spacecraft.updatedAt|date('d-m-Y H:i:s')}}</td>
             <td class="d-flex flex-row">
                 <a href="{{path('app_admin_spacecraft_edit',{'id':spacecraft.id})}}" class="btn btn-warning btn-sm">Editer</a>
-                <a onclick="event.preventDefault(); confirm('Etes vous sur de supprimer ce vaisseau de la base de données ? Cette action est irréversible.') && document.querySelector('#spacecraft_delete_link').click()"  class="btn btn-sm btn-danger ml-1"> Supprimer </a>
-                <a id="spacecraft_delete_link" style="display:none;" href="{{path('app_admin_spacecraft_delete',{'id':spacecraft.id})}}"></a>
+                <a onclick="event.preventDefault(); confirm('Etes vous sur de supprimer ce vaisseau de la base de données ? Cette action est irréversible.') && document.querySelector('#spacecraft_delete_link_{{spacecraft.id}}').click()"  class="btn btn-sm btn-danger ml-1"> Supprimer </a>
+                <a id="spacecraft_delete_link_{{spacecraft.id}}" style="display:none;" href="{{path('app_admin_spacecraft_delete',{'id':spacecraft.id})}}"></a>
             </td>
         </tr>
     {% endfor %}
