@@ -68,10 +68,12 @@ class AdminTripController extends AbstractController
      */
     public function edit(Trip $trip, Request $request, EntityManagerInterface $em): Response
     {
+        $reserved = $trip->getReserved();
         $form = $this->createForm(TripType::class, $trip);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $trip = $form->getData();
+            $trip->setReserved($reserved);
             $em->flush();
             $this->addFlash('success', 'La modification du voyage a été effectué avec succès.');
             return $this->redirectToRoute('app_admin_trip_index');

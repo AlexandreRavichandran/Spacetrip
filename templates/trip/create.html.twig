@@ -35,6 +35,7 @@
         <div class="row">
             <img src="https://placehold.it/300x300" alt="" class="ml-auto mr-auto">
         </div>
+        {{form_row(form.spacecraft)}}
         <div class="row">
             <div class="col">
                 <table class="table table-hover">
@@ -42,7 +43,10 @@
                         <tr>
                             <th scope="col">Marque - Origine</th>
                             <td scope="col">Blablabla</td>
-
+                        </tr>
+                        <tr>
+                            <th scope="row">Prix</th>
+                            <td>Column content</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -62,15 +66,11 @@
                             <th scope="row">Vitesse</th>
                             <td>Column content</td>
                         </tr>
-                        <tr>
-                            <th scope="row">Prix</th>
-                            <td>Column content</td>
-                        </tr>
+
                     </tbody>
                 </table>
             </div>
         </div>
-            {{form_row(form.spacecraft)}}
         </div>
         <div class="col">
             {{form_row(form.departureAt)}}
@@ -107,9 +107,6 @@
         $('#trip_arrivalAt_time_hour').removeAttr('Disabled','');
         $('#trip_arrivalAt_time_minute').removeAttr('Disabled','');
         $('#trip_arrivalAt_time_minute').removeAttr('Disabled','');
-        $('#trip_name').removeAttr('ReadOnly','');
-        $('#trip_description').removeAttr('ReadOnly','');
-        $('#trip_availableSeatNumber').removeAttr('ReadOnly','');
     })
 
     });
