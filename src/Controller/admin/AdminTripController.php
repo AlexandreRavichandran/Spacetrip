@@ -84,4 +84,19 @@ class AdminTripController extends AbstractController
             'trip' => $trip
         ]);
     }
+
+    /* CRUD FOR RESERVED TRIPS */
+
+    /**
+     * Show all reserved trips
+     * @Route("/admin/reserved_trips", name="app_admin_reserved_trips_index")
+     * @return Response
+     */
+    public function resIndex(TripRepository $repo): Response
+    {
+        $trips = $repo->findBy(['reserved' => true]);
+        return $this->render('admin/trip/index.html.twig', [
+            'trips' => $trips
+        ]);
+    }
 }
