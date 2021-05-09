@@ -1,3 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block title %} Les vaisseaux Spacetrip{% endblock %}
+
+{% block body %}
+<div class="container">
+{% for spacecraft in spacecrafts %}
+    <h2>{{spacecraft.name}}</h2>
+    {{ratings[loop.index0]}}
+    {% set test = 5 - ratings[loop.index0]%}
+    <p>
+        {% for i in 1..ratings[loop.index0] %}
+            <i class="bi bi-star-fill"></i>
+        {% endfor %}
+        {% for i in 1..test %}
+        <i class="bi bi-star"></i>
+        {% endfor %}
+    </p>
+{% endfor %}
+</div>
+
+{% endblock %}

@@ -17,8 +17,18 @@ class SpacecraftController extends AbstractController
     public function index(SpacecraftRepository $repo): Response
     {
         $spacecrafts = $repo->findAll();
+        $ratings = [];
+        foreach ($spacecrafts as $spacecraft) {
+            $rating = [];
+            foreach ($spacecraft->getFeedback() as $rates) {
+                array_push($rating, $rates->getRating());
+            }
+            $average =  round(array_sum($rating) / count($rating));
+            array_push($ratings, $average);
+        }
         return $this->render('spacecraft/index.html.twig', [
-            'spacecrafts' => $spacecrafts
+            'spacecrafts' => $spacecrafts,
+            'ratings' => $ratings
         ]);
     }
 }
