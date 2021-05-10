@@ -43,10 +43,9 @@ class TripController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $trip = $form->getData();
             $trip->setName('VR - ' . $user->getEmail() . ' - ' . $trips);
-            $trip->setDescription('Voyage reservé par ' . $user->gerEmail());
-            $trip->setAvailableSeat(null);
+            $trip->setDescription('Voyage reservé par ' . $user->getEmail());
+            $trip->setAvailableSeatNumber(null);
             $trip->setReserved(true);
-            dd($trip);
             $em->persist($trip);
             $em->flush();
             return $this->redirectToRoute('app_admin_trip_index');
