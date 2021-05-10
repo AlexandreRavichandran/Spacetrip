@@ -45,7 +45,7 @@ class AppFixtures extends Fixture
                     ->setDepartureAt($faker->dateTimeAD())
                     ->setArrivalAt($faker->dateTimeAD())
                     ->setAvailableSeatNumber(mt_rand(0, 9))
-                    ->setReserved('false')
+                    ->setReserved(0)
                     ->setSpacecraft($spacecraft);
                 $manager->persist($trip);
             }
