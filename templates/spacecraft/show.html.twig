@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Vaisseau {{spacecraft.name|upper}}{% endblock %}
+{% block body %}
+
+    
+
+<div class="container mt-4">
+    <a href="{{path('app_spacecraft_index')}}" class="btn btn-primary rounded mt-2"> <i class="bi bi-arrow-left"></i> Retour à la liste des vaisseaux</a>
+    <h1 class="text-center"> Vaisseau {{spacecraft.name}}</h1>
+    <h2 class="text-center"> {{spacecraft.brand}} ({{spacecraft.nationality}})</h2>
+    {% set missingStars = 5 - average %}
+    <h3 class="text-center"> {% for i in 1..average %}<i class="bi bi-star-fill"></i>{% endfor %}{% for i in 1..missingStars %}<i class="bi bi-star"></i>{% endfor %} ({{spacecraft.feedback|length}})</h3>
+    <div class="row">
+        <div class="col-5">
+            <img src="https://placehold.it/400x400" alt="" width="100%">
+        </div>
+        <div class="col-7 bg-secondary">
+            <div class="row mt-2">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nam saepe eos facilis perferendis vero impedit ipsa incidunt? Asperiores reiciendis tenetur ducimus. Sunt, odit dolores quos animi et blanditiis eius ut, libero, rerum hic praesentium reiciendis enim laboriosam molestias dignissimos nesciunt ipsa. Repellendus quidem, in minus nam consequuntur itaque recusandae velit sapiente corrupti nobis a, ullam exercitationem deleniti aut saepe aspernatur animi excepturi eos accusamus optio officia neque facere? Inventore, accusamus rerum accusantium, laudantium illum cumque distinctio assumenda temporibus magnam necessitatibus ab laboriosam itaque qui quidem eaque blanditiis ut quasi.</p>
+            </div>
+            <div class="row">
+                <table class="table table-hover">
+                    <tbody>
+                        <tr class="text-center">
+                            <td> Nombre de sièges </td>
+                            <td>{{spacecraft.numberOfSeat}}</td>
+                        </tr>
+                        <tr class="text-center">
+                            <td> Vitesse</td>
+                            <td>{{spacecraft.speed}} km/h</td>
+                        </tr>
+                        <tr class="text-center">
+                            <td> Destinations possibles</td>
+                            <td>{{spacecraft.possibleDestination}}</td>
+                        </tr>
+                        <tr class="text-center">
+                            <td> Prix </td>
+                            <td>{{spacecraft.price}} €</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <h3>l'entreprise</h3>
+    <div class="row">
+        <div class="col-6">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus quas eos omnis magni neque, earum ut, fugiat commodi fugit tenetur, rerum pariatur nam soluta reiciendis amet. Quia debitis ullam molestiae saepe, ad at explicabo doloremque magnam obcaecati, numquam eum quae, hic minima veniam temporibus! Enim repellendus, officia libero in dolores cumque, delectus porro, consectetur laudantium culpa necessitatibus commodi facere maxime quae. Ipsum accusamus blanditiis illum sed itaque, autem rem consectetur, quia debitis sequi culpa quasi voluptate dicta non ratione id!</p>
+        </div>
+        <div class="col-6 text-center">
+            <img src="https://placehold.it/300x300" alt="">
+        </div>
+    </div>
+</div>
+<div class="container">
+    <h3> Les derniers commentaires </h3>
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Auteur</th>
+                    <th scope="col">Commentaires</th>
+                    <th scope="col">Note</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for feedback in spacecraft.feedback %}
+                <tr>
+                    <td>{{feedback.createdAt|date('d/m/Y H:i:s')}}</td>
+                    <td>{{feedback.user.firstName}} {{feedback.user.lastName|upper}}</td>
+                    <td>{{feedback.content}}</td>
+                    {% set feedbackRatingStars = 5 - feedback.rating %}
+                    <td> {% for i in 1..feedback.rating %}<i class="bi bi-star-fill"></i>{% endfor %}{% for i in 1..feedbackRatingStars %}<i class="bi bi-star"></i>{% endfor %}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

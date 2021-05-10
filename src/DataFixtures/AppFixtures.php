@@ -58,13 +58,13 @@ class AppFixtures extends Fixture
                     ->setPassword($this->passwordEncoder->encodePassword($user, 'demo'));
                 $manager->persist($user);
 
-                for ($m = 0; $m <= mt_rand(0, 1); $m++) {
+                for ($m = 0; $m <= mt_rand(0, 6); $m++) {
                     $feedback = new Feedback;
                     $feedback
                         ->setSpacecraft($spacecraft)
                         ->setUser($user)
                         ->setContent($faker->sentence(6))
-                        ->setRating(mt_rand(0, 5));
+                        ->setRating(mt_rand(1, 4));
                     $manager->persist($feedback);
                     $spacecraft->addFeedback($feedback);
                     $manager->persist($spacecraft);
