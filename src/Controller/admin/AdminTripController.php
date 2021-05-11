@@ -7,6 +7,7 @@ use App\Entity\Trip;
 use App\Form\TripType;
 use App\Repository\TripRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,9 +20,9 @@ class AdminTripController extends AbstractController
      * @Route("/admin/trips",name="app_admin_trip_index")
      * @return Response
      */
-    public function index(TripRepository $repo): Response
+    public function index(TripRepository $repo, PaginatorInterface $paginator, Request $request): Response
     {
-        $trips = $repo->findBy(['reserved' => false]);
+        $trips = $paginator->paginate($repo->findBy(['reserved' => false]), $request->query->getInt('page', 1), 11);
         return $this->render('admin/trip/index.html.twig', [
             'trips' => $trips
         ]);
@@ -92,9 +93,9 @@ class AdminTripController extends AbstractController
      * @Route("/admin/reserved_trips", name="app_admin_reserved_trips_index")
      * @return Response
      */
-    public function resIndex(TripRepository $repo): Response
+    public function resIndex(TripRepository $repo, PaginatorInterface $paginator, Request $request): Response
     {
-        $trips = $repo->findBy(['reserved' => true]);
+        $trips = $paginator->paginate($repo->findBy(['reserved' => true]), $request->query->getInt('page', 1), 11);
         return $this->render('admin/trip/index.html.twig', [
             'trips' => $trips
         ]);

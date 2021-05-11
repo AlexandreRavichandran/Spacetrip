@@ -5,6 +5,8 @@ namespace App\Controller\admin;
 use App\Entity\Feedback;
 use App\Repository\FeedbackRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,9 +18,9 @@ class AdminFeedbackController extends AbstractController
      * @Route("/admin/feedbacks", name="app_admin_feedback_index")
      * @return Response
      */
-    public function index(FeedbackRepository $repo): Response
+    public function index(FeedbackRepository $repo, PaginatorInterface $paginator, Request $request): Response
     {
-        $feedbacks = $repo->findAll();
+        $feedbacks = $paginator->paginate($repo->findAll(), $request->query->getInt('page', 1), 11);
 
         return $this->render('admin/feedback/index.html.twig', [
             'feedbacks' => $feedbacks,

@@ -21,7 +21,7 @@ class AppFixtures extends Fixture
     {
         $faker = Factory::create("fr-FR");
         $reserved = [true, false];
-        for ($i = 0; $i < 6; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $spacecraft = new Spacecraft;
             $spacecraft
                 ->setName($faker->word)
@@ -58,7 +58,7 @@ class AppFixtures extends Fixture
                     ->setPassword($this->passwordEncoder->encodePassword($user, 'demo'));
                 $manager->persist($user);
 
-                for ($m = 0; $m <= mt_rand(0, 6); $m++) {
+                for ($m = 0; $m <= mt_rand(4, 6); $m++) {
                     $feedback = new Feedback;
                     $feedback
                         ->setSpacecraft($spacecraft)

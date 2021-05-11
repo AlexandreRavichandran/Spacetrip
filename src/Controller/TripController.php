@@ -7,6 +7,7 @@ use App\Form\TripType;
 use App\Repository\TripRepository;
 use App\Repository\SpacecraftRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,9 +20,9 @@ class TripController extends AbstractController
      * @Route("/trips", name="app_trip_index", methods={"GET"})
      * @return Response
      */
-    public function index(TripRepository $repo): Response
+    public function index(TripRepository $repo, PaginatorInterface $paginator, Request $request): Response
     {
-        $trips = $repo->findBy(['reserved' => false]);
+        $trips = $paginator->paginate($repo->findBy(['reserved' => false]), $request->query->getInt('page', 1), 12);
         return $this->render('trip/index.html.twig', [
             'trips' => $trips
         ]);

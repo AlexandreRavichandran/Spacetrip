@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Spacecraft;
 use App\Repository\SpacecraftRepository;
 use App\Repository\TripRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,7 +19,7 @@ class SpacecraftController extends AbstractController
      * @Route("/spacecrafts",name="app_spacecraft_index")
      * @return Response
      */
-    public function index(SpacecraftRepository $repo): Response
+    public function index(SpacecraftRepository $repo, PaginatorInterface $paginator, Request $request): Response
     {
         $spacecrafts = $repo->findAll();
         $ratings = [];
@@ -30,6 +31,7 @@ class SpacecraftController extends AbstractController
             $average =  round(array_sum($rating) / count($rating));
             array_push($ratings, $average);
         }
+        $spacecrafts = $paginator->paginate($spacecrafts, $request->query->getInt('page', 1), 9);
         return $this->render('spacecraft/index.html.twig', [
             'spacecrafts' => $spacecrafts,
             'ratings' => $ratings

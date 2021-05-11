@@ -8,6 +8,7 @@ use App\Form\SpacecraftType;
 use App\Repository\SpacecraftRepository;
 use App\Repository\TripRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,9 +22,9 @@ class AdminSpacecraftController extends AbstractController
      * @param SpacecraftRepository $repo
      * @return Response
      */
-    public function index(SpacecraftRepository $repo): Response
+    public function index(SpacecraftRepository $repo, PaginatorInterface $paginator, Request $request): Response
     {
-        $spacecrafts = $repo->findAll();
+        $spacecrafts = $paginator->paginate($repo->findAll(), $request->query->getInt('page', 1), 11);
         return $this->render('admin/spacecraft/index.html.twig', [
             'spacecrafts' => $spacecrafts
         ]);
