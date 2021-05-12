@@ -17,9 +17,18 @@ class AdminHomeController extends AbstractController
      * @Route("/admin/home",name="app_admin_home")
      * @return Response
      */
-    public function showDashboard(): Response
+    public function showDashboard(SpacecraftRepository $spacecraftrepo, TripRepository $triprepo): Response
     {
+        $spacecrafts = $spacecraftrepo->findAll();
+        $percentages = [];
+        foreach ($spacecrafts as $spacecraft) {
+            $percentage = (count($spacecraft->getTrip()) / count($triprepo->findAll())) * 100;
+            array_push($percentages, $percentage);
+        }
+
         return $this->render('admin/index.html.twig', [
+            'spacecrafts' => $spacecrafts,
+            'percentages' => $percentages,
             'class' => 'home'
         ]);
     }
