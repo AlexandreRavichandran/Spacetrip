@@ -45,8 +45,8 @@
                     </tr>
                     {% for feedback in feedbacks %}
                     <tr>
-                        <td> Date </td>
-                        <td> {{feedback.spacecraft.name}}</td>
+                        <td>{{feedback.createdAt|date('d/m/Y')}} </td>
+                        <td> {{feedback.spacecraft.name|upper}}</td>
                         <td> {{feedback.content}}</td>
                     </tr>
                     {% endfor %}

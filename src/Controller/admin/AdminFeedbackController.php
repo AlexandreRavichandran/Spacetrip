@@ -37,6 +37,6 @@ class AdminFeedbackController extends AbstractController
         $em->remove($feedback);
         $em->flush();
         $this->addFlash('success', 'Ce commentaire a été supprimé avec succès.');
-        return $this->redirectToRoute('app_admin_feedback_show');
+        return $this->redirectToRoute('app_admin_feedback_index');
     }
 }

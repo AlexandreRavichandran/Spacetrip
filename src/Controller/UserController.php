@@ -18,7 +18,7 @@ class UserController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_USER', null, "Veuillez vous connecter.");
         $user = $this->getUser();
-        $feedbacks = $feedbackRepo->findBy(['user' => $user->getId()], null, 5);
+        $feedbacks = $feedbackRepo->findBy(['user' => $user->getId()], ['createdAt' => 'DESC'], 5);
         return $this->render('user/index.html.twig', [
             'feedbacks' => $feedbacks
         ]);
