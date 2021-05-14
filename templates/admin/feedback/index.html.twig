@@ -18,13 +18,13 @@
                     <th scope="col" class="text-center">E-mail</th>
                     <th scope="col" class="text-center">Vaisseau</th>
                     <th scope="col" class="text-center">Note</th>
-                    <th scope="col" class="text-center">Commentaire</th>
+                    <th style="width:35%" scope="col" class="text-center">Commentaire</th>
                     <th scope="col" class="text-center">Actions</th>
                 </tr>
             </thead>
             <tbody>
             {% for feedback in feedbacks %}
-                <tr>
+                <tr style="height:40px;">
                     <td class="text-center" scope="col">{{feedback.createdAt|date('d/m/Y H:i:s')}}</td>
                     <td class="text-center" scope="col">{{feedback.user.lastName}}</td>
                     <td class="text-center" scope="col">{{feedback.user.firstName}}</td>

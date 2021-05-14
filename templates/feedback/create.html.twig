@@ -21,13 +21,44 @@
     </div>  
     <div class="row">
         <div class="col">
-        {{form_row(form.content)}}
-            <button class="btn btn-primary btn-sm"> Valider mon commentaire</button> 
+        {{form_row(form.content,{id:"content"})}}
+            <div class="d-flex justify-content-between">
+             <p id="alert"></p>
+            <p class="text-muted"><span id="character_count"> </span> /510 </p>
+            </div>
+           
+           
         </div>
     </div>
+    <div class="row d-flex justify-content-center">
+      <button class="btn btn-primary"> Poster mon commentaire</button> 
+    </div>
+   
     {{form_end(form)}}
 
 
     
 </div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    $(document).ready(function(){
+        $("#content").keyup(function(){
+            let count = $('#content').val().length;
+            console.log($("#content").val().length);
+            $('#character_count').html(count);
+        if(count > 510){
+            $("#content").css("background-color","orange");
+            $("#alert").html("Le commentaire est trop long.").css("color","red");
+            $('button').attr('disabled','');
+        }
+        else{
+            $("#content").css("background-color","");
+            $("#alert").html("");
+            $('button').removeAttr('disabled');
+        }
+        })
+    })
+</script>
 {% endblock %}

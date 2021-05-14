@@ -31,6 +31,7 @@ class FeedbackController extends AbstractController
             $spacecraft->addFeedback($feedback);
             $em->persist($feedback);
             $em->flush();
+            $this->addFlash('success', 'Votre commentaire a été posté avec succès.');
             return $this->redirectToRoute('app_spacecraft_show', ['id' => $spacecraft->getId()]);
         }
         return $this->render('feedback/create.html.twig', [

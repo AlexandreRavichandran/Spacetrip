@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\FeedbackRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=FeedbackRepository::class)
@@ -21,6 +22,10 @@ class Feedback
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\Length(
+     *      max = 510,
+     *      maxMessage = "Le commentaire est trop long ({{ limit }} caractères max.)"
+     * )
      */
     private $content;
 
@@ -42,6 +47,12 @@ class Feedback
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *  min = 0,
+     *  max = 5,
+     *  notInRangeMessage = "La note doit etre un chiffre entre {{ min }} et {{ max }}."
+     * )
+     * 
      */
     private $rating;
 

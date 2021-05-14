@@ -45,12 +45,15 @@
                 <img class="ml-auto mr-auto" src="http://placehold.it/200x200" alt="">
             </div>
             <div class="row mt-2">
-                <h4 class=" ml-auto mr-auto"> {{spacecraft.name}} ({{spacecraft.brand}})</h4>
+                <h4 class=" ml-auto mr-auto"> <a href="{{path('app_spacecraft_show',{'id':spacecraft.id})}}">{{spacecraft.name}} ({{spacecraft.brand}})</a></h4>
             </div>
             <div class="row">
-                <p class="ml-auto mr-auto"> Note moyenne des utilisateurs : {{spacecraft.rating}}/5 </p>
+                {% set feedbackRatingStars = 5 - average %}
+
+                <p class="ml-auto mr-auto"> Note moyenne des utilisateurs : {% for i in 1..average %}<i class="bi bi-star-fill"></i>{% endfor %}{% for i in 1..feedbackRatingStars %}<i class="bi bi-star"></i>{% endfor %}</p>
+                <a href="{{path('app_spacecraft_show',{'id':spacecraft.id})}}" class="btn btn-primary btn-sm ml-auto mr-auto rounded">Voir les avis sur ce vaisseau</a>
             </div>
-            <div class="row">
+            <div class="row mt-3">
                 <h5 class="ml-auto mr-auto"> Origine : {{spacecraft.nationality}} </h5>
             </div>
             <div class="row mt-2">
