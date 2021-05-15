@@ -63,18 +63,10 @@ class TripController extends AbstractController
      * @Route("/trips/{name}", name="app_trip_show", methods={"GET"})
      * @return Response
      */
-    public function show(Trip $trip, SpacecraftRepository $repo): Response
+    public function show(Trip $trip): Response
     {
-        $spacecraft = $repo->findOneById($trip->getSpacecraft());
-        $rating = [];
-        foreach ($spacecraft->getFeedback() as $rates) {
-            array_push($rating, $rates->getRating());
-        }
-        $average = round(array_sum($rating) / count($rating));
         return $this->render('trip/show.html.twig', [
-            'trip' => $trip,
-            'spacecraft' => $spacecraft,
-            'average' => $average
+            'trip' => $trip
         ]);
     }
 }

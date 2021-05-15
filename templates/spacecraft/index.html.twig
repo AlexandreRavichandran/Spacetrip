@@ -14,13 +14,13 @@
 <div class="container mt-2">
     <div class="row">
         {% for spacecraft in spacecrafts %}
-        {% set missingStars = 5 - ratings[loop.index0]%}
+        {% set missingStars = 5 - spacecraft.rating%}
         <div class="col-4">
             <div class="card mb-3">
                 <h3 class="card-header text-center">{{spacecraft.name}}</h3>
                 <div class="card-body text-center pb-0">
                     <h5 class="card-title">{{spacecraft.brand}} ({{spacecraft.nationality}})</h5>
-                    <p>{% for i in 1..ratings[loop.index0] %}<i class="bi bi-star-fill"></i>{% endfor %}{% for i in 1..missingStars %}<i class="bi bi-star"></i>{% endfor %} ({{spacecraft.feedback|length}})</p>
+                    <p>{% for i in 1..spacecraft.rating %}<i class="bi bi-star-fill"></i>{% endfor %}{% for i in 1..missingStars %}<i class="bi bi-star"></i>{% endfor %} ({{spacecraft.feedback|length}})</p>
                 </div>
                 <img src="https://placehold.it/200x200" alt="" class="ml-2 mb-2 mr-2">
                 <div class="card-footer text-muted text-center">

@@ -31,8 +31,8 @@ class AppFixtures extends Fixture
                 ->setNumberOfSeat(mt_rand(0, 6))
                 ->setNationality($faker->country)
                 ->setDescription($faker->sentence(6))
-                ->setSpeed($faker->randomFloat(3, 1000, 100000))
-                ->setRating(mt_rand(0, 5));
+                ->setSpeed($faker->randomFloat(3, 1000, 100000));
+
 
 
 
@@ -66,7 +66,8 @@ class AppFixtures extends Fixture
                         ->setContent($faker->sentence(6))
                         ->setRating(mt_rand(1, 4));
                     $manager->persist($feedback);
-                    $spacecraft->addFeedback($feedback);
+                    $spacecraft->addFeedback($feedback)
+                        ->setRating();
                     $manager->persist($spacecraft);
                 }
             }

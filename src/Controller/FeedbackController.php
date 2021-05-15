@@ -29,6 +29,7 @@ class FeedbackController extends AbstractController
             $feedback = $form->getData();
             $feedback->setUser($user)->setSpacecraft($spacecraft);
             $spacecraft->addFeedback($feedback);
+            $spacecraft->setRating();
             $em->persist($feedback);
             $em->flush();
             $this->addFlash('success', 'Votre commentaire a été posté avec succès.');

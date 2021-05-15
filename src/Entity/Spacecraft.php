@@ -238,8 +238,20 @@ class Spacecraft
         return $this->rating;
     }
 
-    public function setRating(float $rating): self
+    /**
+     * Automatically set or updates the rating of the spacecraft based on its feedbacks ratings
+     */
+    public function setRating(): self
     {
+        if (count($this->feedback) > 0) {
+            $ratings = [];
+            foreach ($this->feedback as $feedback) {
+                array_push($ratings, $feedback->getRating());
+            }
+            $rating = round(array_sum($ratings) / (count($ratings)));
+        } else {
+            $rating = null;
+        }
         $this->rating = $rating;
 
         return $this;
