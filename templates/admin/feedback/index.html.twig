@@ -18,7 +18,7 @@
                     <th scope="col" class="text-center">E-mail</th>
                     <th scope="col" class="text-center">Vaisseau</th>
                     <th scope="col" class="text-center">Note</th>
-                    <th style="width:35%" scope="col" class="text-center">Commentaire</th>
+                    <th style="width:30%" scope="col" class="text-center">Commentaire</th>
                     <th scope="col" class="text-center">Actions</th>
                 </tr>
             </thead>
@@ -30,7 +30,7 @@
                     <td class="text-center" scope="col">{{feedback.user.firstName}}</td>
                     <td class="text-center" scope="col"><a href="#">{{feedback.user.email}}</a></td>
                     <td class="text-center" scope="col"><a href="">{{feedback.spacecraft.name}}</a></td>
-                    <td class="text-center" scope="col">{{feedback.rating}}/5</td>
+                    <td class="text-center" scope="col">{{displayStarRating(feedback.rating)}}</td>
                     <td class="text-center" scope="col">{{feedback.content}}</td>
                     <td scope="col">
                         <a href="" class="btn btn-info btn-sm"> Contacter l'utilisateur </a>

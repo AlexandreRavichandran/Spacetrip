@@ -73,8 +73,7 @@
                     <td>{{feedback.createdAt|date('d/m/Y H:i:s')}}</td>
                     <td>{{feedback.user.firstName}} {{feedback.user.lastName|upper}}</td>
                     <td>{{feedback.content}}</td>
-                    {% set feedbackRatingStars = 5 - feedback.rating %}
-                    <td> {% for i in 1..feedback.rating %}<i class="bi bi-star-fill"></i>{% endfor %}{% for i in 1..feedbackRatingStars %}<i class="bi bi-star"></i>{% endfor %}</td>
+                    <td> {{displayStarRating(feedback.rating)}}</td>
                 </tr>
             {% endfor %}
             </tbody>

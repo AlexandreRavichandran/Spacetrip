@@ -64,7 +64,7 @@ class AppFixtures extends Fixture
                         ->setSpacecraft($spacecraft)
                         ->setUser($user)
                         ->setContent($faker->sentence(6))
-                        ->setRating(mt_rand(1, 4));
+                        ->setRating(mt_rand(0, 5));
                     $manager->persist($feedback);
                     $spacecraft->addFeedback($feedback)
                         ->setRating();
