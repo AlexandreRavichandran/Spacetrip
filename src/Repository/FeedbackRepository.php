@@ -19,6 +19,22 @@ class FeedbackRepository extends ServiceEntityRepository
         parent::__construct($registry, Feedback::class);
     }
 
+    /**
+     * Function to return all trips created by a user (useful to set automatically the trip name when user create a trip)
+ 
+     * @return array
+     */
+    public function orderFeedbacks($orderBy, $order): array
+    {
+        return $this
+            ->createQueryBuilder('f')
+            ->innerJoin('f.user', 'u')
+            ->innerJoin('f.spacecraft', 's')
+            ->addOrderBy($orderBy, $order)
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Feedback[] Returns an array of Feedback objects
     //  */

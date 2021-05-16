@@ -24,6 +24,8 @@ class AdminFeedbackController extends AbstractController
 
         return $this->render('admin/feedback/index.html.twig', [
             'feedbacks' => $feedbacks,
+            'order' => null,
+            'orderBy' => null
         ]);
     }
 
@@ -38,5 +40,20 @@ class AdminFeedbackController extends AbstractController
         $em->flush();
         $this->addFlash('success', 'Ce commentaire a été supprimé avec succès.');
         return $this->redirectToRoute('app_admin_feedback_index');
+    }
+
+    /**
+     * Sort all showed feedbacks
+     * @Route("/admin/feedbacks/{orderBy}/{order}",name="app_admin_feedbacks_sort")
+     * @return Response
+     */
+    public function sort(FeedbackRepository $repo, PaginatorInterface $paginator, Request $request, string $orderBy, string $order): Response
+    {
+        $feedbacks = $paginator->paginate($repo->orderFeedbacks($orderBy, $order), $request->query->getInt('page', 1), 11);
+        return $this->render('admin/feedback/index.html.twig', [
+            'feedbacks' => $feedbacks,
+            'order' => $order,
+            'orderBy' => $orderBy
+        ]);
     }
 }
