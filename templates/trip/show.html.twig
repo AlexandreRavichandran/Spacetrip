@@ -48,9 +48,7 @@
                 <h4 class=" ml-auto mr-auto"> <a href="{{path('app_spacecraft_show',{'id':trip.spacecraft.id})}}">{{trip.spacecraft.name}} ({{trip.spacecraft.brand}})</a></h4>
             </div>
             <div class="row">
-                {% set feedbackRatingStars = 5 - trip.spacecraft.rating %}
-
-                <p class="ml-auto mr-auto"> Note moyenne des utilisateurs : {% for i in 1..trip.spacecraft.rating %}<i class="bi bi-star-fill"></i>{% endfor %}{% for i in 1..feedbackRatingStars %}<i class="bi bi-star"></i>{% endfor %}</p>
+                <p class="ml-auto mr-auto"> Note moyenne des utilisateurs : {{displayStarRating(trip.spacecraft.rating)}}</p>
                 <a href="{{path('app_spacecraft_show',{'id':trip.spacecraft.id})}}" class="btn btn-primary btn-sm ml-auto mr-auto rounded">Voir les avis sur ce vaisseau</a>
             </div>
             <div class="row mt-3">

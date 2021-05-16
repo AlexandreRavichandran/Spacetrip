@@ -12,7 +12,7 @@
     {% for spacecraft in spacecrafts %}
         <tr class="table">
             <td>{{spacecraft.name}} - {{spacecraft.brand}}({{spacecraft.nationality}})</td>
-            <td class="text-center">{{spacecraft.rating}}</td>
+            <td class="text-center">{{displayStarRating(spacecraft.rating)}}</td>
             <td class="text-center">{{spacecraft.updatedAt|date('d-m-Y H:i:s')}}</td>
             <td class="d-flex flex-row">
                 <a href="{{path('app_admin_spacecraft_edit',{'id':spacecraft.id})}}" class="btn btn-warning btn-sm">Editer</a>

@@ -32,7 +32,7 @@
                     <td class="text-center" scope="col">{{spacecraft.nationality}}</td>
                     <td class="text-center" scope="col">{{spacecraft.possibleDestination}}</td>
                     <td class="text-center" scope="col">{{spacecraft.price}}</td>
-                    <td class="text-center" scope="col">{{spacecraft.rating}}</td>
+                    <td class="text-center" scope="col">{{displayStarRating(spacecraft.rating)}}</td>
                     <td scope="col">
                         <a href="{{path('app_admin_spacecraft_edit',{'id':spacecraft.id})}}" class="btn btn-warning btn-sm">Editer</a>
                         <a onclick="event.preventDefault(); confirm('Etes vous sur de supprimer ce voyage de la base de données ? Cette action est irréversible.') && document.querySelector('#spacecraft_delete_link_{{spacecraft.id}}').click()"  class="btn btn-sm btn-danger ml-1"> Supprimer </a>
