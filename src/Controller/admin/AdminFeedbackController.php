@@ -44,7 +44,7 @@ class AdminFeedbackController extends AbstractController
 
     /**
      * Sort all showed feedbacks
-     * @Route("/admin/feedbacks/{orderBy}/{order}",name="app_admin_feedbacks_sort")
+     * @Route("/admin/feedbacks/{orderBy}/{order}",name="app_admin_feedback_sort")
      * @return Response
      */
     public function sort(FeedbackRepository $repo, PaginatorInterface $paginator, Request $request, string $orderBy, string $order): Response

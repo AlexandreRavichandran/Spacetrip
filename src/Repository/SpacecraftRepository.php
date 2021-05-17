@@ -33,7 +33,18 @@ class SpacecraftRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-
+    /**
+     * Function to sort spacecrafts with an order
+     * @return array
+     */
+    public function orderSpacecrafts($orderBy, $order): array
+    {
+        return $this
+            ->createQueryBuilder('s')
+            ->addOrderBy($orderBy, $order)
+            ->getQuery()
+            ->getResult();
+    }
 
 
     // /**

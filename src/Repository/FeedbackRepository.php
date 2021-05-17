@@ -20,8 +20,7 @@ class FeedbackRepository extends ServiceEntityRepository
     }
 
     /**
-     * Function to return all trips created by a user (useful to set automatically the trip name when user create a trip)
- 
+     * Function to sort feedbacks with an order
      * @return array
      */
     public function orderFeedbacks($orderBy, $order): array

@@ -22,7 +22,9 @@ class AdminUserController extends AbstractController
     {
         $users = $paginator->paginate($repo->findAll(), $request->query->getInt('page', 1), 11);
         return $this->render('admin/user/index.html.twig', [
-            'users' => $users
+            'users' => $users,
+            'order' => null,
+            'orderBy' => null
         ]);
     }
 
@@ -37,6 +39,21 @@ class AdminUserController extends AbstractController
         return $this->render('admin/user/show.html.twig', [
             'user' => $user,
             'feedbacks' => $feedbacks
+        ]);
+    }
+
+    /**
+     * Sort all showed users
+     * @Route("/admin/users/{orderBy}/{order}",name="app_admin_user_sort")
+     * @return Response
+     */
+    public function sort(UserRepository $repo, PaginatorInterface $paginator, Request $request, string $orderBy, string $order): Response
+    {
+        $users = $paginator->paginate($repo->orderUsers($orderBy, $order), $request->query->getInt('page', 1), 11);
+        return $this->render('admin/user/index.html.twig', [
+            'users' => $users,
+            'order' => $order,
+            'orderBy' => $orderBy
         ]);
     }
 }

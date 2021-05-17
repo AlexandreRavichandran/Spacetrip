@@ -24,7 +24,9 @@ class AdminTripController extends AbstractController
     {
         $trips = $paginator->paginate($repo->findBy(['reserved' => false]), $request->query->getInt('page', 1), 11);
         return $this->render('admin/trip/index.html.twig', [
-            'trips' => $trips
+            'trips' => $trips,
+            'order' => null,
+            'orderBy' => null
         ]);
     }
     /**
@@ -86,6 +88,20 @@ class AdminTripController extends AbstractController
         ]);
     }
 
+    /**
+     * Sort all showed trips
+     * @Route("/admin/trips/{orderBy}/{order}",name="app_admin_trip_sort")
+     * @return Response
+     */
+    public function sort(TripRepository $repo, PaginatorInterface $paginator, Request $request, string $orderBy, string $order): Response
+    {
+        $trips = $paginator->paginate($repo->orderTrips($orderBy, $order), $request->query->getInt('page', 1), 11);
+        return $this->render('admin/trip/index.html.twig', [
+            'trips' => $trips,
+            'order' => $order,
+            'orderBy' => $orderBy
+        ]);
+    }
     /* CRUD FOR RESERVED TRIPS */
 
     /**
@@ -97,7 +113,9 @@ class AdminTripController extends AbstractController
     {
         $trips = $paginator->paginate($repo->findBy(['reserved' => true]), $request->query->getInt('page', 1), 11);
         return $this->render('admin/trip/index.html.twig', [
-            'trips' => $trips
+            'trips' => $trips,
+            'order' => null,
+            'orderBy' => null
         ]);
     }
 }

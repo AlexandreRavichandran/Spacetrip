@@ -26,7 +26,9 @@ class AdminSpacecraftController extends AbstractController
     {
         $spacecrafts = $paginator->paginate($repo->findAll(), $request->query->getInt('page', 1), 11);
         return $this->render('admin/spacecraft/index.html.twig', [
-            'spacecrafts' => $spacecrafts
+            'spacecrafts' => $spacecrafts,
+            'order' => null,
+            'orderBy' => null
         ]);
     }
     /**
@@ -98,5 +100,20 @@ class AdminSpacecraftController extends AbstractController
         }
 
         return $this->redirectToRoute('app_admin_spacecraft_index');
+    }
+
+    /**
+     * Sort all showed spacecrafts
+     * @Route("/admin/spacecrafts/{orderBy}/{order}",name="app_admin_spacecraft_sort")
+     * @return Response
+     */
+    public function sort(SpacecraftRepository $repo, PaginatorInterface $paginator, Request $request, string $orderBy, string $order): Response
+    {
+        $spacecrafts = $paginator->paginate($repo->orderSpacecrafts($orderBy, $order), $request->query->getInt('page', 1), 11);
+        return $this->render('admin/spacecraft/index.html.twig', [
+            'spacecrafts' => $spacecrafts,
+            'order' => $order,
+            'orderBy' => $orderBy
+        ]);
     }
 }

@@ -36,6 +36,19 @@ class TripRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * Function to sort trips with an order
+     * @return array
+     */
+    public function orderTrips($orderBy, $order): array
+    {
+        return $this
+            ->createQueryBuilder('t')
+            ->innerJoin('t.spacecraft', 's')
+            ->addOrderBy($orderBy, $order)
+            ->getQuery()
+            ->getResult();
+    }
     // /**
     //  * @return Trip[] Returns an array of Trip objects
     //  */

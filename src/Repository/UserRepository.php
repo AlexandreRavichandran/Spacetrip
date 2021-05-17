@@ -36,6 +36,19 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
+    /**
+     * Function to sort users with an order
+     * @return array
+     */
+    public function orderUsers($orderBy, $order): array
+    {
+        return $this
+            ->createQueryBuilder('u')
+            ->innerJoin('u.feedback', 'f')
+            ->addOrderBy($orderBy, $order)
+            ->getQuery()
+            ->getResult();
+    }
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

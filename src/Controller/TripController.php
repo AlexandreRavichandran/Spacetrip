@@ -45,7 +45,7 @@ class TripController extends AbstractController
             $trip = $form->getData();
             $trip->setName('VR - ' . $user->getEmail() . ' - ' . $trips);
             $trip->setDescription('Voyage reservé par ' . $user->getEmail());
-            $trip->setAvailableSeatNumber(null);
+            $trip->setAvailableSeatNumber(0);
             $trip->setReserved(true);
             $em->persist($trip);
             $em->flush();
