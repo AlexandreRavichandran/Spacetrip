@@ -11,7 +11,7 @@
     <tbody>
     {% for spacecraft in spacecrafts %}
         <tr class="table">
-            <td>{{spacecraft.name}} - {{spacecraft.brand}}({{spacecraft.nationality}})</td>
+            <td>{{spacecraft.name|upper}} - {{spacecraft.brand}}({{spacecraft.nationality}})</td>
             <td class="text-center">{{displayStarRating(spacecraft.rating)}}</td>
             <td class="text-center">{{spacecraft.updatedAt|date('d-m-Y H:i:s')}}</td>
             <td class="d-flex flex-row">

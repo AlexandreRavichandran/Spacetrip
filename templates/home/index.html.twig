@@ -22,7 +22,7 @@
             <div class="card mb-3">
                 <div class="card-header">
                     <h4 class="text-center"> {{trip.name}}</h4>
-                    <h5 class="text-center"> destination</h5>
+                    <h5 class="text-center"> {{trip.destination.name}}</h5>
                 </div>
                 <div class="card-body mb-2">
                     <h4 class="card-subtitle text-muted text-center"> {{trip.departureAt|date('d-m-Y')}} - {{trip.arrivalAt|date('d-m-Y')}} </h4>
@@ -42,6 +42,7 @@
     {% for feedback in feedbacks %}
         <div class="col">
             <blockquote class="blockquote text-center">
+                {{displayStarRating(feedback.rating)}}
                 <p class="mb-0">{{feedback.content}}</p>
                 <footer class="blockquote-footer">{{feedback.user.firstName}} {{feedback.user.lastName}}</footer>
             </blockquote>

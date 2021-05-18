@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Destination;
 use App\Entity\Trip;
 use App\Entity\Spacecraft;
 use Symfony\Component\Form\AbstractType;
@@ -27,6 +28,11 @@ class TripType extends AbstractType
             ])
             ->add('departureAt', DateTimeType::class, [
                 'label' => 'Date de départ du voyage'
+            ])
+            ->add('destination', EntityType::class, [
+                'label' => 'Destination',
+                'class' => Destination::class,
+                'choice_label' => 'name'
             ])
             ->add('arrivalAt', DateTimeType::class, [
                 'label' => 'Date d\'arrivée du voyage'

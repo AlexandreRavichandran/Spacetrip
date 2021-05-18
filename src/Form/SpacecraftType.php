@@ -3,14 +3,15 @@
 namespace App\Form;
 
 use App\Entity\Spacecraft;
-
+use App\Entity\Destination;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class SpacecraftType extends AbstractType
 {
@@ -25,6 +26,13 @@ class SpacecraftType extends AbstractType
             ])
             ->add('brand', TextType::class, [
                 'label' => 'Marque du vaisseau'
+            ])
+            ->add('possibleDestination', EntityType::class, [
+                'label' => 'Destinations possibles avec ce vaisseau',
+                'class' => Destination::class,
+                'choice_label' => 'name',
+                'multiple' => true
+
             ])
             ->add('numberOfSeat', IntegerType::class, [
                 'label' => 'Nombres de sièges disponible'

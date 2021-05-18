@@ -16,7 +16,7 @@
         {% for spacecraft in spacecrafts %}
         <div class="col-4">
             <div class="card mb-3">
-                <h3 class="card-header text-center">{{spacecraft.name}}</h3>
+                <h3 class="card-header text-center">{{spacecraft.name|upper}}</h3>
                 <div class="card-body text-center pb-0">
                     <h5 class="card-title">{{spacecraft.brand}} ({{spacecraft.nationality}})</h5>
                     <p> {{displayStarRating(spacecraft.rating)}} ({{spacecraft.feedback|length}})</p>

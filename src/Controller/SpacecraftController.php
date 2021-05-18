@@ -49,12 +49,17 @@ class SpacecraftController extends AbstractController
     public function select(Spacecraft $spacecraft, Request $request): Response
     {
         if ($request->isXmlHttpRequest() || $request->query->get('showJson') == 1) {
+            $possibleDestinationsArray = [];
+            foreach ($spacecraft->getPossibleDestination() as $possibleDestinations) {
+                array_push($possibleDestinationsArray, $possibleDestinations->getName());
+            }
+            $possibleDestinationsArray = implode(', ', $possibleDestinationsArray);
             $jsonData = [
                 'brand' => $spacecraft->getBrand(),
                 'nationality' => $spacecraft->getNationality(),
                 'price' => $spacecraft->getPrice(),
                 'rating' => $spacecraft->getRating(),
-                'possibleDestination' => $spacecraft->getPossibleDestination(),
+                'possibleDestination' => $possibleDestinationsArray,
                 'numberOfSeat' => $spacecraft->getNumberOfSeat(),
                 'speed' => $spacecraft->getSpeed()
             ];

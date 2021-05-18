@@ -28,7 +28,7 @@
                     <td class="text-center" scope="col">{{feedback.user.lastName}}</td>
                     <td class="text-center" scope="col">{{feedback.user.firstName}}</td>
                     <td class="text-center" scope="col"><a href="#">{{feedback.user.email}}</a></td>
-                    <td class="text-center" scope="col"><a href="">{{feedback.spacecraft.name}}</a></td>
+                    <td class="text-center" scope="col"><a href="">{{feedback.spacecraft.name|upper}}</a></td>
                     <td class="text-center" scope="col">{{displayStarRating(feedback.rating)}}</td>
                     <td class="text-center" scope="col">{{feedback.content}}</td>
                     <td scope="col">

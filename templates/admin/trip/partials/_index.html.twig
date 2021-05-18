@@ -18,11 +18,11 @@
         {% if reserved == true %}
         <tr class="table">
             {% set split = trip.name|split(' - ')%}
-            <td><a href="#">{{split.1}}</a> - {{split.2}}(destination)</td>
+            <td><a href="#">{{split.1}}</a> - {{split.2}}{{trip.destination.name|upper}}</td>
             <td class="text-center">{{trip.departureAt|date('d-m-Y H:i:s')}} - {{trip.arrivalAt|date('d-m-Y H:i:s')}}</td>
             <td>{{trip.spacecraft.name}}</td>
         {% else %}
-            <td><a href="#">{{trip.name}} - {{trip.destination|upper}}</td>
+            <td><a href="#">{{trip.name}} - {{trip.destination.name|upper}}</td>
             <td class="text-center">{{trip.availableSeatNumber}}</td>
             <td>{{trip.updatedAt|date('d-m-Y H:i:s')}}</td>
         {% endif %}

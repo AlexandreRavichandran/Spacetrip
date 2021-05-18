@@ -14,7 +14,7 @@
         <tr class="table">
             <td class="text-center">{{feedback.createdAt|date('d-m-Y H:i:s')}}</td>
             <td>{{feedback.user.lastName}} - {{feedback.user.firstName}}</td>
-            <td class="text-center">{{feedback.spacecraft.name}}</td>
+            <td class="text-center">{{feedback.spacecraft.name|upper}}</td>
             <td style="width:35%;" class="text-center">{{feedback.content}}</td>
             <td class="text-center">{{displayStarRating(feedback.rating)}}</td>
         </tr>
