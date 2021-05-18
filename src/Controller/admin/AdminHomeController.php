@@ -30,7 +30,7 @@ class AdminHomeController extends AbstractController
         $destinations = $destinationRepo->findAll();
         $destinationPercentages = [];
         foreach ($destinations as $destination) {
-            $percentage = (count($destination->getTrips()) / count($destinationRepo->findAll())) * 100;
+            $percentage = (count($destination->getTrips()) / count($tripRepo->findAll())) * 100;
             array_push($destinationPercentages, $percentage);
         }
         return $this->render('admin/index.html.twig', [
