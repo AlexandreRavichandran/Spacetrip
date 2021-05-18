@@ -26,7 +26,6 @@ class AppFixtures extends Fixture
             $spacecraft
                 ->setName($faker->word)
                 ->setPrice($faker->randomFloat(3))
-                ->setPossibleDestination($faker->sentence(3))
                 ->setBrand($faker->word())
                 ->setNumberOfSeat(mt_rand(0, 6))
                 ->setNationality($faker->country)
@@ -41,7 +40,6 @@ class AppFixtures extends Fixture
                 $trip
                     ->setName($faker->word)
                     ->setDescription($faker->text(30))
-                    ->setDestination($faker->country)
                     ->setDepartureAt($faker->dateTimeAD())
                     ->setArrivalAt($faker->dateTimeAD())
                     ->setAvailableSeatNumber(mt_rand(0, 9))

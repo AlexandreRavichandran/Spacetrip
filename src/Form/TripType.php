@@ -25,9 +25,6 @@ class TripType extends AbstractType
             ->add('description', TextareaType::class, [
                 'label' => 'Description du voyage',
             ])
-            ->add('destination', TextType::class, [
-                'label' => 'Destination du voyage'
-            ])
             ->add('departureAt', DateTimeType::class, [
                 'label' => 'Date de départ du voyage'
             ])

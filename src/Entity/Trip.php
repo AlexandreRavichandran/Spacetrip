@@ -36,11 +36,6 @@ class Trip
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $destination;
-
-    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $createdAt;
@@ -77,6 +72,12 @@ class Trip
      */
     private $spacecraft;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Destination::class, inversedBy="trips")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $destination;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -102,18 +103,6 @@ class Trip
     public function setDescription(?string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getDestination(): ?string
-    {
-        return $this->destination;
-    }
-
-    public function setDestination(string $destination): self
-    {
-        $this->destination = $destination;
 
         return $this;
     }
@@ -210,6 +199,18 @@ class Trip
     public function setSpacecraft(?Spacecraft $spacecraft): self
     {
         $this->spacecraft = $spacecraft;
+
+        return $this;
+    }
+
+    public function getDestination(): ?Destination
+    {
+        return $this->destination;
+    }
+
+    public function setDestination(?Destination $destination): self
+    {
+        $this->destination = $destination;
 
         return $this;
     }

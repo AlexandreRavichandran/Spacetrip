@@ -40,11 +40,6 @@ class Spacecraft
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $possibleDestination;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $brand;
 
     /**
@@ -92,10 +87,16 @@ class Spacecraft
      */
     private $feedback;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Destination::class, inversedBy="spacecrafts")
+     */
+    private $possibleDestination;
+
     public function __construct()
     {
         $this->trip = new ArrayCollection();
         $this->feedback = new ArrayCollection();
+        $this->possibleDestination = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -123,18 +124,6 @@ class Spacecraft
     public function setPrice(string $price): self
     {
         $this->price = $price;
-
-        return $this;
-    }
-
-    public function getPossibleDestination(): ?string
-    {
-        return $this->possibleDestination;
-    }
-
-    public function setPossibleDestination(string $possibleDestination): self
-    {
-        $this->possibleDestination = $possibleDestination;
 
         return $this;
     }
@@ -313,6 +302,30 @@ class Spacecraft
                 $feedback->setSpacecraft(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Destination[]
+     */
+    public function getPossibleDestination(): Collection
+    {
+        return $this->possibleDestination;
+    }
+
+    public function addPossibleDestination(Destination $possibleDestination): self
+    {
+        if (!$this->possibleDestination->contains($possibleDestination)) {
+            $this->possibleDestination[] = $possibleDestination;
+        }
+
+        return $this;
+    }
+
+    public function removePossibleDestination(Destination $possibleDestination): self
+    {
+        $this->possibleDestination->removeElement($possibleDestination);
 
         return $this;
     }

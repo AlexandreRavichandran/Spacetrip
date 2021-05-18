@@ -23,9 +23,6 @@ class SpacecraftType extends AbstractType
             ->add('price', NumberType::class, [
                 'label' => 'Prix du vaisseau'
             ])
-            ->add('possibleDestination', TextType::class, [
-                'label' => 'Destinations possibles avec ce vaisseau'
-            ])
             ->add('brand', TextType::class, [
                 'label' => 'Marque du vaisseau'
             ])
