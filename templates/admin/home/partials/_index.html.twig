@@ -2,10 +2,10 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+            <div id="spacecraftChartContainer" style="height: 370px; width: 100%;"></div>
         </div>
         <div class="col">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, magnam labore architecto distinctio saepe laborum vitae aut cum quaerat quidem quos quis a deserunt, sunt totam eos, debitis omnis unde numquam corrupti! Culpa, voluptate eaque labore dolore autem, inventore ullam, optio molestias placeat ab veniam quasi? Molestiae enim ipsa, vel perspiciatis quidem sed quis eos, nostrum minus fuga earum! Laboriosam molestiae voluptatum ab magnam nesciunt dolore error quaerat dignissimos, accusantium nam ipsa atque eius sapiente! Repudiandae ea ratione delectus vitae?</p>
+            <div id="destinationContainer" style="height: 370px; width: 100%;"></div>
         </div>
     </div>
 </div>
@@ -17,7 +17,7 @@
 
 window.onload = function() {
 
-var chart = new CanvasJS.Chart("chartContainer", {
+var spacecraftChart = new CanvasJS.Chart("spacecraftChartContainer", {
 	animationEnabled: true,
 	title: {
 		text: "Les vaisseaux les plus sollicités"
@@ -29,12 +29,31 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		indexLabel: "{label} {y}",
 		dataPoints: [
              {% for spacecraft in spacecrafts %}
-			{y: {{percentages[loop.index0]}}, label: "{{spacecraft.name|upper}}"},
+			{y: {{spacecraftPercentages[loop.index0]}}, label: "{{spacecraft.name|upper}}"},
             {% endfor %}
 		]
 	}]
 });
-chart.render();
+spacecraftChart.render();
+
+var destinationChart = new CanvasJS.Chart("destinationContainer", {
+	animationEnabled: true,
+	title: {
+		text: "Les destinations favorites"
+	},
+	data: [{
+		type: "pie",
+		startAngle: 240,
+		yValueFormatString: "##0.00\"%\"",
+		indexLabel: "{label} {y}",
+		dataPoints: [
+             {% for destination in destinations %}
+			{y: {{destinationPercentages[loop.index0]}}, label: "{{destination.name|upper}}"},
+            {% endfor %}
+		]
+	}]
+});
+destinationChart.render();
 
 }
 </script>

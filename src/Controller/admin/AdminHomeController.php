@@ -2,6 +2,7 @@
 
 namespace App\Controller\admin;
 
+use App\Repository\DestinationRepository;
 use App\Repository\FeedbackRepository;
 use App\Repository\SpacecraftRepository;
 use App\Repository\TripRepository;
@@ -17,18 +18,26 @@ class AdminHomeController extends AbstractController
      * @Route("/admin/home",name="app_admin_home")
      * @return Response
      */
-    public function showDashboard(SpacecraftRepository $spacecraftrepo, TripRepository $triprepo): Response
+    public function showDashboard(SpacecraftRepository $spacecraftRepo, TripRepository $tripRepo, DestinationRepository $destinationRepo): Response
     {
-        $spacecrafts = $spacecraftrepo->findAll();
-        $percentages = [];
+        $spacecrafts = $spacecraftRepo->findAll();
+        $spacecraftPercentages = [];
         foreach ($spacecrafts as $spacecraft) {
-            $percentage = (count($spacecraft->getTrip()) / count($triprepo->findAll())) * 100;
-            array_push($percentages, $percentage);
+            $percentage = (count($spacecraft->getTrip()) / count($tripRepo->findAll())) * 100;
+            array_push($spacecraftPercentages, $percentage);
         }
 
+        $destinations = $destinationRepo->findAll();
+        $destinationPercentages = [];
+        foreach ($destinations as $destination) {
+            $percentage = (count($destination->getTrips()) / count($destinationRepo->findAll())) * 100;
+            array_push($destinationPercentages, $percentage);
+        }
         return $this->render('admin/index.html.twig', [
             'spacecrafts' => $spacecrafts,
-            'percentages' => $percentages,
+            'spacecraftPercentages' => $spacecraftPercentages,
+            'destinations' => $destinations,
+            'destinationPercentages' => $destinationPercentages,
             'class' => 'home'
         ]);
     }
