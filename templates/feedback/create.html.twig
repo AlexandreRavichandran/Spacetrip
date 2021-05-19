@@ -5,29 +5,66 @@
 {% block body %}
 <div class="container mt-2">
     <div class="row">
-        <h1 class="text-center"> Vaisseau {{spacecraft.name}}</h1>
+        <h1 class="ml-auto mr-auto"> Vaisseau {{spacecraft.name}}</h1>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <img src="https://placehold.it/300x300" alt="">
+        </div>
+        <div class="col-8">
+            <p> {{spacecraft.description}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quam incidunt esse et quod nihil quisquam, eum labore praesentium odit ullam distinctio reiciendis at alias, consequuntur voluptatem minus hic sapiente. Tempore aut voluptate cupiditate. Quam, fugit? Unde eveniet, quos perferendis nesciunt explicabo debitis temporibus sapiente illum incidunt molestias possimus iste!</p>
+            <div class="row">
+                <table class="table table-hover">
+                    <tbody>
+                        <tr class="text-center">
+                            <td> Nombre de sièges </td>
+                            <td>{{spacecraft.numberOfSeat}}</td>
+                        </tr>
+                        <tr class="text-center">
+                            <td> Vitesse</td>
+                            <td>{{spacecraft.speed}} km/h</td>
+                        </tr>
+                        <tr class="text-center">
+                            <td> Destinations possibles</td>
+                            <td> <ul>{% for possibleDestination in spacecraft.possibleDestination %}<li>{{possibleDestination.name}}</li>{% endfor %}</ul></td>
+                        </tr>
+                        <tr class="text-center">
+                            <td> Prix </td>
+                            <td>{{spacecraft.price}} €</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <p class="ml-auto mr-auto"> Note actuelle :</p>
+    </div>
+    <div class="row">
+        <h1 class="ml-auto mr-auto">{{displayStarRating(spacecraft.rating)}}</h1>
     </div>
 </div>
 
-<div class="container">
+<div class="container mt-4">
     <div class="row">
-        <p> Nom : {{app.user.firstName}} {{app.user.lastName}}</p>
+        <h4 class="ml-auto mr-auto"> Donnez votre note pour ce vaisseau : </h4>
+    </div>
+    <div class="row">
+        <p class="ml-auto mr-auto" style="font-size:30px"> <span><i id="ratingMinus" class="bi bi-dash"></i></span> <span id="userRating">{% for i in 0..4 %}<i class="bi bi-star"></i>{% endfor %}</span> <span><i id="ratingPlus" class="bi bi-plus"></i></span></p> 
     </div>
     {{form_start(form)}}
     <div class="row">
         <div class="col-4">
-        {{form_row(form.rating)}}
+        {{form_widget(form.rating, {'id':'rating', 'attr':{'class':'invisible'}})}}
         </div>
     </div>  
     <div class="row">
         <div class="col">
         {{form_row(form.content,{id:"content"})}}
             <div class="d-flex justify-content-between">
-             <p id="alert"></p>
+            <p id="alert"></p>
             <p class="text-muted"><span id="character_count"> </span> /510 </p>
             </div>
-           
-           
         </div>
     </div>
     <div class="row d-flex justify-content-center">
@@ -59,6 +96,20 @@
             $('button').removeAttr('disabled');
         }
         })
+
+        $("#ratingPlus").click(function(){
+            $("#userRating").prepend('<i class="bi bi-star-fill"></i>');
+            $("#userRating i:last-child").remove();
+            $("#rating").val($('#userRating .bi-star-fill').length)
+        })
+        $("#ratingMinus").click(function(){
+            $("#userRating").append('<i class="bi bi-star"></i>');
+            $("#userRating i:first-child").remove();
+            $("#rating").val($('#userRating .bi-star-fill').length)
+        })
+
+
     })
+
 </script>
 {% endblock %}

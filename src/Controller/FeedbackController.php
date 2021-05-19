@@ -16,7 +16,7 @@ class FeedbackController extends AbstractController
 {
     /**
      * Add a feedback on a spacecraft
-     * @Route("/{id}/feedback/create", name="app_feedback_create")
+     * @Route("/spacecrafts/{id}/feedback/create", name="app_feedback_create")
      */
     public function index(Spacecraft $spacecraft, Request $request, EntityManagerInterface $em): Response
     {
