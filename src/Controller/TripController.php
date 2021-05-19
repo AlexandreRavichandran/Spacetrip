@@ -22,7 +22,7 @@ class TripController extends AbstractController
      */
     public function index(TripRepository $repo, PaginatorInterface $paginator, Request $request): Response
     {
-        $trips = $paginator->paginate($repo->findBy(['reserved' => false]), $request->query->getInt('page', 1), 12);
+        $trips = $paginator->paginate($repo->findAvailableTrips(), $request->query->getInt('page', 1), 12);
         return $this->render('trip/index.html.twig', [
             'trips' => $trips
         ]);

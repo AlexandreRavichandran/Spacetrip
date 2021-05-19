@@ -20,6 +20,20 @@ class TripRepository extends ServiceEntityRepository
     }
 
 
+    /**
+     * Show all available trips (trips that are not reserved and where available seats are more than 1)
+     *
+     * @return array
+     */
+    public function findAvailableTrips(): array
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.reserved = :reserved')
+            ->andWhere('t.availableSeatNumber >= :seatNumber')
+            ->setParameters(['reserved' => false, 'seatNumber' => 1])
+            ->getQuery()
+            ->getResult();
+    }
 
     /**
      * Function to return all trips created by a user (useful to set automatically the trip name when user create a trip)
