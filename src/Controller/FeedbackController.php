@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Feedback;
 use App\Entity\Spacecraft;
 use App\Form\FeedbackType;
+use App\Repository\FeedbackRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,6 +39,22 @@ class FeedbackController extends AbstractController
         return $this->render('feedback/create.html.twig', [
             'spacecraft' => $spacecraft,
             'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * Sort feedbacks when showing a spacecraft
+     * @Route("/spacecrafts/{id}/feedbacks/{orderBy}/{order}",name="app_spacecraft_feedback_sort")
+     * @return Response
+     */
+    public function sortFeedbacks(Spacecraft $spacecraft, FeedbackRepository $repo, $orderBy = null, $order = null): Response
+    {
+        $feedbacks = $repo->findBy(['spacecraft' => $spacecraft->getId()], [$orderBy => $order]);
+        return $this->render('spacecraft/show.html.twig', [
+            'feedbacks' => $feedbacks,
+            'spacecraft' => $spacecraft,
+            'orderBy' => $orderBy,
+            'order' => $order
         ]);
     }
 }

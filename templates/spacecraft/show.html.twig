@@ -61,14 +61,14 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col-2">Date</th>
+                    <th scope="col-2">Date <a href="{% if orderBy is same as 'createdAt' and order is same as 'DESC'%}{{path('app_spacecraft_feedback_sort',{'id':spacecraft.id,'orderBy':'createdAt','order':'ASC'})}}{% else %}{{path('app_spacecraft_feedback_sort',{'id':spacecraft.id,'orderBy':'createdAt','order':'DESC'})}}{% endif %}" class="{{setSortingIcon(orderBy,'createdAt',order)}}"></a></th>
                     <th scope="col-3">Auteur</th>
                     <th style="width:50%;" scope="col-3">Commentaires</th>
-                    <th scope="col-4">Note</th>
+                    <th scope="col-4">Note <a href="{% if orderBy is same as 'rating' and order is same as 'DESC'%}{{path('app_spacecraft_feedback_sort',{'id':spacecraft.id,'orderBy':'rating','order':'ASC'})}}{% else %}{{path('app_spacecraft_feedback_sort',{'id':spacecraft.id,'orderBy':'rating','order':'DESC'})}}{% endif %}" class="{{setSortingIcon(orderBy,'rating',order)}}"></a></th>
                 </tr>
             </thead>
             <tbody>
-            {% for feedback in spacecraft.feedback %}
+            {% for feedback in feedbacks %}
                 <tr>
                     <td>{{feedback.createdAt|date('d/m/Y H:i:s')}}</td>
                     <td>{{feedback.user.firstName}} {{feedback.user.lastName|upper}}</td>
@@ -83,13 +83,18 @@
 {% endblock %}
 {% block javascripts %}
 <script>
-$(function() {
+$(document).ready(function(){
     $("#goFeedback").on('click', function() {
         var position = $("#feedback").offset().top;
         $("HTML, BODY").animate({
             scrollTop: position
         }, 1000);
     });
-});
+    {% if orderBy is not same as null and order is not same as null %}
+        $(document).scrollTop( $("#feedback").offset().top );  
+    {% endif %}
+})
+
+
 </script>
 {% endblock %}

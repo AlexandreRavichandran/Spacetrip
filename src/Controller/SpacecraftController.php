@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Spacecraft;
+use App\Repository\FeedbackRepository;
 use App\Repository\SpacecraftRepository;
 use App\Repository\TripRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -33,12 +34,16 @@ class SpacecraftController extends AbstractController
      * @Route("/spacecrafts/{id}",name="app_spacecraft_show")
      * @return Response
      */
-    public function show(Spacecraft $spacecraft, TripRepository $repo): Response
+    public function show(Spacecraft $spacecraft, TripRepository $tripRepo, FeedbackRepository $feedbackrepo): Response
     {
-        $trips = $repo->findBy(['spacecraft' => $spacecraft->getId()]);
+        $trips = $tripRepo->findBy(['spacecraft' => $spacecraft->getId()]);
+        $feedbacks = $feedbackrepo->findBy(['spacecraft' => $spacecraft->getId()]);
         return $this->render('spacecraft/show.html.twig', [
             'spacecraft' => $spacecraft,
-            'trips' => $trips
+            'trips' => $trips,
+            'orderBy' => null,
+            'order' => null,
+            'feedbacks' => $feedbacks
         ]);
     }
 
