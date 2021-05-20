@@ -63,6 +63,23 @@ class TripRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * Show available trips for a specific destination
+     *
+     * @return array
+     */
+    public function AvailableTripByDestination($destination): array
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.reserved = :reserved')
+            ->andWhere('t.availableSeatNumber >= :seatNumber')
+            ->andWhere('t.destination = :destination')
+            ->setParameters(['reserved' => false, 'seatNumber' => 1, 'destination' => $destination])
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Trip[] Returns an array of Trip objects
     //  */

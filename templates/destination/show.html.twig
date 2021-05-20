@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Destination {{destination.name}} {% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <a href="{{path('app_destination_index')}}" class="btn btn-primary rounded mt-2"> <i class="bi bi-arrow-left"></i> Retour </a>
+    <h1 class="text-center"> {{destination.name }} </h1>
+    <div class="row">
+        <div class="col-4">
+            <img src="https://placehold.it/400x400" alt="" class="w-100">
+        </div>
+        <div class="col-8">
+            <div class="row">
+                <p> {{destination.description}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure commodi quod, laudantium veritatis deserunt blanditiis nihil iste doloribus? Repudiandae asperiores eligendi voluptates laboriosam architecto ut laborum eaque ipsum odio? Adipisci officia veritatis quisquam pariatur. Officia animi nobis adipisci veniam, ipsam eos inventore ratione recusandae rerum alias dignissimos. Voluptatum obcaecati fugit ullam dolor, ratione ab voluptatem exercitationem velit explicabo eaque consequatur aliquid itaque quisquam corporis hic libero id sequi cumque nulla non corrupti et suscipit ducimus eum? Pariatur quos deserunt eaque suscipit, hic natus quibusdam a minus aspernatur fugiat, nulla eius!</p>
+                <p>Vous voulez en savoir plus ? Voir <a class="text-danger" href="https://fr.wikipedia.org/wiki/{{destination.name}}_%28plan%C3%A8te%29">ici</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <h4 class="ml-auto mr-auto"> Quelques caracteristiques techniques</h4>
+    </div>
+    <div class="row">
+        <p> Distance Terre <i class="bi bi-arrow-right-short"></i> {{destination.name}} : {{destination.distance}} km</p>
+    </div>
+</div>
+<div class="container mt-4">
+    <h4 class="text-center">Interessé par cette destination ?</h4>
+    <div class="row mt-4">
+        <div class="col-8">
+            <h5 class="text-center">Voyez nos voyages actuels...</h5>
+            <table class="table table-hover w-75 m-auto">
+                <tbody>
+                {% for trip in trips %}
+                    <tr class="table">
+                        <td class="text-center"> 
+                            <p>Nom : {{trip.name|upper}}</p> 
+                            <p>Départ : {{trip.departureAt|date('d/m/Y H:i:s')}}</p>
+                            <p>Arrivée : {{trip.arrivalAt|date('d/m/Y H:i:s')}}</p>
+                        </td>
+                        <td class="d-flex flex-column justify-content-center align-items-start">
+                            <a href="{{path('app_trip_show',{'name':trip.name})}}" class="btn btn-primary rounded btn-sm w-50 ml-auto mr-auto mb-2 mt-4">Voir les détails</a>
+                            {% if trip.availableSeatNumber <= 2 %}
+                                <p class="text-center badge badge-pill badge-warning ml-auto mr-auto p-2"><i class="bi bi-exclamation-triangle-fill"></i> {{trip.availableSeatNumber}} place(s) restant(s) ! </p>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-4">
+            <h5 class="text-center">Ou organisez vous-même votre voyage !</h5>
+            <h7 class="text-center mt-2">Vaisseau disponibles pour cette destination :</h7>
+            <table class="table table-hover m-auto">
+                <tbody>
+                {% for spacecraft in destination.spacecrafts %}
+                    <tr class="table">
+                        <td class="text-center"> 
+                            <a href="{{path('app_spacecraft_show',{'id':spacecraft.id})}}">{{spacecraft.name|upper}}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <a href="{{path('app_trip_create')}}" class="btn btn-primary d-flex justify-content-center mt-2"> Créer mon voyage</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

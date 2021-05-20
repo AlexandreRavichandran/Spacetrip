@@ -29,9 +29,9 @@
                             <td> Vitesse</td>
                             <td>{{spacecraft.speed}} km/h</td>
                         </tr>
-                        <tr class="text-center">
-                            <td> Destinations possibles</td>
-                            <td> <ul>{% for possibleDestination in spacecraft.possibleDestination %}<li>{{possibleDestination.name}}</li>{% endfor %}</ul></td>
+                        <tr>
+                            <td class="text-center"> Destinations possibles</td>
+                            <td class="ml-auto mr-auto"> <ul>{% for possibleDestination in spacecraft.possibleDestination %}<li><a href="{{path('app_destination_show',{'name':possibleDestination.name})}}">{{possibleDestination.name}}</a></li>{% endfor %}</ul></td>
                         </tr>
                         <tr class="text-center">
                             <td> Prix </td>
