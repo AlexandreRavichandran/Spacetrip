@@ -38,7 +38,7 @@ class TripController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_USER', null, "Veuillez vous connecter.");
         $trip = new Trip;
         $user = $this->getUser();
-        $trips = count($repo->findNumberOfTrips($user->getEmail())) + 1;
+        $trips = count($repo->findUserTrips($user->getEmail())) + 1;
         $form = $this->createForm(TripType::class, $trip);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -49,7 +49,7 @@ class TripController extends AbstractController
             $trip->setReserved(true);
             $em->persist($trip);
             $em->flush();
-            return $this->redirectToRoute('app_admin_trip_index');
+            return $this->redirectToRoute('app_user_profile');
         }
         return $this->render('trip/create.html.twig', [
             'form' => $form->createView(),

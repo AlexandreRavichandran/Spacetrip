@@ -40,7 +40,7 @@ class TripRepository extends ServiceEntityRepository
  
      * @return array
      */
-    public function findNumberOfTrips($user): array
+    public function findUserTrips($user): array
     {
         return $this
             ->createQueryBuilder('t')
