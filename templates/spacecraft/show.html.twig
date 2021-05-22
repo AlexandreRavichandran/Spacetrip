@@ -35,7 +35,7 @@
                         </tr>
                         <tr class="text-center">
                             <td> Prix </td>
-                            <td>{{spacecraft.price}} €</td>
+                            <td>{{formatPrice(spacecraft.reservationPrice,0)}} € + {{formatPrice(spacecraft.pricePerDistance,5)}} €/km</td>
                         </tr>
                     </tbody>
                 </table>

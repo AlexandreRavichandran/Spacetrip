@@ -40,7 +40,7 @@ class AppExtension extends AbstractExtension
         }
     }
 
-    public function setSortingIcon(string $actualOrder, string $orderBy, string $order, string $type = 'alpha'): void
+    public function setSortingIcon(string $actualOrder = null, string $orderBy = null, string $order = null, string $type = 'alpha'): void
     {
         if ($actualOrder === $orderBy && $order === 'ASC') {
             echo "bi bi-sort-$type-down";
