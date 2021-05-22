@@ -225,8 +225,17 @@ class Trip
         return $this->price;
     }
 
-    public function setPrice(float $price): self
+    /**
+     * Set automatically the price of a Trip based on the destination distance and spacecraft prices
+     * (formula = destination_distance * price_per_distance + reservation_price)
+     *  
+     * @return self
+     */
+    public function setPrice(): self
     {
+        $destination = $this->getDestination();
+        $spacecraft = $this->getSpacecraft();
+        $price = ($destination->getDistance() * $spacecraft->getPricePerDistance() + $spacecraft->getReservationPrice());
         $this->price = $price;
 
         return $this;

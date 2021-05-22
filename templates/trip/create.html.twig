@@ -45,7 +45,7 @@
                             <td id="brand_origin" class="text-center" scope="col"></td>
                         </tr>
                         <tr>
-                            <th scope="row">Prix</th>
+                            <th scope="row">Prix :</th>
                             <td id="price" class="text-center"></td>
                         </tr>
                     </thead>
@@ -59,7 +59,7 @@
                             <td id="possible_destination" class="text-center"></td>
                         </tr>
                         <tr>
-                            <th scope="row">Nombre de place disponibles</th>
+                            <th scope="row">Nombre de places</th>
                             <td id="available_seat_number" class="text-center"></td>
                         </tr>
                         <tr>
@@ -114,11 +114,11 @@
 
             .done(function(data,status){
             $('#brand_origin').html(data['brand'] + ' - ' + data['nationality'])
-            $('#price').html(data['price'])
+            $('#price').html(data['reservationPrice'] + ' € + ' + data['pricePerDistance'] + ' €/km')
             $('#rating').html(data['rating'])
             $('#possible_destination').html(data['possibleDestination'])
             $('#available_seat_number').html(data['numberOfSeat'])
-            $('#speed').html(data['speed'])
+            $('#speed').html(data['speed'] + ' km/h')
             
             })
         })

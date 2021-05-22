@@ -41,6 +41,7 @@ class AdminTripController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $trip = new Trip();
             $trip = $form->getData();
+            $trip->setPrice();
             $em->persist($trip);
             $em->flush();
             $this->addFlash('success', 'La création du nouveau voyage a été effectué avec succès.');

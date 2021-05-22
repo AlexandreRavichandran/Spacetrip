@@ -67,11 +67,11 @@ class AppFixtures extends Fixture
                         ->setLastName($faker->lastName)
                         ->setPassword($this->passwordEncoder->encodePassword($user, 'demo'));
                     $manager->persist($user);
-                    for ($k = 0; $k < mt_rand(0, 1); $k++) {
+                    for ($k = 1; $k < mt_rand(1, 3); $k++) {
                         $trip = new Trip;
                         $trip
-                            ->setName('VR - ' . $user->getEmail() . ' - ' . $faker->word)
-                            ->setDescription($user->getEmail() . ' - ' . $faker->word)
+                            ->setName('VR - ' . $user->getEmail() . ' - ' . $k)
+                            ->setDescription('Voyage reservé par ' . $user->getEmail())
                             ->setDepartureAt($faker->dateTimeAD())
                             ->setArrivalAt($faker->dateTimeAD())
                             ->setAvailableSeatNumber(0)

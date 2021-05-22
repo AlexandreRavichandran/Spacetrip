@@ -47,6 +47,7 @@ class TripController extends AbstractController
             $trip->setDescription('Voyage reservé par ' . $user->getEmail());
             $trip->setAvailableSeatNumber(0);
             $trip->setReserved(true);
+            $trip->setPrice();
             $em->persist($trip);
             $em->flush();
             return $this->redirectToRoute('app_user_profile');

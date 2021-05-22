@@ -62,7 +62,8 @@ class SpacecraftController extends AbstractController
             $jsonData = [
                 'brand' => $spacecraft->getBrand(),
                 'nationality' => $spacecraft->getNationality(),
-                'price' => $spacecraft->getPrice(),
+                'reservationPrice' => $spacecraft->getReservationPrice(),
+                'pricePerDistance' => $spacecraft->getPricePerDistance(),
                 'rating' => $spacecraft->getRating(),
                 'possibleDestination' => $possibleDestinationsArray,
                 'numberOfSeat' => $spacecraft->getNumberOfSeat(),
