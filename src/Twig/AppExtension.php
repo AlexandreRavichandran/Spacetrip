@@ -2,6 +2,7 @@
 
 namespace App\Twig;
 
+use PhpParser\Node\Stmt\Echo_;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -13,10 +14,11 @@ class AppExtension extends AbstractExtension
             new TwigFunction('displayStarRating', [$this, 'displayStarRating']),
             new TwigFunction('setSortingPath', [$this, 'setSortingPath']),
             new TwigFunction('setSortingIcon', [$this, 'setSortingIcon']),
+            new TwigFunction('formatPrice', [$this, 'formatPrice']),
         ];
     }
 
-    public function displayStarRating($rating): void
+    public function displayStarRating(float $rating): void
     {
 
         $missingStar = 5 - $rating;
@@ -29,7 +31,7 @@ class AppExtension extends AbstractExtension
             echo '<i class="bi bi-star"></i>';
         }
     }
-    public function setSortingPath($filename, $actualOrder, $orderBy, $order): void
+    public function setSortingPath(string $filename, string $actualOrder, string $orderBy, string $order): void
     {
         if ($actualOrder === $orderBy && $order === 'DESC') {
             echo "{{path(app_admin_" . $filename . "_sort),{'orderBy':$orderBy,'order':'ASC'}}}";
@@ -38,12 +40,18 @@ class AppExtension extends AbstractExtension
         }
     }
 
-    public function setSortingIcon($actualOrder, $orderBy, $order, $type = 'alpha'): void
+    public function setSortingIcon(string $actualOrder, string $orderBy, string $order, string $type = 'alpha'): void
     {
         if ($actualOrder === $orderBy && $order === 'ASC') {
             echo "bi bi-sort-$type-down";
         } else {
             echo "bi bi-sort-$type-up";
         }
+    }
+
+    public function formatPrice(float $price, int $decimals): string
+    {
+        $price = number_format($price, $decimals, ',', ' ');
+        return $price;
     }
 }

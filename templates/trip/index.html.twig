@@ -24,6 +24,7 @@
                     <h5 class="card-subtitle text-muted text-center"> {{trip.departureAt|date('d-m-Y')}} - {{trip.arrivalAt|date('d-m-Y')}} </h5>
                 </div>
                 <img src="https://placehold.it/300x300" alt="" class="text-center mb-4 ml-auto mr-auto">
+                <p class="text-center">{{formatPrice(trip.price,2)}} €</p>
                 <div class="card-footer text-muted text-center">
                     <a href="{{path('app_trip_show',{'name': trip.name})}}" class="card-link stretched-link"> En savoir plus</a>
                 </div>
