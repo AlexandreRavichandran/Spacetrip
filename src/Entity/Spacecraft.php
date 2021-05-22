@@ -92,6 +92,16 @@ class Spacecraft
      */
     private $possibleDestination;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $reservationPrice;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $pricePerDistance;
+
     public function __construct()
     {
         $this->trip = new ArrayCollection();
@@ -326,6 +336,30 @@ class Spacecraft
     public function removePossibleDestination(Destination $possibleDestination): self
     {
         $this->possibleDestination->removeElement($possibleDestination);
+
+        return $this;
+    }
+
+    public function getReservationPrice(): ?float
+    {
+        return $this->reservationPrice;
+    }
+
+    public function setReservationPrice(float $reservationPrice): self
+    {
+        $this->reservationPrice = $reservationPrice;
+
+        return $this;
+    }
+
+    public function getPricePerDistance(): ?float
+    {
+        return $this->pricePerDistance;
+    }
+
+    public function setPricePerDistance(float $pricePerDistance): self
+    {
+        $this->pricePerDistance = $pricePerDistance;
 
         return $this;
     }
