@@ -33,11 +33,6 @@ class Spacecraft
     private $name;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $price;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $brand;
@@ -122,18 +117,6 @@ class Spacecraft
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getPrice(): ?string
-    {
-        return $this->price;
-    }
-
-    public function setPrice(string $price): self
-    {
-        $this->price = $price;
 
         return $this;
     }

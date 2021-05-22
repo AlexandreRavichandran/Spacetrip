@@ -27,12 +27,13 @@ class AppFixtures extends Fixture
             $spacecraft = new Spacecraft;
             $spacecraft
                 ->setName($faker->word)
-                ->setPrice($faker->randomFloat(3))
                 ->setBrand($faker->word())
                 ->setNumberOfSeat(mt_rand(1, 6))
                 ->setNationality($faker->country)
                 ->setDescription($faker->sentence(6))
-                ->setSpeed($faker->randomFloat(3, 1000, 100000));
+                ->setSpeed($faker->randomFloat(3, 1000, 100000))
+                ->setReservationPrice($faker->randomFloat(2, 1000, 10000))
+                ->setPricePerDistance($faker->randomFloat(5, 0.00001, 0.002));
 
             for ($i = 0; $i < mt_rand(0, 4); $i++) {
                 $destination = new Destination;
@@ -54,7 +55,8 @@ class AppFixtures extends Fixture
                         ->setAvailableSeatNumber(mt_rand(0, 9))
                         ->setReserved(0)
                         ->setSpacecraft($spacecraft)
-                        ->setDestination($destination);
+                        ->setDestination($destination)
+                        ->setPrice($destination->getDistance() * $spacecraft->getPricePerDistance() + $spacecraft->getReservationPrice());
                     $manager->persist($trip);
                 }
 
@@ -75,7 +77,8 @@ class AppFixtures extends Fixture
                             ->setAvailableSeatNumber(0)
                             ->setReserved(1)
                             ->setSpacecraft($spacecraft)
-                            ->setDestination($destination);
+                            ->setDestination($destination)
+                            ->setPrice($destination->getDistance() * $spacecraft->getPricePerDistance() + $spacecraft->getReservationPrice());
                         $manager->persist($trip);
                     }
                     for ($m = 0; $m <= mt_rand(4, 6); $m++) {
