@@ -18,7 +18,7 @@ class AppExtension extends AbstractExtension
         ];
     }
 
-    public function displayStarRating(float $rating): void
+    public function displayStarRating(float $rating = null): void
     {
 
         $missingStar = 5 - $rating;

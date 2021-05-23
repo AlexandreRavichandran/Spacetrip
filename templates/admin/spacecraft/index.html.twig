@@ -31,7 +31,7 @@
                     <td class="text-center" scope="col">{{spacecraft.brand}}</td>
                     <td class="text-center" scope="col">{{spacecraft.nationality}}</td>
                     <td class="text-center" scope="col">{% for possibleDestination in spacecraft.possibleDestination %} {{possibleDestination.name}} {% endfor %}</td>
-                    <td class="text-center" scope="col">{{spacecraft.price}}</td>
+                    <td class="text-center" scope="col">{{formatPrice(spacecraft.reservationPrice,0)}} € + {{formatPrice(spacecraft.pricePerDistance,5)}} €/km</td>
                     <td class="text-center" scope="col">{{displayStarRating(spacecraft.rating)}}</td>
                     <td scope="col">
                         <a href="{{path('app_admin_spacecraft_edit',{'id':spacecraft.id})}}" class="btn btn-warning btn-sm">Editer</a>
