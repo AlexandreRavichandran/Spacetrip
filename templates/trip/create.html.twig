@@ -23,62 +23,81 @@
         </div>
         <div class="col">
         {{form_row(form.availableSeatNumber, {'attr': {'ReadOnly': '','placeholder':'N/A', 'value': null}})}}
+        
         </div>
     </div>
-    <div class="row">
-        <div class="col">
-            {{form_row(form.destination)}}
-        </div>
+    <div class="ml-auto mr-auto d-flex flex-column ">
+        {{form_row(form.departureAt)}}
+        {{form_row(form.arrivalAt)}}
     </div>
-    <div class="row">
-    <div class="col">
-        <div class="row">
-            <img src="https://placehold.it/300x300" alt="" class="ml-auto mr-auto">
-        </div>
-        {{form_row(form.spacecraft,{'id': 'spacecraft'})}}
-        <div class="row">
-            <div class="col">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Marque - Origine</th>
-                            <td id="brand_origin" class="text-center" scope="col"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Prix :</th>
-                            <td id="price" class="text-center"></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">Note</th>
-                            <td id="rating" class="text-center"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Destinations possibles</th>
-                            <td id="possible_destination" class="text-center"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Nombre de places</th>
-                            <td id="available_seat_number" class="text-center"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Vitesse</th>
-                            <td id="speed" class="text-center"></td>
-                        </tr>
-                    </tbody>
-                </table>
+    <h3 class="text-center mt-5">Choix de la destination</h3>
+    <div class="row mt-4">
+        <div class="col-5 d-flex justify-content-center align-items-center">
+            <div class="row">
+                <img src="https://placehold.it/300x300" alt="">
             </div>
         </div>
+        <div class="col-7">
+        {{form_row(form.destination,{'id': 'destination'})}}
+            <div class="row">
+                <div class="col">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Distance :</th>
+                                <td class="text-center"> <span id="distance"> </span> km</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>       
         </div>
-        <div class="col">
-            {{form_row(form.departureAt)}}
-            {{form_row(form.arrivalAt)}}
+    </div>
+    <h3 class="text-center mt-5">Choix du vaisseau</h3>
+    <div class="row mt-4">
+        <div class="col-7">
+        {{form_row(form.spacecraft,{'id': 'spacecraft'})}}
+            <div class="row">
+                <div class="col">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <th scope="col">Marque - Origine</th>
+                                <td id="brand_origin" class="text-center" scope="col"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Prix :</th>
+                                <td class="text-center"> <span id="reservationPrice"></span> € + <span id="pricePerDistance"></span> €/km</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Note</th>
+                                <td id="rating" class="text-center"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Nombre de places</th>
+                                <td id="available_seat_number" class="text-center"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Vitesse</th>
+                                <td id="speed" class="text-center"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-5 d-flex justify-content-center align-items-center">
+            <div class="row">
+                <img src="https://placehold.it/300x300" alt="">
+            </div>
         </div>
     </div>
     <div class="row mt-5">
-           <p>En cliquant sur "Reserver mon voyage", vous approuvez avoir une bonne condition physique pour un voyage dans l'espace </p>
-           <p>Spacetrip se dénie de toute responsabilité en cas de problèmes de santé de votre part.</p>
+        <h4 class="ml-auto mr-auto"> Prix estimé : <span id="totalPrice"></span> €</h4>
+    </div>
+    <div class="row mt-5">
+        <p class="ml-auto mr-auto">En cliquant sur "Reserver mon voyage", vous approuvez avoir une bonne condition physique pour un voyage dans l'espace </p>
+        <p class="ml-auto mr-auto">Spacetrip se dénie de toute responsabilité en cas de problèmes de santé de votre part.</p>
     </div>
     <div class="row">
         <button id="submit_button" class="btn btn-primary w-25 mb-3 ml-auto mr-auto">Reserver mon voyage</button>
@@ -90,38 +109,7 @@
 <script>
     $(document).ready(function(){
 
-        $('#trip_departureAt_time_hour option[value="14"]').attr('selected','selected');
-        $('#trip_departureAt_time_minute option[value="30"]').attr('selected','selected');
-        $('#trip_departureAt_time_hour').attr('Disabled','');
-        $('#trip_departureAt_time_minute').attr('Disabled','');
-        $('#trip_arrivalAt_time_hour').attr('Disabled','');
-        $('#trip_arrivalAt_time_minute').attr('Disabled','');
         $('.descriptionForm').html('Réservé par {{app.user.userName}}');
-        $('#trip_arrivalAt_time_hour option[value="18"]').attr('selected','selected');
-        $('#trip_arrivalAt_time_minute option[value="00"]').attr('selected','selected');
-    
-        $('form[name=trip]').on('submit',function(){
-            $('#trip_departureAt_time_hour,#trip_departureAt_time_minute, #trip_arrivalAt_time_hour, #trip_arrivalAt_time_minute, #trip_arrivalAt_time_minute').removeAttr('Disabled','');
-        })
-
-        $('#spacecraft').on('change',function(event){
-            spacecraft = $('#spacecraft').val()
-
-            $.ajax({
-            method: "GET",
-            url: '/trips/show/' + spacecraft
-            })
-
-            .done(function(data,status){
-            $('#brand_origin').html(data['brand'] + ' - ' + data['nationality'])
-            $('#price').html(data['reservationPrice'] + ' € + ' + data['pricePerDistance'] + ' €/km')
-            $('#rating').html(data['rating'])
-            $('#possible_destination').html(data['possibleDestination'])
-            $('#available_seat_number').html(data['numberOfSeat'])
-            $('#speed').html(data['speed'] + ' km/h')
-            
-            })
-        })
     })
 </script>
 {% endblock %}

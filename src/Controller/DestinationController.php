@@ -3,13 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Destination;
-use App\Repository\DestinationRepository;
 use App\Repository\TripRepository;
+use App\Repository\DestinationRepository;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 
 class DestinationController extends AbstractController
 {
@@ -37,5 +38,20 @@ class DestinationController extends AbstractController
             'destination' => $destination,
             'trips' => $trips
         ]);
+    }
+
+    /**
+     * Ajax response to show spacecraft characteristics when creating a trip
+     * @Route("/destinations/show/{id}",name="app_destination_show_ajax")
+     */
+    public function select(Destination $destination, Request $request): Response
+    {
+        if ($request->isXmlHttpRequest() || $request->query->get('showJson') == 1) {
+            $jsonData = [
+                'distance' => $destination->getDistance()
+            ];
+
+            return new JsonResponse($jsonData);
+        }
     }
 }
