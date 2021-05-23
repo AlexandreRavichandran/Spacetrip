@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
 
     $('#trip_departureAt_time_hour option[value="14"]').attr('selected', 'selected');
