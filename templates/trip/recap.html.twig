@@ -9,6 +9,12 @@
         <div class="row mt-4">
             <div class="col border-right border-primary">
                 <p class="text-center"> Téléchargez votre ticket de transport contenant vos informations </p>
+                <div class="row d-flex justify-content-center">
+                    <form id="csrf" method="POST" action="{{path('app_get_ticket',{'trip':trip.id})}}">
+                        <input type="hidden" name="token" value="{{csrf_token('getTicket')}}">
+                        <button class="btn btn-primary btn-md d-flex ml-auto mr-auto"> Télécharger mon ticket </button>
+                    </form>
+                </div>
             </div>
             <div class="col">
                 <p class="text-center"> Si ce n'est pas déja fait, prenez connaissance des informations concernant votre destination ainsi que votre vaisseau d'embarquement </p>
@@ -21,4 +27,10 @@
             </div>
         </div>
     </div>
+
+{% endblock %}
+{% block javascripts %}
+<script>
+  
+</script>
 {% endblock %}

@@ -11,6 +11,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Qipsius\TCPDFBundle\Controller\TCPDFController;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TripController extends AbstractController
@@ -90,12 +91,13 @@ class TripController extends AbstractController
      * @Route("/trips/{id}/succeed",name="app_trip_succeed")
      * @return Response
      */
-    public function onReservationSuccess(Trip $trip, EntityManagerInterface $em, Request $request): Response
+    public function onReservationSuccess(Trip $trip, EntityManagerInterface $em, Request $request, TCPDFController $tcpdf): Response
     {
         $token = $request->request->get('token');
         if ($this->isCsrfTokenValid('purchasing', $token)) {
             //$trip->setAvailableSeatNumber($trip->getAvailableSeatNumber() - 1);
             //$em->flush();
+
             return $this->render('trip/recap.html.twig', [
                 'trip' => $trip,
             ]);
