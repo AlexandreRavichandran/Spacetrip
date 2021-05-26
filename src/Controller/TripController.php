@@ -94,11 +94,13 @@ class TripController extends AbstractController
     {
         $token = $request->request->get('token');
         if ($this->isCsrfTokenValid('purchasing', $token)) {
-            $trip->setAvailableSeatNumber($trip->getAvailableSeatNumber() - 1);
-            $em->flush();
-            return $this->redirectToRoute('app_home');
+            //$trip->setAvailableSeatNumber($trip->getAvailableSeatNumber() - 1);
+            //$em->flush();
+            return $this->render('trip/recap.html.twig', [
+                'trip' => $trip,
+            ]);
         }
-
+        $this->addFlash('danger', 'Une erreur s\'est produite. Le paiement a echoué. Veuillez recommencer.');
         return $this->render('trip/reserve.html.twig', [
             'trip' => $trip
         ]);

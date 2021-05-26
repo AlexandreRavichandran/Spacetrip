@@ -1,5 +1,24 @@
 {% extends 'base.html.twig' %}
+{% block title %} Merci ! {% endblock %}
 
 {% block body %}
-
+    <div class="container mt-4">
+        <h1 class="text-center mt-4"> Merci pour votre reservation !  </h1>
+        <h4 class="text-center mt-4"> Votre voyage vers {{trip.destination.name}} a été reservé avec succès. </h4>
+        <h5 class="text-center mt-4"> Et maintenant ? </h5>
+        <div class="row mt-4">
+            <div class="col border-right border-primary">
+                <p class="text-center"> Téléchargez votre ticket de transport contenant vos informations </p>
+            </div>
+            <div class="col">
+                <p class="text-center"> Si ce n'est pas déja fait, prenez connaissance des informations concernant votre destination ainsi que votre vaisseau d'embarquement </p>
+                <div class="row">
+                    <a class="ml-auto mr-auto btn btn-md btn-primary" href="{{path('app_spacecraft_show',{'id':trip.spacecraft.id})}}"> Informations sur votre vaisseau ({{trip.spacecraft.name|upper}})</a>
+                </div>
+                <div class="row mt-3">
+                    <a class="ml-auto mr-auto btn btn-md btn-primary" href="{{path('app_destination_show',{'name':trip.destination.name})}}"> Informations sur la destination ({{trip.destination.name|upper}})</a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
