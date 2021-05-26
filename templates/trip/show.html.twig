@@ -116,7 +116,7 @@
             <div class="row mb-4 mt-4 d-flex flex-column justify-content-center">
                 <p class="text-center">En cliquant sur "Reserver une place", vous approuvez avoir une bonne condition physique pour un voyage dans l'espace </p>
                 <p class="text-center">Spacetrip se dénie de toute responsabilité en cas de problèmes de santé de votre part.</p>
-                <button class="btn btn-primary ml-auto mr-auto rounded mb-1"> Reserver une place </button>
+                <a href="{{path('app_trip_payment',{'id':trip.id})}}" class="btn btn-primary ml-auto mr-auto rounded mb-1"> Reserver une place </a>
             </div>
         </div>
     </div>

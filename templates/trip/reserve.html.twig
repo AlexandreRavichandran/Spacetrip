@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{trip.name}} - recapitulatif {% endblock %}
+{% set price = trip.price|round %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="text-center"> Recapitulatif de la reservation </h1>
+    <div class="row mt-3">
+        <div class="col-5">
+            <h4 class="text-center"> Votre voyage </h4>
+            <div class="row">
+                <div class="col">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <th> Destination </th>
+                                <td> {{trip.destination.name}} </td>
+                            </tr>
+                            <tr>
+                                <th> Vaisseau utilisé </th>
+                                <td> {{trip.spacecraft.name|upper}}</td>
+                            </tr>
+                            <tr>
+                                <th> Lieu de départ </th>
+                                <td> {{trip.spacecraft.nationality}}</td>
+                            </tr>
+                            <tr>
+                                <th> Periode de voyage </th>
+                                <td> {{trip.departureAt|date('d/m/Y')}} - {{trip.arrivalAt|date('d/m/Y')}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <p> Votre voyage prendra départ à l'entreprise {{trip.spacecraft.brand|upper}} - {{trip.spacecraft.nationality|upper}}</p>
+                        <p class="ml-auto mr-auto"> Veuillez etre sur les lieux à {{trip.departureAt|date('H:i')}}.</p>
+                        <p>Les billets des retardataires ne seront pas remboursés.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt reprehenderit suscipit sequi facilis tempora consectetur unde, eum, quidem non ex culpa voluptatem, deleniti necessitatibus adipisci aspernatur! Quis laboriosam, necessitatibus perspiciatis temporibus, vel ex tempore quibusdam recusandae quaerat ut nam corrupti dolore. Tempora sapiente adipisci veniam quisquam molestiae perferendis ut, obcaecati, repellat aut corporis id quam aliquid asperiores quod nesciunt odio odit? Eum veniam laboriosam eaque, dolor officia quam cupiditate? Ipsam blanditiis vitae iure tenetur quaerat rerum consectetur, labore non tempore? Vel tempora ullam praesentium consequatur dolor! Ex fuga doloremque cumque.</p>
+            </div>
+        </div>
+        <div class="col-7">
+            <h4 class="text-center"> Paiement</h4>
+            <div class="row">
+                <div class="col">
+                    {% include 'trip/partials/_paymentApiDisplay.html.twig' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<form method="POST" id="csrf" action="{{path('app_trip_succeed',{'id':trip.id})}}">
+    <input type="hidden" name="token" value="{{csrf_token('purchasing')}}">
+</form>
+{% endblock %}
+{% block javascripts %}
+
+{% endblock %}
+
+

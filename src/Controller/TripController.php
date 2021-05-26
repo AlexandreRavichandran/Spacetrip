@@ -70,4 +70,37 @@ class TripController extends AbstractController
             'trip' => $trip
         ]);
     }
+
+    /**
+     * show a recap of the trip and proceed to payment
+     * @Route("/trips/{id}/payment", name="app_trip_payment")
+     */
+    public function reserveTrip(Trip $trip): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, 'Veuillez vous connecter');
+        $user = $this->getUser();
+        return $this->render('trip/reserve.html.twig', [
+            'trip' => $trip,
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * Page called when a trip is successfully reserved
+     * @Route("/trips/{id}/succeed",name="app_trip_succeed")
+     * @return Response
+     */
+    public function onReservationSuccess(Trip $trip, EntityManagerInterface $em, Request $request): Response
+    {
+        $token = $request->request->get('token');
+        if ($this->isCsrfTokenValid('purchasing', $token)) {
+            $trip->setAvailableSeatNumber($trip->getAvailableSeatNumber() - 1);
+            $em->flush();
+            return $this->redirectToRoute('app_home');
+        }
+
+        return $this->render('trip/reserve.html.twig', [
+            'trip' => $trip
+        ]);
+    }
 }
