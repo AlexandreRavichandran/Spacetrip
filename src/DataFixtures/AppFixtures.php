@@ -11,38 +11,47 @@ use App\Entity\Spacecraft;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class AppFixtures extends Fixture
 {
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    private $client;
+
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder, HttpClientInterface $client)
     {
         $this->passwordEncoder = $passwordEncoder;
+        $this->client = $client;
     }
     public function load(ObjectManager $manager)
     {
+        $response = $this->client->request('GET', 'https://api.le-systeme-solaire.net/rest/bodies/?filter=isPlanet,neq,false');
+        $response = $response->toArray();
         $faker = Factory::create("fr-FR");
         $reserved = [true, false];
 
-        for ($h = 0; $h < 6; $h++) {
-            $spacecraft = new Spacecraft;
-            $spacecraft
-                ->setName($faker->word)
-                ->setBrand($faker->word())
-                ->setNumberOfSeat(mt_rand(1, 6))
-                ->setNationality($faker->country)
+
+        for ($i = 0; $i < 13; $i++) {
+
+            $distance = abs(149597870 - ($response['bodies'][$i]['aphelion'] * (1 - $response['bodies'][$i]['eccentricity'])));
+            $destination = new Destination;
+            $destination->setName($response['bodies'][$i]['name'])
                 ->setDescription($faker->sentence(6))
-                ->setSpeed($faker->randomFloat(3, 1000, 100000))
-                ->setReservationPrice($faker->randomFloat(2, 1000, 10000))
-                ->setPricePerDistance($faker->randomFloat(5, 0.00001, 0.002));
+                ->setDistance($distance);
+            $manager->persist($destination);
 
-            for ($i = 0; $i < mt_rand(0, 4); $i++) {
-                $destination = new Destination;
-                $destination->setName($faker->word())
+
+            for ($h = 0; $h < 6; $h++) {
+                $spacecraft = new Spacecraft;
+                $spacecraft
+                    ->setName($faker->word)
+                    ->setBrand($faker->word())
+                    ->setNumberOfSeat(mt_rand(1, 6))
+                    ->setNationality($faker->country)
                     ->setDescription($faker->sentence(6))
-                    ->setDistance($faker->randomFloat(3, 1000, 100000));
-                $manager->persist($destination);
-                $spacecraft->addPossibleDestination($destination);
-
+                    ->setSpeed($faker->randomFloat(3, 1000, 100000))
+                    ->setReservationPrice($faker->randomFloat(2, 1000, 10000))
+                    ->setPricePerDistance($faker->randomFloat(5, 0.00001, 0.002))
+                    ->addPossibleDestination($destination);
 
 
                 for ($j = 0; $j < mt_rand(3, 5); $j++) {

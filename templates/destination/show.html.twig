@@ -18,10 +18,32 @@
         </div>
     </div>
     <div class="row mt-3">
-        <h4 class="ml-auto mr-auto"> Quelques caracteristiques techniques</h4>
+        <h4 class="ml-auto mr-auto"> Quelques caracteristiques</h4>
     </div>
     <div class="row">
-        <p> Distance Terre <i class="bi bi-arrow-right-short"></i> {{destination.name}} : {{destination.distance}} km</p>
+        <p>Découvert le {{informations['discoveryDate']}} par {{informations['discoveredBy']}}</p>
+    </div>
+    <div class="row">
+        <p> Distance par rapport à la terre : {{destination.distance|number_format(0,'.',' ')}} km</p>
+    </div>
+    <div class="row">
+        <p> Satellites associés à cette planète : </p>
+        {% if informations['moons'] is not same as null %}
+            {% for moons in informations['moons']|batch(4) %}
+            <div class="col"> 
+                <ul>
+                    {% for moons in moons %}
+                        <li> <a href="https://fr.wikipedia.org/wiki/{{moons['moon']}}_(lune)">{{moons['moon']}}</a> </li>
+                    {% endfor %}
+                </ul>   
+            </div>
+            {% endfor %}
+        {% else %}
+            <p> Aucune </p>
+        {% endif %}
+    </div>
+    <div class="row">
+        <p> Gravité : {{informations['gravity']}} m.s</p>
     </div>
 </div>
 <div class="container mt-4">

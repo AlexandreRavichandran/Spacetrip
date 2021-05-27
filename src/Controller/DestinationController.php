@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Destination;
 use App\Repository\TripRepository;
 use App\Repository\DestinationRepository;
+use App\Service\CallDestinationApi;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,12 +32,14 @@ class DestinationController extends AbstractController
      * @Route("/destinations/{name}",name="app_destination_show")
      * @return Response
      */
-    public function show(Destination $destination, TripRepository $repo): Response
+    public function show(Destination $destination, TripRepository $repo, CallDestinationApi $callDestinationApi): Response
     {
-        $trips = $repo->AvailableTripByDestination($destination->getId());
+        $informations = $callDestinationApi->getDestinationData($destination->getName());
+        $trips = $repo->AvailableTripByDestination($destination->getId(), 3);
         return $this->render('destination/show.html.twig', [
             'destination' => $destination,
-            'trips' => $trips
+            'trips' => $trips,
+            'informations' => $informations
         ]);
     }
 

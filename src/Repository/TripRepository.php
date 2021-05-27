@@ -69,13 +69,14 @@ class TripRepository extends ServiceEntityRepository
      *
      * @return array
      */
-    public function AvailableTripByDestination($destination): array
+    public function AvailableTripByDestination($destination, $limit): array
     {
         return $this->createQueryBuilder('t')
             ->andWhere('t.reserved = :reserved')
             ->andWhere('t.availableSeatNumber >= :seatNumber')
             ->andWhere('t.destination = :destination')
             ->setParameters(['reserved' => false, 'seatNumber' => 1, 'destination' => $destination])
+            ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
     }
