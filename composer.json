@@ -17,6 +17,7 @@
         "phpdocumentor/reflection-docblock": "^5.2",
         "qipsius/tcpdf-bundle": "^2.0",
         "sensio/framework-extra-bundle": "^5.1",
+        "symfony/apache-pack": "^1.0",
         "symfony/asset": "5.2.*",
         "symfony/console": "5.2.*",
         "symfony/dotenv": "5.2.*",
@@ -89,6 +90,9 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "compile": [
+            "php bin/console doctrine:migrations:migrate"
         ]
     },
     "conflict": {
