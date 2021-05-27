@@ -33,18 +33,20 @@
                     </table>
                     <div class="row">
                         <p> Votre voyage prendra départ à l'entreprise {{trip.spacecraft.brand|upper}} - {{trip.spacecraft.nationality|upper}}</p>
-                        <p class="ml-auto mr-auto"> Veuillez etre sur les lieux à {{trip.departureAt|date('H:i')}}.</p>
+                        <p class="ml-auto mr-auto"> L'embarquement aura lieu <strong>20 minutes</strong> avant l'heure de décollage indiqué {{trip.departureAt|date('H:i')}}. </p>
+                        <p class="text-danger">Veuillez etre sur les lieux au plus tard à {{trip.departureAt|date_modify('-20 minutes ')|date('H:i')}}.</p>
                         <p>Les billets des retardataires ne seront pas remboursés.</p>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt reprehenderit suscipit sequi facilis tempora consectetur unde, eum, quidem non ex culpa voluptatem, deleniti necessitatibus adipisci aspernatur! Quis laboriosam, necessitatibus perspiciatis temporibus, vel ex tempore quibusdam recusandae quaerat ut nam corrupti dolore. Tempora sapiente adipisci veniam quisquam molestiae perferendis ut, obcaecati, repellat aut corporis id quam aliquid asperiores quod nesciunt odio odit? Eum veniam laboriosam eaque, dolor officia quam cupiditate? Ipsam blanditiis vitae iure tenetur quaerat rerum consectetur, labore non tempore? Vel tempora ullam praesentium consequatur dolor! Ex fuga doloremque cumque.</p>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/irHF6r98MS0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
         <div class="col-7">
             <h4 class="text-center"> Paiement</h4>
-            <div class="row">
+            <h5 class="text-center mt-4"> Prix à payer : {{formatPrice(trip.price,0)}} €</h5>
+            <div class="row mt-4">
                 <div class="col">
                     {% include 'trip/partials/_paymentApiDisplay.html.twig' %}
                 </div>

@@ -31,6 +31,7 @@ class TripRepository extends ServiceEntityRepository
             ->andWhere('t.reserved = :reserved')
             ->andWhere('t.availableSeatNumber >= :seatNumber')
             ->setParameters(['reserved' => false, 'seatNumber' => 1])
+            ->addOrderBy('t.departureAt', 'DESC')
             ->getQuery()
             ->getResult();
     }

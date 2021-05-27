@@ -26,8 +26,8 @@
     <div class="row">
         <p> Distance par rapport à la terre : {{destination.distance|number_format(0,'.',' ')}} km</p>
     </div>
+    <p class="text-center"> Satellites associés à cette planète : </p>
     <div class="row">
-        <p> Satellites associés à cette planète : </p>
         {% if informations['moons'] is not same as null %}
             {% for moons in informations['moons']|batch(4) %}
             <div class="col"> 
