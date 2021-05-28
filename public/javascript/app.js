@@ -50,4 +50,41 @@ $(document).ready(function () {
                 $('#totalPrice').html(Math.round(2500 + parseFloat($('#reservationPrice').html()) + parseFloat($('#pricePerDistance').html()) * data['distance']))
             })
     })
+
+
+
+    // preset destination informations
+    destination = $('#destination').val()
+
+    $.ajax({
+        method: "GET",
+        url: '/destinations/getAjaxData/' + destination
+    })
+
+        .done(function (data, status) {
+            $('#distance').html(Math.round(data['distance']));
+            $('#gravity').html(data['gravity']);
+            $('#description').html(data['description']);
+            $('#totalPrice').html(Math.round(2500 + parseFloat($('#reservationPrice').html()) + parseFloat($('#pricePerDistance').html()) * data['distance']))
+        })
+
+    //Preset spacecraft informations
+    spacecraft = $('#spacecraft').val()
+
+    $.ajax({
+        method: "GET",
+        url: '/spacecrafts/getAjaxData/' + spacecraft
+    })
+
+        .done(function (data, status) {
+            $('#brand_origin').html(data['brand'] + ' - ' + data['nationality'])
+            $('#reservationPrice').html(data['reservationPrice'])
+            $('#pricePerDistance').html(data['pricePerDistance'])
+            $('#rating').html(data['rating'])
+            $('#possible_destination').html(data['possibleDestination'])
+            $('#available_seat_number').html(data['numberOfSeat'])
+            $('#speed').html(data['speed'] + ' km/h')
+            $('#totalPrice').html(Math.round(2500 + data['reservationPrice'] + data['pricePerDistance'] * $('#distance').html()))
+
+        })
 })

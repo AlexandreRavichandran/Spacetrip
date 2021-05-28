@@ -34,11 +34,13 @@ class SpacecraftController extends AbstractController
      * @Route("/spacecrafts/{id}",name="app_spacecraft_show")
      * @return Response
      */
-    public function show(Spacecraft $spacecraft, TripRepository $tripRepo, FeedbackRepository $feedbackrepo): Response
+    public function show(Spacecraft $spacecraft, TripRepository $tripRepo, FeedbackRepository $feedbackrepo, Request $request): Response
     {
+        $previousUrl = $request->headers->get('referer');
         $trips = $tripRepo->findBy(['spacecraft' => $spacecraft->getId()]);
         $feedbacks = $feedbackrepo->findBy(['spacecraft' => $spacecraft->getId()]);
         return $this->render('spacecraft/show.html.twig', [
+            'previousUrl' => $previousUrl,
             'spacecraft' => $spacecraft,
             'trips' => $trips,
             'orderBy' => null,

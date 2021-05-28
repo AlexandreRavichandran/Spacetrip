@@ -5,7 +5,7 @@
 {% block body %}
 <div class="container mt-4">
     <div class="row">
-        <a href="{{path('app_trip_index')}}" class="btn btn-primary btn-md rounded"><i class="bi bi-arrow-left"></i> Retour</a>
+        <a href="{{previousUrl}}" class="btn btn-primary btn-md rounded"><i class="bi bi-arrow-left"></i> Retour</a>
     </div>
 </div>
 <div class="container mt-4 text-center tripBackground">
@@ -29,8 +29,7 @@
                 </div>
                 <div class="col-8">
                     <p>{{trip.description}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam consequuntur aliquid quasi officia, vitae eos ratione incidunt voluptate doloremque adipisci sit sed? Aliquid, consequuntur quos? Perspiciatis magnam tenetur voluptatum reprehenderit.
-                    Magnam officiis id voluptatibus sunt perspiciatis hic illum error beatae quis repellendus, sit, soluta quaerat illo? Molestiae ipsum magnam officiis quaerat sed tenetur, inventore tempora quod, veniam odio quisquam labore.nventore tempora quod, veniam odio quisquam labonventore tempora quod, veniam odio quisquam labo...<a class="text-danger" href="{{path('app_destination_show',{'name':trip.destination.name})}}"> Voir plus </a></p>
-                    
+                    Magnam officiis id voluptatibus sunt perspiciatis hic illum error beatae quis repellendus, sit, soluta quaerat illo? Molestiae ipsum magnam officiis quaerat sed tenetur, inventore tempora quod, veniam odio quisquam labore.nventore tempora quod, veniam odio quisquam labonventore tempora quod, veniam odio quisquam labo...<a class="text-danger" href="{{path('app_destination_show',{'name':trip.destination.name})}}"> Voir plus </a></p>      
                 </div>
             </div>
             <div class="row">
@@ -67,7 +66,7 @@
             </div>
             <div class="row">
                 <p class="ml-auto mr-auto"> Note moyenne des utilisateurs : {{displayStarRating(trip.spacecraft.rating)}}</p>
-                <a href="{{path('app_spacecraft_show',{'id':trip.spacecraft.id})}}" class="btn btn-primary btn-sm ml-auto mr-auto rounded">Voir les avis sur ce vaisseau</a>
+                <a target="_blank" href="{{path('app_spacecraft_show',{'id':trip.spacecraft.id})}}" class="btn btn-primary btn-sm ml-auto mr-auto rounded">Voir les avis sur ce vaisseau</a>
             </div>
             <div class="row mt-3">
                 <h5 class="ml-auto mr-auto"> Origine : {{trip.spacecraft.nationality}} </h5>

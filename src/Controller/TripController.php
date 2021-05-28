@@ -67,10 +67,12 @@ class TripController extends AbstractController
      * @Route("/trips/{name}", name="app_trip_show", methods={"GET"})
      * @return Response
      */
-    public function show(Trip $trip): Response
+    public function show(Trip $trip, Request $request): Response
     {
+        $previousUrl = $request->headers->get('referer');
         return $this->render('trip/show.html.twig', [
-            'trip' => $trip
+            'trip' => $trip,
+            'previousUrl' => $previousUrl
         ]);
     }
 
@@ -78,13 +80,15 @@ class TripController extends AbstractController
      * show a recap of the trip and proceed to payment
      * @Route("/trips/{id}/payment", name="app_trip_payment")
      */
-    public function reserveTrip(Trip $trip): Response
+    public function reserveTrip(Trip $trip, Request $request): Response
     {
+        $previousUrl = $request->headers->get('referer');
         $this->denyAccessUnlessGranted('ROLE_USER', null, 'Veuillez vous connecter');
         $user = $this->getUser();
         return $this->render('trip/reserve.html.twig', [
             'trip' => $trip,
-            'user' => $user
+            'user' => $user,
+            'previousUrl' => $previousUrl
         ]);
     }
 
