@@ -51,7 +51,9 @@ class TripController extends AbstractController
             $trip->setPrice();
             $em->persist($trip);
             $em->flush();
-            return $this->redirectToRoute('app_user_profile');
+            return $this->redirectToRoute('app_trip_payment', [
+                'id' => $trip->getId()
+            ]);
         }
         return $this->render('trip/create.html.twig', [
             'form' => $form->createView(),

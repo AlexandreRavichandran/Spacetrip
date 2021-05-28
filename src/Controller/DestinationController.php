@@ -45,13 +45,18 @@ class DestinationController extends AbstractController
 
     /**
      * Ajax response to show spacecraft characteristics when creating a trip
-     * @Route("/destinations/show/{id}",name="app_destination_show_ajax")
+     * @Route("/destinations/getAjaxData/{id}",name="app_destination_ajax_request")
      */
-    public function select(Destination $destination, Request $request): Response
+    public function select(Destination $destination, Request $request, CallDestinationApi $response): Response
     {
+
         if ($request->isXmlHttpRequest() || $request->query->get('showJson') == 1) {
+            $destinationData = $response->getDestinationData($destination->getName());
             $jsonData = [
-                'distance' => $destination->getDistance()
+                'distance' => $destination->getDistance(),
+                'gravity' => $destinationData['gravity'],
+                'description' => $destination->getDescription()
+
             ];
 
             return new JsonResponse($jsonData);

@@ -49,7 +49,7 @@ class SpacecraftController extends AbstractController
 
     /**
      * Ajax response to show spacecraft characteristics when creating a trip
-     * @Route("/trips/show/{id}",name="app_trip_show_ajax")
+     * @Route("/spacecrafts/getAjaxData/{id}",name="app_spacecraft_ajax_request")
      */
     public function select(Spacecraft $spacecraft, Request $request): Response
     {

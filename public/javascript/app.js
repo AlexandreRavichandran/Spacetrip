@@ -19,7 +19,7 @@ $(document).ready(function () {
 
         $.ajax({
             method: "GET",
-            url: '/trips/show/' + spacecraft
+            url: '/spacecrafts/getAjaxData/' + spacecraft
         })
 
             .done(function (data, status) {
@@ -40,11 +40,13 @@ $(document).ready(function () {
 
         $.ajax({
             method: "GET",
-            url: '/destinations/show/' + destination
+            url: '/destinations/getAjaxData/' + destination
         })
 
             .done(function (data, status) {
-                $('#distance').html(data['distance'])
+                $('#distance').html(Math.round(data['distance']));
+                $('#gravity').html(data['gravity']);
+                $('#description').html(data['description']);
                 $('#totalPrice').html(Math.round(parseFloat($('#reservationPrice').html()) + parseFloat($('#pricePerDistance').html()) * data['distance']))
             })
     })

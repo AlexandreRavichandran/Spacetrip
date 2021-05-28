@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-
+{% set distance = 0 %}
 {% block title %}Reservation d'un voyage{% endblock %}
 
 {% block body %}
@@ -46,6 +46,14 @@
                             <tr>
                                 <th scope="row">Distance :</th>
                                 <td class="text-center"> <span id="distance"> </span> km</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Gravité :</th>
+                                <td class="text-center"> <span id="gravity"> </span> m.s</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Description :</th>
+                                <td class="text-center"> <span id="description"> </span> km</td>
                             </tr>
                         </tbody>
                     </table>
