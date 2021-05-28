@@ -30,7 +30,7 @@ $(document).ready(function () {
                 $('#possible_destination').html(data['possibleDestination'])
                 $('#available_seat_number').html(data['numberOfSeat'])
                 $('#speed').html(data['speed'] + ' km/h')
-                $('#totalPrice').html(Math.round(data['reservationPrice'] + data['pricePerDistance'] * $('#distance').html()))
+                $('#totalPrice').html(Math.round(2500 + data['reservationPrice'] + data['pricePerDistance'] * $('#distance').html()))
 
             })
     })
@@ -47,7 +47,7 @@ $(document).ready(function () {
                 $('#distance').html(Math.round(data['distance']));
                 $('#gravity').html(data['gravity']);
                 $('#description').html(data['description']);
-                $('#totalPrice').html(Math.round(parseFloat($('#reservationPrice').html()) + parseFloat($('#pricePerDistance').html()) * data['distance']))
+                $('#totalPrice').html(Math.round(2500 + parseFloat($('#reservationPrice').html()) + parseFloat($('#pricePerDistance').html()) * data['distance']))
             })
     })
 })
