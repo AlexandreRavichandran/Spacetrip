@@ -113,4 +113,28 @@ class TripController extends AbstractController
             'trip' => $trip
         ]);
     }
+
+    /**
+     * Delete a created trip 
+     * @Route("/trips/{id}/delete", name="app_user_trip_delete")
+     * @return Response
+     */
+    public function delete(Trip $trip, EntityManagerInterface $em): Response
+    {
+        $user = $this->getUser()->getEmail();
+
+        if ($trip->getReserved() === false) {
+            $this->addFlash('warning', 'Une erreur s\'est produite lors de la suppression.');
+        } else {
+            $tripName = explode(' - ', $trip->getName());
+            if ($tripName[1] !== $user) {
+                $this->addFlash('warning', 'Une erreur s\'est produite lors de la suppression.');
+            } else {
+                $em->remove($trip);
+                $em->flush();
+                $this->addFlash('success', 'Votre voyage " ' . $trip->getName() . ' " a été supprimé.');
+            }
+        }
+        return $this->redirectToRoute('app_user_profile');
+    }
 }

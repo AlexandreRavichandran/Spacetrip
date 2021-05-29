@@ -40,6 +40,13 @@ class HomeController extends AbstractController
         if ($this->isCsrfTokenValid('getTicket', $token)) {
             $user = $this->getUser();
 
+            if ($trip->getReserved() === true) {
+                $trip = explode(' - ', $trip->getName());
+                $tripName = $trip[0] . $trip[2];
+            } else {
+                $tripName = $trip->getName();
+            }
+
             $pdf = $tcpdf->create();
             $pdf->SetAuthor('Spacetrip');
             $pdf->SetTitle('Ticket de voyage de ' . $user->getFirstName() . ' ' . $user->getLastName());
@@ -47,7 +54,7 @@ class HomeController extends AbstractController
             $pdf->SetMargins(25, 70, 25);
             $html =
                 " <h1 class='ml-auto mr-auto'> Ticket de reservation de " .  $user->getFirstName() . " " . $user->getLastName() . "</h1>
-             <h2 class='ml-auto mr-auto'> Voyage " . $trip->getName() . "</h2>
+             <h2 class='ml-auto mr-auto'> Voyage " . $tripName . "</h2>
              <p class='ml-auto mr-auto mb-4'><strong> Gardez ce ticket precieusement.</strong> Il vous sera demandé avant l'embarquement. </p>
          ";
             $pdf->WriteHTML($html, true, false, true, false, '');
@@ -67,9 +74,9 @@ class HomeController extends AbstractController
                 'fontsize' => 8,
                 'stretchtext' => 4
             ];
-            $pdf->write1DBarcode($trip->getName() . $user->getFirstName() . $user->getLastName(), 'C39', '', '', '', 18, 0.4, $style, 'N');
+            $pdf->write1DBarcode($tripName . $user->getFirstName() . $user->getLastName(), 'C39', '', '', '', 18, 0.4, $style, 'N');
 
-            $response = new Response($pdf->Output('voyage_' . $trip->getName() . '_' . mt_rand(0, 1000000) . '.pdf'));
+            $response = new Response($pdf->Output('voyage_' . $tripName . '_' . $user->getFirstName() . $user->getLastName() . mt_rand(0, 1000000) . '.pdf'));
             $response->headers->set('Content-type', 'application/pdf');
             return $response;
         }

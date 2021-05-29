@@ -40,12 +40,12 @@
             <div class="row">
                 <div id="comments" class="list-group p-2 w-100" style="height:290px; overflow:scroll; overflow-x: hidden">
                     {% for feedback in feedbacks %}
-                    <div class="d-flex w-100 justify-content-between">
+                    <div class="d-flex w-100 justify-content-between p-2 border-top">
                         <h5 class="mb-1"><a href="{{path('app_spacecraft_show',{'id':feedback.spacecraft.id})}}">{{feedback.spacecraft.name}}</a></h5>
                         <small>{{feedback.createdAt|date('d/m/Y H:i:s')}}</small>
                     </div>
                     <p class="mb-1">{{feedback.content}}</p>
-                    <p class="text-right">Note : {{feedback.rating}}/5</p>
+                    <p class="text-right">Note : {{displayStarRating(feedback.rating)}}</p>
                     {% endfor %}
                 </div>              
             </div>
@@ -53,9 +53,15 @@
     </div>
 </div>
 <div class="container">
-    <h3 class="text-center"> Vos voyages reservés</h3>
+    <h3 class="text-center"> Vos voyages </h3>
     <div class="row">
-        
+        <div class="col mt-3">
+            <table class="table table-hover w-75 m-auto">
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
         <div class="col">
             <a class="d-flex justify-content-end" href="{{path('app_trip_create')}}">Un nouveau voyage à reserver ? cliquez ici</a>
             <table class="table table-hover w-75 m-auto">
@@ -67,25 +73,33 @@
                             <p>Départ : {{trip.departureAt|date('d/m/Y H:i:s')}}<i class="bi bi-arrow-right-short"></i> {{trip.arrivalAt|date('d/m/Y H:i:s')}}</p>        
                             <p>Vaisseau utilisé : <a href="{{path('app_spacecraft_show',{'id':trip.spacecraft.id})}}">{{trip.spacecraft.name|upper}}</a></p>
                             <p class="text-muted text-left"> Réservé le {{trip.createdAt|date('d/m/Y')}}</p>
+                            <a href="{{path('app_user_trip_delete', {'id':trip.id})}}" class="btn btn-primary btn-sm ml-auto"> Supprimer ce voyage </a>
                         </td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
+    
         </div>
     </div>
 </div>
 {% endblock %}
 {% block javascripts %}
 <script>
-    /*$(document).ready(function(){
-        
-        $("#comments").animate({ scrollTop: $("#comments").height() }, 10000,function(){
-            $("#comments").animate({ scrollTop: 0 }, 10000)
-        });
+    $(document).ready(function(){
+        function feedbackAnimate(){
+        $("#comments").animate({ scrollTop: $("#comments").height() }, 10000, "linear").animate({ scrollTop: 0 }, 10000, "linear", feedbackAnimate);
+
+        };
+        feedbackAnimate();
+
+        $("#comments").hover(function(){
+            $("#comments").stop();},function(){
+                feedbackAnimate();
+            })
 
 
-
-    }); */
+    }); 
 </script>
 {% endblock %}
+
