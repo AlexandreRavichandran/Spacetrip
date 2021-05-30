@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+{% block title %} Editer mon profil {% endblock %}
+
+
+{% block body %}
+<div class="container mt-4">
+<h1 class="text-center"> Editer mon profil </h1>
+{{form_start(form)}}
+    <div class="row">
+        <div class="col">
+            {{form_row(form.lastName)}}    
+        </div>
+        <div class="col">
+            {{form_row(form.firstName)}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            {{form_label(form.password)}} 
+            {{form_errors(form.password)}}
+            <div class="input-group mb-3 w-50">
+                {{form_widget(form.password)}}
+                <span id="showPassword" class="input-group-text"><i class="bi lg bi-eye-fill"></i></span>
+            </div>
+             {{form_help(form.password)}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            {{form_row(form.email)}}
+        </div>
+    </div>
+    <div class="row">
+        <button type="submit" class="btn btn-primary btn-sm ml-auto mr-auto"> Modifier mon profil</button>
+    </div>
+{{form_end(form)}}
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    $(document).ready(function(){
+        $("#showPassword").mousedown(function(){
+            $("#user_password").attr('type','text');
+        })
+        $("#showPassword").mouseup(function(){
+           $("#user_password").attr('type','password');
+        })
+    })
+</script>
+{% endblock %}
