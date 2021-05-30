@@ -97,6 +97,11 @@ class Spacecraft
      */
     private $pricePerDistance;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $available;
+
     public function __construct()
     {
         $this->trip = new ArrayCollection();
@@ -343,6 +348,18 @@ class Spacecraft
     public function setPricePerDistance(float $pricePerDistance): self
     {
         $this->pricePerDistance = $pricePerDistance;
+
+        return $this;
+    }
+
+    public function getAvailable(): ?bool
+    {
+        return $this->available;
+    }
+
+    public function setAvailable(bool $available): self
+    {
+        $this->available = $available;
 
         return $this;
     }

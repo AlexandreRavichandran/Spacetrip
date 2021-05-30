@@ -3,8 +3,9 @@
 namespace App\Entity;
 
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\TripRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -82,6 +83,25 @@ class Trip
      * @ORM\Column(type="float")
      */
     private $price;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *          min = 1,
+     *          max = 4,
+     * )
+     */
+    private $status;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="trip")
+     */
+    private $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -237,6 +257,45 @@ class Trip
         $spacecraft = $this->getSpacecraft();
         $price = ($destination->getDistance() * $spacecraft->getPricePerDistance() + $spacecraft->getReservationPrice());
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getStatus(): ?int
+    {
+        return $this->status;
+    }
+
+    public function setStatus(int $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addTrip($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeTrip($this);
+        }
 
         return $this;
     }

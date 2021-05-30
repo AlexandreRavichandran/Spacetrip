@@ -63,9 +63,15 @@ class User implements UserInterface
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Trip::class, inversedBy="users")
+     */
+    private $trip;
+
     public function __construct()
     {
         $this->feedback = new ArrayCollection();
+        $this->trip = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -233,6 +239,30 @@ class User implements UserInterface
     public function setUpdatedAt(): self
     {
         $this->updatedAt = new \DateTimeImmutable();
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Trip[]
+     */
+    public function getTrip(): Collection
+    {
+        return $this->trip;
+    }
+
+    public function addTrip(Trip $trip): self
+    {
+        if (!$this->trip->contains($trip)) {
+            $this->trip[] = $trip;
+        }
+
+        return $this;
+    }
+
+    public function removeTrip(Trip $trip): self
+    {
+        $this->trip->removeElement($trip);
 
         return $this;
     }

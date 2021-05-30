@@ -27,7 +27,7 @@ class AppFixtures extends Fixture
         $response = $this->client->request('GET', 'https://api.le-systeme-solaire.net/rest/bodies/?filter=isPlanet,neq,false');
         $response = $response->toArray();
         $faker = Factory::create("fr-FR");
-        $reserved = [true, false];
+        $boolean = [true, false];
 
 
         for ($i = 0; $i < 13; $i++) {
@@ -51,6 +51,7 @@ class AppFixtures extends Fixture
                     ->setSpeed($faker->randomFloat(3, 1000, 100000))
                     ->setReservationPrice($faker->randomFloat(2, 1000, 10000))
                     ->setPricePerDistance($faker->randomFloat(5, 0.00001, 0.002))
+                    ->setAvailable($boolean[mt_rand(0, 1)])
                     ->addPossibleDestination($destination);
 
 
@@ -65,7 +66,17 @@ class AppFixtures extends Fixture
                         ->setReserved(0)
                         ->setSpacecraft($spacecraft)
                         ->setDestination($destination)
+                        ->setStatus(mt_rand(1, 4))
                         ->setPrice($destination->getDistance() * $spacecraft->getPricePerDistance() + $spacecraft->getReservationPrice());
+                    for ($v = 0; $v <= mt_rand(0, 1); $v++) {
+                        $user = new User;
+                        $user->setEmail($faker->email)
+                            ->setFirstName($faker->firstName)
+                            ->setLastName($faker->lastName)
+                            ->setPassword($this->passwordEncoder->encodePassword($user, 'demo'))
+                            ->addTrip($trip);
+                        $manager->persist($user);
+                    }
                     $manager->persist($trip);
                 }
 
@@ -75,8 +86,9 @@ class AppFixtures extends Fixture
                         ->setFirstName($faker->firstName)
                         ->setLastName($faker->lastName)
                         ->setPassword($this->passwordEncoder->encodePassword($user, 'demo'));
+
                     $manager->persist($user);
-                    for ($k = 1; $k < mt_rand(1, 3); $k++) {
+                    for ($k = 1; $k < mt_rand(0, 3); $k++) {
                         $trip = new Trip;
                         $trip
                             ->setName('VR - ' . $user->getEmail() . ' - ' . $k)
@@ -85,12 +97,13 @@ class AppFixtures extends Fixture
                             ->setArrivalAt($faker->dateTimeAD())
                             ->setAvailableSeatNumber(0)
                             ->setReserved(1)
+                            ->setStatus(mt_rand(1, 4))
                             ->setSpacecraft($spacecraft)
                             ->setDestination($destination)
                             ->setPrice($destination->getDistance() * $spacecraft->getPricePerDistance() + $spacecraft->getReservationPrice());
                         $manager->persist($trip);
                     }
-                    for ($m = 0; $m <= mt_rand(4, 6); $m++) {
+                    for ($m = 0; $m <= mt_rand(0, 3); $m++) {
                         $feedback = new Feedback;
                         $feedback
                             ->setSpacecraft($spacecraft)
