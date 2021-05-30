@@ -6,6 +6,7 @@ use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\TripRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -87,8 +88,8 @@ class Trip
     /**
      * @ORM\Column(type="integer")
      * @Assert\Range(
-     *          min = 1,
-     *          max = 4,
+     *          min = 1
+     *          max = 4
      * )
      */
     private $status;

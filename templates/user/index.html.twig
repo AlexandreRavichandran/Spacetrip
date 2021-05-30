@@ -58,14 +58,6 @@
         <div class="col mt-3">
             <table class="table table-hover w-75 m-auto">
                 <tbody>
-
-                </tbody>
-            </table>
-        </div>
-        <div class="col">
-            <a class="d-flex justify-content-end" href="{{path('app_trip_create')}}">Un nouveau voyage à reserver ? cliquez ici</a>
-            <table class="table table-hover w-75 m-auto">
-                <tbody>
                 {% for trip in trips %}
                     <tr class="table">
                         <td class="text-center">
@@ -74,6 +66,24 @@
                             <p>Vaisseau utilisé : <a href="{{path('app_spacecraft_show',{'id':trip.spacecraft.id})}}">{{trip.spacecraft.name|upper}}</a></p>
                             <p class="text-muted text-left"> Réservé le {{trip.createdAt|date('d/m/Y')}}</p>
                             <a href="{{path('app_user_trip_delete', {'id':trip.id})}}" class="btn btn-primary btn-sm ml-auto"> Supprimer ce voyage </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col">
+            <a class="d-flex justify-content-end" href="{{path('app_trip_create')}}">Un nouveau voyage à reserver ? cliquez ici</a>
+            <table class="table table-hover w-75 m-auto">
+                <tbody>
+                {% for reservedTrip in reservedTrips %}
+                    <tr class="table">
+                        <td class="text-center">
+                            <h5> Destination : {{reservedTrip.destination.name}}</h5>
+                            <p>Départ : {{reservedTrip.departureAt|date('d/m/Y H:i:s')}}<i class="bi bi-arrow-right-short"></i> {{reservedTrip.arrivalAt|date('d/m/Y H:i:s')}}</p>        
+                            <p>Vaisseau utilisé : <a href="{{path('app_spacecraft_show',{'id':trip.spacecraft.id})}}">{{reservedTrip.spacecraft.name|upper}}</a></p>
+                            <p class="text-muted text-left"> Réservé le {{reservedTrip.createdAt|date('d/m/Y')}}</p>
+                            <a href="{{path('app_user_trip_delete', {'id':reservedTrip.id})}}" class="btn btn-primary btn-sm ml-auto"> Supprimer ce voyage </a>
                         </td>
                     </tr>
                 {% endfor %}

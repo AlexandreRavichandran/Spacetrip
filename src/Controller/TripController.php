@@ -101,8 +101,9 @@ class TripController extends AbstractController
     {
         $token = $request->request->get('token');
         if ($this->isCsrfTokenValid('purchasing', $token)) {
-            //$trip->setAvailableSeatNumber($trip->getAvailableSeatNumber() - 1);
-            //$em->flush();
+            $trip->setAvailableSeatNumber($trip->getAvailableSeatNumber() - 1);
+            $trip->addUser($this->getUser());
+            $em->flush();
 
             return $this->render('trip/recap.html.twig', [
                 'trip' => $trip,

@@ -55,7 +55,7 @@ class AppFixtures extends Fixture
                     ->addPossibleDestination($destination);
 
 
-                for ($j = 0; $j < mt_rand(3, 5); $j++) {
+                for ($j = 0; $j < mt_rand(1, 3); $j++) {
                     $trip = new Trip;
                     $trip
                         ->setName($faker->word)
@@ -66,7 +66,7 @@ class AppFixtures extends Fixture
                         ->setReserved(0)
                         ->setSpacecraft($spacecraft)
                         ->setDestination($destination)
-                        ->setStatus(mt_rand(1, 4))
+                        ->setStatus(mt_rand(2, 4))
                         ->setPrice($destination->getDistance() * $spacecraft->getPricePerDistance() + $spacecraft->getReservationPrice());
                     for ($v = 0; $v <= mt_rand(0, 1); $v++) {
                         $user = new User;
@@ -76,45 +76,35 @@ class AppFixtures extends Fixture
                             ->setPassword($this->passwordEncoder->encodePassword($user, 'demo'))
                             ->addTrip($trip);
                         $manager->persist($user);
+                        for ($k = 1; $k < mt_rand(0, 1); $k++) {
+                            $trip = new Trip;
+                            $trip
+                                ->setName('VR - ' . $user->getEmail() . ' - ' . $k)
+                                ->setDescription('Voyage reservé par ' . $user->getEmail())
+                                ->setDepartureAt($faker->dateTimeAD())
+                                ->setArrivalAt($faker->dateTimeAD())
+                                ->setAvailableSeatNumber(0)
+                                ->setReserved(1)
+                                ->setStatus(mt_rand(1, 4))
+                                ->setSpacecraft($spacecraft)
+                                ->setDestination($destination)
+                                ->setPrice($destination->getDistance() * $spacecraft->getPricePerDistance() + $spacecraft->getReservationPrice());
+                            $manager->persist($trip);
+                        }
+                        for ($m = 0; $m <= mt_rand(0, 3); $m++) {
+                            $feedback = new Feedback;
+                            $feedback
+                                ->setSpacecraft($spacecraft)
+                                ->setUser($user)
+                                ->setContent($faker->sentence(6))
+                                ->setRating(mt_rand(0, 5));
+                            $manager->persist($feedback);
+                            $spacecraft->addFeedback($feedback)
+                                ->setRating();
+                            $manager->persist($spacecraft);
+                        }
                     }
                     $manager->persist($trip);
-                }
-
-                for ($l = 0; $l <= mt_rand(0, 1); $l++) {
-                    $user = new User;
-                    $user->setEmail($faker->email)
-                        ->setFirstName($faker->firstName)
-                        ->setLastName($faker->lastName)
-                        ->setPassword($this->passwordEncoder->encodePassword($user, 'demo'));
-
-                    $manager->persist($user);
-                    for ($k = 1; $k < mt_rand(0, 3); $k++) {
-                        $trip = new Trip;
-                        $trip
-                            ->setName('VR - ' . $user->getEmail() . ' - ' . $k)
-                            ->setDescription('Voyage reservé par ' . $user->getEmail())
-                            ->setDepartureAt($faker->dateTimeAD())
-                            ->setArrivalAt($faker->dateTimeAD())
-                            ->setAvailableSeatNumber(0)
-                            ->setReserved(1)
-                            ->setStatus(mt_rand(1, 4))
-                            ->setSpacecraft($spacecraft)
-                            ->setDestination($destination)
-                            ->setPrice($destination->getDistance() * $spacecraft->getPricePerDistance() + $spacecraft->getReservationPrice());
-                        $manager->persist($trip);
-                    }
-                    for ($m = 0; $m <= mt_rand(0, 3); $m++) {
-                        $feedback = new Feedback;
-                        $feedback
-                            ->setSpacecraft($spacecraft)
-                            ->setUser($user)
-                            ->setContent($faker->sentence(6))
-                            ->setRating(mt_rand(0, 5));
-                        $manager->persist($feedback);
-                        $spacecraft->addFeedback($feedback)
-                            ->setRating();
-                        $manager->persist($spacecraft);
-                    }
                 }
             }
         }
