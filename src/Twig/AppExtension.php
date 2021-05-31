@@ -15,6 +15,7 @@ class AppExtension extends AbstractExtension
             new TwigFunction('setSortingPath', [$this, 'setSortingPath']),
             new TwigFunction('setSortingIcon', [$this, 'setSortingIcon']),
             new TwigFunction('formatPrice', [$this, 'formatPrice']),
+            new TwigFunction('getStatus', [$this, 'getStatus'])
         ];
     }
 
@@ -53,5 +54,23 @@ class AppExtension extends AbstractExtension
     {
         $price = number_format($price, $decimals, ',', ' ');
         return $price;
+    }
+
+    public function getStatus(int $status): void
+    {
+        switch ($status) {
+            case 1:
+                echo '<p class="bg-warning w-50 ml-auto p-1 text-center"> En attente de paiement </p>';
+                break;
+            case 2:
+                echo '<p class="bg-success w-50 ml-auto p-1 text-center"> Reservé </p>';
+                break;
+            case 3:
+                echo '<p class="bg-danger w-50 ml-auto p-1 text-center text-white"> Complet </p>';
+                break;
+            case 4:
+                echo '<p class="bg-primary w-50 ml-auto p-1 text-center text-white"> Voyage terminé </p>';
+                break;
+        }
     }
 }

@@ -24,7 +24,6 @@ class UserController extends AbstractController
         $user = $this->getUser();
         $feedbacks = $feedbackRepo->findBy(['user' => $user->getId()], ['createdAt' => 'DESC']);
         $reservedTrips = $tripRepo->findUserTrips($user->getEmail());
-        $user = $this->getUser();
         $trips = $user->getTrip();
         return $this->render('user/index.html.twig', [
             'feedbacks' => $feedbacks,

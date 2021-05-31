@@ -83,7 +83,7 @@ class TripController extends AbstractController
      */
     public function reserveTrip(Trip $trip, Request $request): Response
     {
-        if ($trip->getAvailableSeatNumber() === 0) {
+        if ($trip->getReserved() === false && $trip->getAvailableSeatNumber() === 0) {
             $this->addFlash('danger', 'Ce voyage n\'a malheureusement plus de places disponibles.');
             return $this->redirectToRoute('app_trip_index');
         }
@@ -105,13 +105,16 @@ class TripController extends AbstractController
     public function onReservationSuccess(Trip $trip, EntityManagerInterface $em, Request $request, TCPDFController $tcpdf): Response
     {
         $token = $request->request->get('token');
-        if ($trip->getAvailableSeatNumber() === 0) {
+        if ($trip->getReserved() === false && $trip->getAvailableSeatNumber() === 0) {
             $this->addFlash('danger', 'Ce voyage n\'a malheureusement plus de places disponibles.');
             return $this->redirectToRoute('app_trip_index');
         }
         if ($this->isCsrfTokenValid('purchasing', $token)) {
             $trip->setStatus(3);
             $trip->setAvailableSeatNumber($trip->getAvailableSeatNumber() - 1);
+            if ($trip->getAvailableSeatNumber() === 0) {
+                $trip->setStatus(3);
+            }
             $trip->addUser($this->getUser());
             $em->flush();
 

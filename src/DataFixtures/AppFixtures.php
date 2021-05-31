@@ -76,7 +76,7 @@ class AppFixtures extends Fixture
                             ->setPassword($this->passwordEncoder->encodePassword($user, 'demo'))
                             ->addTrip($trip);
                         $manager->persist($user);
-                        for ($k = 1; $k < mt_rand(0, 1); $k++) {
+                        for ($k = 1; $k < mt_rand(1, 2); $k++) {
                             $trip = new Trip;
                             $trip
                                 ->setName('VR - ' . $user->getEmail() . ' - ' . $k)
@@ -84,7 +84,7 @@ class AppFixtures extends Fixture
                                 ->setDepartureAt($faker->dateTimeAD())
                                 ->setArrivalAt($faker->dateTimeAD())
                                 ->setAvailableSeatNumber(0)
-                                ->setReserved(1)
+                                ->setReserved(0)
                                 ->setStatus(mt_rand(1, 4))
                                 ->setSpacecraft($spacecraft)
                                 ->setDestination($destination)

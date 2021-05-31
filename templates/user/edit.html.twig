@@ -20,7 +20,7 @@
             {{form_errors(form.password)}}
             <div class="input-group mb-3 w-50">
                 {{form_widget(form.password)}}
-                <span id="showPassword" class="input-group-text"><i class="bi lg bi-eye-fill"></i></span>
+                <a href="#" id="showPassword" class="input-group-text"><i class="bi lg bi-eye-fill"></i></a>
             </div>
              {{form_help(form.password)}}
         </div>
@@ -41,10 +41,12 @@
 {% block javascripts %}
 <script>
     $(document).ready(function(){
-        $("#showPassword").mousedown(function(){
+        $("#showPassword").mousedown(function(e){
+            e.preventDefault();
             $("#user_password").attr('type','text');
         })
-        $("#showPassword").mouseup(function(){
+        $("#showPassword").mouseup(function(e){
+            e.preventDefault();
            $("#user_password").attr('type','password');
         })
     })
