@@ -47,14 +47,16 @@ class FeedbackController extends AbstractController
      * @Route("/spacecrafts/{id}/feedbacks/{orderBy}/{order}",name="app_spacecraft_feedback_sort")
      * @return Response
      */
-    public function sortFeedbacks(Spacecraft $spacecraft, FeedbackRepository $repo, $orderBy = null, $order = null): Response
+    public function sortFeedbacks(Spacecraft $spacecraft, FeedbackRepository $repo, $orderBy = null, $order = null, Request $request): Response
     {
+        $previousUrl = $request->headers->get('referer');
         $feedbacks = $repo->findBy(['spacecraft' => $spacecraft->getId()], [$orderBy => $order]);
         return $this->render('spacecraft/show.html.twig', [
             'feedbacks' => $feedbacks,
             'spacecraft' => $spacecraft,
             'orderBy' => $orderBy,
-            'order' => $order
+            'order' => $order,
+            'previousUrl' => $previousUrl
         ]);
     }
 }

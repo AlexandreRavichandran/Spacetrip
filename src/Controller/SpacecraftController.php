@@ -39,6 +39,9 @@ class SpacecraftController extends AbstractController
     {
         $previousUrl = $request->headers->get('referer');
         $trips = $tripRepo->findBy(['spacecraft' => $spacecraft->getId()]);
+        if ($spacecraft->getAvailable() === false) {
+            $this->addFlash('warning', 'Ce vaisseau est actuellement en maintenance et non utilisable.');
+        }
         $feedbacks = $feedbackrepo->findBy(['spacecraft' => $spacecraft->getId()]);
         return $this->render('spacecraft/show.html.twig', [
             'previousUrl' => $previousUrl,

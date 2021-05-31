@@ -50,7 +50,7 @@
         <h4 class="ml-auto mr-auto"> Donnez votre note pour ce vaisseau : </h4>
     </div>
     <div class="row">
-        <p class="ml-auto mr-auto" style="font-size:30px"> <span><i id="ratingMinus" class="bi bi-dash"></i></span> <span id="userRating">{% for i in 0..4 %}<i class="bi bi-star"></i>{% endfor %}</span> <span><i id="ratingPlus" class="bi bi-plus"></i></span></p> 
+        <p class="ml-auto mr-auto" style="font-size:30px"> <a id="ratingMinusClick" href="#"><i id="ratingMinus" class="bi bi-dash"></i></a> <span id="userRating">{% for i in 0..4 %}<i class="bi bi-star"></i>{% endfor %}</span> <a href="#" id="ratingPlusClick"><i id="ratingPlus" class="bi bi-plus"></i></a></p> 
     </div>
     {{form_start(form)}}
     <div class="row">
@@ -81,6 +81,7 @@
 {% block javascripts %}
 <script>
     $(document).ready(function(){
+        $
         $("#content").keyup(function(){
             let count = $('#content').val().length;
             console.log($("#content").val().length);
@@ -97,12 +98,14 @@
         }
         })
 
-        $("#ratingPlus").click(function(){
+        $("#ratingPlusClick").click(function(e){
+            e.preventDefault();
             $("#userRating").prepend('<i class="bi bi-star-fill"></i>');
             $("#userRating i:last-child").remove();
             $("#rating").val($('#userRating .bi-star-fill').length)
         })
-        $("#ratingMinus").click(function(){
+        $("#ratingMinusClick").click(function(e){
+            e.preventDefault();
             $("#userRating").append('<i class="bi bi-star"></i>');
             $("#userRating i:first-child").remove();
             $("#rating").val($('#userRating .bi-star-fill').length)

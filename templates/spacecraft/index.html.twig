@@ -20,6 +20,11 @@
                 <div class="card-body text-center pb-0">
                     <h5 class="card-title">{{spacecraft.brand}} ({{spacecraft.nationality}})</h5>
                     <p> {{displayStarRating(spacecraft.rating)}} ({{spacecraft.feedback|length}})</p>
+                    {% if spacecraft.available is same as true %}
+                    <span style="font-size:15px;" class="badge rounded-pill bg-success w-50 ml-auto mr-auto mb-3">Disponible</span>
+                    {% else %}
+                    <span style="font-size:15px;" class="badge rounded-pill bg-warning w-50 ml-auto mr-auto mb-3">En maintenance</span>
+                    {% endif %}
                 </div>
                 <img src="https://placehold.it/200x200" alt="" class="ml-2 mb-2 mr-2">
                 <div class="card-footer text-muted text-center">
