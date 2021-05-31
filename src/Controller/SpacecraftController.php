@@ -6,6 +6,7 @@ use App\Entity\Spacecraft;
 use App\Repository\FeedbackRepository;
 use App\Repository\SpacecraftRepository;
 use App\Repository\TripRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -74,5 +75,20 @@ class SpacecraftController extends AbstractController
 
             return new JsonResponse($jsonData);
         }
+    }
+
+    /**
+     * Make a spacecraft available on the admin spacecraft index (AJAX request)
+     * @Route("/admin/spacecraft/available",name="app_admin_spacecraft_available")
+     * @return void
+     */
+    public function makeSpacecraftAvailable(Request $request, SpacecraftRepository $repo, EntityManagerInterface $em)
+    {
+        if ($request->isXmlHttpRequest()) {
+            $spacecraft = $repo->findOneBy(['id' => $_POST['id']]);
+            $spacecraft->setAvailable($_POST['value']);
+            $em->flush();
+        }
+        return new JsonResponse();
     }
 }

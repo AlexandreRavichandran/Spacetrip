@@ -20,6 +20,7 @@
                     <th scope="col" class="text-center">Destinations possibles</th>
                     <th scope="col" class="text-center">Prix <a href="{% if orderBy is same as 's.price' and order is same as 'DESC' %}{{path('app_admin_spacecraft_sort',{'orderBy':'s.price','order':'ASC'})}}{% else %}{{path('app_admin_spacecraft_sort',{'orderBy':'s.price','order':'DESC'})}}{% endif %}" class="{{setSortingIcon(orderBy,'s.price', order, 'numeric')}}"></a></th>
                     <th scope="col" class="text-center">Note moyenne <a href="{% if orderBy is same as 's.rating' and order is same as 'DESC' %}{{path('app_admin_spacecraft_sort',{'orderBy':'s.rating','order':'ASC'})}}{% else %}{{path('app_admin_spacecraft_sort',{'orderBy':'s.rating','order':'DESC'})}}{% endif %}" class="{{setSortingIcon(orderBy,'s.rating', order, 'numeric')}}"></a></th>
+                    <th scope="col" class="text-center">Vaisseau opérationnel</th>
                     <th scope="col" class="text-center">Actions</th>
                 </tr>
             </thead>
@@ -33,6 +34,7 @@
                     <td class="text-center" scope="col">{% for possibleDestination in spacecraft.possibleDestination %} {{possibleDestination.name}} {% endfor %}</td>
                     <td class="text-center" scope="col">{{formatPrice(spacecraft.reservationPrice,0)}} € + {{formatPrice(spacecraft.pricePerDistance,5)}} €/km</td>
                     <td class="text-center" scope="col">{{displayStarRating(spacecraft.rating)}}</td>
+                    <td class="text-center" scope="col"><input type="checkbox" onchange="ajaxCheckbox({{spacecraft.id}})" {% if spacecraft.available is same as true %} checked value= "1" {% else %} value="0" {% endif %} name="available_checkbox_{{spacecraft.id}}" id="available_checkbox_{{spacecraft.id}}"></td>
                     <td scope="col">
                         <a href="{{path('app_admin_spacecraft_edit',{'id':spacecraft.id})}}" class="btn btn-warning btn-sm">Editer</a>
                         <a onclick="event.preventDefault(); confirm('Etes vous sur de supprimer ce voyage de la base de données ? Cette action est irréversible.') && document.querySelector('#spacecraft_delete_link_{{spacecraft.id}}').click()"  class="btn btn-sm btn-danger ml-1"> Supprimer </a>
@@ -47,4 +49,29 @@
         {{knp_pagination_render(spacecrafts)}}
     </div>
 </div>
+{% endblock %}
+{% block javascripts %}
+<script>
+
+        function ajaxCheckbox(id){
+         if($("#available_checkbox_" + id).val() == 1 ){
+                $("#available_checkbox_" + id).val(0)
+            } else{
+                $("#available_checkbox_" + id).val(1)
+
+            }
+            let value = $("#available_checkbox_" + id).val()
+        $.ajax({
+            method:"POST",
+            url: '{{path('app_admin_spacecraft_available')}}',
+            data: {id: id, value: value}
+        })
+        .done({
+            
+        })
+        }
+
+
+</script>
+
 {% endblock %}
