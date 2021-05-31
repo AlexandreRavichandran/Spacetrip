@@ -110,12 +110,16 @@ class TripController extends AbstractController
             return $this->redirectToRoute('app_trip_index');
         }
         if ($this->isCsrfTokenValid('purchasing', $token)) {
-            $trip->setStatus(3);
-            $trip->setAvailableSeatNumber($trip->getAvailableSeatNumber() - 1);
-            if ($trip->getAvailableSeatNumber() === 0) {
-                $trip->setStatus(3);
+
+            if ($trip->getReserved() === false) {
+                $trip->setAvailableSeatNumber($trip->getAvailableSeatNumber() - 1);
+                if ($trip->getAvailableSeatNumber() === 0) {
+                    $trip->setStatus(3);
+                }
+                $trip->addUser($this->getUser());
+            } else {
+                $trip->setStatus(2);
             }
-            $trip->addUser($this->getUser());
             $em->flush();
 
             return $this->render('trip/recap.html.twig', [

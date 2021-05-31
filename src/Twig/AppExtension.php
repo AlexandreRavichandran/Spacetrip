@@ -56,14 +56,15 @@ class AppExtension extends AbstractExtension
         return $price;
     }
 
-    public function getStatus(int $status): void
+    public function getStatus(int $status, $tripId = null, $reserved = false): void
     {
+
         switch ($status) {
             case 1:
-                echo '<p class="bg-warning w-50 ml-auto p-1 text-center"> En attente de paiement </p>';
+                echo '<p class="d-flex justify-content-end"><a href="/trips/' . $tripId . '/payment" class="btn btn-warning w-50 btn-sm text-center"> En attente de paiement </a></p>';
                 break;
             case 2:
-                echo '<p class="bg-success w-50 ml-auto p-1 text-center"> Reservé </p>';
+                echo '<button class="btn btn-success w-50 btn-sm text-center"> Reservé</button>';
                 break;
             case 3:
                 echo '<p class="bg-danger w-50 ml-auto p-1 text-center text-white"> Complet </p>';

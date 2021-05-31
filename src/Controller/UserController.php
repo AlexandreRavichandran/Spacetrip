@@ -46,6 +46,7 @@ class UserController extends AbstractController
             $user = $form->getData();
             $user->setPassword($passwordInterface->encodePassword($user, $user->getPassword()));
             $em->flush();
+            $this->addFlash('success', 'Vos informations ont bien été modifiés.');
             return $this->redirectToRoute('app_user_profile');
         }
         return $this->render('user/edit.html.twig', [

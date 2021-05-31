@@ -64,7 +64,10 @@
                         <h5 class="mb-1"> {{trip.name}} - {{trip.destination.name}}</h5>
                     </div>
                     <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                    {{getStatus(trip.status)}}
+                        <form class="d-flex justify-content-end" action="{{path('app_get_ticket',{'trip':trip.id})}}" method="post" id="crsrForm">
+                            <input type="hidden" name="token" value="{{csrf_token('getTicket')}}">
+                            {{getStatus(trip.status,trip.id)}}
+                        </form>
                 </div>
             {% endfor %}
             </div>
@@ -79,12 +82,16 @@
                         <h6 class="mb-1">Voyage à destination de {{reservedTrip.destination.name}}</h6>
                     </div>
                     <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                    {{getStatus(reservedTrip.status)}}
+                    <form {% if reservedTrip.status is same as 2 %} class="d-flex justify-content-end" {% endif %} action="{{path('app_get_ticket',{'trip':reservedTrip.id})}}" method="post" id="crsrForm">
+                        <input type="hidden" name="token" value="{{csrf_token('getTicket')}}">
+                        {{getStatus(reservedTrip.status,reservedTrip.id,true)}}
+                    </form>
                 </div>
             {% endfor %}
             </div>
         </div>
     </div>
+
 </div>
 {% endblock %}
 {% block javascripts %}
@@ -101,6 +108,7 @@
                 feedbackAnimate();
             })
 
+        
 
     }); 
 </script>

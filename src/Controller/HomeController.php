@@ -76,10 +76,11 @@ class HomeController extends AbstractController
             ];
             $pdf->write1DBarcode($tripName . $user->getFirstName() . $user->getLastName(), 'C39', '', '', '', 18, 0.4, $style, 'N');
 
-            $response = new Response($pdf->Output('voyage_' . $tripName . '_' . $user->getFirstName() . $user->getLastName() . mt_rand(0, 1000000) . '.pdf'));
+            $response = new Response($pdf->Output('voyage_' . $tripName . '_' . $user->getFirstName() . $user->getLastName() . '.pdf'));
             $response->headers->set('Content-type', 'application/pdf');
             return $response;
         }
+        $this->addFlash('warning', 'Une erreur s\'est produite');
         return $this->redirectToRoute('app_home');
     }
 }
