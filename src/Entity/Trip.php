@@ -88,7 +88,7 @@ class Trip
     /**
      * @ORM\Column(type="integer")
      * @Assert\Range(
-     *          min = 1
+     *          min = 1,
      *          max = 4
      * )
      */
@@ -249,14 +249,18 @@ class Trip
     /**
      * Set automatically the price of a Trip based on the destination distance and spacecraft prices
      * (formula = destination_distance * price_per_distance + reservation_price)
-     *  
+
      * @return self
      */
-    public function setPrice(): self
+    public function setPrice(bool $reserved = false): self
     {
         $destination = $this->getDestination();
         $spacecraft = $this->getSpacecraft();
-        $price = ($destination->getDistance() * $spacecraft->getPricePerDistance() + $spacecraft->getReservationPrice());
+        if ($reserved) {
+            $price = ($destination->getDistance() * $spacecraft->getPricePerDistance() + $spacecraft->getReservationPrice());
+        } else {
+            $price = ($destination->getDistance() * $spacecraft->getPricePerDistance() + $spacecraft->getReservationPrice() + 2500);
+        }
         $this->price = $price;
 
         return $this;

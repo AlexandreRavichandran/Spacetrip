@@ -78,10 +78,15 @@
             <div class="list-group">
             {% for reservedTrip in reservedTrips %}
                 <div class="list-group-item list-group-item-action flex-column align-items-start">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h6 class="mb-1">Voyage à destination de {{reservedTrip.destination.name}}</h6>
+                    <div class="d-flex w-100 justify-content-between mb-2">
+                        <h6 class="mb-1 d-flex align-items-center">Voyage à destination de {{reservedTrip.destination.name}}</h6>
+                        {% if reservedTrip.status is not same as 4 %}
+                        <a href="{{path('app_trip_edit',{'id':reservedTrip.id})}}" class="btn btn-primary btn-sm">Editer</a>
+                        {% endif %}
                     </div>
-                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                    <p class="mb-1"> Vaisseau : {{reservedTrip.spacecraft.name}}</p>
+                    <p class="mb-1">Départ : {{reservedTrip.departureAt|date('d/m/Y H:i')}} à {{reservedTrip.spacecraft.nationality}}</p>
+                    <p class="mb-1">Arrivée : {{reservedTrip.arrivalAt|date('d/m/Y H:i')}} à {{reservedTrip.spacecraft.nationality}}</p>
                     <form {% if reservedTrip.status is same as 2 %} class="d-flex justify-content-end" {% endif %} action="{{path('app_get_ticket',{'trip':reservedTrip.id})}}" method="post" id="crsrForm">
                         <input type="hidden" name="token" value="{{csrf_token('getTicket')}}">
                         {{getStatus(reservedTrip.status,reservedTrip.id,true)}}
