@@ -70,6 +70,10 @@ class TripController extends AbstractController
      */
     public function show(Trip $trip, Request $request): Response
     {
+        if ($trip->getReserved() === true) {
+            $this->addFlash('danger', 'Une erreur s\'est produite.');
+            return $this->redirectToRoute('app_trip_index');
+        }
         $previousUrl = $request->headers->get('referer');
         return $this->render('trip/show.html.twig', [
             'trip' => $trip,

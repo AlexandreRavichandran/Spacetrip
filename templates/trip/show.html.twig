@@ -8,13 +8,18 @@
         <a href="{{previousUrl}}" class="btn btn-primary btn-md rounded"><i class="bi bi-arrow-left"></i> Retour</a>
     </div>
 </div>
+{% if trip.availableSeatNumber is same as 0 %}
+<div class="row">
+    <h1 class="text-center badge badge-pill badge-danger mt-2 w-50 ml-auto mr-auto p-2">Ce voyage est complet. </h1>
+</div>
+{% endif %}
 <div class="container mt-4 text-center tripBackground">
 
     <h1> VOYAGE {{trip.name}} - {{trip.destination.name}}</h1>
     <h2> {{trip.departureAt|date('d-m-Y')}} - {{trip.arrivalAt|date('d-m-Y')}}</h2>
 </div>
 <div class="container mt-4">
- {% if trip.availableSeatNumber <= 2 %}
+ {% if trip.availableSeatNumber <= 2 and trip.availableSeatNumber is not same as 0 %}
     <div class="row">
         <p class="text-center badge badge-pill badge-danger w-50 ml-auto mr-auto p-2"> Il reste actuellement {{trip.availableSeatNumber}} place(s) disponibles. N'attendez plus pour reserver ! </p>
     </div>
@@ -96,7 +101,7 @@
                 <p> <i class="bi bi-exclamation-diamond-fill"></i> La participation à ce voyage requiert un bon etat physique. Veuillez consulter un medecin avant de reserver le voyage</p>
             </div>
             <div class="row">
-            {% if trip.availableSeatNumber <= 2 %}
+            {% if trip.availableSeatNumber <= 2 and trip.availableSeatNumber is not same as 0 %}
                 <p class="text-center badge badge-pill badge-danger w-50 ml-auto mr-auto p-2"> Il reste actuellement {{trip.availableSeatNumber}} place(s) disponibles. N'attendez plus pour reserver ! </p>
             {% else %}
                 <p class="text-center"> Nombre de places disponibles pour ce voyage : {{trip.availableSeatNumber}} </p>
@@ -115,7 +120,12 @@
             <div class="row mb-4 mt-4 d-flex flex-column justify-content-center">
                 <p class="text-center">En cliquant sur "Reserver une place", vous approuvez avoir une bonne condition physique pour un voyage dans l'espace </p>
                 <p class="text-center">Spacetrip se dénie de toute responsabilité en cas de problèmes de santé de votre part.</p>
-                <a href="{{path('app_trip_payment',{'id':trip.id})}}" class="btn btn-primary ml-auto mr-auto rounded mb-1"> Reserver une place </a>
+                <a href="{{path('app_trip_payment',{'id':trip.id})}}" class="btn {% if trip.availableSeatNumber is same as 0 %} disabled {% endif %} btn-primary ml-auto mr-auto rounded mb-1"> Reserver une place </a>
+                {% if trip.availableSeatNumber is same as 0 %}
+                <div class="row">
+                    <h1 class="text-center badge badge-pill badge-danger mt-2 w-50 ml-auto mr-auto p-2">Ce voyage est complet. </h1>
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -43,7 +43,8 @@ class AdminSpacecraftController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $spacecraft = new Spacecraft;
             $spacecraft = $form->getData();
-            $spacecraft->setRating();
+            $spacecraft->setRating()
+                ->setAvailable(true);
             $em->persist($spacecraft);
             $em->flush();
             $this->addFlash('success', 'L\'ajout du nouveau vaisseau a été effectué avec succès.');

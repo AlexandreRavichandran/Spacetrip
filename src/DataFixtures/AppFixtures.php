@@ -40,7 +40,7 @@ class AppFixtures extends Fixture
             $manager->persist($destination);
 
 
-            for ($h = 0; $h < 6; $h++) {
+            for ($h = 0; $h < 2; $h++) {
                 $spacecraft = new Spacecraft;
                 $spacecraft
                     ->setName($faker->word)
@@ -65,8 +65,14 @@ class AppFixtures extends Fixture
                         ->setAvailableSeatNumber(mt_rand(0, 9))
                         ->setReserved(0)
                         ->setSpacecraft($spacecraft)
-                        ->setDestination($destination)
-                        ->setStatus(mt_rand(2, 4))
+                        ->setDestination($destination);
+                    if ($trip->getAvailableSeatNumber() === 0) {
+                        $status = 3;
+                    } else {
+                        $random = [2, 4];
+                        $status = $random[mt_rand(0, 1)];
+                    }
+                    $trip->setStatus($status)
                         ->setPrice($destination->getDistance() * $spacecraft->getPricePerDistance() + $spacecraft->getReservationPrice());
                     for ($v = 0; $v <= mt_rand(0, 1); $v++) {
                         $user = new User;
@@ -76,21 +82,6 @@ class AppFixtures extends Fixture
                             ->setPassword($this->passwordEncoder->encodePassword($user, 'demo'))
                             ->addTrip($trip);
                         $manager->persist($user);
-                        for ($k = 1; $k < mt_rand(1, 2); $k++) {
-                            $trip = new Trip;
-                            $trip
-                                ->setName('VR - ' . $user->getEmail() . ' - ' . $k)
-                                ->setDescription('Voyage reservé par ' . $user->getEmail())
-                                ->setDepartureAt($faker->dateTimeAD())
-                                ->setArrivalAt($faker->dateTimeAD())
-                                ->setAvailableSeatNumber(0)
-                                ->setReserved(0)
-                                ->setStatus(mt_rand(1, 4))
-                                ->setSpacecraft($spacecraft)
-                                ->setDestination($destination)
-                                ->setPrice($destination->getDistance() * $spacecraft->getPricePerDistance() + $spacecraft->getReservationPrice());
-                            $manager->persist($trip);
-                        }
                         for ($m = 0; $m <= mt_rand(0, 3); $m++) {
                             $feedback = new Feedback;
                             $feedback
@@ -101,11 +92,11 @@ class AppFixtures extends Fixture
                             $manager->persist($feedback);
                             $spacecraft->addFeedback($feedback)
                                 ->setRating();
-                            $manager->persist($spacecraft);
                         }
                     }
                     $manager->persist($trip);
                 }
+                $manager->persist($spacecraft);
             }
         }
 
