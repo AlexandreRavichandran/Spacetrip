@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Form\UserType;
 use App\Repository\TripRepository;
 use App\Repository\FeedbackRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,14 +38,14 @@ class UserController extends AbstractController
      * @Route("/profile/edit",name="app_user_edit")
      * @return Response
      */
-    public function edit(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordInterface): Response
+    public function edit(Request $request, EntityManagerInterface $em, UserRepository $repo): Response
     {
         $user = $this->getUser();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
-            $user->setPassword($passwordInterface->encodePassword($user, $user->getPassword()));
+            $repo->upgradePassword($user, $user->getPassword());
             $em->flush();
             $this->addFlash('success', 'Vos informations ont bien été modifiés.');
             return $this->redirectToRoute('app_user_profile');

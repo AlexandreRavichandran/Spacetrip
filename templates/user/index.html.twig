@@ -61,13 +61,23 @@
             {% for trip in trips %}
                 <div class="list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1"> {{trip.name}} - {{trip.destination.name}}</h5>
+                        <h6 class="mb-1"> {{trip.name}} - {{trip.destination.name}}</h6>
+                        <div class="dropdown">
+                            <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Modifier
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a href="{{path('app_trip_delete',{'id':trip.id})}}" class="dropdown-item text-center">Annuler ma réservation</a>
+                            </div>
+                        </div>
                     </div>
-                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                        <form class="d-flex justify-content-end" action="{{path('app_get_ticket',{'trip':trip.id})}}" method="post" id="crsrForm">
-                            <input type="hidden" name="token" value="{{csrf_token('getTicket')}}">
-                            {{getStatus(trip.status,trip.id)}}
-                        </form>
+                    <p class="mb-1"> Vaisseau : {{trip.spacecraft.name}}</p>
+                    <p class="mb-1">Départ : {{trip.departureAt|date('d/m/Y H:i')}} à {{trip.spacecraft.nationality}}</p>
+                    <p class="mb-1">Arrivée : {{trip.arrivalAt|date('d/m/Y H:i')}} à {{trip.spacecraft.nationality}}</p>
+                    <form class="d-flex justify-content-end" action="{{path('app_get_ticket',{'trip':trip.id})}}" method="post" id="crsrForm">
+                        <input type="hidden" name="token" value="{{csrf_token('getTicket')}}">
+                        {{getStatus(trip.status,trip.id)}}
+                    </form>
                 </div>
             {% endfor %}
             </div>
@@ -81,7 +91,15 @@
                     <div class="d-flex w-100 justify-content-between mb-2">
                         <h6 class="mb-1 d-flex align-items-center">Voyage à destination de {{reservedTrip.destination.name}}</h6>
                         {% if reservedTrip.status is not same as 4 %}
-                        <a href="{{path('app_trip_edit',{'id':reservedTrip.id})}}" class="btn btn-primary btn-sm">Editer</a>
+                        <div class="dropdown">
+                            <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Modifier
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a href="{{path('app_trip_edit',{'id':reservedTrip.id})}}" class="dropdown-item text-center">Editer mon voyage</a>
+                                <a href="{{path('app_trip_delete',{'id':reservedTrip.id})}}" class="dropdown-item text-center">Annuler ma réservation</a>
+                            </div>
+                        </div>
                         {% endif %}
                     </div>
                     <p class="mb-1"> Vaisseau : {{reservedTrip.spacecraft.name}}</p>
