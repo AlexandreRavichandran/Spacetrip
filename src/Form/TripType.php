@@ -28,7 +28,10 @@ class TripType extends AbstractType
                 'label' => 'Description du voyage',
             ])
             ->add('departureAt', DateTimeType::class, [
-                'label' => 'Date de départ du voyage'
+                'label' => 'Date de départ du voyage',
+                'attr' => [
+                    'class' => 'd-flex justify-content-center',
+                ]
             ])
             ->add('destination', EntityType::class, [
                 'label' => 'Destination',
@@ -36,7 +39,10 @@ class TripType extends AbstractType
                 'choice_label' => 'name'
             ])
             ->add('arrivalAt', DateTimeType::class, [
-                'label' => 'Date d\'arrivée du voyage'
+                'label' => 'Date d\'arrivée du voyage',
+                'attr' => [
+                    'class' => 'd-flex justify-content-center',
+                ]
             ])
             ->add('availableSeatNumber', IntegerType::class, [
                 'label' => 'Nombre de places disponibles'

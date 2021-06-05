@@ -6,6 +6,7 @@ use App\Entity\Trip;
 use App\Form\TripType;
 use App\Repository\TripRepository;
 use App\Repository\SpacecraftRepository;
+use App\Service\CallWeatherApi;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,6 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Qipsius\TCPDFBundle\Controller\TCPDFController;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class TripController extends AbstractController
 {
@@ -206,5 +208,24 @@ class TripController extends AbstractController
             'form' => $form->createView(),
             'trips' => $trips
         ]);
+    }
+
+    /**
+     * Get the weather forecast when creating a trip
+     * @Route("/trips/create/weather/{city}/{date}",name="app_ajax_trip_create_ajax")
+     */
+    public function getWeather(string $date, string $city, CallWeatherApi $callWeatherApi, Request $request)
+    {
+        if ($request->isXmlHttpRequest() || $request->query->get('showJson') == 1) {
+            $date = str_replace('-', '/', $date);
+            $date = strtotime($date);
+            $weatherData =  $callWeatherApi->getWeatherData($city, $date);
+            $jsonData = [
+                'weather' => $weatherData
+
+            ];
+        }
+
+        return new JsonResponse($jsonData);
     }
 }

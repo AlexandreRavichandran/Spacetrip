@@ -23,10 +23,6 @@
         
         </div>
     </div>
-    <div class="ml-auto mr-auto d-flex flex-column ">
-        {{form_row(form.departureAt)}}
-        {{form_row(form.arrivalAt)}}
-    </div>
     <h3 class="text-center mt-5">Choix de la destination</h3>
     <div class="row mt-4">
         <div class="col-5 d-flex justify-content-center align-items-center">
@@ -96,6 +92,19 @@
                 <img src="https://placehold.it/300x300" alt="">
             </div>
         </div>
+    </div>
+    <div class="ml-auto mr-auto d-flex flex-column ">
+       <div class="col text-center">
+            {{form_row(form.departureAt)}}
+            <div id="departureDateWeather" class="d-none mt-3">
+                <h4> Prévisions meteorologiques : </h4>
+                <img id="departureDateWeatherIcon" src="#" alt="" width="200" height="200">
+                <h5 class="mb-3" id="weather"></h5>
+            </div>
+            
+            {{form_row(form.arrivalAt)}}
+            <img id="arrivalDateWeather" src="#" alt="">
+       </div>
     </div>
     <div class="row mt-5">
         <h4 class="ml-auto mr-auto"> Prix estimé : <span id="totalPrice"></span> €</h4>

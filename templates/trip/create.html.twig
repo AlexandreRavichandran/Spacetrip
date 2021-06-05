@@ -35,6 +35,7 @@
     })
 
         .done(function (data, status) {
+            
             $('#brand_origin').html(data['brand'] + ' - ' + data['nationality'])
             $('#reservationPrice').html(data['reservationPrice'])
             $('#pricePerDistance').html(data['pricePerDistance'])
@@ -43,8 +44,22 @@
             $('#available_seat_number').html(data['numberOfSeat'])
             $('#speed').html(data['speed'] + ' km/h')
             $('#totalPrice').html(Math.round(2500 + data['reservationPrice'] + data['pricePerDistance'] * $('#distance').html()))
-
         })
+    $('#trip_departureAt').change(function(){
+        console.log(nationality)
+        let date = $('#trip_departureAt_date_day').val() + '-' + $('#trip_departureAt_date_month').val() + '-' + $('#trip_departureAt_date_year').val() 
+        console.log(date);
+        $.ajax({
+            method:"GET",
+            url:'/trips/create/weather/'+ nationality + '/'+ date
+        })
+        .done(function(data,status){
+            $('#departureDateWeather').removeClass('d-none');
+            $('#departureDateWeatherIcon').attr('src','http://openweathermap.org/img/wn/' + data['weather']['icon']+ '@2x.png')
+            $('#weather').html(data['weather']['description']);
+        })
+    })
+
     })
 </script>
 {% endblock %}
