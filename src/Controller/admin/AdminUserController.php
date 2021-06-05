@@ -20,6 +20,7 @@ class AdminUserController extends AbstractController
      */
     public function index(UserRepository $repo, PaginatorInterface $paginator, Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $users = $paginator->paginate($repo->findAll(), $request->query->getInt('page', 1), 11);
         return $this->render('admin/user/index.html.twig', [
             'users' => $users,
@@ -35,6 +36,7 @@ class AdminUserController extends AbstractController
      */
     public function show(User $user, FeedbackRepository $repo): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $feedbacks = $repo->findBy(['user' => $user->getId()]);
         return $this->render('admin/user/show.html.twig', [
             'user' => $user,
@@ -49,6 +51,7 @@ class AdminUserController extends AbstractController
      */
     public function sort(UserRepository $repo, PaginatorInterface $paginator, Request $request, string $orderBy, string $order): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $users = $paginator->paginate($repo->orderUsers($orderBy, $order), $request->query->getInt('page', 1), 11);
         return $this->render('admin/user/index.html.twig', [
             'users' => $users,

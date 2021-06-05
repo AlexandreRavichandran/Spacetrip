@@ -20,6 +20,7 @@ class AdminHomeController extends AbstractController
      */
     public function showDashboard(SpacecraftRepository $spacecraftRepo, TripRepository $tripRepo, DestinationRepository $destinationRepo): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $spacecrafts = $spacecraftRepo->findAll();
         $spacecraftPercentages = [];
         foreach ($spacecrafts as $spacecraft) {
@@ -48,6 +49,7 @@ class AdminHomeController extends AbstractController
      */
     public function showLatestTrips(TripRepository $repo): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $trips = $repo->findBy(['reserved' => false], ['createdAt' => 'DESC'], 5);
         return $this->render('admin/index.html.twig', [
             'trips' => $trips,
@@ -63,6 +65,7 @@ class AdminHomeController extends AbstractController
      */
     public function showLatestSpacecrafts(SpacecraftRepository $repo): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $spacecrafts = $repo->findLatestSpacecrafts('updatedAt', 5);
         return $this->render('admin/index.html.twig', [
             'spacecrafts' => $spacecrafts,
@@ -77,6 +80,7 @@ class AdminHomeController extends AbstractController
      */
     public function showLatestUsers(UserRepository $repo): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $users = $repo->findBy([], ['createdAt' => 'DESC'], 5);
         return $this->render('admin/index.html.twig', [
             'users' => $users,
@@ -91,6 +95,7 @@ class AdminHomeController extends AbstractController
      */
     public function showLatestFeedbacks(FeedbackRepository $repo): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $feedbacks = $repo->findBy([], ['createdAt' => 'DESC'], 5);
         return $this->render('admin/index.html.twig', [
             'feedbacks' => $feedbacks,
@@ -105,6 +110,7 @@ class AdminHomeController extends AbstractController
      */
     public function showLatestReservedTrips(TripRepository $repo): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $trips = $repo->findBy(['reserved' => true], ['createdAt' => 'DESC'], 5);
         return $this->render('admin/index.html.twig', [
             'trips' => $trips,

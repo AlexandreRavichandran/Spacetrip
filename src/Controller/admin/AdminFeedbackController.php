@@ -20,6 +20,7 @@ class AdminFeedbackController extends AbstractController
      */
     public function index(FeedbackRepository $repo, PaginatorInterface $paginator, Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $feedbacks = $paginator->paginate($repo->findAll(), $request->query->getInt('page', 1), 11);
 
         return $this->render('admin/feedback/index.html.twig', [
@@ -36,6 +37,7 @@ class AdminFeedbackController extends AbstractController
      */
     public function delete(Feedback $feedback, EntityManagerInterface $em): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $em->remove($feedback);
         $em->flush();
         $this->addFlash('success', 'Ce commentaire a été supprimé avec succès.');
@@ -49,6 +51,7 @@ class AdminFeedbackController extends AbstractController
      */
     public function sort(FeedbackRepository $repo, PaginatorInterface $paginator, Request $request, string $orderBy, string $order): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $feedbacks = $paginator->paginate($repo->orderFeedbacks($orderBy, $order), $request->query->getInt('page', 1), 11);
         return $this->render('admin/feedback/index.html.twig', [
             'feedbacks' => $feedbacks,

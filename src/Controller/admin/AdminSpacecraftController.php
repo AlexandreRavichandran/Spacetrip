@@ -24,6 +24,7 @@ class AdminSpacecraftController extends AbstractController
      */
     public function index(SpacecraftRepository $repo, PaginatorInterface $paginator, Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $spacecrafts = $paginator->paginate($repo->findAll(), $request->query->getInt('page', 1), 11);
         return $this->render('admin/spacecraft/index.html.twig', [
             'spacecrafts' => $spacecrafts,
@@ -38,6 +39,7 @@ class AdminSpacecraftController extends AbstractController
      */
     public function create(request $request, EntityManagerInterface $em): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $form = $this->createForm(SpacecraftType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -62,6 +64,7 @@ class AdminSpacecraftController extends AbstractController
      */
     public function edit(Spacecraft $spacecraft, Request $request, EntityManagerInterface $em): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $form = $this->createForm(SpacecraftType::class, $spacecraft);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -84,6 +87,7 @@ class AdminSpacecraftController extends AbstractController
      */
     public function delete(Spacecraft $spacecraft, EntityManagerInterface $em, TripRepository $repo): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $trips = $repo->findBy(['spacecraft' => $spacecraft->getId()]);
         if ($trips) {
             $tripNames = [];
@@ -110,6 +114,7 @@ class AdminSpacecraftController extends AbstractController
      */
     public function sort(SpacecraftRepository $repo, PaginatorInterface $paginator, Request $request, string $orderBy, string $order): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $spacecrafts = $paginator->paginate($repo->orderSpacecrafts($orderBy, $order), $request->query->getInt('page', 1), 11);
         return $this->render('admin/spacecraft/index.html.twig', [
             'spacecrafts' => $spacecrafts,

@@ -79,6 +79,7 @@ class AppFixtures extends Fixture
                         $user->setEmail($faker->email)
                             ->setFirstName($faker->firstName)
                             ->setLastName($faker->lastName)
+                            ->setRoles(['ROLE_USER'])
                             ->setPassword($this->passwordEncoder->encodePassword($user, 'demo'))
                             ->addTrip($trip);
                         $manager->persist($user);
@@ -99,7 +100,13 @@ class AppFixtures extends Fixture
                 $manager->persist($spacecraft);
             }
         }
-
+        $admin = new User;
+        $admin->setFirstName('Alex')
+            ->setLastName('Ravi')
+            ->setEmail('alexandreravi7@gmail.com')
+            ->setRoles(['ROLE_ADMIN'])
+            ->setPassword($this->passwordEncoder->encodePassword($user, 'demo'));
+        $manager->persist($admin);
 
 
         $manager->flush();
