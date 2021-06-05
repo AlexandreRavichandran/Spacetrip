@@ -218,7 +218,7 @@ class TripController extends AbstractController
     {
         if ($request->isXmlHttpRequest() || $request->query->get('showJson') == 1) {
             $date = str_replace('-', '/', $date);
-            $date = strtotime($date);
+            $date = strtotime($date . ' 15:00:00');
             $weatherData =  $callWeatherApi->getWeatherData($city, $date);
             $jsonData = [
                 'weather' => $weatherData

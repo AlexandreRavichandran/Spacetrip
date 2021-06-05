@@ -44,11 +44,11 @@
             $('#available_seat_number').html(data['numberOfSeat'])
             $('#speed').html(data['speed'] + ' km/h')
             $('#totalPrice').html(Math.round(2500 + data['reservationPrice'] + data['pricePerDistance'] * $('#distance').html()))
+            window.nationality = data['nationality']
         })
     $('#trip_departureAt').change(function(){
-        console.log(nationality)
+
         let date = $('#trip_departureAt_date_day').val() + '-' + $('#trip_departureAt_date_month').val() + '-' + $('#trip_departureAt_date_year').val() 
-        console.log(date);
         $.ajax({
             method:"GET",
             url:'/trips/create/weather/'+ nationality + '/'+ date
@@ -56,10 +56,22 @@
         .done(function(data,status){
             $('#departureDateWeather').removeClass('d-none');
             $('#departureDateWeatherIcon').attr('src','http://openweathermap.org/img/wn/' + data['weather']['icon']+ '@2x.png')
-            $('#weather').html(data['weather']['description']);
+            $('#departureWeather').html(data['weather']['description']);
         })
     })
+    $('#trip_arrivalAt').change(function(){
 
+        let date = $('#trip_arrivalAt_date_day').val() + '-' + $('#trip_arrivalAt_date_month').val() + '-' + $('#trip_arrivalAt_date_year').val() 
+        $.ajax({
+            method:"GET",
+            url:'/trips/create/weather/'+ nationality + '/'+ date
+        })
+        .done(function(data,status){
+            $('#arrivalDateWeather').removeClass('d-none');
+            $('#arrivalDateWeatherIcon').attr('src','http://openweathermap.org/img/wn/' + data['weather']['icon']+ '@2x.png')
+            $('#arrivalWeather').html(data['weather']['description']);
+        })
+    })
     })
 </script>
 {% endblock %}

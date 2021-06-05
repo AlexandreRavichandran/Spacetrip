@@ -32,7 +32,6 @@ $(document).ready(function () {
                 $('#speed').html(data['speed'] + ' km/h')
                 $('#totalPrice').html(Math.round(2500 + data['reservationPrice'] + data['pricePerDistance'] * $('#distance').html()))
                 window.nationality = data['nationality']
-                console.log(nationality)
             })
     })
 
