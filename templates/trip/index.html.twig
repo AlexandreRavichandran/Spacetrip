@@ -11,10 +11,10 @@
 <div class="container mt-4">
     <h1> Les voyages actuels </h1>
     <a href="{{path('app_trip_create')}} "><p class="text-right"> Interessé par aucun voyage ? Spacetrip vous propose désormais de reserver des voyages sur-mesure !  </p></a>
-    {% for row in trips|batch(3) %}
+
     <div class="row mt-2">
-    {% for trip in row %}
-        <div class="col-md-4">
+    {% for trip in trips %}
+        <div class=" col-xs-12 col-md-6 col-xl-4 flex-wrap">
             <div class="card mb-3">
                 <div class="card-header">
                     <h4 class="text-center"> {{trip.name}}</h4>
@@ -32,7 +32,7 @@
         </div>
     {% endfor %}
     </div>
-    {% endfor %}
+}
     <div class="row navigation d-flex justify-content-center">
         {{knp_pagination_render(trips)}}
     </div>

@@ -6,28 +6,28 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{{path('app_trip_index')}}"> Les voyages </a>
+                <a class="nav-link text-center" href="{{path('app_trip_index')}}"> Les voyages </a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Documentation</a>
+                <a class="nav-link dropdown-toggle text-center" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Documentation</a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{path('app_destination_index')}}">Les destinations possibles</a>
-                    <a class="dropdown-item" href="{{path('app_spacecraft_index')}}">Les vaisseaux de Spacetrip</a>
+                    <a class="dropdown-item text-center" href="{{path('app_destination_index')}}">Les destinations possibles</a>
+                    <a class="dropdown-item text-center" href="{{path('app_spacecraft_index')}}">Les vaisseaux de Spacetrip</a>
                 </div>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
             {% if app.user %}
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="{{path('app_user_profile')}}" role="button" aria-haspopup="true" aria-expanded="false">Bonjour {{app.user.firstName}}</a>
+                <a class="nav-link dropdown-toggle text-center" data-toggle="dropdown" href="{{path('app_user_profile')}}" role="button" aria-haspopup="true" aria-expanded="false">Bonjour {{app.user.firstName}}</a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{path('app_user_profile')}}">Mon profil</a>
-                    <a class="dropdown-item" href="{{path('app_logout')}}">Déconnexion</a>
+                    <a class="dropdown-item text-center" href="{{path('app_user_profile')}}">Mon profil</a>
+                    <a class="dropdown-item text-center" href="{{path('app_logout')}}">Déconnexion</a>
                 </div>
             </li>
             {% else %}
             <li class="nav-item">
-                <a class="nav-link" href="{{path('app_login')}}"> Connexion </a>
+                <a class="nav-link text-center" href="{{path('app_login')}}"> Connexion </a>
             </li>
             {% endif %}
             </li>

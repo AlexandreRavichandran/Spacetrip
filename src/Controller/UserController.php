@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends AbstractController
@@ -38,14 +39,14 @@ class UserController extends AbstractController
      * @Route("/profile/edit",name="app_user_edit")
      * @return Response
      */
-    public function edit(Request $request, EntityManagerInterface $em, UserRepository $repo): Response
+    public function edit(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = $this->getUser();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
-            $repo->upgradePassword($user, $user->getPassword());
+            $user->setPassword($passwordEncoder->encodePassword($user, $user->getPassword()));
             $em->flush();
             $this->addFlash('success', 'Vos informations ont bien été modifiés.');
             return $this->redirectToRoute('app_user_profile');

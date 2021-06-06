@@ -3,16 +3,16 @@
 {% block title %}Ajouter un commentaire{% endblock %}
 
 {% block body %}
-<div class="container mt-2">
+<div class="container mt-4">
     <div class="row">
         <h1 class="ml-auto mr-auto"> Vaisseau {{spacecraft.name}}</h1>
     </div>
     <div class="row">
-        <div class="col-4">
-            <img src="https://placehold.it/300x300" alt="">
+        <div class="col-xs-12 col-md-4">
+            <img src="https://placehold.it/300x300" alt="" class="w-100 ml-auto mr-auto">
         </div>
-        <div class="col-8">
-            <p> {{spacecraft.description}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quam incidunt esse et quod nihil quisquam, eum labore praesentium odit ullam distinctio reiciendis at alias, consequuntur voluptatem minus hic sapiente. Tempore aut voluptate cupiditate. Quam, fugit? Unde eveniet, quos perferendis nesciunt explicabo debitis temporibus sapiente illum incidunt molestias possimus iste!</p>
+        <div class="col-xs-12 col-md-8">
+            <p class="p-2"> {{spacecraft.description}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quam incidunt esse et quod nihil quisquam, eum labore praesentium odit ullam distinctio reiciendis at alias, consequuntur voluptatem minus hic sapiente. Tempore aut voluptate cupiditate. Quam, fugit? Unde eveniet, quos perferendis nesciunt explicabo debitis temporibus sapiente illum incidunt molestias possimus iste!</p>
             <div class="row">
                 <table class="table table-hover">
                     <tbody>
@@ -38,7 +38,7 @@
         </div>
     </div>
     <div class="row mt-2">
-        <p class="ml-auto mr-auto"> Note actuelle :</p>
+        <p style="font-size:1rem" class="ml-auto mr-auto"> Note actuelle :</p>
     </div>
     <div class="row">
         <h1 class="ml-auto mr-auto">{{displayStarRating(spacecraft.rating)}}</h1>
@@ -47,7 +47,7 @@
 
 <div class="container mt-4">
     <div class="row">
-        <h4 class="ml-auto mr-auto"> Donnez votre note pour ce vaisseau : </h4>
+        <h4 style="font-size:1.5rem" class="text-center"> Donnez votre note pour ce vaisseau : </h4>
     </div>
     <div class="row">
         <p class="ml-auto mr-auto" style="font-size:30px"> <a id="ratingMinusClick" href="#"><i id="ratingMinus" class="bi bi-dash"></i></a> <span id="userRating">{% for i in 0..4 %}<i class="bi bi-star"></i>{% endfor %}</span> <a href="#" id="ratingPlusClick"><i id="ratingPlus" class="bi bi-plus"></i></a></p> 
@@ -87,7 +87,7 @@
             console.log($("#content").val().length);
             $('#character_count').html(count);
         if(count > 510){
-            $("#content").css("background-color","orange");
+            $("#content").css("background-color","yellow");
             $("#alert").html("Le commentaire est trop long.").css("color","red");
             $('button').attr('disabled','');
         }

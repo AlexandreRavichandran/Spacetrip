@@ -25,15 +25,15 @@
     </div>
     {% endif %}
     <div class="row">
-        <div class="col-md-8 ">
+        <div class="col-xs-12 col-md-8 ">
             <h3 class="text-center"> La destination </h3>
             <h4 class="text-center"> {{trip.destination.name|upper}}</h4>
             <div class="row">
-                <div class="col-4">
-                    <img src="https://placehold.it/300x300" alt="" class="w-100">
+                <div class="col-xs-12 col-md-4">
+                    <img src="https://placehold.it/200x200" alt="" class="ml-auto mr-auto w-100 m-2">
                 </div>
-                <div class="col-8">
-                    <p>{{trip.description}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam consequuntur aliquid quasi officia, vitae eos ratione incidunt voluptate doloremque adipisci sit sed? Aliquid, consequuntur quos? Perspiciatis magnam tenetur voluptatum reprehenderit.
+                <div class="col-xs-12 col-md-8">
+                    <p class="p-2">{{trip.description}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam consequuntur aliquid quasi officia, vitae eos ratione incidunt voluptate doloremque adipisci sit sed? Aliquid, consequuntur quos? Perspiciatis magnam tenetur voluptatum reprehenderit.
                     Magnam officiis id voluptatibus sunt perspiciatis hic illum error beatae quis repellendus, sit, soluta quaerat illo? Molestiae ipsum magnam officiis quaerat sed tenetur, inventore tempora quod, veniam odio quisquam labore.nventore tempora quod, veniam odio quisquam labonventore tempora quod, veniam odio quisquam labo...<a class="text-danger" href="{{path('app_destination_show',{'name':trip.destination.name})}}"> Voir plus </a></p>      
                 </div>
             </div>
@@ -61,16 +61,18 @@
                 </table>
             </div>
         </div>
-        <div class="col-md-4 ">
+        <div class="col-xs-12 col-md-4 ">
             <h3 class="text-center"> Le vaisseau </h3>
             <div class="row">
-                <img class="ml-auto mr-auto" src="http://placehold.it/200x200" alt="">
+                <img class="ml-auto mr-auto w-75 m-2" src="http://placehold.it/200x200" alt="" >
             </div>
             <div class="row mt-2">
                 <h4 class=" ml-auto mr-auto"> <a href="{{path('app_spacecraft_show',{'id':trip.spacecraft.id})}}">{{trip.spacecraft.name}} ({{trip.spacecraft.brand}})</a></h4>
             </div>
             <div class="row">
                 <p class="ml-auto mr-auto"> Note moyenne des utilisateurs : {{displayStarRating(trip.spacecraft.rating)}}</p>
+            </div>
+            <div class="row">
                 <a target="_blank" href="{{path('app_spacecraft_show',{'id':trip.spacecraft.id})}}" class="btn btn-primary btn-sm ml-auto mr-auto rounded">Voir les avis sur ce vaisseau</a>
             </div>
             <div class="row mt-3">
@@ -78,7 +80,7 @@
             </div>
             <div class="row mt-2">
                 <h6 class="ml-auto mr-auto">Caracteristiques techniques : </h6>
-                <ul>
+                <ul class="ml-auto mr-auto">
                     <li class="text-center"> Vitesse : {{trip.spacecraft.speed|number_format(2,'.',' ')}} km/h </li>
                     <li class="text-center"> Nombre de places : {{trip.spacecraft.numberOfSeat}} sièges </li>
                     <li class="text-center"> Prix initial : {{formatPrice(trip.spacecraft.reservationPrice,2)}} € </li>
@@ -87,11 +89,11 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row mt-4">
         <div class="col">
             <h3 class="text-center"> Détails du voyage </h3>
             <div class="row">
-                <p>{{trip.description}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam consequuntur aliquid quasi officia, vitae eos ratione incidunt voluptate doloremque adipisci sit sed? Aliquid, consequuntur quos? Perspiciatis magnam tenetur voluptatum reprehenderit.
+                <p class="p-4">{{trip.description}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam consequuntur aliquid quasi officia, vitae eos ratione incidunt voluptate doloremque adipisci sit sed? Aliquid, consequuntur quos? Perspiciatis magnam tenetur voluptatum reprehenderit.
                 Magnam officiis id voluptatibus sunt perspiciatis hic illum error beatae quis repellendus, sit, soluta quaerat illo? Molestiae ipsum magnam officiis quaerat sed tenetur, inventore tempora quod, veniam odio quisquam labore.
                 Corporis fugiat facere officia aspernatur cum ullam consequuntur quis! Inventore sit similique nobis officia molestiae ex saepe ad tenetur perspiciatis autem. Asperiores vitae ratione tempora et nostrum odit aliquid repudiandae!
                 Eum, quam assumenda sunt tenetur consequatur iure ab beatae accusamus vitae minima molestias, nam, nostrum ad explicabo. Est, quasi similique. Commodi ad quam quas architecto, libero cum vel similique molestiae?
@@ -102,9 +104,9 @@
             </div>
             <div class="row">
             {% if trip.availableSeatNumber <= 2 and trip.availableSeatNumber is not same as 0 %}
-                <p class="text-center badge badge-pill badge-danger w-50 ml-auto mr-auto p-2"> Il reste actuellement {{trip.availableSeatNumber}} place(s) disponibles. N'attendez plus pour reserver ! </p>
+                <p class="text-center badge badge-pill badge-danger w-50 ml-auto mr-auto p-4"> Il reste actuellement {{trip.availableSeatNumber}} place(s) disponibles. N'attendez plus pour reserver ! </p>
             {% else %}
-                <p class="text-center"> Nombre de places disponibles pour ce voyage : {{trip.availableSeatNumber}} </p>
+                <p class="text-center p-4" style="font-size:1rem"> Nombre de places disponibles pour ce voyage : {{trip.availableSeatNumber}} </p>
             {% endif %}
             </div>
             <div class="row">

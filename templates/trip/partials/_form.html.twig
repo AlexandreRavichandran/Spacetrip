@@ -6,46 +6,46 @@
         <p class="text-danger text-center" style="font-size:18px"> Des frais de reservation de 2500 € seront ajoutés au prix final. </p>
     </div>
 </div>
-<div class="container mt-4">
+<div class="container mt-4 p-2">
     {{form_start(form)}}
     <div class="row">
         {{form_row(form.reserved,{'attr': {'disabled': '','checked':''}})}}
     </div>
     <div class="row">
-        <div class="col">
+        <div class="col-xs-12 col-md-4">
         {{form_row(form.name,{'attr': {'ReadOnly': '', 'placeholder':'A ne pas remplir'}})}}
         </div>
-        <div class="col">
+        <div class="col-xs-12 col-md-4">
         {{form_row(form.description,{'attr': {'ReadOnly': '','class':'descriptionForm'}})}}
         </div>
-        <div class="col">
+        <div class="col-xs-12 col-md-4">
         {{form_row(form.availableSeatNumber, {'attr': {'ReadOnly': '','placeholder':'N/A', 'value': null}})}}
         
         </div>
     </div>
     <h3 class="text-center mt-5">Choix de la destination</h3>
     <div class="row mt-4">
-        <div class="col-5 d-flex justify-content-center align-items-center">
+        <div class="col-xs-12 col-md-5 d-flex justify-content-center align-items-center">
             <div class="row">
                 <img src="https://placehold.it/300x300" alt="">
             </div>
         </div>
-        <div class="col-7">
+        <div class="col-xs-12 col-md-7">
         {{form_row(form.destination,{'id': 'destination'})}}
             <div class="row">
                 <div class="col">
                     <table class="table table-hover">
                         <tbody>
                             <tr>
-                                <th scope="row">Distance :</th>
+                                <th style="width:50%" scope="row">Distance :</th>
                                 <td class="text-center"> <span id="distance"> </span> km</td>
                             </tr>
                             <tr>
-                                <th scope="row">Gravité :</th>
+                                <th style="width:50%" scope="row">Gravité :</th>
                                 <td class="text-center"> <span id="gravity"> </span> m.s</td>
                             </tr>
                             <tr>
-                                <th scope="row">Description :</th>
+                                <th style="width:50%" scope="row">Description :</th>
                                 <td class="text-center"> <span id="description"> </span></td>
                             </tr>
                         </tbody>
@@ -56,30 +56,30 @@
     </div>
     <h3 class="text-center mt-5">Choix du vaisseau</h3>
     <div class="row mt-4">
-        <div class="col-7">
+        <div class="col-xs-12 col-md-7">
         {{form_row(form.spacecraft,{'id': 'spacecraft'})}}
             <div class="row">
                 <div class="col">
                     <table class="table table-hover">
                         <tbody>
                             <tr>
-                                <th scope="col">Marque - Origine</th>
+                                <th style="width:50%" scope="col">Marque - Origine</th>
                                 <td id="brand_origin" class="text-center" scope="col"></td>
                             </tr>
                             <tr>
-                                <th scope="row">Prix :</th>
+                                <th style="width:50%" scope="row">Prix :</th>
                                 <td class="text-center"> <span id="reservationPrice"></span> € + <span id="pricePerDistance"></span> €/km</td>
                             </tr>
                             <tr>
-                                <th scope="row">Note</th>
+                                <th style="width:50%" scope="row">Note</th>
                                 <td id="rating" class="text-center"></td>
                             </tr>
                             <tr>
-                                <th scope="row">Nombre de places</th>
+                                <th style="width:50%" scope="row">Nombre de places</th>
                                 <td id="available_seat_number" class="text-center"></td>
                             </tr>
                             <tr>
-                                <th scope="row">Vitesse</th>
+                                <th style="width:50%" scope="row">Vitesse</th>
                                 <td id="speed" class="text-center"></td>
                             </tr>
                         </tbody>
@@ -87,14 +87,15 @@
                 </div>
             </div>
         </div>
-        <div class="col-5 d-flex justify-content-center align-items-center">
+        <div class="col-xs-12 col-md-5 d-flex justify-content-center align-items-center">
             <div class="row">
                 <img src="https://placehold.it/300x300" alt="">
             </div>
         </div>
     </div>
     <div class="ml-auto mr-auto d-flex flex-column ">
-       <div class="col text-center">
+        <h3 class="text-center mt-5">Date du voyage</h3>
+        <div class="col text-center">
             {{form_row(form.departureAt)}}
             <div id="departureDateWeather" class="d-none mt-3">
                 <h4> Prévisions meteorologiques : </h4>
@@ -107,17 +108,17 @@
                 <img id="arrivalDateWeatherIcon" src="#" alt="" width="200" height="200">
                 <h5 class="mb-3" id="arrivalWeather"></h5>
             </div>
-       </div>
+        </div>
     </div>
     <div class="row mt-5">
         <h4 class="ml-auto mr-auto"> Prix estimé : <span id="totalPrice"></span> €</h4>
     </div>
     <div class="row mt-5">
-        <p class="ml-auto mr-auto">En cliquant sur "Reserver mon voyage", vous approuvez avoir une bonne condition physique pour un voyage dans l'espace </p>
-        <p class="ml-auto mr-auto">Spacetrip se dénie de toute responsabilité en cas de problèmes de santé de votre part.</p>
+        <p class="p-2 ml-auto mr-auto">En cliquant sur "Reserver mon voyage", vous approuvez avoir une bonne condition physique pour un voyage dans l'espace </p>
+        <p class="p-2 ml-auto mr-auto">Spacetrip se dénie de toute responsabilité en cas de problèmes de santé de votre part.</p>
     </div>
     <div class="row">
-        <button id="submit_button" class="btn btn-primary w-25 mb-3 ml-auto mr-auto">Reserver mon voyage</button>
+        <button id="submit_button" class="btn btn-primary w-50 mb-3 ml-auto mr-auto">Reserver mon voyage</button>
     </div>
     {{form_end(form)}}
 </div>

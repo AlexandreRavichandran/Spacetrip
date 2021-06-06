@@ -7,20 +7,20 @@
 <h1 class="text-center"> Editer mon profil </h1>
 {{form_start(form)}}
     <div class="row">
-        <div class="col">
+        <div class="col-xs-12 col-md-6">
             {{form_row(form.lastName)}}    
         </div>
-        <div class="col">
+        <div class="col-xs-12 col-md-6">
             {{form_row(form.firstName)}}
         </div>
     </div>
     <div class="row">
-        <div class="col">
+        <div class="col-xs-12 col-md-6">
             {{form_label(form.password)}} 
             {{form_errors(form.password)}}
-            <div class="input-group mb-3 w-50">
-                {{form_widget(form.password)}}
-                <a href="#" id="showPassword" class="input-group-text"><i class="bi lg bi-eye-fill"></i></a>
+            <div class="col-xs-12 input-group mb-3 w-100">
+                {{form_widget(form.password,{'attr':{'class':'col-11'}})}}
+                <a href="#" id="showPassword" class="input-group-text col-1 d-flex justify-content-center"><i class="bi lg bi-eye-fill"></i></a>
             </div>
              {{form_help(form.password)}}
         </div>
@@ -31,7 +31,7 @@
         </div>
     </div>
     <div class="row">
-        <button type="submit" class="btn btn-primary btn-sm ml-auto mr-auto"> Modifier mon profil</button>
+        <button type="submit" class="btn btn-primary ml-auto mr-auto"> Modifier mon profil</button>
     </div>
 {{form_end(form)}}
 </div>

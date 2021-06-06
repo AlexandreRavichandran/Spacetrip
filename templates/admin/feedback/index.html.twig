@@ -4,10 +4,7 @@
 {% block body %}
 <div class="container-fluid ml-auto mr-auto mt-5">
     <h1 class="text-center"> Liste des commentaires </h1>
-    <div class="row">
-        <a href="{{path('app_admin_feedback_show_latest')}}" class="btn btn-primary btn-md ml-5 rounded"><i class="bi bi-arrow-left"></i> Retour </a>
-    </div>
-    <div class="row mt-2">
+    <div class="row mt-2" style="overflow:scroll">
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -31,9 +28,9 @@
                     <td class="text-center" scope="col"><a href="">{{feedback.spacecraft.name|upper}}</a></td>
                     <td class="text-center" scope="col">{{displayStarRating(feedback.rating)}}</td>
                     <td class="text-center" scope="col">{{feedback.content}}</td>
-                    <td scope="col">
+                    <td scope="col d-flex flex-column justify-content-center">
                         <a href="" class="btn btn-info btn-sm"> Contacter l'utilisateur </a>
-                        <a href="{{path('app_admin_feedback_delete',{'id':feedback.id})}}" class="btn btn-danger btn-sm"> Supprimer</a>
+                        <a href="{{path('app_admin_feedback_delete',{'id':feedback.id})}}" class="btn btn-danger btn-sm mt-1"> Supprimer</a>
                     </td>
                 </tr>
             {% endfor %}

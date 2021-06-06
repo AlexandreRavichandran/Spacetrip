@@ -1,20 +1,20 @@
     {{form_start(form)}}
     <div class="row">
-        <div class="col">
+        <div class="col-xs-12 col-md-6">
             {{form_row(form.name, {'id': 'name'})}}
             {{form_row(form.destination)}}
         </div>
-        <div class="col">
+        <div class="col-xs-12 col-md-6">
             {{form_row(form.availableSeatNumber, {'id': 'available_seat_number'})}}
             {{form_row(form.spacecraft,{'id': 'spacecraft'})}}
         </div>
     </div>
     <div class="row">
-        <div class="col">
+        <div class="col-xs-12 col-md-6">
             {{form_row(form.departureAt)}}
             {{form_row(form.arrivalAt)}}
         </div>
-        <div class="col">
+        <div class="col-xs-12 col-md-6">
             <div class="row">
                 <div class="col text-center">
                     {{form_row(form.reserved,{'id': 'reserved_button'})}}
@@ -24,6 +24,6 @@
     </div>
     {{form_row(form.description)}}
     <div class="row">
-           <button class="btn btn-primary w-25 ml-auto mr-auto">{% if action is same as 'create' %} Créer un nouveau {% else %} Modifier un {% endif %}voyage</button>
+           <button class="btn btn-primary w-50 ml-auto mr-auto">{% if action is same as 'create' %} Créer un nouveau {% else %} Modifier un {% endif %}voyage</button>
     </div>
     {{form_end(form)}}
