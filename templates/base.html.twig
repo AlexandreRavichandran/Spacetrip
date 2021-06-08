@@ -25,6 +25,9 @@
     <body>
         <header>
             {% include 'partials/navbar.html.twig' %}
+            <div class="text-center bg-warning">
+                <p class="p-2" style="font-size:1.2rem"> This website is currently still on development. Some features may not work (well)</p>
+            </div>
         </header>
     {% for label,messages in app.flashes %}
         {% for message in messages %}
