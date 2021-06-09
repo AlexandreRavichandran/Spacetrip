@@ -20,7 +20,9 @@ class FeedbackRepository extends ServiceEntityRepository
     }
 
     /**
-     * Function to sort feedbacks with an order
+     * Sort all feedbacks on a specific order
+     * @param string $orderBy
+     * @param string $order
      * @return array
      */
     public function orderFeedbacks($orderBy, $order): array

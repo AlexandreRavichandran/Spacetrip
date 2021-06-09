@@ -5,27 +5,33 @@ namespace App\Controller;
 use App\Entity\Trip;
 use App\Form\TripType;
 use App\Repository\TripRepository;
-use App\Repository\SpacecraftRepository;
 use App\Service\CallWeatherApi;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Qipsius\TCPDFBundle\Controller\TCPDFController;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class TripController extends AbstractController
 {
+    private $em;
+    private $tripRepository;
+
+    public function __construct(EntityManagerInterface $em, TripRepository $tripRepository)
+    {
+        $this->em = $em;
+        $this->tripRepository = $tripRepository;
+    }
     /**
      * Show all trips available
      * @Route("/trips", name="app_trip_index", methods={"GET"})
      * @return Response
      */
-    public function index(TripRepository $repo, PaginatorInterface $paginator, Request $request): Response
+    public function index(PaginatorInterface $paginator, Request $request): Response
     {
-        $trips = $paginator->paginate($repo->findAvailableTrips(), $request->query->getInt('page', 1), 12);
+        $trips = $paginator->paginate($this->tripRepository->findAvailableTrips(), $request->query->getInt('page', 1), 12);
         return $this->render('trip/index.html.twig', [
             'trips' => $trips
         ]);
@@ -36,12 +42,12 @@ class TripController extends AbstractController
      * @Route("/trips/create",name="app_trip_create")
      * @return Response
      */
-    public function create(Request $request, EntityManagerInterface $em, TripRepository $repo): Response
+    public function create(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER', null, "Veuillez vous connecter.");
         $trip = new Trip;
         $user = $this->getUser();
-        $trips = count($repo->findUserTrips($user->getEmail())) + 1;
+        $trips = count($this->tripRepository->findUserTrips($user->getEmail())) + 1;
         $form = $this->createForm(TripType::class, $trip);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -52,8 +58,8 @@ class TripController extends AbstractController
             $trip->setReserved(true);
             $trip->setPrice();
             $trip->setStatus('1');
-            $em->persist($trip);
-            $em->flush();
+            $this->em->persist($trip);
+            $this->em->flush();
             return $this->redirectToRoute('app_trip_payment', [
                 'id' => $trip->getId()
             ]);
@@ -109,7 +115,7 @@ class TripController extends AbstractController
      * @Route("/trips/{id}/succeed",name="app_trip_succeed")
      * @return Response
      */
-    public function onReservationSuccess(Trip $trip, EntityManagerInterface $em, Request $request): Response
+    public function onReservationSuccess(Trip $trip, Request $request): Response
     {
         $token = $request->request->get('token');
         if ($trip->getReserved() === false && $trip->getAvailableSeatNumber() === 0) {
@@ -127,7 +133,7 @@ class TripController extends AbstractController
             } else {
                 $trip->setStatus(2);
             }
-            $em->flush();
+            $this->em->flush();
 
             return $this->render('trip/recap.html.twig', [
                 'trip' => $trip,
@@ -144,21 +150,21 @@ class TripController extends AbstractController
      * @Route("/trips/{id}/delete", name="app_trip_delete")
      * @return Response
      */
-    public function delete(Trip $trip, EntityManagerInterface $em, TripRepository $repo): Response
+    public function delete(Trip $trip): Response
     {
         $user = $this->getUser();
 
         if ($trip->getReserved() === false) {
             $user->removeTrip($trip);
-            $em->flush();
+            $this->em->flush();
             $this->addFlash('success', 'Vous avez été désisté de ce voyage.');
         } else {
             $tripName = explode(' - ', $trip->getName());
             if ($tripName[1] !== $user->getEmail()) {
                 $this->addFlash('warning', 'Une erreur s\'est produite lors de la suppression.');
             } else {
-                $em->remove($trip);
-                $em->flush();
+                $this->em->remove($trip);
+                $this->em->flush();
                 $this->addFlash('success', 'Votre voyage " ' . $trip->getName() . ' " a été supprimé. Vous serez remboursé ulterieurement.');
             }
         }
@@ -171,7 +177,7 @@ class TripController extends AbstractController
 
      * @return Response
      */
-    public function edit(Trip $trip, EntityManagerInterface $em, TripRepository $repo, Request $request): Response
+    public function edit(Trip $trip, Request $request): Response
     {
         if ($trip->getReserved() === false) {
             $this->addFlash('danger', 'Une erreur s\'est produite. Vous ne disposez pas des autorisations pour la modification de ce voyage.');
@@ -185,7 +191,7 @@ class TripController extends AbstractController
             $this->addFlash('danger', 'Une erreur s\'est produite. Vous ne ddddisposez pas des autorisations pour la modification de ce voyage.');
             return $this->redirectToRoute('app_home');
         }
-        $trips = count($repo->findUserTrips($user->getEmail()));
+        $trips = count($this->tripRepository->findUserTrips($user->getEmail()));
         $previousPrice = $trip->getPrice();
         $form = $this->createForm(TripType::class, $trip);
         $form->handleRequest($request);
@@ -193,10 +199,10 @@ class TripController extends AbstractController
             $trip = $form->getData();
             $trip->setReserved(true);
             $trip->setPrice();
-            $em->flush();
+            $this->em->flush();
             if ($trip->getPrice() > $previousPrice) {
                 $trip->setStatus(1);
-                $em->flush();
+                $this->em->flush();
                 $this->addFlash('success', 'Votre précédent voyage a été annulé et un remboursement sera effectué ulterieurement si necessaire. Veuillez procéder au paiement du nouveau voyage.');
                 return $this->redirectToRoute('app_user_profile');
             } else {

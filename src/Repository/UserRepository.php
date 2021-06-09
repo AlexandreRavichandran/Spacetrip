@@ -37,7 +37,10 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     /**
-     * Function to sort users with an order
+     * Sort Users with a specific order
+     *
+     * @param string $orderBy
+     * @param string $order
      * @return array
      */
     public function orderUsers($orderBy, $order): array
@@ -50,14 +53,20 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getResult();
     }
 
-
-    public function filterByRoles(string $role, int $numberOfResults): array
+    /**
+     * Select users only with a specific role
+     *
+     * @param string $role
+     * @param int $numberOfResults
+     * @return array
+     */
+    public function filterByRoles(string $role, int $limit): array
     {
         return $this
             ->createQueryBuilder('u')
             ->andWhere('u.roles LIKE :role')
             ->setParameter('role', '%"' . $role . '"%')
-            ->setMaxResults($numberOfResults)
+            ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
     }

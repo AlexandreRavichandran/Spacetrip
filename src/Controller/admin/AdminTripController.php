@@ -15,15 +15,29 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminTripController extends AbstractController
 {
+    private $tripRepository;
+    private $paginator;
+    private $em;
+
+    /**
+     * Function construrct for AdminTripController
+     */
+    public function __construct(Triprepository $tripRepository, PaginatorInterface $paginatorInterface, EntityManagerInterface $em)
+    {
+        $this->tripRepository = $tripRepository;
+        $this->paginator = $paginatorInterface;
+        $this->em = $em;
+        // Check roles
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
+    }
     /**
      * Show all trips
      * @Route("/admin/trips",name="app_admin_trip_index")
      * @return Response
      */
-    public function index(TripRepository $repo, PaginatorInterface $paginator, Request $request): Response
+    public function index(Request $request): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
-        $trips = $paginator->paginate($repo->findBy(['reserved' => false]), $request->query->getInt('page', 1), 11);
+        $trips = $this->paginator->paginate($this->tripRepository->findBy(['reserved' => false]), $request->query->getInt('page', 1), 11);
         return $this->render('admin/trip/index.html.twig', [
             'trips' => $trips,
             'order' => null,
@@ -35,9 +49,8 @@ class AdminTripController extends AbstractController
      * @Route("/admin/trips/create", name="app_admin_trip_create")
      * @return Response
      */
-    public function create(Request $request, EntityManagerInterface $em): Response
+    public function create(Request $request): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $form = $this->createForm(TripType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -45,8 +58,8 @@ class AdminTripController extends AbstractController
             $trip = $form->getData();
             $trip->setPrice()
                 ->setStatus(2);
-            $em->persist($trip);
-            $em->flush();
+            $this->em->persist($trip);
+            $this->em->flush();
             $this->addFlash('success', 'La création du nouveau voyage a été effectué avec succès.');
             return $this->redirectToRoute('app_trip_show', ['name' => $trip->getName()]);
         }
@@ -61,11 +74,10 @@ class AdminTripController extends AbstractController
      * @Route("/admin/trips/{id}/delete", name="app_admin_trip_delete")
      * @return Response
      */
-    public function delete(Trip $trip, EntityManagerInterface $em): Response
+    public function delete(Trip $trip): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
-        $em->remove($trip);
-        $em->flush();
+        $this->em->remove($trip);
+        $this->em->flush();
         $this->addFlash('success', 'La suppression du voyage ' . $trip->getName() . ' a été effectué avec succès.');
         return $this->redirectToRoute('app_admin_trip_index');
     }
@@ -74,16 +86,15 @@ class AdminTripController extends AbstractController
      * @Route("/admin/trips/{id}/edit", name="app_admin_trip_edit")
      * @return Response
      */
-    public function edit(Trip $trip, Request $request, EntityManagerInterface $em): Response
+    public function edit(Trip $trip, Request $request): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $reserved = $trip->getReserved();
         $form = $this->createForm(TripType::class, $trip);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $trip = $form->getData();
             $trip->setReserved($reserved);
-            $em->flush();
+            $this->em->flush();
             $this->addFlash('success', 'La modification du voyage a été effectué avec succès.');
             return $this->redirectToRoute('app_admin_trip_index');
         }
@@ -99,10 +110,9 @@ class AdminTripController extends AbstractController
      * @Route("/admin/trips/{orderBy}/{order}",name="app_admin_trip_sort")
      * @return Response
      */
-    public function sort(TripRepository $repo, PaginatorInterface $paginator, Request $request, string $orderBy, string $order): Response
+    public function sort(Request $request, string $orderBy, string $order): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
-        $trips = $paginator->paginate($repo->orderTrips($orderBy, $order), $request->query->getInt('page', 1), 11);
+        $trips = $this->paginator->paginate($this->tripRepository->orderTrips($orderBy, $order), $request->query->getInt('page', 1), 11);
         return $this->render('admin/trip/index.html.twig', [
             'trips' => $trips,
             'order' => $order,
@@ -116,10 +126,9 @@ class AdminTripController extends AbstractController
      * @Route("/admin/reserved_trips", name="app_admin_reserved_trips_index")
      * @return Response
      */
-    public function resIndex(TripRepository $repo, PaginatorInterface $paginator, Request $request): Response
+    public function resIndex(Request $request): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
-        $trips = $paginator->paginate($repo->findBy(['reserved' => true]), $request->query->getInt('page', 1), 11);
+        $trips = $this->paginator->paginate($this->tripRepository->findBy(['reserved' => true]), $request->query->getInt('page', 1), 11);
         return $this->render('admin/trip/index.html.twig', [
             'trips' => $trips,
             'order' => null,

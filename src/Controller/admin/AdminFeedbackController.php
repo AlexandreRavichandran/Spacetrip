@@ -13,15 +13,27 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminFeedbackController extends AbstractController
 {
+    private $repo;
+    private $paginator;
+
+    /**
+     * Construct function of AdminFeedbackController
+     */
+    public function __construct(PaginatorInterface $paginator, FeedbackRepository $repo)
+    {
+        $this->paginator = $paginator;
+        $this->repo = $repo;
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
+    }
+
     /**
      * Show all feedbacks
      * @Route("/admin/feedbacks", name="app_admin_feedback_index")
      * @return Response
      */
-    public function index(FeedbackRepository $repo, PaginatorInterface $paginator, Request $request): Response
+    public function index(Request $request): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
-        $feedbacks = $paginator->paginate($repo->findAll(), $request->query->getInt('page', 1), 11);
+        $feedbacks = $this->paginator->paginate($this->repo->findAll(), $request->query->getInt('page', 1), 11);
 
         return $this->render('admin/feedback/index.html.twig', [
             'feedbacks' => $feedbacks,
@@ -37,7 +49,6 @@ class AdminFeedbackController extends AbstractController
      */
     public function delete(Feedback $feedback, EntityManagerInterface $em): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $em->remove($feedback);
         $em->flush();
         $this->addFlash('success', 'Ce commentaire a été supprimé avec succès.');
@@ -49,10 +60,9 @@ class AdminFeedbackController extends AbstractController
      * @Route("/admin/feedbacks/{orderBy}/{order}",name="app_admin_feedback_sort")
      * @return Response
      */
-    public function sort(FeedbackRepository $repo, PaginatorInterface $paginator, Request $request, string $orderBy, string $order): Response
+    public function sort(string $orderBy, string $order, Request $request): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
-        $feedbacks = $paginator->paginate($repo->orderFeedbacks($orderBy, $order), $request->query->getInt('page', 1), 11);
+        $feedbacks = $this->paginator->paginate($this->repo->orderFeedbacks($orderBy, $order), $request->query->getInt('page', 1), 11);
         return $this->render('admin/feedback/index.html.twig', [
             'feedbacks' => $feedbacks,
             'order' => $order,

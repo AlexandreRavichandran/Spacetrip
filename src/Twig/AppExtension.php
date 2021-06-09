@@ -18,7 +18,12 @@ class AppExtension extends AbstractExtension
             new TwigFunction('getStatus', [$this, 'getStatus'])
         ];
     }
-
+    /**
+     * Display rating with bootstrap stars (fill and not fill)
+     *
+     * @param float $rating
+     * @return void
+     */
     public function displayStarRating(float $rating = null): void
     {
 
@@ -32,6 +37,16 @@ class AppExtension extends AbstractExtension
             echo '<i class="bi bi-star"></i>';
         }
     }
+
+    /**
+     * Function to set the path of re-sorting when we already did a sorting. Useful mostly on the admin section.
+     *
+     * @param string $filename
+     * @param string $actualOrder
+     * @param string $orderBy
+     * @param string $order
+     * @return void
+     */
     public function setSortingPath(string $filename, string $actualOrder, string $orderBy, string $order): void
     {
         if ($actualOrder === $orderBy && $order === 'DESC') {
@@ -41,6 +56,15 @@ class AppExtension extends AbstractExtension
         }
     }
 
+    /**
+     *  Function to set the icon when we already did a sorting. Useful mostly on the admin section.
+     *
+     * @param string $actualOrder
+     * @param string $orderBy
+     * @param string $order
+     * @param string $type
+     * @return void
+     */
     public function setSortingIcon(string $actualOrder = null, string $orderBy = null, string $order = null, string $type = 'alpha'): void
     {
         if ($actualOrder === $orderBy && $order === 'ASC') {
@@ -50,12 +74,27 @@ class AppExtension extends AbstractExtension
         }
     }
 
+    /**
+     * Function used to format the price (XXX XXX XXX,XX €)
+     *
+     * @param float $price
+     * @param integer $decimals
+     * @return string
+     */
     public function formatPrice(float $price, int $decimals): string
     {
         $price = number_format($price, $decimals, ',', ' ');
         return $price;
     }
 
+    /**
+     * Function linked to the Trip Entity. Permit to show the status name instead of the status number.
+     *
+     * @param integer $status
+     * @param int $tripId
+     * @param boolean $reserved
+     * @return void
+     */
     public function getStatus(int $status, $tripId = null, $reserved = false): void
     {
 

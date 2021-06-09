@@ -13,15 +13,26 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminUserController extends AbstractController
 {
+    private $userRepository;
+    private $paginator;
+
+    /**
+     * Function construrct for AdminUserController
+     */
+    public function __construct(UserRepository $userRepository, PaginatorInterface $paginatorInterface)
+    {
+        $this->userRepository = $userRepository;
+        $this->paginator = $paginatorInterface;
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
+    }
     /**
      * Show all users
      * @Route("/admin/users", name="app_admin_user_index")
      * @return Response
      */
-    public function index(UserRepository $repo, PaginatorInterface $paginator, Request $request): Response
+    public function index(Request $request): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
-        $users = $paginator->paginate($repo->findAll(), $request->query->getInt('page', 1), 11);
+        $users = $this->paginator->paginate($this->userRepository->findAll(), $request->query->getInt('page', 1), 11);
         return $this->render('admin/user/index.html.twig', [
             'users' => $users,
             'order' => null,
@@ -36,7 +47,6 @@ class AdminUserController extends AbstractController
      */
     public function show(User $user, FeedbackRepository $repo): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $feedbacks = $repo->findBy(['user' => $user->getId()]);
         return $this->render('admin/user/show.html.twig', [
             'user' => $user,
@@ -49,10 +59,9 @@ class AdminUserController extends AbstractController
      * @Route("/admin/users/{orderBy}/{order}",name="app_admin_user_sort")
      * @return Response
      */
-    public function sort(UserRepository $repo, PaginatorInterface $paginator, Request $request, string $orderBy, string $order): Response
+    public function sort(Request $request, string $orderBy, string $order): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
-        $users = $paginator->paginate($repo->orderUsers($orderBy, $order), $request->query->getInt('page', 1), 11);
+        $users = $this->paginator->paginate($this->userRepository->orderUsers($orderBy, $order), $request->query->getInt('page', 1), 11);
         return $this->render('admin/user/index.html.twig', [
             'users' => $users,
             'order' => $order,

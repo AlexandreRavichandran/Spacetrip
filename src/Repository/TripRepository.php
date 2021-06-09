@@ -38,7 +38,8 @@ class TripRepository extends ServiceEntityRepository
 
     /**
      * Function to return all trips created by a user (useful to set automatically the trip name when user create a trip)
- 
+     *
+     * @param string $user
      * @return array
      */
     public function findUserTrips($user): array
@@ -52,7 +53,10 @@ class TripRepository extends ServiceEntityRepository
     }
 
     /**
-     * Function to sort trips with an order
+     * sort all standard trips to a specific order
+     *
+     * @param string $orderBy
+     * @param string $order
      * @return array
      */
     public function orderTrips($orderBy, $order): array
@@ -66,8 +70,10 @@ class TripRepository extends ServiceEntityRepository
     }
 
     /**
-     * Show available trips for a specific destination
+     * Show all trips available of a specific destination
      *
+     * @param Destination $destination
+     * @param int $limit
      * @return array
      */
     public function AvailableTripByDestination($destination, $limit): array

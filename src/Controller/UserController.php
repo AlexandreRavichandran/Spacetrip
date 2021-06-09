@@ -5,24 +5,25 @@ namespace App\Controller;
 use App\Form\UserType;
 use App\Repository\TripRepository;
 use App\Repository\FeedbackRepository;
-use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends AbstractController
 {
+    public function __construct()
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, "Veuillez vous connecter.");
+    }
     /**
      * @Route("/profile", name="app_user_profile")
      * @return Response
      */
     public function index(FeedbackRepository $feedbackRepo, TripRepository $tripRepo): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_USER', null, "Veuillez vous connecter.");
         $user = $this->getUser();
         $feedbacks = $feedbackRepo->findBy(['user' => $user->getId()], ['createdAt' => 'DESC']);
         $reservedTrips = $tripRepo->findUserTrips($user->getEmail());

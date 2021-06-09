@@ -20,7 +20,10 @@ class SpacecraftRepository extends ServiceEntityRepository
     }
 
     /**
-     * Select the latest created spacetrips
+     * Select the latest spacecraft (where the Departure Date is sooner)
+     *
+     * @param string $field
+     * @param int $limit
      * @return array
      */
     public function findLatestSpacecrafts($field, $limit = null): array
@@ -34,7 +37,10 @@ class SpacecraftRepository extends ServiceEntityRepository
     }
 
     /**
-     * Function to sort spacecrafts with an order
+     * Sort all spacecrafts on a specific order
+     *
+     * @param string $orderBy
+     * @param string $order
      * @return array
      */
     public function orderSpacecrafts($orderBy, $order): array
