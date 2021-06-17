@@ -1,6 +1,6 @@
 # Spacetrip
 An trip Agency that organizes trips to space (on development)
-The website is available here : 
+The website is available here : https://spacetrip-app.herokuapp.com/
 # Requirements
 
 - Symfony > 5.0.0
