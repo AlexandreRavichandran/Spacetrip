@@ -16,7 +16,6 @@ class UserController extends AbstractController
 {
     public function __construct()
     {
-        $this->denyAccessUnlessGranted('ROLE_USER', null, "Veuillez vous connecter.");
     }
     /**
      * @Route("/profile", name="app_user_profile")
@@ -24,6 +23,7 @@ class UserController extends AbstractController
      */
     public function index(FeedbackRepository $feedbackRepo, TripRepository $tripRepo): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, "Veuillez vous connecter.");
         $user = $this->getUser();
         $feedbacks = $feedbackRepo->findBy(['user' => $user->getId()], ['createdAt' => 'DESC']);
         $reservedTrips = $tripRepo->findUserTrips($user->getEmail());
@@ -42,6 +42,7 @@ class UserController extends AbstractController
      */
     public function edit(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, "Veuillez vous connecter.");
         $user = $this->getUser();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);

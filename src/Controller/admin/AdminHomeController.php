@@ -29,7 +29,6 @@ class AdminHomeController extends AbstractController
         $this->destinationRepository = $destinationRepo;
         $this->userRepository = $userRepo;
         $this->spacecraftRepository = $spacecraftRepo;
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
     }
 
 
@@ -40,6 +39,7 @@ class AdminHomeController extends AbstractController
      */
     public function showDashboard(): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $spacecrafts = $this->spacecraftRepository->findAll();
         $spacecraftPercentages = [];
         foreach ($spacecrafts as $spacecraft) {
@@ -68,6 +68,7 @@ class AdminHomeController extends AbstractController
      */
     public function showLatestTrips(): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $trips = $this->tripRepository->findBy(['reserved' => false], ['createdAt' => 'DESC'], 5);
         return $this->render('admin/index.html.twig', [
             'trips' => $trips,
