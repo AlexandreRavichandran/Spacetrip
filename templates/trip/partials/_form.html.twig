@@ -6,31 +6,31 @@
         <p class="text-danger text-center" style="font-size:18px"> Des frais de reservation de 2500 € seront ajoutés au prix final. </p>
     </div>
 </div>
-<div class="container mt-4 p-2">
+<div class="container mt-4 p-4">
     {{form_start(form)}}
     <div class="row">
         {{form_row(form.reserved,{'attr': {'disabled': '','checked':''}})}}
     </div>
     <div class="row">
-        <div class="col-xs-12 col-md-4">
+        <div class="col-xs-12 col-md-12 col-lg-4">
         {{form_row(form.name,{'attr': {'ReadOnly': '', 'placeholder':'A ne pas remplir'}})}}
         </div>
-        <div class="col-xs-12 col-md-4">
+        <div class="col-xs-12 col-md-12 col-lg-4">
         {{form_row(form.description,{'attr': {'ReadOnly': '','class':'descriptionForm'}})}}
         </div>
-        <div class="col-xs-12 col-md-4">
+        <div class="col-xs-12 col-md-12 col-lg-4">
         {{form_row(form.availableSeatNumber, {'attr': {'ReadOnly': '','placeholder':'N/A', 'value': null}})}}
         
         </div>
     </div>
     <h3 class="text-center mt-5">Choix de la destination</h3>
     <div class="row mt-4">
-        <div class="col-xs-12 col-md-5 d-flex justify-content-center align-items-center">
+        <div class="col-xs-12 col-md-12 col-lg-5 d-flex justify-content-center align-items-center">
             <div class="row">
                 <img src="https://placehold.it/300x300" alt="">
             </div>
         </div>
-        <div class="col-xs-12 col-md-7">
+        <div class="col-xs-12 col-md-12 col-lg-7">
         {{form_row(form.destination,{'id': 'destination'})}}
             <div class="row">
                 <div class="col">
@@ -56,7 +56,7 @@
     </div>
     <h3 class="text-center mt-5">Choix du vaisseau</h3>
     <div class="row mt-4">
-        <div class="col-xs-12 col-md-7">
+        <div class="col-xs-12 col-md-12 col-lg-7">
         {{form_row(form.spacecraft,{'id': 'spacecraft'})}}
             <div class="row">
                 <div class="col">
@@ -87,7 +87,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 col-md-5 d-flex justify-content-center align-items-center">
+        <div class="col-xs-12 col-md-12 col-lg-5 d-flex justify-content-center align-items-center">
             <div class="row">
                 <img src="https://placehold.it/300x300" alt="">
             </div>
@@ -98,13 +98,13 @@
         <div class="col text-center">
             {{form_row(form.departureAt)}}
             <div id="departureDateWeather" class="d-none mt-3">
-                <h4> Prévisions meteorologiques : </h4>
+                <h4 class="mt-2"> Prévisions meteorologiques : </h4>
                 <img id="departureDateWeatherIcon" src="#" alt="" width="200" height="200">
                 <h5 class="mb-3" id="departureWeather"></h5>
             </div>
             {{form_row(form.arrivalAt)}}
             <div id="arrivalDateWeather" class="d-none mt-3">
-                <h4> Prévisions meteorologiques : </h4>
+                <h4 class="mt-2"> Prévisions meteorologiques : </h4>
                 <img id="arrivalDateWeatherIcon" src="#" alt="" width="200" height="200">
                 <h5 class="mb-3" id="arrivalWeather"></h5>
             </div>
