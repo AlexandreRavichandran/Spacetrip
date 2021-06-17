@@ -8,7 +8,7 @@
     <h1 class="text-center"> Recapitulatif de la reservation </h1>
 
     <div class="row mt-3">
-        <div class="col-xs-12 col-md-5">
+        <div class="col-xs-12 col-lg-5">
             <h4 class="text-center"> Votre voyage </h4>
             <a href="{{path('app_trip_edit',{'id':trip.id})}}" class="btn btn-sm btn-primary d-flex justify-content-center mb-3">Modifier mon voyage</a>
             <div class="row">
@@ -34,21 +34,21 @@
                         </tbody>
                     </table>
                     <div class="row">
-                        <p class="p-4"> Votre voyage prendra départ à l'entreprise {{trip.spacecraft.brand|upper}} - {{trip.spacecraft.nationality|upper}}</p>
+                        <p class="p-4 ml-auto mr-auto"> Votre voyage prendra départ à l'entreprise {{trip.spacecraft.brand|upper}} - {{trip.spacecraft.nationality|upper}}</p>
                         <p class="ml-auto mr-auto p-4"> L'embarquement aura lieu <strong>20 minutes</strong> avant l'heure de décollage indiqué {{trip.departureAt|date('H:i')}}. </p>
-                        <p style="font-size:1rem" class="text-danger text-center p-4">Veuillez être sur les lieux au plus tard à {{trip.departureAt|date_modify('-20 minutes ')|date('H:i')}}.</p>
-                        <p class="p-4">Les billets des retardataires ne seront pas remboursés.</p>
+                        <p style="font-size:1rem" class="text-danger ml-auto mr-auto p-4">Veuillez être sur les lieux au plus tard à {{trip.departureAt|date_modify('-20 minutes ')|date('H:i')}}.</p>
+                        <p class="p-4 ml-auto mr-auto">Les billets des retardataires ne seront pas remboursés.</p>
                     </div>
                 </div>
             </div>
             <div class="row mt-3 p-2">
-                <iframe width="600" height="450" style="border:3" loading="lazy" allowfullscreen
+                <iframe class="ml-auto mr-auto" width="600" height="450" style="border:3" loading="lazy" allowfullscreen
                     src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCjw1CmDLmie3_56kYx237wli-D1bDiCC8
                         &q={{trip.spacecraft.nationality}}">
                 </iframe>
             </div>
         </div>
-        <div class="col-xs-12 col-md-7 mt-4">
+        <div class="col-xs-12 col-lg-7 mt-4">
             <h4 class="text-center"> Paiement</h4>
             <h5 class="text-center mt-4"> Prix à payer : {{formatPrice(trip.price,0)}} €</h5>
             <div class="row mt-4">

@@ -7,7 +7,7 @@
         <h4 class="text-center mt-4"> Votre voyage vers {{trip.destination.name}} a été reservé avec succès. </h4>
         <h5 class="text-center mt-4"> Et maintenant ? </h5>
         <div class="row mt-4">
-            <div class="col-xs-12 col-md-6 border-right border-primary">
+            <div class="col-xs-12 col-md-12 col-lg-6 mt-4">
                 <p class="text-center mt-4"> 1) Téléchargez votre ticket de transport contenant vos informations </p>
                 <div class="row d-flex justify-content-center">
                     <form id="csrf" method="POST" action="{{path('app_get_ticket',{'trip':trip.id})}}">
@@ -16,7 +16,7 @@
                     </form>
                 </div>
             </div>
-            <div class="col-xs-12 col-md-6">
+            <div class="col-xs-12 col-md-12 col-lg-6 mt-4">
                 <p class="text-center mt-4"> 2) Si ce n'est pas déja fait, prenez connaissance des informations concernant votre destination ainsi que votre vaisseau d'embarquement </p>
                 <div class="row">
                     <a class="ml-auto mr-auto btn btn-md btn-primary rounded" href="{{path('app_spacecraft_show',{'id':trip.spacecraft.id})}}"> Informations sur votre vaisseau ({{trip.spacecraft.name|upper}})</a>
