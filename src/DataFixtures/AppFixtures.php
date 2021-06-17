@@ -40,7 +40,7 @@ class AppFixtures extends Fixture
             $manager->persist($destination);
 
 
-            for ($h = 0; $h < 2; $h++) {
+            for ($h = 0; $h < 1; $h++) {
                 $spacecraft = new Spacecraft;
                 $spacecraft
                     ->setName($faker->word)
@@ -83,7 +83,7 @@ class AppFixtures extends Fixture
                             ->setPassword($this->passwordEncoder->encodePassword($user, 'demo'))
                             ->addTrip($trip);
                         $manager->persist($user);
-                        for ($m = 0; $m <= mt_rand(0, 3); $m++) {
+                        for ($m = 0; $m <= mt_rand(0, 2); $m++) {
                             $feedback = new Feedback;
                             $feedback
                                 ->setSpacecraft($spacecraft)
