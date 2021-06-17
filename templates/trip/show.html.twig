@@ -3,11 +3,6 @@
 {% block title %}Les voyages{% endblock %}
 
 {% block body %}
-<div class="container mt-4">
-    <div class="row">
-        <a href="{{previousUrl}}" class="btn btn-primary btn-md rounded"><i class="bi bi-arrow-left"></i> Retour</a>
-    </div>
-</div>
 {% if trip.availableSeatNumber is same as 0 %}
 <div class="row">
     <h1 class="text-center badge badge-pill badge-danger mt-2 w-50 ml-auto mr-auto p-2">Ce voyage est complet. </h1>
@@ -29,10 +24,10 @@
             <h3 class="text-center"> La destination </h3>
             <h4 class="text-center"> {{trip.destination.name|upper}}</h4>
             <div class="row">
-                <div class="col-xs-12 col-md-4">
+                <div class="col-xs-12 col-lg-4">
                     <img src="https://placehold.it/200x200" alt="" class="ml-auto mr-auto w-100 m-2">
                 </div>
-                <div class="col-xs-12 col-md-8">
+                <div class="col-xs-12 col-lg-8">
                     <p class="p-2">{{trip.description}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam consequuntur aliquid quasi officia, vitae eos ratione incidunt voluptate doloremque adipisci sit sed? Aliquid, consequuntur quos? Perspiciatis magnam tenetur voluptatum reprehenderit.
                     Magnam officiis id voluptatibus sunt perspiciatis hic illum error beatae quis repellendus, sit, soluta quaerat illo? Molestiae ipsum magnam officiis quaerat sed tenetur, inventore tempora quod, veniam odio quisquam labore.nventore tempora quod, veniam odio quisquam labonventore tempora quod, veniam odio quisquam labo...<a class="text-danger" href="{{path('app_destination_show',{'name':trip.destination.name})}}"> Voir plus </a></p>      
                 </div>
@@ -67,16 +62,16 @@
                 <img class="ml-auto mr-auto w-75 m-2" src="http://placehold.it/200x200" alt="" >
             </div>
             <div class="row mt-2">
-                <h4 class=" ml-auto mr-auto"> <a href="{{path('app_spacecraft_show',{'id':trip.spacecraft.id})}}">{{trip.spacecraft.name}} ({{trip.spacecraft.brand}})</a></h4>
+                <h4 class="text-center"> <a href="{{path('app_spacecraft_show',{'id':trip.spacecraft.id})}}">{{trip.spacecraft.name}} ({{trip.spacecraft.brand}})</a></h4>
             </div>
-            <div class="row">
-                <p class="ml-auto mr-auto"> Note moyenne des utilisateurs : {{displayStarRating(trip.spacecraft.rating)}}</p>
+            <div class="row ml-auto mr-auto">
+                <p class="text-center"> Note moyenne des utilisateurs : {{displayStarRating(trip.spacecraft.rating)}}</p>
             </div>
             <div class="row">
                 <a target="_blank" href="{{path('app_spacecraft_show',{'id':trip.spacecraft.id})}}" class="btn btn-primary btn-sm ml-auto mr-auto rounded">Voir les avis sur ce vaisseau</a>
             </div>
             <div class="row mt-3">
-                <h5 class="ml-auto mr-auto"> Origine : {{trip.spacecraft.nationality}} </h5>
+                <h5 class="text-center"> Origine : {{trip.spacecraft.nationality}} </h5>
             </div>
             <div class="row mt-2">
                 <h6 class="ml-auto mr-auto">Caracteristiques techniques : </h6>
