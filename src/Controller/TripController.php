@@ -106,6 +106,7 @@ class TripController extends AbstractController
             'price' => $trip->getPrice(),
             'trip' => $trip,
             'user' => $user,
+            'googleMapApiKey' => $_ENV['GOOGLE_MAPS_API_KEY'],
             'previousUrl' => $previousUrl
         ]);
     }

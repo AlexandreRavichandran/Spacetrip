@@ -15,7 +15,7 @@ class CallWeatherApi
 
     public function getWeatherData(string $cityName, int $date): array
     {
-        $response = $this->client->request('GET', 'https://api.openweathermap.org/data/2.5/forecast?q=' . $cityName . '&appid=a91bd64fa6c92f13167c0425d033e611&lang=fr');
+        $response = $this->client->request('GET', 'https://api.openweathermap.org/data/2.5/forecast?q=' . $cityName . '&appid=' . $_ENV['OPEN_WEATHER_API_KEY']);
         $response =  $response->toArray();
         $index = array_search($date, $response);
         return $response['list'][$index]['weather'][0];
