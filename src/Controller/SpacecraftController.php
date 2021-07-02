@@ -80,18 +80,5 @@ class SpacecraftController extends AbstractController
         }
     }
 
-    /**
-     * Make a spacecraft available on the admin spacecraft index (AJAX request)
-     * @Route("/admin/spacecraft/available",name="app_admin_spacecraft_available")
-     * @return void
-     */
-    public function makeSpacecraftAvailable(Request $request, SpacecraftRepository $repo, EntityManagerInterface $em)
-    {
-        if ($request->isXmlHttpRequest()) {
-            $spacecraft = $repo->findOneBy(['id' => $_POST['id']]);
-            $spacecraft->setAvailable($_POST['value']);
-            $em->flush();
-        }
-        return new JsonResponse();
-    }
+
 }

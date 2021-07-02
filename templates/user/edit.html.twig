@@ -37,18 +37,3 @@
 </div>
 
 {% endblock %}
-
-{% block javascripts %}
-<script>
-    $(document).ready(function(){
-        $("#showPassword").mousedown(function(e){
-            e.preventDefault();
-            $("#user_password").attr('type','text');
-        })
-        $("#showPassword").mouseup(function(e){
-            e.preventDefault();
-           $("#user_password").attr('type','password');
-        })
-    })
-</script>
-{% endblock %}

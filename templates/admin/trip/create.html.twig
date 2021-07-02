@@ -8,28 +8,3 @@
     {% include('admin/trip/partials/_form.html.twig') %}
 </div>
 {% endblock %}
-
-{% block javascripts %}
-<script>
-$(document).ready(function()
-    {
-        $('#reserved_button').on('change',function()
-        {
-            if($('#reserved_button:checked').val() === "1"){
-                $('#name').attr('ReadOnly', '').attr('placeholder','Non pris en compte pour les voyages réservés');
-                $('#description').attr('ReadOnly', '').attr('placeholder','Non pris en compte pour les voyages réservés');
-                $('#available_seat_number').attr('ReadOnly', '').attr('placeholder','Non pris en compte pour les voyages réservés');
-            }
-            else{
-                $('#name').removeAttr('ReadOnly').removeAttr('placeholder');
-                $('#description').removeAttr('ReadOnly').removeAttr('placeholder');
-                $('#available_seat_number').removeAttr('ReadOnly').removeAttr('placeholder');  
-            }
-        })
-
-
-    })
-
-</script>
-
-{% endblock %}

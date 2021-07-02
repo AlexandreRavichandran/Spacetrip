@@ -90,17 +90,9 @@
 {% block javascripts %}
 <script>
 $(document).ready(function(){
-    $("#goFeedback").on('click', function() {
-        var position = $("#feedback").offset().top;
-        $("HTML, BODY").animate({
-            scrollTop: position
-        }, 1000);
-    });
     {% if orderBy is not same as null and order is not same as null %}
         $(document).scrollTop( $("#feedback").offset().top );  
     {% endif %}
 })
-
-
 </script>
 {% endblock %}

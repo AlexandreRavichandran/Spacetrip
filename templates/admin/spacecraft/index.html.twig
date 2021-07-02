@@ -49,28 +49,3 @@
     </div>
 </div>
 {% endblock %}
-{% block javascripts %}
-<script>
-
-        function ajaxCheckbox(id){
-         if($("#available_checkbox_" + id).val() == 1 ){
-                $("#available_checkbox_" + id).val(0)
-            } else{
-                $("#available_checkbox_" + id).val(1)
-
-            }
-            let value = $("#available_checkbox_" + id).val()
-        $.ajax({
-            method:"POST",
-            url: '{{path('app_admin_spacecraft_available')}}',
-            data: {id: id, value: value}
-        })
-        .done({
-            
-        })
-        }
-
-
-</script>
-
-{% endblock %}

@@ -120,20 +120,8 @@
 {% block javascripts %}
 <script>
     $(document).ready(function(){
-        function feedbackAnimate(){
-        $("#comments").animate({ scrollTop: $("#comments").height() }, 10000, "linear").animate({ scrollTop: 0 }, 10000, "linear", feedbackAnimate);
-
-        };
         feedbackAnimate();
-
-        $("#comments").hover(function(){
-            $("#comments").stop();},function(){
-                feedbackAnimate();
-            })
-
-        
-
-    }); 
+    })
 </script>
 {% endblock %}
 
