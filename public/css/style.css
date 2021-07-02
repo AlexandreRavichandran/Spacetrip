@@ -16,3 +16,44 @@
     min-height: 43px;
     max-height: 43px;
 }
+
+#helpBox{
+    position: fixed;
+    width: 250px;
+    top: 50%;
+    font-size:1.3em;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    padding: 0.5em;
+    border: 2px solid black;
+    opacity: 0.2;
+    z-index: 99;
+
+}
+#helpBox:hover{
+    opacity:1;
+    background-color: grey;
+    color:white;
+    cursor: pointer;
+}
+
+.comment{
+    display:none;
+    font-size:1.2em;
+    padding:1.5em;
+    border-radius: 7px;
+    background-color: #E8E8E8;
+}
+
+#numberOfComments{
+    opacity:1;
+    width: 50px;
+    padding: 10px;
+    text-align: center;
+    background-color: red;
+    border-radius: 50%;
+    position:absolute;
+    right:-20px;
+    bottom:-20px;
+}
+

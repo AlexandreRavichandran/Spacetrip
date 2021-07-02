@@ -42,6 +42,10 @@
                 </div>
             </div>
             <div class="row mt-3 p-2">
+                    <div class="comment mb-2">
+                        <p>Here, an API request is being made to the google map API, to show location of the trip's departure location. (in this exemple, the searched location is "{{trip.spacecraft.nationality}}").</p>
+                        <p>Used API : <a href="https://developers.google.com/maps">Google Maps API</a></p>
+                    </div>
                 <iframe class="ml-auto mr-auto" width="600" height="450" style="border:3" loading="lazy" allowfullscreen
                     src="https://www.google.com/maps/embed/v1/place?key={{googleMapApiKey}}
                         &q={{trip.spacecraft.nationality}}">
@@ -56,6 +60,7 @@
                     {% include 'trip/partials/_paymentApiDisplay.html.twig' %}
                 </div>
             </div>
+            {# https://www.fakenamegenerator.com/gen-random-fr-fr.php #}
         </div>
     </div>
 </div>
