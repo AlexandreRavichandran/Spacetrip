@@ -14,7 +14,7 @@ $(document).ready(function () {
         $('#trip_departureAt_time_hour,#trip_departureAt_time_minute, #trip_arrivalAt_time_hour, #trip_arrivalAt_time_minute, #trip_arrivalAt_time_minute').removeAttr('Disabled', '');
     })
 
-    $('#spacecraft').on('change', function (event) {
+    $('#spacecraft').on('change', function () {
         spacecraft = $('#spacecraft').val()
 
         $.ajax({
@@ -22,7 +22,7 @@ $(document).ready(function () {
             url: '/spacecrafts/getAjaxData/' + spacecraft
         })
 
-            .done(function (data, status) {
+            .done(function (data) {
                 $('#brand_origin').html(data['brand'] + ' - ' + data['nationality'])
                 $('#reservationPrice').html(data['reservationPrice'])
                 $('#pricePerDistance').html(data['pricePerDistance'])
@@ -51,5 +51,16 @@ $(document).ready(function () {
             })
     })
 
+    $('#helpBox').click(function () {
+        if ($('#helpBox').hasClass('active')) {
+            $('.comment').fadeOut("slow");
+            $('#helpBoxMessage').html('Discovering the app ? Click here to display comments');
+            $('#helpBox').removeClass('active');
+        } else {
+            $('.comment').fadeIn("slow");
+            $('#helpBoxMessage').html('Click here to hide comments');
+            $('#helpBox').addClass('active');
+        }
+    })
 
 })
