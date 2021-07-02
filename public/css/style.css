@@ -27,6 +27,7 @@
     padding: 0.5em;
     border: 2px solid black;
     opacity: 0.2;
+    
     z-index: 99;
 
 }
@@ -47,11 +48,12 @@
 
 #numberOfComments{
     opacity:1;
-    width: 50px;
+    width: 190px;
     padding: 10px;
     text-align: center;
     background-color: red;
-    border-radius: 50%;
+    font-size: 0.7em;
+    border-radius: 20px;
     position:absolute;
     right:-20px;
     bottom:-20px;
