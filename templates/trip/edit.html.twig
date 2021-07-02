@@ -8,6 +8,7 @@
 {% block javascripts %}
 <script>
     $(document).ready(function(){
+    forbidUserModifications();
     $('.descriptionForm').html('Réservé par {{app.user.userName}}');
     presetDestinationTUser();
 })
