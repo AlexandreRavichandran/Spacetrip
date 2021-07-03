@@ -46,8 +46,11 @@
     background-color: #E8E8E8;
     margin-top: 1em;
     margin-bottom: 1em;
-}
 
+}
+.comment p {
+    text-align: center;
+}
 #numberOfComments{
     opacity:1;
     width: 190px;
