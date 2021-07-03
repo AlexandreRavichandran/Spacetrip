@@ -4,6 +4,7 @@
 
 {% block body %}
 <div class="container mt-2">
+    <p class="comment"> Welcome ! This website is a fake space trip agency. When discovering this website, you can activate the comments to see more information about this website's features.</p>
     <div class="jumbotron">
         <h1 style="font-size:4rem" class="display-3">PROPULSEZ VOUS AVEC SPACETRIP !</h1>
         <p class="lead"> Vous êtes-vous déjà demandé ce qu'il y avait au-dessus de vous? Avez-vous toujours révé d'aller dans l'espace ? Passez du rêve à la réalité avec SPACETRIP* !</p>
@@ -27,7 +28,8 @@
                 <div class="card-body mb-2">
                     <h4 class="card-subtitle text-muted text-center"> {{trip.departureAt|date('d-m-Y')}} - {{trip.arrivalAt|date('d-m-Y')}} </h4>
                 </div>
-                <img src="https://placehold.it/300x300" alt="" class="text-center mb-4 ml-auto mr-auto">
+
+                <img src="http://placehold.it/300x300" alt="" class="text-center mb-4 ml-auto mr-auto">
                 <div class="card-footer text-muted text-center">
                     <a href="{{path('app_trip_show',{'name':trip.name})}}" class="card-link stretched-link"> En savoir plus</a>
                 </div>
