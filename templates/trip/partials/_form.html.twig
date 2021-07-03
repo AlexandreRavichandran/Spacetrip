@@ -2,11 +2,16 @@
 <div class="container mt-3">
     <div class="jumbotron">
         <h1> Nouveau sur Spacetrip : Les reservations sur mesure ! </h1>
-        <p> Vous avez bien lu ! Vous pouvez maintenant organiser vous meme votre voyage, choisir votre destination, voir les créneaux disponibles, choisir votre transport et préparer votre valise ! </p>
+        <p> Vous avez bien lu ! Vous pouvez maintenant organiser vous meme votre voyage, choisir votre destination, 
+            voir les créneaux disponibles, choisir votre transport et préparer votre valise ! </p>
         <p class="text-danger text-center" style="font-size:18px"> Des frais de reservation de 2500 € seront ajoutés au prix final. </p>
     </div>
 </div>
 <div class="container mt-4 p-4">
+    <div class="comment">
+        <p>I choose to forbid user to set the trip name, trip description and available seat number himself. 
+        theses values are blocked and will be setted automatically when the form is submitted.</p>
+    </div>
     {{form_start(form)}}
     <div class="row">
         {{form_row(form.reserved,{'attr': {'disabled': '','checked':''}})}}
@@ -24,6 +29,10 @@
         </div>
     </div>
     <h3 class="text-center mt-5">Choix de la destination</h3>
+    <div class="comment">
+        <p>Here, the data about the destination is displayed thanks to an Ajax request. There is a first ajax request to pre-set 
+        datas for one destination, then there is Ajax request each time the user change the destination.</p>
+    </div>
     <div class="row mt-4">
         <div class="col-xs-12 col-md-12 col-lg-5 d-flex justify-content-center align-items-center">
             <div class="row">
@@ -55,6 +64,10 @@
         </div>
     </div>
     <h3 class="text-center mt-5">Choix du vaisseau</h3>
+    <div class="comment">
+        <p>Here, the data about the spacecraft is displayed thanks to an Ajax request. There is a first ajax request to pre-set 
+        datas for one spacecraft, then there is Ajax request each time the user change the spacecraft.</p>
+    </div>
     <div class="row mt-4">
         <div class="col-xs-12 col-md-12 col-lg-7">
         {{form_row(form.spacecraft,{'id': 'spacecraft'})}}
@@ -94,6 +107,10 @@
         </div>
     </div>
     <div class="ml-auto mr-auto d-flex flex-column ">
+        <div class="comment">
+            <p>When the departure date and arrival date are changed, a API request is send to show the weather of the day choosed.</p>
+            <p>Used API : <a class="text-danger" target="_blank" href="https://openweathermap.org/api">Openweathermap API</a></p>
+        </div>
         <h3 class="text-center mt-5">Date du voyage</h3>
         <div class="col text-center">
             {{form_row(form.departureAt)}}

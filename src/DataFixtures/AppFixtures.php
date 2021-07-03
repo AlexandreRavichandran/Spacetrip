@@ -50,7 +50,7 @@ class AppFixtures extends Fixture
                     ->setDescription($faker->sentence(6))
                     ->setSpeed($faker->randomFloat(3, 1000, 100000))
                     ->setReservationPrice($faker->randomFloat(2, 1000, 10000))
-                    ->setPricePerDistance($faker->randomFloat(5, 0.00001, 0.002))
+                    ->setPricePerDistance($faker->randomFloat(5, 0.00001, 0.0002))
                     ->setAvailable($boolean[mt_rand(0, 1)])
                     ->addPossibleDestination($destination);
 

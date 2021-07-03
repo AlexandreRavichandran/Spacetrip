@@ -44,7 +44,7 @@
             <div class="row mt-3 p-2">
                     <div class="comment mb-2">
                         <p>Here, an API request is being made to the google map API, to show location of the trip's departure location. (in this exemple, the searched location is "{{trip.spacecraft.nationality}}").</p>
-                        <p>Used API : <a href="https://developers.google.com/maps">Google Maps API</a></p>
+                        <p>Used API : <a class="text-danger" target="_blank" href="https://developers.google.com/maps">Google Maps API</a></p>
                     </div>
                 <iframe class="ml-auto mr-auto" width="600" height="450" style="border:3" loading="lazy" allowfullscreen
                     src="https://www.google.com/maps/embed/v1/place?key={{googleMapApiKey}}
@@ -56,11 +56,16 @@
             <h4 class="text-center"> Paiement</h4>
             <h5 class="text-center mt-4"> Prix à payer : {{formatPrice(trip.price,0)}} €</h5>
             <div class="row mt-4">
+                <div class="comment">
+                    <p>The buttons below use the Paypal API to manage payment.</p>
+                    <p>Want to try ? you can go <a class="text-danger" target="_blank" href="https://www.fakenamegenerator.com/gen-random-fr-fr.php">here</a> to generate a fake 
+                    credit card informations and proceed to payment (informations about credit card are on 'Finance' field on the website)</p>
+                    <p>Used API : <a class="text-danger" target="_blank" href="https://developer.paypal.com/docs/api/overview/">Paypal API</a></p>
+                </div>
                 <div class="col">
                     {% include 'trip/partials/_paymentApiDisplay.html.twig' %}
                 </div>
             </div>
-            {# https://www.fakenamegenerator.com/gen-random-fr-fr.php #}
         </div>
     </div>
 </div>
