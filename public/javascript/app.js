@@ -296,10 +296,15 @@ function hidePassword(e) {
     $("#user_password").attr('type', 'password');
 }
 
+/**
+ * Function to show the number of comments available on the page
+ */
+function showTotalCommentNumber() {
+    const showTotalCommentNumber = $('#numberOfComments #number');
+    showTotalCommentNumber.html($('.comment').length);
+    console.log($('.comment').length);
 
-
-
-
+}
 
 
 

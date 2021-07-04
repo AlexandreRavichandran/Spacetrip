@@ -18,8 +18,13 @@
     <body>
         <header>
             {% include 'partials/navbar.html.twig' %}
-            <div class="text-center bg-warning">
-                <p class="p-2" style="font-size:1.2rem"> This website is currently still on development. Some features may not work (well)</p>
+            <div class="">
+                <p class="p-2 text-center bg-warning" style="font-size:1.2rem"> This website is currently still on development. Some features may not work (well).</p>
+            </div>
+            <div id="helpBox" class="helpBox">
+                <p id="helpBoxMessage">Discovering the app ? Click here to display comments.</p>   
+            <div id="numberOfComments"> <span id="number"></span> comment(s) available.</div>     
+             
             </div>
             {% for label,messages in app.flashes %}
                 {% for message in messages %}
@@ -32,10 +37,6 @@
     {% endfor %}
         <main>
             {% block body %}{% endblock %}
-            <div id="helpBox" class="helpBox">
-                <p id="helpBoxMessage">Discovering the app ? Click here to display comments</p>   
-                <div id="numberOfComments"> <span>14</span> comments available</div>     
-            </div>
         </main>
         <footer class="mt-4">
             {% include 'partials/footer.html.twig' %}

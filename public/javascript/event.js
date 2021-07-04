@@ -7,6 +7,7 @@ function init() {
 
     //GENERAL FUNCTIONS
     $('#helpBox').click(showComment);
+    showTotalCommentNumber()
 
     //USER TRIPS CREATING EVENTS
     $('#destination').on('change', ajaxDestination);
