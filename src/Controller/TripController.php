@@ -82,10 +82,10 @@ class TripController extends AbstractController
             $this->addFlash('danger', 'Une erreur s\'est produite.');
             return $this->redirectToRoute('app_trip_index');
         }
-        $previousUrl = $request->headers->get('referer');
+
         return $this->render('trip/show.html.twig', [
             'trip' => $trip,
-            'previousUrl' => $previousUrl
+
         ]);
     }
 
@@ -99,7 +99,8 @@ class TripController extends AbstractController
             $this->addFlash('danger', 'Ce voyage n\'a malheureusement plus de places disponibles.');
             return $this->redirectToRoute('app_trip_index');
         }
-        $previousUrl = $request->headers->get('referer');
+
+
         $this->denyAccessUnlessGranted('ROLE_USER', null, 'Veuillez vous connecter');
         $user = $this->getUser();
         return $this->render('trip/reserve.html.twig', [
@@ -107,7 +108,7 @@ class TripController extends AbstractController
             'trip' => $trip,
             'user' => $user,
             'googleMapApiKey' => $_ENV['GOOGLE_MAPS_API_KEY'],
-            'previousUrl' => $previousUrl
+
         ]);
     }
 

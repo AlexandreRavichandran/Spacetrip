@@ -49,14 +49,14 @@ class FeedbackController extends AbstractController
      */
     public function sortFeedbacks(Spacecraft $spacecraft, FeedbackRepository $repo, $orderBy = null, $order = null, Request $request): Response
     {
-        $previousUrl = $request->headers->get('referer');
+      
         $feedbacks = $repo->findBy(['spacecraft' => $spacecraft->getId()], [$orderBy => $order]);
         return $this->render('spacecraft/show.html.twig', [
             'feedbacks' => $feedbacks,
             'spacecraft' => $spacecraft,
             'orderBy' => $orderBy,
             'order' => $order,
-            'previousUrl' => $previousUrl
+          
         ]);
     }
 }

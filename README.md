@@ -1,5 +1,8 @@
 # Spacetrip
 An trip Agency that organizes trips to space (on development)
+
+This project is for training purpose only. Don't use real infos here ! 
+
 The website is available here : https://spacetrip-app.herokuapp.com/
 # Requirements
 

@@ -34,7 +34,7 @@ class AdminTripController extends AbstractController
      * @return Response
      */
     public function index(Request $request): Response
-    { // Check roles
+    {
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $trips = $this->paginator->paginate($this->tripRepository->findBy(['reserved' => false]), $request->query->getInt('page', 1), 11);
         return $this->render('admin/trip/index.html.twig', [
@@ -49,7 +49,7 @@ class AdminTripController extends AbstractController
      * @return Response
      */
     public function create(Request $request): Response
-    { // Check roles
+    {
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $form = $this->createForm(TripType::class);
         $form->handleRequest($request);
@@ -75,7 +75,7 @@ class AdminTripController extends AbstractController
      * @return Response
      */
     public function delete(Trip $trip): Response
-    { // Check roles
+    {
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $this->em->remove($trip);
         $this->em->flush();
@@ -88,7 +88,7 @@ class AdminTripController extends AbstractController
      * @return Response
      */
     public function edit(Trip $trip, Request $request): Response
-    { // Check roles
+    {
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $reserved = $trip->getReserved();
         $form = $this->createForm(TripType::class, $trip);
@@ -113,7 +113,7 @@ class AdminTripController extends AbstractController
      * @return Response
      */
     public function sort(Request $request, string $orderBy, string $order): Response
-    { // Check roles
+    {
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $trips = $this->paginator->paginate($this->tripRepository->orderTrips($orderBy, $order), $request->query->getInt('page', 1), 11);
         return $this->render('admin/trip/index.html.twig', [
@@ -130,7 +130,7 @@ class AdminTripController extends AbstractController
      * @return Response
      */
     public function resIndex(Request $request): Response
-    { // Check roles
+    {
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $trips = $this->paginator->paginate($this->tripRepository->findBy(['reserved' => true]), $request->query->getInt('page', 1), 11);
         return $this->render('admin/trip/index.html.twig', [

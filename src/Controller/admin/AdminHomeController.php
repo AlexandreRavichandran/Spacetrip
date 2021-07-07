@@ -40,12 +40,17 @@ class AdminHomeController extends AbstractController
     public function showDashboard(): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
+
+        //Calculate the percentage of use of each Spacecrafts in trips
+
         $spacecrafts = $this->spacecraftRepository->findAll();
         $spacecraftPercentages = [];
         foreach ($spacecrafts as $spacecraft) {
             $percentage = (count($spacecraft->getTrip()) / count($this->tripRepository->findAll())) * 100;
             array_push($spacecraftPercentages, $percentage);
         }
+
+        //Calculate the percentage of use of each Destinations in trips
 
         $destinations = $this->destinationRepository->findAll();
         $destinationPercentages = [];

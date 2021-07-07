@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Form\UserType;
 use App\Repository\TripRepository;
+use App\Repository\UserRepository;
 use App\Repository\FeedbackRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -56,5 +58,26 @@ class UserController extends AbstractController
         return $this->render('user/edit.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * Function to generate random user data to connect to an account on login page
+     * @Route("/login/getUserData", name="app_user_ajax_getUserData")
+     * @return 
+     */
+    public function generateUserData(UserRepository $repo, Request $request)
+    {
+        if ($request->isXmlHttpRequest() || $request->query->get('showJson') == 1) {
+            $allUser = $repo->filterByRoles('ROLE_USER');;
+            $randomUser = $allUser[mt_rand(0, count($allUser))];
+
+            $jsonData = [
+                'username' => $randomUser->getEmail(),
+                'password' => $randomUser->getPassword(),
+
+            ];
+
+            return new JsonResponse($jsonData);
+        }
     }
 }

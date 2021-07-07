@@ -32,5 +32,7 @@ function init() {
     $("#showPassword").mousedown(showPassword);
     $("#showPassword").mouseup(hidePassword);
 
+    //USER LOGIN EVENTS
+    $("#randomUserButton").click(randomUserGenerator);
 
 }

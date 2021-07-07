@@ -37,7 +37,8 @@ class AdminSpacecraftController extends AbstractController
      * @return Response
      */
     public function index(Request $request): Response
-    { //Check roles
+    {
+
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $spacecrafts = $this->paginator->paginate($this->spacecraftRepository->findAll(), $request->query->getInt('page', 1), 11);
         return $this->render('admin/spacecraft/index.html.twig', [
@@ -52,7 +53,7 @@ class AdminSpacecraftController extends AbstractController
      * @return Response
      */
     public function create(Request $request): Response
-    { //Check roles
+    {
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $form = $this->createForm(SpacecraftType::class);
         $form->handleRequest($request);
@@ -77,7 +78,7 @@ class AdminSpacecraftController extends AbstractController
      * @return Response
      */
     public function edit(Spacecraft $spacecraft, Request $request): Response
-    { //Check roles
+    {
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $form = $this->createForm(SpacecraftType::class, $spacecraft);
         $form->handleRequest($request);
@@ -100,7 +101,7 @@ class AdminSpacecraftController extends AbstractController
      * @return Reponse
      */
     public function delete(Spacecraft $spacecraft, TripRepository $repo): Response
-    { //Check roles
+    {
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $trips = $repo->findBy(['spacecraft' => $spacecraft->getId()]);
         if ($trips) {
@@ -127,7 +128,7 @@ class AdminSpacecraftController extends AbstractController
      * @return Response
      */
     public function sort(Request $request, string $orderBy, string $order): Response
-    { //Check roles
+    {
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
         $spacecrafts = $this->paginator->paginate($this->spacecraftRepository->orderSpacecrafts($orderBy, $order), $request->query->getInt('page', 1), 11);
         return $this->render('admin/spacecraft/index.html.twig', [

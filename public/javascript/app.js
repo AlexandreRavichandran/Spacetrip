@@ -239,7 +239,7 @@ function manageFeedbackSpace() {
 
 /**
  * Function to add star on rating when user do a feedback
- * @param {-} e 
+ * @param {Event} e 
  */
 function addRatingStar(e) {
     e.preventDefault();
@@ -250,7 +250,7 @@ function addRatingStar(e) {
 
 /**
  *  Function to remove star on rating when user do a feedback
- * @param {*} e 
+ * @param {Event} e 
  */
 function removeRatingStar(e) {
     e.preventDefault();
@@ -280,7 +280,7 @@ function stopFeedbackAnimation() {
 
 /**
  * Function to show the password when user edits his profile
- * @param {*} e 
+ * @param {Event} e 
  */
 function showPassword(e) {
     e.preventDefault();
@@ -289,7 +289,7 @@ function showPassword(e) {
 
 /**
  * Function to hide the password when user edits his profile
- * @param {*} e 
+ * @param {Event} e 
  */
 function hidePassword(e) {
     e.preventDefault();
@@ -302,12 +302,27 @@ function hidePassword(e) {
 function showTotalCommentNumber() {
     const showTotalCommentNumber = $('#numberOfComments #number');
     showTotalCommentNumber.html($('.comment').length);
-    console.log($('.comment').length);
 
 }
 
+/**
+ * Function to get random user in the login page comments
+ * @param {Event} e 
+ */
+function randomUserGenerator(e = null) {
+    if (e !== null) {
+        e.preventDefault();
+    }
+    $.ajax({
+        method: "GET",
+        url: '/login/getUserData',
 
+    })
+        .done(function (data, status) {
 
+            console.log(data['password']);
 
+            $('#commentRandomUsername').html(data['username']);
 
-
+        })
+}

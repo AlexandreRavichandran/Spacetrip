@@ -60,7 +60,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
      * @param int $numberOfResults
      * @return array
      */
-    public function filterByRoles(string $role, int $limit): array
+    public function filterByRoles(string $role, int $limit = null): array
     {
         return $this
             ->createQueryBuilder('u')

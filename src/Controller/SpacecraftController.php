@@ -37,14 +37,14 @@ class SpacecraftController extends AbstractController
      */
     public function show(Spacecraft $spacecraft, TripRepository $tripRepo, FeedbackRepository $feedbackrepo, Request $request): Response
     {
-        $previousUrl = $request->headers->get('referer');
+
         $trips = $tripRepo->findBy(['spacecraft' => $spacecraft->getId()]);
         if ($spacecraft->getAvailable() === false) {
             $this->addFlash('warning', 'Ce vaisseau est actuellement en maintenance et non utilisable.');
         }
         $feedbacks = $feedbackrepo->findBy(['spacecraft' => $spacecraft->getId()]);
         return $this->render('spacecraft/show.html.twig', [
-            'previousUrl' => $previousUrl,
+
             'spacecraft' => $spacecraft,
             'trips' => $trips,
             'orderBy' => null,
@@ -79,6 +79,4 @@ class SpacecraftController extends AbstractController
             return new JsonResponse($jsonData);
         }
     }
-
-
 }

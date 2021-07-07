@@ -56,6 +56,7 @@ class TripType extends AbstractType
                 'choice_label' => 'name',
                 'label' => 'Vaisseau utilisé'
             ]);
+        //https://www.youtube.com/watch?v=Uw9nrrccUpI&list=PLlxQJeQRaKDRs9WlWQiXNqWU0blyaZBzo&index=45
     }
 
     public function configureOptions(OptionsResolver $resolver)
