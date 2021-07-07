@@ -19,12 +19,7 @@
         <header>
             {% include 'partials/_navbar.html.twig' %}
             <div class="">
-                <p class="p-2 text-center bg-warning" style="font-size:1.2rem"> This website is currently still on development. Some features may not work (well).</p>
-            </div>
-            <div id="helpBox" class="helpBox">
-                <p id="helpBoxMessage">Discovering the app ? Click here to display comments.</p>   
-            <div id="numberOfComments"> <span id="number"></span> comment(s) available.</div>     
-             
+                <p class="p-2 text-center bg-warning" style="font-size:1.2rem"> This website is currently still on development. Some features may not work (well).</p>             
             </div>
             {% for label,messages in app.flashes %}
                 {% for message in messages %}
@@ -33,8 +28,12 @@
                     {{message}}
                 </div>
                 {% endfor %}
+            {% endfor %}
         </header>
-    {% endfor %}
+            <div id="helpBox" class="helpBox">
+                <p id="helpBoxMessage">Discovering the app ? Click here to display comments.</p>   
+                <div id="numberOfComments"> <span id="number"></span> comment(s) available.</div>     
+            </div>
         <main>
             {% block body %}{% endblock %}
         </main>

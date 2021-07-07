@@ -83,4 +83,24 @@ class HomeController extends AbstractController
         $this->addFlash('warning', 'Une erreur s\'est produite');
         return $this->redirectToRoute('app_home');
     }
+
+    /**
+     * Go to the Legal Notice page
+     * @Route("/notice", name="app_notice")
+     * @return Response
+     */
+    public function getLegalNotice(): Response
+    {
+        return $this->render('home/legalNotice.html.twig');
+    }
+
+    /**
+     * Go to the about page
+     * @Route("/about",name="app_about")
+     * @return Response
+     */
+    public function getAbout(): Response
+    {
+        return $this->render('home/about.html.twig');
+    }
 }
