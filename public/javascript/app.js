@@ -49,6 +49,7 @@ function presetDestinationTUser() {
             $('#gravity').html(data['gravity']);
             $('#description').html(data['description']);
             $('#totalPrice').html(Math.round(2500 + parseFloat($('#reservationPrice').html()) + parseFloat($('#pricePerDistance').html()) * data['distance']))
+            $('#destination_picture').attr('src', '/images/pictures_destinations/picture_' + data['name'] + '.jpg');
         })
 
     //Preset spacecraft informations
@@ -61,15 +62,17 @@ function presetDestinationTUser() {
 
         .done(function (data, status) {
 
-            $('#brand_origin').html(data['brand'] + ' - ' + data['nationality'])
-            $('#reservationPrice').html(data['reservationPrice'])
-            $('#pricePerDistance').html(data['pricePerDistance'])
-            $('#rating').html(data['rating'])
-            $('#possible_destination').html(data['possibleDestination'])
-            $('#available_seat_number').html(data['numberOfSeat'])
-            $('#speed').html(data['speed'] + ' km/h')
+            $('#brand_origin').html(data['brand'] + ' - ' + data['nationality']);
+            $('#reservationPrice').html(data['reservationPrice']);
+            $('#pricePerDistance').html(data['pricePerDistance']);
+            $('#rating').html(data['rating']);
+            $('#possible_destination').html(data['possibleDestination']);
+            $('#available_seat_number').html(data['numberOfSeat']);
+            $('#speed').html(data['speed'] + ' km/h');
             $('#totalPrice').html(Math.round(2500 + data['reservationPrice'] + data['pricePerDistance'] * $('#distance').html()))
-            window.nationality = data['nationality']
+            $('#spacecraft_picture').attr('src', '/images/pictures_spacecrafts/picture_' + data['name'] + '.jpg');
+            window.nationality = data['nationality'];
+
         })
 }
 
@@ -90,6 +93,7 @@ function ajaxDestination() {
             $('#gravity').html(data['gravity']);
             $('#description').html(data['description']);
             $('#totalPrice').html(Math.round(2500 + parseFloat($('#reservationPrice').html()) + parseFloat($('#pricePerDistance').html()) * data['distance']))
+            $('#destination_picture').attr('src', '/images/pictures_destinations/picture_' + data['name'] + '.jpg');
         })
 }
 
@@ -113,6 +117,7 @@ function ajaxSpacecraft() {
             $('#available_seat_number').html(data['numberOfSeat'])
             $('#speed').html(data['speed'] + ' km/h')
             $('#totalPrice').html(Math.round(2500 + data['reservationPrice'] + data['pricePerDistance'] * $('#distance').html()))
+            $('#spacecraft_picture').attr('src', '/images/pictures_spacecrafts/picture_' + data['name'] + '.jpg');
             window.nationality = data['nationality']
         })
 }

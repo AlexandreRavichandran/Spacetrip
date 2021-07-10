@@ -66,6 +66,7 @@ class SpacecraftController extends AbstractController
             }
             $possibleDestinationsArray = implode(', ', $possibleDestinationsArray);
             $jsonData = [
+                'name' => $spacecraft->getName(),
                 'brand' => $spacecraft->getBrand(),
                 'nationality' => $spacecraft->getNationality(),
                 'reservationPrice' => $spacecraft->getReservationPrice(),

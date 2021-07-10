@@ -9,14 +9,13 @@
 </div>
 {% endif %}
 <div class="container mt-4 text-center tripBackground">
-
     <h1> VOYAGE {{trip.name}} - {{trip.destination.name}}</h1>
     <h2> {{trip.departureAt|date('d-m-Y')}} - {{trip.arrivalAt|date('d-m-Y')}}</h2>
 </div>
 <div class="container mt-4">
  {% if trip.availableSeatNumber <= 2 and trip.availableSeatNumber is not same as 0 %}
     <div class="row">
-        <p class="text-center badge badge-pill badge-danger w-50 ml-auto mr-auto p-2"> Il reste actuellement {{trip.availableSeatNumber}} place(s) disponibles. N'attendez plus pour reserver ! </p>
+        <p class="text-center badge badge-pill badge-danger ml-auto mr-auto p-2"> Il reste actuellement {{trip.availableSeatNumber}} place(s) disponibles. N'attendez plus pour reserver ! </p>
     </div>
     {% endif %}
     <div class="row">
@@ -25,7 +24,7 @@
             <h4 class="text-center"> {{trip.destination.name|upper}}</h4>
             <div class="row">
                 <div class="col-xs-12 col-lg-4">
-                    <img src="https://placehold.it/200x200" alt="" class="ml-auto mr-auto w-100 m-2">
+                    <img src="/images/pictures_destinations/picture_{{trip.destination.name}}.jpg" alt="Image de {{trip.destination.name}}" class="ml-auto mr-auto w-100 m-2">
                 </div>
                 <div class="col-xs-12 col-lg-8">
                     <p class="p-2">{{trip.description}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam consequuntur aliquid quasi officia, vitae eos ratione incidunt voluptate doloremque adipisci sit sed? Aliquid, consequuntur quos? Perspiciatis magnam tenetur voluptatum reprehenderit.
@@ -55,19 +54,19 @@
         <div class="col-xs-12 col-md-4 ">
             <h3 class="text-center"> Le vaisseau </h3>
             <div class="row">
-                <img class="ml-auto mr-auto w-75 m-2" src="http://placehold.it/200x200" alt="" >
+                <img class="ml-auto mr-auto w-75 m-2" src="/images/pictures_spacecrafts/picture_{{trip.spacecraft.name}}.jpg" alt="" >
             </div>
             <div class="row mt-2">
                 <h4 class="text-center"> <a href="{{path('app_spacecraft_show',{'id':trip.spacecraft.id})}}">{{trip.spacecraft.name}} ({{trip.spacecraft.brand}})</a></h4>
             </div>
             <div class="row ml-auto mr-auto">
-                <p class="text-center"> Note moyenne des utilisateurs : {{displayStarRating(trip.spacecraft.rating)}}</p>
+                <p class="ml-auto mr-auto"> Note moyenne des utilisateurs : {{displayStarRating(trip.spacecraft.rating)}}</p>
             </div>
             <div class="row">
                 <a target="_blank" href="{{path('app_spacecraft_show',{'id':trip.spacecraft.id})}}" class="btn btn-primary btn-sm ml-auto mr-auto rounded">Voir les avis sur ce vaisseau</a>
             </div>
             <div class="row mt-3">
-                <h5 class="text-center"> Origine : {{trip.spacecraft.nationality}} </h5>
+                <h5 class="ml-auto mr-auto"> Origine : {{trip.spacecraft.nationality}} </h5>
             </div>
             <div class="row mt-2">
                 <h6 class="ml-auto mr-auto">Caracteristiques techniques : </h6>
@@ -95,7 +94,7 @@
             </div>
             <div class="row">
             {% if trip.availableSeatNumber <= 2 and trip.availableSeatNumber is not same as 0 %}
-                <p class="text-center badge badge-pill badge-danger w-50 ml-auto mr-auto p-3"> Il reste actuellement {{trip.availableSeatNumber}} place(s) disponibles. N'attendez plus pour reserver ! </p>
+                <p class="text-center badge badge-pill badge-danger ml-auto mr-auto p-3"> Il reste actuellement {{trip.availableSeatNumber}} place(s) disponibles. N'attendez plus pour reserver ! </p>
             {% else %}
                 <p class="text-center p-4" style="font-size:1rem"> Nombre de places disponibles pour ce voyage : {{trip.availableSeatNumber}} </p>
             {% endif %}

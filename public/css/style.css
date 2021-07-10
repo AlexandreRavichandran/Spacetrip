@@ -1,11 +1,23 @@
+
 .tripBackground{
     height: 200px;
-    background-image: url('http://placehold.it/1100x300');
+    background-image: url('../images/background_trip_name_title.PNG');
     background-repeat: no-repeat;
     width: 100%;
     padding-top: 20px;
     background-position: center;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
+.tripBackground h1, .tripBackground h2{
+    color:white;
+    text-shadow: 1px 1px 2px rgb(255, 255, 255), 0 0 1em rgb(255, 255, 255);
+}
+
+img{
+    border-radius: 8px;
 }
 
 .loginForm{
@@ -30,6 +42,7 @@
     z-index: 99;
 
 }
+
 #helpBox:hover{
     opacity:1;
     background-color: grey;
@@ -47,9 +60,11 @@
     margin-bottom: 1em;
 
 }
+
 .comment p {
     text-align: center;
 }
+
 #numberOfComments{
     opacity:1;
     width: 190px;
@@ -62,6 +77,31 @@
     right:-20px;
     bottom:-20px;
     color:white;
+}
+
+.pictureGroup{
+    position: relative;
+    width: 80%;
+    margin: auto;
+
+
+}
+
+.spacecraftImage{
+    position: absolute;
+    bottom:0px;
+    right:0px;
+    border-top: 2px solid red;
+    border-left: 2px solid red;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 0px;
+    width:50%;
+}
+.spacecraftImage img{
+    display:block;
+}
+.destinationImage{
+    width: 100%; 
 }
 
 @media screen and (max-width:900px)   {

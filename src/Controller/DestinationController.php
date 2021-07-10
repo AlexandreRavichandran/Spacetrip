@@ -53,6 +53,7 @@ class DestinationController extends AbstractController
         if ($request->isXmlHttpRequest() || $request->query->get('showJson') == 1) {
             $destinationData = $response->getDestinationData($destination->getName());
             $jsonData = [
+                'name' => $destination->getName(),
                 'distance' => $destination->getDistance(),
                 'gravity' => $destinationData['gravity'],
                 'description' => $destination->getDescription()

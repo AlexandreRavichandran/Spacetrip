@@ -7,7 +7,7 @@
     <h1 class="text-center"> {{destination.name }} </h1>
     <div class="row">
         <div class="col-xs-12 col-md-4">
-            <img src="https://placehold.it/400x400" alt="" class="w-100">
+            <img src="/images/pictures_destinations/picture_{{destination.name}}.jpg" alt="Image de {{destination.name}}" class="w-100">
         </div>
         <div class="col-xs-12 col-md-8">
             <div class="row">
@@ -19,12 +19,14 @@
     <div class="row mt-3">
         <h4 class="ml-auto mr-auto"> Quelques caracteristiques</h4>
         <div class="comment">
-            <p>These datas are not from the database. they can be displayed thanks to an API that i call to have data about a planet following his name.</p>
+            <p>These datas below are not from the database. they can be displayed thanks to an API that i call to have data about a planet (name of his moons, discovery date... ) following his name.</p>
             <p>Used API : <a class="text-danger" target="_blank" href="https://api.le-systeme-solaire.net/en/">API-le-systeme-solaire.</a></p>
         </div>
     </div>
     <div class="row">
+        {% if informations['discoveryDate'] is not same as "" %}
         <p class="p-2">Découvert le {{informations['discoveryDate']}} par {{informations['discoveredBy']}}</p>
+        {% endif %}
     </div>
     <div class="row">
         <p class="p-2"> Distance par rapport à la terre : {{destination.distance|number_format(0,'.',' ')}} km</p>
@@ -42,7 +44,7 @@
             </div>
             {% endfor %}
         {% else %}
-            <p> Aucune </p>
+            <p class="ml-auto mr-auto"> Aucune </p>
         {% endif %}
     </div>
     <div class="row">
