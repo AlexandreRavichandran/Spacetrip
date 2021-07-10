@@ -13,6 +13,9 @@
 </div>
 <div class="container mt-2">
     <div class="row">
+        {% if spacecrafts is empty %}
+        <p class="h3 ml-auto mr-auto mt-4 mb-4"> Il n'y a aucun vaisseau disponible actuellement... Veuillez réessayer ulterieurement.</p>
+        {% endif %}
         {% for spacecraft in spacecrafts %}
         <div class="col-xs-12 col-md-6 col-xl-4">
             <div class="card mb-3">

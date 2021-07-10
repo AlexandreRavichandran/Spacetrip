@@ -91,14 +91,14 @@ img{
     position: absolute;
     bottom:0px;
     right:0px;
-    border-top: 2px solid red;
-    border-left: 2px solid red;
-    border-bottom-left-radius: 0px;
-    border-top-right-radius: 0px;
     width:50%;
 }
 .spacecraftImage img{
+    border-top: 2px solid red;
+    border-left: 2px solid red;
     display:block;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 0px;
 }
 .destinationImage{
     width: 100%; 

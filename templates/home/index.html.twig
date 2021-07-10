@@ -18,6 +18,9 @@
 <div class="container mt-4">
     <h1 class="homepage_title" style="font-size:2rem"> Les prochains voyages </h1>
     <div class="row mb-2">
+    {% if trips is empty %}
+        <p class="h3 ml-auto mr-auto mt-4 mb-4"> Il n'y a pas de voyages actuellement... Réessayez ulterieurement.</p>
+    {% endif %}
     {% for trip in trips %}
         <div class="col-xs-12 col-md-6">
             <div class="card mb-3">

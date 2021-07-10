@@ -20,10 +20,10 @@
     <h2 class="text-center"> {{spacecraft.brand}} ({{spacecraft.nationality}}) </h2>
     <h3 class="text-center">{{displayStarRating(spacecraft.rating)}} <a href="#" id="goFeedback">({{spacecraft.feedback|length}})</a></h3>
     <div class="row">
-        <div class="col-xs-12 col-md-5">
+        <div class="col-xs-12 col-md-12 col-lg-5">
             <img src="/images/pictures_spacecrafts/picture_{{spacecraft.name}}.jpg" alt="Image de {{spacecraft.name}}" width="100%">
         </div>
-        <div class="col-xs-12 col-md-7 bg-secondary">
+        <div class="col-xs-12 col-md-12 col-lg-7 bg-secondary">
             <div class="row mt-2">
                 <p class="p-2">Perferendis vero impedit ipsa incidunt? Asperioresamus rerum accusantium, laudantium illum cumque distinctio assumenda temporibus magnam necessitatibus tium, laudantium illum cumque distinctio assumenda temporibus magnam necessitatibus ab laab laboriosam itaque qui quidem eaque blanditiis ut quasi.</p>
             </div>
@@ -55,10 +55,10 @@
 <div class="container mt-2">
     <h3>l'entreprise</h3>
     <div class="row">
-        <div class="col-xs-12 col-md-6">
+        <div class="col-xs-12 col-md-12 col-lg-6">
             <p class="p-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus quas eos omnis magni neque, earum ut, fugiat commodi fugit tenetur, rerum pariatur nam soluta reiciendis amet. Quia debitis ullam molestiae saepe, ad at explicabo doloremque magnam obcaecati, numquam eum quae, hic minima veniam temporibus! Enim repellendus, officia libero in dolores cumque, delectus porro, consectetur laudantium culpa necessitatibus commodi facere maxime quae. Ipsum accusamus blanditiis illum sed itaque, autem rem consectetur, quia debitis sequi culpa quasi voluptate dicta non ratione id!</p>
         </div>
-        <div class="col-xs-12 col-md-6 d-flex justify-content-center align-items-center">
+        <div class="col-xs-12 col-md-12 col-lg-6 d-flex justify-content-center align-items-center">
             <img class="d-block" src="/images/pictures_spacecrafts/pictures_spacecrafts_brands/picture_{{spacecraft.brand}}.png" alt="Logo de {{spacecraft.brand}}" width="100%">
         </div>
     </div>
@@ -67,7 +67,10 @@
     <h3 id="feedback"> Les derniers commentaires </h3>
     <a class="d-flex justify-content-end" href="{{path('app_feedback_create',{id:spacecraft.id})}}">Vous avez déja eu une experience avec ce vaisseau ? Donnez nous votre avis !</a>
     <div class="row" style="overflow:scroll">
-        <table  class="table table-hover w-100 overflow-auto">
+        {% if feedbacks is empty %}
+        <p class="h3 ml-auto mr-auto mt-4 mb-4"> Il n'y a actuellement aucun commentaire pour ce vaisseau. <a href="{{path('app_feedback_create',{id:spacecraft.id})}}" class="text-danger">Soyez le premier ! </a></p>
+        {% else %}
+        <table class="table table-hover w-100 overflow-auto">
             <thead>
                 <tr>
                     <th scope="col">Date <a href="{% if orderBy is same as 'createdAt' and order is same as 'DESC'%}{{path('app_spacecraft_feedback_sort',{'id':spacecraft.id,'orderBy':'createdAt','order':'ASC'})}}{% else %}{{path('app_spacecraft_feedback_sort',{'id':spacecraft.id,'orderBy':'createdAt','order':'DESC'})}}{% endif %}" class="{{setSortingIcon(orderBy,'createdAt',order)}}"></a></th>
@@ -77,6 +80,7 @@
                 </tr>
             </thead>
             <tbody>
+          
             {% for feedback in feedbacks %}
                 <tr>
                     <td>{{feedback.createdAt|date('d/m/Y H:i:s')}}</td>
@@ -87,6 +91,7 @@
             {% endfor %}
             </tbody>
         </table>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

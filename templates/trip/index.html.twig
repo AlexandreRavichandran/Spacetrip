@@ -10,8 +10,12 @@
 </div>
 <div class="container mt-4">
     <h1> Les voyages actuels </h1>
-    <a href="{{path('app_trip_create')}} "><p class="text-danger text-right"> Interessé par aucun voyage ? Spacetrip vous propose désormais de reserver des voyages sur-mesure !  </p></a>
+    <a href="{{path('app_trip_create')}}"><p class="text-danger text-right"> Interessé par aucun voyage ? Spacetrip vous propose désormais de reserver des voyages sur-mesure !  </p></a>
     <div class="row mt-2">
+    {% if trips is empty %}
+        <p class="h3 ml-auto mr-auto mt-4 mb-4"> Il n'y a pas de voyages actuellement...</p>
+        <p class="h3 ml-auto mr-auto mt-4 mb-4 "> Mais rien ne vous empeche de <a href="{{path('app_trip_create')}}" class="text-danger"> créer votre propre voyage !</a></p>
+    {% endif %}
     {% for trip in trips %}
         <div class=" col-xs-12 col-md-6 col-xl-4 flex-wrap">
             <div class="card mb-3">

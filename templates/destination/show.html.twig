@@ -54,8 +54,11 @@
 <div class="container mt-4">
     <h4 style="font-size:1.5rem" class="text-center">Interessé par cette destination ?</h4>
     <div class="row mt-4">
-        <div class="colx-xs-12 col-md-8">
+        <div class="colx-xs-12 col-md-12 col-lg-8">
             <h5 style="font-size:1.2rem" class="text-center">Voyez nos voyages actuels...</h5>
+            {% if destination.trips is empty %}
+            <p class="h3 ml-auto mr-auto mt-4 mb-4"> Il y a aucun voyage pour {{destination.name}} actuellement.</p>
+            {% endif %}
             <table class="table table-hover m-auto">
                 <tbody>
                 {% for trip in trips %}
@@ -76,9 +79,10 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-xs-12 col-md-4">
+        <div class="col-xs-12 col-md-12 col-lg-4">
             <h5 style="font-size:1.2rem" class="text-center">Ou organisez vous-même votre voyage !</h5>
             <h7 class="text-center mt-2">Vaisseau disponibles pour cette destination :</h7>
+            
             <table class="table table-hover m-auto">
                 <tbody>
                 {% for spacecraft in destination.spacecrafts %}
