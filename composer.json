@@ -93,7 +93,7 @@
         ],
         "compile": [
             "php bin/console doctrine:migrations:migrate",
-            "php bin/console ddoctrine:fixtures:load --no-interaction --env=PROD"
+            "php bin/console doctrine:fixtures:load --no-interaction --env=PROD"
         ]
     },
     "conflict": {
