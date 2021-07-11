@@ -3,7 +3,7 @@
 {% block title %}[ADMIN] Modification d'un voyage{% endblock %}
 
 {% block body %}
-<div class="container mt-4">
+<div class="container mt-4 p-4">
     <h1 class="text-center"> Modification du voyage "{{trip.name}}" à destination de "{{trip.destination}}"</h1>
     {% include('admin/trip/partials/_form.html.twig')%}
 </div>

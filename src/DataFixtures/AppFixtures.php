@@ -133,7 +133,7 @@ class AppFixtures extends Fixture
         $admin = new User;
         $admin->setFirstName('Alex')
             ->setLastName('Ravi')
-            ->setEmail('alexandreravi7@gmail.com')
+            ->setEmail('admin@spacetrip.com')
             ->setRoles(['ROLE_ADMIN'])
             ->setPassword($this->passwordEncoder->encodePassword($user, 'demo'));
         $manager->persist($admin);

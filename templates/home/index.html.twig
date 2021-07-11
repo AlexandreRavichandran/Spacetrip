@@ -3,7 +3,7 @@
 {% block title %} Accueil{% endblock %}
 
 {% block body %}
-<div class="container mt-2">
+<div class="container mt-2 p-4">
     <p class="comment"> Welcome ! This website is a fake space trip agency. When discovering this website, you can activate the comments to see more information about this website's features.</p>
     <div class="jumbotron">
         <h1 style="font-size:4rem" class="display-3">PROPULSEZ VOUS AVEC SPACETRIP !</h1>
@@ -11,11 +11,11 @@
         <hr class="my-4">
         <p>* Les voyageurs de SPACETRIP doivent respecter certaines conditions pour parciiper aux voyages(Voir les détails sur les fiches voyages.) </p>
         <p class="lead">
-            <a class="btn btn-primary justify-content-center" href="#" role="button">En savoir plus</a>
+            <a class="btn btn-primary justify-content-center" href="{{path('app_about')}}" role="button">En savoir plus</a>
         </p>
     </div>
 </div>
-<div class="container mt-4">
+<div class="container mt-4 p-4">
     <h1 class="homepage_title" style="font-size:2rem"> Les prochains voyages </h1>
     <div class="row mb-2">
     {% if trips is empty %}
@@ -45,7 +45,7 @@
     {% endfor %}
     </div>
 </div>
-<div class="container mt-4">
+<div class="container mt-4 p-4">
     <h1> Ils ont adoré !  </h1>
     <div class="row mt-2">
     {% for feedback in feedbacks %}

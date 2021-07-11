@@ -8,11 +8,11 @@
     <h1 class="text-center badge badge-pill badge-danger mt-2 w-50 ml-auto mr-auto p-2">Ce voyage est complet. </h1>
 </div>
 {% endif %}
-<div class="container mt-4 text-center tripBackground">
+<div class="container mt-4 text-center tripBackground p-4">
     <h1> VOYAGE {{trip.name}} - {{trip.destination.name}}</h1>
     <h2> {{trip.departureAt|date('d-m-Y')}} - {{trip.arrivalAt|date('d-m-Y')}}</h2>
 </div>
-<div class="container mt-4">
+<div class="container mt-4 p-4">
  {% if trip.availableSeatNumber <= 2 and trip.availableSeatNumber is not same as 0 %}
     <div class="row">
         <p class="text-center badge badge-pill badge-danger ml-auto mr-auto p-2"> Il reste actuellement {{trip.availableSeatNumber}} place(s) disponibles. N'attendez plus pour reserver ! </p>
