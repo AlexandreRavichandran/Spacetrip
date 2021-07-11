@@ -323,9 +323,7 @@ function randomUserGenerator(e = null) {
         url: '/login/getUserData',
 
     })
-        .done(function (data, status) {
-
-            console.log(data['password']);
+        .done(function (data) {
 
             $('#commentRandomUsername').html(data['username']);
 

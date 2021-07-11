@@ -95,7 +95,14 @@ class ConnectionFormAuthenticator extends AbstractFormLoginAuthenticator impleme
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
-        return new RedirectResponse($this->urlGenerator->generate('app_user_profile'));
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $request->request->get('email')]);
+
+        if (in_array('ROLE_ADMIN', $user->getRoles())) {
+            return new RedirectResponse($this->urlGenerator->generate('app_admin_home'));
+        } else {
+            return new RedirectResponse($this->urlGenerator->generate('app_user_profile'));
+        }
+
         //throw new \Exception('TODO: provide a valid redirect inside ' . __FILE__);
     }
 

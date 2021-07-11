@@ -21,7 +21,10 @@
                             </tr>
                             <tr>
                                 <th> Vaisseau utilisé </th>
-                                <td> {{trip.spacecraft.name|upper}}</td>
+                                <td>
+                                    <p> {{trip.spacecraft.name|upper}}</p>
+                                    <p>Fabriqué par {{trip.spacecraft.brand|upper}}</p>
+                                </td>
                             </tr>
                             <tr>
                                 <th> Lieu de départ </th>
@@ -60,6 +63,7 @@
                     <p>The buttons below use the Paypal API to manage payment.</p>
                     <p>Want to try ? you can go <a class="text-danger" target="_blank" href="https://www.fakenamegenerator.com/gen-random-fr-fr.php">here</a> to generate a fake 
                     credit card informations and proceed to payment (informations about credit card are on 'Finance' field on the website)</p>
+                    <p class="h4 text-warning"> Don't put real infos here !</p>
                     <p>Used API : <a class="text-danger" target="_blank" href="https://developer.paypal.com/docs/api/overview/">Paypal API</a></p>
                 </div>
                 <div class="col">

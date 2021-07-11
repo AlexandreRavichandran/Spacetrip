@@ -18,10 +18,9 @@ class SecurityController extends AbstractController
         if ($this->getUser()) {
             return $this->redirectToRoute('app_home');
         }
+        
         // You can delete this if you're going to use this website for your own service ! 
-
         $user = $repo->filterByRoles('ROLE_USER', 1);
-        $admin = $repo->filterByRoles('ROLE_ADMIN', 1);
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
@@ -31,7 +30,6 @@ class SecurityController extends AbstractController
             'last_username' => $lastUsername,
             'error' => $error,
             'user' => $user[0],
-            'admin' => $admin[0]
         ]);
     }
 

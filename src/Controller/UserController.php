@@ -73,8 +73,6 @@ class UserController extends AbstractController
 
             $jsonData = [
                 'username' => $randomUser->getEmail(),
-                'password' => $randomUser->getPassword(),
-
             ];
 
             return new JsonResponse($jsonData);

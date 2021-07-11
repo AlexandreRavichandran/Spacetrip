@@ -38,21 +38,15 @@
 <div class="container mt-4 comment">
     <div class="row">
         <h5 class="ml-auto mr-auto  "> Discovering the app ? Try one of theses accounts </h5>
-        <div class="col-xs-12 col-lg-6 border p-2">
+    </div>
+        <div class="border p-2">
             <p class="text-center"> Standard user Account </p>
-            <p class="text-center">Email : <span id="commentRandomUsername"></span> <span id="clipboardLogo"> <i class="bi bi-clipboard"></i></p> 
+            <p class="text-center">Email : <span id="commentRandomUsername"></span> <a href="#" class="ml-4 pt-2" id="clipboardLogo"> <i class="h3 bi bi-clipboard mt-1"></i></a> </p>
             <p id="commentRandomPassword" class="text-center"> Password : demo </p>
         </div>
-        <div class="col-xs-12 col-lg-6 border p-2">
-            <p class="text-center">Admin account (you will have access to /Admin endpoints) </p>
-            <p class="text-center">Email : {{admin.email}}  <span id="clipboardLogoAdmin"><i class="bi bi-clipboard"></i></p>
-            <p class="text-center">Password : demo </p>
-        </div>
-    </div>
     <div class="row mt-2">
         <a href="#" id="randomUserButton" class="btn btn-primary d-block ml-auto mr-auto">Not working or want to have new account ? click here to refresh datas</a>
     </div>
-
 </div>
 {% endblock %}
 {% block javascripts %}

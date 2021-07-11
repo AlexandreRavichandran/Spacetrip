@@ -7,7 +7,7 @@ function init() {
 
     //GENERAL FUNCTIONS
     $('#helpBox').click(showComment);
-    showTotalCommentNumber()
+    showTotalCommentNumber();
 
     //USER TRIPS CREATING EVENTS
     $('#destination').on('change', ajaxDestination);
@@ -34,5 +34,5 @@ function init() {
 
     //USER LOGIN EVENTS
     $("#randomUserButton").click(randomUserGenerator);
-
+    $("#clipboardLogo").click(copyToClipboard);
 }
