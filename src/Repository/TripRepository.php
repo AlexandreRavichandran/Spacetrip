@@ -21,17 +21,19 @@ class TripRepository extends ServiceEntityRepository
 
 
     /**
-     * Show all available trips (trips that are not reserved and where available seats are more than 1)
+     * function to find available trips
      *
+     * @param integer $limit
      * @return array
      */
-    public function findAvailableTrips(): array
+    public function findAvailableTrips($limit = null): array
     {
         return $this->createQueryBuilder('t')
             ->andWhere('t.reserved = :reserved')
             ->andWhere('t.availableSeatNumber >= :seatNumber')
             ->setParameters(['reserved' => false, 'seatNumber' => 1])
             ->addOrderBy('t.departureAt', 'DESC')
+            ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
     }

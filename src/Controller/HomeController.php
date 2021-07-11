@@ -20,7 +20,7 @@ class HomeController extends AbstractController
      */
     public function index(TripRepository $tripRepo, FeedbackRepository $feedbackRepo): Response
     {
-        $trips = $tripRepo->findBy(['reserved' => false], ['departureAt' => 'DESC'], 2);
+        $trips = $tripRepo->findAvailableTrips(2);
         $feedbacks = $feedbackRepo->findBy([], ['rating' => 'DESC'], 3);
         return $this->render('home/index.html.twig', [
             'trips' => $trips,

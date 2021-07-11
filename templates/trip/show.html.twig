@@ -57,7 +57,7 @@
                 <img class="ml-auto mr-auto w-75 m-2" src="/images/pictures_spacecrafts/picture_{{trip.spacecraft.name}}.jpg" alt="" >
             </div>
             <div class="row mt-2">
-                <h4 class="text-center"> <a href="{{path('app_spacecraft_show',{'id':trip.spacecraft.id})}}">{{trip.spacecraft.name}} ({{trip.spacecraft.brand}})</a></h4>
+                <h4 class="ml-auto mr-auto"> <a class="d-block" href="{{path('app_spacecraft_show',{'id':trip.spacecraft.id})}}">{{trip.spacecraft.name}} ({{trip.spacecraft.brand}})</a></h4>
             </div>
             <div class="row ml-auto mr-auto">
                 <p class="ml-auto mr-auto"> Note moyenne des utilisateurs : {{displayStarRating(trip.spacecraft.rating)}}</p>
