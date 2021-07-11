@@ -8,7 +8,7 @@
         <div class="comment">
             <p>This page is the user's profile page, the user can edit his informations, see his latest feedbacks and his next and previous trips.</p>
         </div>
-        <div class="col-xs-12 col-md-5">
+        <div class="col-xs-12 col-lg-5">
             <div class="row">
                 <h3 class="ml-auto mr-auto"> Vos informations </h3>
             </div>
@@ -38,7 +38,7 @@
                 </tfoot>
             </table>
         </div>
-        <div class=" col-xs-12 col-md-6">
+        <div class=" col-xs-12 col-lg-6">
             <h3 class="text-center"> Mes derniers commentaires </h3>
             <div class="row">
                 <div id="comments" class="list-group p-2 w-100" style="height:290px; overflow:scroll; overflow-x: hidden">
@@ -62,7 +62,7 @@
         <p>The user can see below each trips that he reserved or created, with their status. Following the status,
         the user can do different action such as cancel a reservation, edit a reserved trip etc..</p>
     </div>
-        <div class="col-xs-12 col-md-6 mt-4">
+        <div class="col-xs-12 col-lg-6 mt-4">
             <h5 class="text-center"> Les voyages </h5>
             <div class="list-group">
             {% for trip in trips %}
@@ -89,7 +89,7 @@
             {% endfor %}
             </div>
         </div>
-        <div class="col-xs-12 col-md-6 mt-4">
+        <div class="col-xs-12 col-lg-6 mt-4">
             <h5 class="text-center"> Vos voyages réservés </h5>
             <div class="list-group">
             {% for reservedTrip in reservedTrips %}
