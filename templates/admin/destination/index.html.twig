@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}[ADMIN] Liste des destinations {% endblock %}
+
+{% block body %}
+<div class="container-fluid ml-auto mr-auto mt-5 p-4">
+    <h1 class="text-center"> Liste des destinations </h1>
+    <div class="row">
+        <p class="ml-auto"><a href="{{path('app_admin_destination_create')}}">Ajouter une nouvelle destination</a></p>
+    </div>
+    <div class="row mt-2" style="overflow:scroll">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center">Nom</th>
+                    <th scope="col" class="text-center">Distance</th>
+                    <th scope="col" class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for destination in destinations %}
+                <tr>
+                    <td class="text-center" scope="col">{{destination.name}}</td>
+                    <td class="text-center" scope="col">{{destination.distance|number_format(0,'.',' ')}} km</td>
+                    <td scope="col" class="d-flex flex-column justify-content-center">
+                        <a href="{{path('app_admin_destination_edit',{'id':destination.id})}}" class="btn btn-warning btn-sm">Editer</a>
+                        <a onclick="event.preventDefault(); confirm('Etes vous sur de supprimer cette destination de la base de données ? Cette action est irréversible.') && document.querySelector('#destination_delete_link_{{destination.id}}').click()"  class="btn btn-sm btn-danger mt-1"> Supprimer </a>
+                        <a id="destination_delete_link_{{destination.id}}" style="display:none;" href="{{path('app_admin_destination_delete',{'id':destination.id})}}"></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="navigation d-flex justify-content-center mt-2">
+        {{knp_pagination_render(destinations)}}
+    </div>
+</div>
+{% endblock %}

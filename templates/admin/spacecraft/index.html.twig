@@ -39,7 +39,7 @@
                     <td class="text-center" scope="col"><input type="checkbox" onchange="ajaxCheckbox({{spacecraft.id}})" {% if spacecraft.available is same as true %} checked value= "1" {% else %} value="0" {% endif %} name="available_checkbox_{{spacecraft.id}}" id="available_checkbox_{{spacecraft.id}}"></td>
                     <td scope="col" class="d-flex flex-column justify-content-center">
                         <a href="{{path('app_admin_spacecraft_edit',{'id':spacecraft.id})}}" class="btn btn-warning btn-sm">Editer</a>
-                        <a onclick="event.preventDefault(); confirm('Etes vous sur de supprimer ce voyage de la base de données ? Cette action est irréversible.') && document.querySelector('#spacecraft_delete_link_{{spacecraft.id}}').click()"  class="btn btn-sm btn-danger mt-1"> Supprimer </a>
+                        <a onclick="event.preventDefault(); confirm('Etes vous sur de supprimer ce vaisseau de la base de données ? Cette action est irréversible.') && document.querySelector('#spacecraft_delete_link_{{spacecraft.id}}').click()"  class="btn btn-sm btn-danger mt-1"> Supprimer </a>
                         <a id="spacecraft_delete_link_{{spacecraft.id}}" style="display:none;" href="{{path('app_admin_spacecraft_delete',{'id':spacecraft.id})}}"></a>
                     </td>
                 </tr>
