@@ -55,7 +55,8 @@ class AdminDestinationController extends AbstractController
             return $this->redirectToRoute('app_admin_destination_index');
         }
         return $this->render('admin/destination/create.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'action' => 'create'
         ]);
     }
 
@@ -70,7 +71,8 @@ class AdminDestinationController extends AbstractController
 
         return $this->render('admin/destination/edit.html.twig', [
             'form' => $form->createView(),
-            'destination' => $destination
+            'destination' => $destination,
+            'action' => 'edit'
         ]);
     }
 

@@ -1,7 +1,8 @@
 {% extends 'base.html.twig' %}
 {% block title %} Ajout d'une nouvelle destination {% endblock %}
 {% block body %}
-    {{form_start(form)}}
-    <button type="submit">Valider</button>
-    {{form_end(form)}}
+<div class="container mt-4 p-4">
+    <h1>Ajout d'une nouvelle destination </h1>
+    {% include('admin/destination/partials/_form.html.twig')%}
+</div>
 {% endblock %}
