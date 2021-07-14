@@ -70,7 +70,6 @@ class TripType extends AbstractType
                 'label' => 'Vaisseau utilisé',
                 'choices' => $spacecrafts,
                 'placeholder' => 'Choisissez votre vaisseau',
-                'required' => false
             ]);
         };
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($formModifier) {

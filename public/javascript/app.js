@@ -50,28 +50,6 @@ function presetDestinationTUser() {
             $('#description').html(data['description']);
             $('#totalPrice').html(Math.round(2500 + parseFloat($('#reservationPrice').html()) + parseFloat($('#pricePerDistance').html()) * data['distance']))
             $('#destination_picture').attr('src', '/images/pictures_destinations/picture_' + data['name'] + '.jpg');
-        })
-
-    //Preset spacecraft informations
-    spacecraft = $('#spacecraft').val()
-
-    $.ajax({
-        method: "GET",
-        url: '/spacecrafts/getAjaxData/' + spacecraft
-    })
-
-        .done(function (data, status) {
-
-            $('#brand_origin').html(data['brand'] + ' - ' + data['nationality']);
-            $('#reservationPrice').html(data['reservationPrice']);
-            $('#pricePerDistance').html(data['pricePerDistance']);
-            $('#rating').html(data['rating']);
-            $('#possible_destination').html(data['possibleDestination']);
-            $('#available_seat_number').html(data['numberOfSeat']);
-            $('#speed').html(data['speed'] + ' km/h');
-            $('#totalPrice').html(Math.round(2500 + data['reservationPrice'] + data['pricePerDistance'] * $('#distance').html()))
-            $('#spacecraft_picture').attr('src', '/images/pictures_spacecrafts/picture_' + data['name'] + '.jpg');
-            window.nationality = data['nationality'];
 
         })
 }
@@ -88,7 +66,7 @@ function ajaxDestination() {
     })
 
         .done(function (data, status) {
-            console.log('ok');
+
             $('#distance').html(Math.round(data['distance']));
             $('#gravity').html(data['gravity']);
             $('#description').html(data['description']);
@@ -101,7 +79,8 @@ function ajaxDestination() {
  * Function called to display spacecraft data when creating a trip
  */
 function ajaxSpacecraft() {
-    spacecraft = $('#spacecraft').val()
+    spacecraft = $('#spacecraft').val();
+    console.log('ok');
 
     $.ajax({
         method: "GET",
@@ -109,6 +88,7 @@ function ajaxSpacecraft() {
     })
 
         .done(function (data) {
+            console.log('ajaxok');
             $('#brand_origin').html(data['brand'] + ' - ' + data['nationality'])
             $('#reservationPrice').html(data['reservationPrice'])
             $('#pricePerDistance').html(data['pricePerDistance'])
@@ -118,8 +98,45 @@ function ajaxSpacecraft() {
             $('#speed').html(data['speed'] + ' km/h')
             $('#totalPrice').html(Math.round(2500 + data['reservationPrice'] + data['pricePerDistance'] * $('#distance').html()))
             $('#spacecraft_picture').attr('src', '/images/pictures_spacecrafts/picture_' + data['name'] + '.jpg');
+
             window.nationality = data['nationality']
         })
+}
+
+function ajaxSpacecraftField() {
+    const form = $(this).closest('form');
+    let data = {};
+    data[$(this).attr('name')] = $(this).val();
+    data[$('#trip_departureAt_date_day').attr('name')] = $('#trip_departureAt_date_day').val();
+    data[$('#trip_departureAt_date_month').attr('name')] = $('#trip_departureAt_date_month').val();
+    data[$('#trip_departureAt_date_year').attr('name')] = $('#trip_departureAt_date_year').val();
+    data[$('#trip_departureAt_date_hour').attr('name')] = $('#trip_departureAt_date_hour').val();
+    data[$('#trip_departureAt_date_minute').attr('name')] = $('#trip_departureAt_date_minute').val();
+
+    data[$('#trip_arrivalAt_date_day').attr('name')] = $('#trip_arrivalAt_date_day').val();
+    data[$('#trip_arrivalAt_date_month').attr('name')] = $('#trip_arrivalAt_date_month').val();
+    data[$('#trip_arrivalAt_date_year').attr('name')] = $('#trip_arrivalAt_date_year').val();
+    data[$('#trip_arrivalAt_date_hour').attr('name')] = $('#trip_arrivalAt_date_hour').val();
+    data[$('#trip_arrivalAt_date_minute').attr('name')] = $('#trip_arrivalAt_date_minute').val();
+
+    $.ajax({
+        url: form.attr('action'),
+        type: form.attr('method'),
+        data: data,
+        
+        success: function (html) {
+
+            console.log($(html).find('#spacecraft'));
+
+            $('#spacecraft').replaceWith(
+
+                $(html).find('#spacecraft'),
+
+            );
+
+            $('#spacecraft').on('change', ajaxSpacecraft);
+        }
+    });
 }
 
 /**
