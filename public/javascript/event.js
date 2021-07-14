@@ -12,7 +12,7 @@ function init() {
     //USER TRIPS CREATING EVENTS
     $('#destination').on('change', ajaxSpacecraftField)
     $('#destination').on('change', ajaxDestination);
-    $('#spacecraft').on('change', ajaxSpacecraft);  $('#spacecraft').on('change', ajaxSpacecraft);
+    $('#spacecraft').on('change', ajaxSpacecraft);
     $('#trip_departureAt').change(showWeatherAtDepartureDate);
     $('#trip_arrivalAt').change(showWeatherAtArrivalDate);
     $('form[name=trip]').on('submit', enableDataToSubmit);

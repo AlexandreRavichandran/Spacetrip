@@ -32,29 +32,6 @@ function forbidUserModifications() {
 }
 
 /**
- * Function to send AJAX request to preset the destination data when user come to trip creating page
- */
-function presetDestinationTUser() {
-
-    // preset destination informations
-    destination = $('#destination').val()
-
-    $.ajax({
-        method: "GET",
-        url: '/destinations/getAjaxData/' + destination
-    })
-
-        .done(function (data, status) {
-            $('#distance').html(Math.round(data['distance']));
-            $('#gravity').html(data['gravity']);
-            $('#description').html(data['description']);
-            $('#totalPrice').html(Math.round(2500 + parseFloat($('#reservationPrice').html()) + parseFloat($('#pricePerDistance').html()) * data['distance']))
-            $('#destination_picture').attr('src', '/images/pictures_destinations/picture_' + data['name'] + '.jpg');
-
-        })
-}
-
-/**
  * Function called to display destination data when creating a trip
  */
 function ajaxDestination() {
@@ -72,6 +49,14 @@ function ajaxDestination() {
             $('#description').html(data['description']);
             $('#totalPrice').html(Math.round(2500 + parseFloat($('#reservationPrice').html()) + parseFloat($('#pricePerDistance').html()) * data['distance']))
             $('#destination_picture').attr('src', '/images/pictures_destinations/picture_' + data['name'] + '.jpg');
+
+            $('#brand_origin').html('');
+            $('#reservationPrice').html('');
+            $('#pricePerDistance').html('');
+            $('#rating').html('');
+            $('#available_seat_number').html('');
+            $('#brand_origin').html('');
+            $('#speed').html('');
         })
 }
 
@@ -123,7 +108,7 @@ function ajaxSpacecraftField() {
         url: form.attr('action'),
         type: form.attr('method'),
         data: data,
-        
+
         success: function (html) {
 
             console.log($(html).find('#spacecraft'));

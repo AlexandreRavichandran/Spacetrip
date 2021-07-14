@@ -39,7 +39,8 @@ class TripType extends AbstractType
             ->add('destination', EntityType::class, [
                 'label' => 'Destination',
                 'class' => Destination::class,
-                'choice_label' => 'name'
+                'choice_label' => 'name',
+                'placeholder' => 'Choisissez une destination'
             ])
             ->add('arrivalAt', DateTimeType::class, [
                 'label' => 'Date d\'arrivée du voyage',
@@ -72,6 +73,7 @@ class TripType extends AbstractType
                 'placeholder' => 'Choisissez votre vaisseau',
             ]);
         };
+        
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($formModifier) {
 
             $data = $event->getData();
