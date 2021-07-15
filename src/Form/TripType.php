@@ -12,7 +12,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -55,7 +54,6 @@ class TripType extends AbstractType
                 'label' => 'Voyage reservé',
                 'required' => false
             ]);
-        //https://www.youtube.com/watch?v=Uw9nrrccUpI&list=PLlxQJeQRaKDRs9WlWQiXNqWU0blyaZBzo&index=45
 
         $formModifier = function (FormInterface $form, Destination $destination = null) {
 
@@ -73,7 +71,7 @@ class TripType extends AbstractType
                 'placeholder' => 'Choisissez votre vaisseau',
             ]);
         };
-        
+
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($formModifier) {
 
             $data = $event->getData();
