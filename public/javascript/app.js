@@ -42,7 +42,7 @@ function ajaxDestination() {
         url: '/destinations/getAjaxData/' + destination
     })
 
-        .done(function (data, status) {
+        .done(function (data) {
 
             $('#distance').html(Math.round(data['distance']));
             $('#gravity').html(data['gravity']);
@@ -57,6 +57,7 @@ function ajaxDestination() {
             $('#available_seat_number').html('');
             $('#brand_origin').html('');
             $('#speed').html('');
+            $('#spacecraft_picture').removeAttr('src');
         })
 }
 
@@ -65,7 +66,7 @@ function ajaxDestination() {
  */
 function ajaxSpacecraft() {
     spacecraft = $('#spacecraft').val();
-    console.log('ok');
+
 
     $.ajax({
         method: "GET",
@@ -73,7 +74,6 @@ function ajaxSpacecraft() {
     })
 
         .done(function (data) {
-            console.log('ajaxok');
             $('#brand_origin').html(data['brand'] + ' - ' + data['nationality'])
             $('#reservationPrice').html(data['reservationPrice'])
             $('#pricePerDistance').html(data['pricePerDistance'])
@@ -111,7 +111,7 @@ function ajaxSpacecraftField() {
 
         success: function (html) {
 
-            console.log($(html).find('#spacecraft'));
+
 
             $('#spacecraft').replaceWith(
 
