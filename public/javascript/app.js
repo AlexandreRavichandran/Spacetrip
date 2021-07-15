@@ -90,6 +90,7 @@ function ajaxSpacecraft() {
 
 function ajaxSpacecraftField() {
     const form = $(this).closest('form');
+    console.log('ok');
     let data = {};
     data[$(this).attr('name')] = $(this).val();
     data[$('#trip_departureAt_date_day').attr('name')] = $('#trip_departureAt_date_day').val();
@@ -110,8 +111,6 @@ function ajaxSpacecraftField() {
         data: data,
 
         success: function (html) {
-
-
 
             $('#spacecraft').replaceWith(
 

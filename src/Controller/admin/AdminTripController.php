@@ -50,8 +50,9 @@ class AdminTripController extends AbstractController
      */
     public function create(Request $request): Response
     {
+        $trip = new Trip;
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
-        $form = $this->createForm(TripType::class);
+        $form = $this->createForm(TripType::class, $trip);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $trip = new Trip();
