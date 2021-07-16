@@ -104,6 +104,17 @@ img{
     width: 100%; 
 }
 
+#calculateDistanceOff{
+    display: none;
+}
+#calculateDistance{
+    display: none;
+}
+#destination_description, #spacecraft_description{
+    
+    min-height: 100px;
+    max-height: 200px;
+}
 @media screen and (max-width:900px)   {
     
     #helpBox{

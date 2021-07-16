@@ -17,12 +17,19 @@ class DestinationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class)
-            ->add('description', TextareaType::class)
-            ->add('distance', NumberType::class)
+            ->add('name', TextType::class, [
+                'label' => 'Nom de la destination'
+            ])
+            ->add('description', TextareaType::class, [
+                'label' => 'Description'
+            ])
+            ->add('distance', NumberType::class, [
+                'label' => 'Distance par rapport à la Terre (km)'
+            ])
             ->add('spacecrafts', EntityType::class, [
                 'class' => Spacecraft::class,
                 'choice_label' => 'name',
+                'label' => 'Vaisseau disponibles pour cette destination',
                 'multiple' => true
             ]);
     }
