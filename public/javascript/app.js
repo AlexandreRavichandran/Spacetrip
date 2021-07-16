@@ -329,3 +329,27 @@ function randomUserGenerator(e = null) {
 
         })
 }
+
+
+function showDestinationDistanceCalculateFields() {
+
+    $('#calculateDistanceOn').css('display', 'none');
+    $('#calculateDistanceOff').css('display', 'block');
+    $('#calculateDistance').slideDown();
+    $('#destination_distance').attr('readOnly', '');
+}
+
+function hideDestinationDistanceCalculateFields() {
+
+    $('#calculateDistanceOn').css('display', 'block');
+    $('#calculateDistanceOff').css('display', 'none');
+    $('#calculateDistance').slideUp();
+    $('#destination_distance').removeAttr('readOnly', '');
+}
+
+function calculateDestinationDistance() {
+    const aphelionValue = $("#aphelion").val();
+    const eccentricityValue = $("#eccentricity").val();
+    const distance = 149597870 - (aphelionValue * (1 - eccentricityValue));
+    $("#destination_distance").val(Math.round(distance));
+}

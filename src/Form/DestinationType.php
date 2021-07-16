@@ -24,12 +24,12 @@ class DestinationType extends AbstractType
                 'label' => 'Description'
             ])
             ->add('distance', NumberType::class, [
-                'label' => 'Distance par rapport à la Terre'
+                'label' => 'Distance par rapport à la Terre (km)'
             ])
             ->add('spacecrafts', EntityType::class, [
                 'class' => Spacecraft::class,
                 'choice_label' => 'name',
-                'label' => 'Vaisseau dispobinbles pour cette destination',
+                'label' => 'Vaisseau disponibles pour cette destination',
                 'multiple' => true
             ]);
     }

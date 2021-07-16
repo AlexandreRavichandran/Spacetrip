@@ -9,15 +9,42 @@
             </div>
         </div>
         <div class="col-xs-12 col-lg-6 mt-4 pl-4">
-            <div class="row">
-                <div class="col">
-                    <div class="btn btn-success btn-sm">Je connais la distance Terre -> Planète</div>
+            <div class="comment">
+                <p>Here, you have two possibilities : </p>
+                <p>Either you already know the distance between the new destination and Earth, and you can write it yourself..</p>
+                <p>Or...(click on the button)</p>
+                <p class="text-center mb-0"><i class="bi bi-arrow-down"></i></p>
+            </div>
+            <div class="row justify-content-center">
+                <div id="calculateDistanceOff" class="col-9">
+                    <a class=" d-block btn btn-success btn-sm rounded">Je connais la distance Terre -> Planète</a>
                 </div>
-                <div class="col">
-                    <div class="btn btn-danger btn-sm">Je ne connais pas la distance Terre -> Planète</div>
+                <div id="calculateDistanceOn" class="col-9">
+                    <a class=" d-block btn btn-danger btn-sm rounded">Je ne connais pas la distance Terre -> Planète</a>
                 </div>
             </div>
-            <div class="row d-block mt-2">
+            <div id="calculateDistance" class="container">
+                <div class="comment">
+                    <p>You can provide Aphelion and Eccentricity value, and the website will automatically calculate the distance.</p>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-4 d-flex align-items-center justify-content-center">
+                        <label class="mb-0" for="aphelion"> Aphelion (km) :</label>
+                    </div>
+                    <div class="col-8">
+                        <input class ="form-control" type="number" name="aphelion" id="aphelion">
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-4 d-flex align-items-center justify-content-center">
+                        <label class="mb-0" for="eccentricity"> Eccentricité :</label>
+                    </div>
+                    <div class="col-8">
+                        <input class="form-control" step="any" type="number" name="eccentricity" id="eccentricity">
+                    </div>
+                </div>  
+            </div>
+            <div class="row d-block mt-4">
             {{form_row(form.distance)}}
             </div>
         </div>
