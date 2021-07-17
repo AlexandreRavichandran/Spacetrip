@@ -1,0 +1,25 @@
+<div class="container-fluid adminNav">
+    <p class="text-center pb-0 pt-2 h3 text-white">Bonjour Administrateur {{app.user.firstName}}</p>
+    <ul class="nav nav-pills d-flex justify-content-center pb-2">
+        <li class="nav-item">
+            <a class="nav-link bg-danger text-white rounded" href="{{path('app_admin_home')}}">PAGE ADMIN</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle btn btn-success rounded text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Nouveau</a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="{{path('app_admin_trip_create')}}">Voyage</a>
+                <a class="dropdown-item" href="{{path('app_admin_spacecraft_create')}}">Vaisseau</a>
+                <a class="dropdown-item" href="{{path('app_admin_destination_create')}}">Destination</a>
+            </div>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle btn btn-success rounded text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Voir</a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="{{path('app_admin_trip_index')}}"> Voyage actuels</a>
+                <a class="dropdown-item" href="{{path('app_admin_spacecraft_index')}}">Vaisseaux actuels</a>
+                <a class="dropdown-item" href="{{path('app_admin_destination_index')}}">Destinations actuels</a>
+                <a class="dropdown-item" href="{{path('app_admin_user_index')}}">Utilisateurs</a>
+            </div>
+        </li>
+    </ul>
+</div>

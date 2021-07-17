@@ -115,6 +115,9 @@ img{
     min-height: 100px;
     max-height: 200px;
 }
+.adminNav{
+    background-color: rgb(190, 190, 190);
+}
 @media screen and (max-width:900px)   {
     
     #helpBox{

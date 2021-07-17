@@ -18,7 +18,10 @@
     <body>
         <header>
             {% include 'partials/_navbar.html.twig' %}
-            <div class="">
+            {% if app.user != null and 'ROLE_ADMIN' in app.user.roles %}
+            {% include 'partials/_adminNavbar.html.twig' %}
+            {% endif %}
+            <div>
                 <p class="p-2 text-center bg-warning" style="font-size:1.2rem"> This website is currently still on development. Some features may not work (well).</p>             
             </div>
             {% for label,messages in app.flashes %}
