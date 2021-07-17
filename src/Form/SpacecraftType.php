@@ -35,10 +35,10 @@ class SpacecraftType extends AbstractType
                 'label' => 'Nombres de sièges disponible'
             ])
             ->add('reservationPrice', NumberType::class, [
-                'label' => 'Prix de reservation'
+                'label' => 'Prix de reservation (€)'
             ])
             ->add('pricePerDistance', NumberType::class, [
-                'label' => 'Prix kilometrique'
+                'label' => 'Prix kilometrique (€/km)'
             ])
             ->add('nationality', TextType::class, [
                 'label' => 'Lieu de création du vaisseau'
@@ -47,7 +47,7 @@ class SpacecraftType extends AbstractType
                 'label' => 'Description du vaisseau'
             ])
             ->add('speed', NumberType::class, [
-                'label' => 'Vitesse du vaisseau (en km/h)'
+                'label' => 'Vitesse du vaisseau (km/h)'
             ]);
     }
 
