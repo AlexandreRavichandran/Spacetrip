@@ -10,7 +10,9 @@
     <div class="row mt-3">
         <div class="col-xs-12 col-lg-5">
             <h4 class="text-center"> Votre voyage </h4>
+            {% if trip.reserved is same as true %}
             <a href="{{path('app_trip_edit',{'id':trip.id})}}" class="btn btn-sm btn-primary d-flex justify-content-center mb-3">Modifier mon voyage</a>
+            {% endif %}
             <div class="row">
                 <div class="col">
                     <table class="table table-hover">

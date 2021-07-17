@@ -208,6 +208,7 @@ class TripController extends AbstractController
                 $this->addFlash('success', 'Votre précédent voyage a été annulé et un remboursement sera effectué ulterieurement si necessaire. Veuillez procéder au paiement du nouveau voyage.');
                 return $this->redirectToRoute('app_user_profile');
             } else {
+                $trip->setStatus(2);
                 $this->addFlash('success', 'Votre voyage a été modifié. Si un remboursement est necessaire, il sera effectué ulterieurement.');
                 return $this->redirectToRoute('app_user_profile');
             }

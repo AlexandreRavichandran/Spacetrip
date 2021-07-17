@@ -29,12 +29,6 @@ class AppFixtures extends Fixture
         $faker = Factory::create("fr-FR");
         $boolean = [true, false];
 
-        /**
-         * Stocker tout les objets destinations dans une variable
-         * et ensuite les utiliser un par un quand on le voudra
-         * ca servira a pas avoir de for imbriqués dans des for 
-         */
-
         $destinations = [];
         $spacecrafts = [
             ['name' => 'Mercury', 'nationality' => 'Etats-Unis', 'brand' => 'McDonnell Aircraft Corporation'],
