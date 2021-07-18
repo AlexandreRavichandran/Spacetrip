@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="container mt-4 p-4">
-    <h1 class="text-center"> Modification du voyage "{{trip.name}}" à destination de "{{trip.destination}}"</h1>
+    <h1 class="text-center"> Modification du voyage "{{trip.name}}" à destination de "{{trip.destination.name}}"</h1>
     {% include('admin/trip/partials/_form.html.twig')%}
 </div>
 {% endblock %}

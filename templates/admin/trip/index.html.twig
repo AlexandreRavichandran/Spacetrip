@@ -6,13 +6,15 @@
 <div class="container-fluid ml-auto mr-auto mt-5 p-4">
     <h1 class="text-center"> Liste des voyages </h1>
     <div class="row">
-        <div class="col-xs-12 col-lg-10 d-flex justify-content-center mt-3">
-            <a href="{{path('app_admin_trip_index')}}" class="btn btn-primary btn-md rounded mr-5">Voir les voyages non reservés </a>
-            <a href="{{path('app_admin_reserved_trips_index')}}" class="btn btn-primary btn-md rounded">Voir les voyages réservés </a>
+        <div class="col-xs-12 col-lg-6 mt-3">
+            <a href="{{path('app_admin_trip_index')}}" class="d-block btn btn-primary btn-md rounded">Voir les voyages non reservés </a>
         </div>
-        <div class="col-xs-12 col-lg-2 align-self-end mt-3">
-            <p class="text-center"><a href="{{path('app_admin_trip_create')}}">Créer un nouveau voyage</a></p>
+        <div class="col-xs-12 col-lg-6 mt-3">
+            <a href="{{path('app_admin_reserved_trips_index')}}" class="d-block btn btn-primary btn-md rounded">Voir les voyages réservés </a>
         </div>
+    </div>
+    <div class="row d-flex justify-content-end mt-2 mb-0">
+        <p><a href="{{path('app_admin_trip_create')}}">Créer un nouveau voyage</a></p>
     </div>
     <div class="row mt-2" style="overflow:scroll">
         <table class="table table-hover">
@@ -37,7 +39,14 @@
                     <td scope="col" class="text-center">{{trip.arrivalAt|date('d/m/Y H:i:s')}}</td>
                     <td scope="col" class="text-center">{{trip.spacecraft.name|upper}}</td>
                     <td scope="col" class="text-center">{{trip.availableSeatNumber}}</td>
-                    <td scope="col" class="text-center">{{trip.status}}</td>
+                    <td scope="col" class="text-center">
+                        <select name="tripStatus_{{trip.id}}" id="tripStatus_{{trip.id}}" onchange="changeTripStatus({{trip.id}})">
+                            <option {% if trip.status is same as 1 %} selected {% endif %} value="1">Non payé</option>
+                            <option {% if trip.status is same as 2 %} selected {% endif %} value="2">Disponible</option>
+                            <option {% if trip.status is same as 3 %} selected {% endif %} value="3">Complet</option>
+                            <option {% if trip.status is same as 4 %} selected {% endif %} value="4">Terminé</option>
+                        </select>
+                    </td>
                     <td scope="col" class="d-flex flex-column justify-content-center">
                         <a href="{{path('app_admin_trip_edit',{'id':trip.id})}}" class="btn btn-warning btn-sm mb-2">Editer</a>
                         <a onclick="event.preventDefault(); confirm('Etes vous sur de supprimer ce voyage de la base de données ? Cette action est irréversible.') && document.querySelector('#trip_delete_link_{{trip.id}}').click()"  class="btn btn-sm btn-danger"> Supprimer </a>

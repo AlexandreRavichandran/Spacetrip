@@ -88,6 +88,9 @@ function ajaxSpacecraft() {
         })
 }
 
+/**
+ * Function to show spacecrafts RELATED TO the choosen destination
+ */
 function ajaxSpacecraftField() {
     const form = $(this).closest('form');
     console.log('ok');
@@ -190,7 +193,7 @@ function forbidAdminModifications() {
 
 /**
  * Function called to change the spacecraft status (AJAX request)
- * @param {integer} id 
+ * @param number id 
  */
 function ajaxCheckbox(id) {
     if ($("#available_checkbox_" + id).val() == 1) {
@@ -211,6 +214,27 @@ function ajaxCheckbox(id) {
         })
 }
 
+
+/**
+ * AJAX function to change the trip status on admin section
+ * @param number id 
+ */
+function changeTripStatus(id) {
+
+
+
+    let value = $('#tripStatus_' + id).val()
+    $.ajax({
+        method: "POST",
+        url: '/admin/trips/status',
+        data: { id: id, value: value }
+    })
+        .done(function (data, status) {
+            console.log('ok');
+
+        })
+
+}
 //FEEDBACK MAKING FUNCTION
 
 /**
@@ -245,7 +269,7 @@ function manageFeedbackSpace() {
 
 /**
  * Function to add star on rating when user do a feedback
- * @param {Event} e 
+ * @param Event e 
  */
 function addRatingStar(e) {
     e.preventDefault();
@@ -256,7 +280,7 @@ function addRatingStar(e) {
 
 /**
  *  Function to remove star on rating when user do a feedback
- * @param {Event} e 
+ * @param Event e 
  */
 function removeRatingStar(e) {
     e.preventDefault();
@@ -286,7 +310,7 @@ function stopFeedbackAnimation() {
 
 /**
  * Function to show the password when user edits his profile
- * @param {Event} e 
+ * @param Event e 
  */
 function showPassword(e) {
     e.preventDefault();
@@ -295,7 +319,7 @@ function showPassword(e) {
 
 /**
  * Function to hide the password when user edits his profile
- * @param {Event} e 
+ * @param Event e 
  */
 function hidePassword(e) {
     e.preventDefault();
@@ -313,7 +337,7 @@ function showTotalCommentNumber() {
 
 /**
  * Function to get random user in the login page comments
- * @param {Event} e 
+ * @param Event e 
  */
 function randomUserGenerator(e = null) {
     if (e !== null) {
@@ -331,7 +355,9 @@ function randomUserGenerator(e = null) {
         })
 }
 
-
+/**
+ * Function to display Aphelion and Eccentricity input to calculate destination distance
+ */
 function showDestinationDistanceCalculateFields() {
 
     $('#calculateDistanceOn').css('display', 'none');
@@ -340,6 +366,9 @@ function showDestinationDistanceCalculateFields() {
     $('#destination_distance').attr('readOnly', '');
 }
 
+/**
+ * Function to hide Aphelion and Eccentricity input to calculate destination distance
+ */
 function hideDestinationDistanceCalculateFields() {
 
     $('#calculateDistanceOn').css('display', 'block');
@@ -348,6 +377,9 @@ function hideDestinationDistanceCalculateFields() {
     $('#destination_distance').removeAttr('readOnly', '');
 }
 
+/**
+ * Function to calculate the destination distance based on the aphelion and eccentricity values
+ */
 function calculateDestinationDistance() {
     const aphelionValue = $("#aphelion").val();
     const eccentricityValue = $("#eccentricity").val();

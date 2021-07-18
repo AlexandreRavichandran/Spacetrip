@@ -11,6 +11,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminTripController extends AbstractController
@@ -139,5 +140,20 @@ class AdminTripController extends AbstractController
             'order' => null,
             'orderBy' => null
         ]);
+    }
+
+    /**
+     * Change the status of a trip  (AJAX request)
+     * @Route("/admin/trips/status",name="app_admin_trip_status")
+     * @return void
+     */
+    public function changeTripStatus(Request $request)
+    {
+        if ($request->isXmlHttpRequest()) {
+            $trip = $this->tripRepository->findOneBy(['id' => $_POST['id']]);
+            $trip->setStatus($_POST['value']);
+            $this->em->flush();
+        }
+        return new JsonResponse();
     }
 }
