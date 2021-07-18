@@ -104,7 +104,7 @@
             </div>
             <div class="row">
                 <button type="button" class="btn btn-primary btn-success btn-sm ml-auto mr-auto" data-toggle="collapse" data-target="#priceExplanation">Pourquoi ce prix ?</button>
-                <div id="priceExplanation" class="collapse card card-body mt-2 border-success">
+                <div id="priceExplanation" class="collapse mt-2 border border-success rounded p-4 mb-1">
                     <p> Le prix des voyages dépend de 2 facteurs principaux : la destination du voyage et le vaisseau utilisé.</p>
                     <p> Le prix se calcule donc par le produit de la distance de la destination ({{trip.destination.distance|number_format(0,'',' ')}} km) et le prix kilometrique du vaisseau ({{formatPrice(trip.spacecraft.pricePerDistance,5)}} €/km), dans lequel le prix de reservation du vaisseau ({{formatPrice(trip.spacecraft.reservationPrice,2)}} €) est ajouté.</p>
                 </div>

@@ -18,8 +18,8 @@
     {% endif %}
     {% for trip in trips %}
         <div class=" col-xs-12 col-md-6 col-xl-4 flex-wrap">
-            <div class="card mb-3">
-                <div class="card-header">
+            <div class="card mb-5 ">
+                <div>
                     <h4 class="text-center"> {{trip.name}}</h4>
                     <h5 class="text-center"> {{trip.destination.name}}</h5>
                 </div>
@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <p class="text-center">{{formatPrice(trip.price,2)}} €</p>
-                <div class="card-footer text-muted text-center">
+                <div class=" text-muted text-center">
                     <a href="{{path('app_trip_show',{'name': trip.name})}}" class="card-link stretched-link"> En savoir plus</a>
                 </div>
             </div>

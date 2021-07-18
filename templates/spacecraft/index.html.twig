@@ -18,8 +18,8 @@
         {% endif %}
         {% for spacecraft in spacecrafts %}
         <div class="col-xs-12 col-md-6 col-xl-4">
-            <div class="card mb-3">
-                <h3 class="card-header text-center">{{spacecraft.name|upper}}</h3>
+            <div class="card mb-5">
+                <h3 class="text-center">{{spacecraft.name|upper}}</h3>
                 <div class="card-body text-center pb-0">
                     <h5 class="card-title">{{spacecraft.brand}} ({{spacecraft.nationality}})</h5>
                     <p style="font-size:1.3rem"> {{displayStarRating(spacecraft.rating)}} ({{spacecraft.feedback|length}})</p>
@@ -32,7 +32,7 @@
                 <div class="p-4">
                     <img src="/images/pictures_spacecrafts/picture_{{spacecraft.name}}.jpg" alt="Image de {{spacecraft.name}}" class="mb-2 d-block destinationImage">
                 </div>
-                <div class="card-footer text-muted text-center">
+                <div class="text-muted text-center">
                     <a href="{{path('app_spacecraft_show',{'id':spacecraft.id})}}" class="card-link stretched-link">En savoir plus</a>
                 </div>
             </div>
