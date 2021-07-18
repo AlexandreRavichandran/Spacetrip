@@ -118,8 +118,11 @@ img{
 }
 
 .card{
-    border:2px solid white;
-    border-radius:25%;
+    border:2px solid white;   
+}
+
+.card:hover{
+    background-color: rgb(226, 225, 225);
 }
 .spacecraftHeight{
     height:150px;

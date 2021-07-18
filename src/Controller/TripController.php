@@ -125,7 +125,10 @@ class TripController extends AbstractController
             return $this->redirectToRoute('app_trip_index');
         }
         if ($this->isCsrfTokenValid('purchasing', $token)) {
-
+            if ($trip->getUsers()->contains($this->getUser())) {
+                $this->addFlash('warning', 'vous avez déja payé ce voyage.');
+                return $this->redirectToRoute('app_user_profile');
+            }
             if ($trip->getReserved() === false) {
                 $trip->setAvailableSeatNumber($trip->getAvailableSeatNumber() - 1);
                 if ($trip->getAvailableSeatNumber() === 0) {
