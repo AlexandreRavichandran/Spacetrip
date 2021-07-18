@@ -4,6 +4,7 @@ namespace App\Controller\admin;
 
 use App\Entity\Destination;
 use App\Form\DestinationType;
+use App\Repository\TripRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\DestinationRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -78,11 +79,24 @@ class AdminDestinationController extends AbstractController
 
     /**
      * Delete a selected destination
-     * @Route("/admin/destination/{id}/delete",name="app_admin_destination_delete")
+     * @Route("/admin/destinations/{id}/delete",name="app_admin_destination_delete")
      * @return Response
      */
-    public function delete(): Response
+    public function delete(Destination $destination, TripRepository $tripRepo): Response
     {
+        $checkIfTripExists = $tripRepo->findBy(['destination' => $destination->getId()]);
+        if ($checkIfTripExists) {
+            $tripNames = [];
+            foreach ($checkIfTripExists as $trip) {
+                array_push($tripNames, $trip->getName());
+            }
+            $tripNames = implode(', ', $tripNames);
+            $this->addFlash('warning', 'Cette destination est liée aux voyages ' . $tripNames . ' . Veuillez modifier ces voyages avant de supprimer cette destination.');
+        } else {
+            $this->em->remove($destination);
+            $this->em->flush();
+            $this->addFlash('success', 'La destination ' . $destination->getName() . ' a été supprimé.');
+        }
         return $this->redirectToRoute('app_admin_destination_index');
     }
 }
