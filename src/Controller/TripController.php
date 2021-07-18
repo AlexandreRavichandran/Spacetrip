@@ -159,7 +159,10 @@ class TripController extends AbstractController
     {
         $user = $this->getUser();
 
-        if ($trip->getReserved() === false) {
+        $trip->getUsers()->contains($this->getUser());
+
+        if ($trip->getReserved() === false && $trip) {
+            $trip->setAvailableSeatNumber($trip->getAvailableSeatNumber() + 1);
             $user->removeTrip($trip);
             $this->em->flush();
             $this->addFlash('success', 'Vous avez été désisté de ce voyage.');
