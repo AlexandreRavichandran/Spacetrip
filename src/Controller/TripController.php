@@ -32,6 +32,7 @@ class TripController extends AbstractController
     public function index(PaginatorInterface $paginator, Request $request): Response
     {
         $trips = $paginator->paginate($this->tripRepository->findAvailableTrips(), $request->query->getInt('page', 1), 12);
+
         return $this->render('trip/index.html.twig', [
             'trips' => $trips
         ]);
@@ -44,14 +45,18 @@ class TripController extends AbstractController
      */
     public function create(Request $request): Response
     {
+        //Check if user is connected
         $this->denyAccessUnlessGranted('ROLE_USER', null, "Veuillez vous connecter.");
+
         $trip = new Trip;
         $user = $this->getUser();
-        $tripIncrementation = count($this->getUser()->getTrip()) + 1;
+        //This will be added in the new trip name
+        $tripIncrementation = count($user->getTrip()) + 1;
         $form = $this->createForm(TripType::class, $trip);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $trip = $form->getData();
+            //Trip name will be like "VR - [user Email] - [user trip number]"
             $trip->setName('VR - ' . $user->getEmail() . ' - ' . $tripIncrementation);
             $trip->setDescription('Voyage reservé par ' . $user->getEmail());
             $trip->setAvailableSeatNumber(0);
@@ -60,10 +65,12 @@ class TripController extends AbstractController
             $trip->setStatus('1');
             $this->em->persist($trip);
             $this->em->flush();
+
             return $this->redirectToRoute('app_trip_payment', [
                 'id' => $trip->getId()
             ]);
         }
+
         return $this->render('trip/create.html.twig', [
             'form' => $form->createView(),
             'trips' => $tripIncrementation
@@ -80,6 +87,7 @@ class TripController extends AbstractController
     {
         if ($trip->getReserved() === true) {
             $this->addFlash('danger', 'Une erreur s\'est produite.');
+
             return $this->redirectToRoute('app_trip_index');
         }
 
@@ -95,14 +103,17 @@ class TripController extends AbstractController
      */
     public function reserveTrip(Trip $trip): Response
     {
+        //Check if user is connected
+        $this->denyAccessUnlessGranted('ROLE_USER', null, "Veuillez vous connecter.");
+
         if ($trip->getReserved() === false && $trip->getAvailableSeatNumber() === 0) {
             $this->addFlash('danger', 'Ce voyage n\'a malheureusement plus de places disponibles.');
+
             return $this->redirectToRoute('app_trip_index');
         }
 
-
-        $this->denyAccessUnlessGranted('ROLE_USER', null, 'Veuillez vous connecter');
         $user = $this->getUser();
+
         return $this->render('trip/reserve.html.twig', [
             'price' => $trip->getPrice(),
             'trip' => $trip,
@@ -119,32 +130,44 @@ class TripController extends AbstractController
      */
     public function onReservationSuccess(Trip $trip, Request $request): Response
     {
+        //Check if user is connected
+        $this->denyAccessUnlessGranted('ROLE_USER', null, 'Veuillez vous connecter');
+
+        //csrf protection
         $token = $request->request->get('token');
         if ($trip->getReserved() === false && $trip->getAvailableSeatNumber() === 0) {
             $this->addFlash('danger', 'Ce voyage n\'a malheureusement plus de places disponibles.');
+
             return $this->redirectToRoute('app_trip_index');
         }
+
         if ($this->isCsrfTokenValid('purchasing', $token)) {
+            // Check if user already paid to the trip
             if ($trip->getUsers()->contains($this->getUser())) {
                 $this->addFlash('warning', 'vous avez déja payé ce voyage.');
                 return $this->redirectToRoute('app_user_profile');
             }
+
             if ($trip->getReserved() === false) {
                 $trip->setAvailableSeatNumber($trip->getAvailableSeatNumber() - 1);
                 if ($trip->getAvailableSeatNumber() === 0) {
                     $trip->setStatus(3);
                 }
+
                 $trip->addUser($this->getUser());
             } else {
                 $trip->setStatus(2);
             }
+
             $this->em->flush();
 
             return $this->render('trip/recap.html.twig', [
                 'trip' => $trip,
             ]);
         }
+
         $this->addFlash('danger', 'Une erreur s\'est produite. Le paiement a echoué. Veuillez recommencer.');
+
         return $this->render('trip/reserve.html.twig', [
             'trip' => $trip
         ]);
@@ -157,20 +180,29 @@ class TripController extends AbstractController
      */
     public function delete(Trip $trip): Response
     {
+        //Check if user is connected
+        $this->denyAccessUnlessGranted('ROLE_USER', null, 'Veuillez vous connecter');
+
         $user = $this->getUser();
 
+        //Check if user reserved the trip
         $trip->getUsers()->contains($this->getUser());
 
+        //In case of quitting a non reserved trip
         if ($trip->getReserved() === false && $trip) {
+
             $trip->setAvailableSeatNumber($trip->getAvailableSeatNumber() + 1);
             $user->removeTrip($trip);
             $this->em->flush();
             $this->addFlash('success', 'Vous avez été désisté de ce voyage.');
         } else {
+            //In case of quitting a reserved trip
             $tripName = explode(' - ', $trip->getName());
             if ($tripName[1] !== $user->getEmail()) {
+
                 $this->addFlash('warning', 'Une erreur s\'est produite lors de la suppression.');
             } else {
+
                 $this->em->remove($trip);
                 $this->em->flush();
                 $this->addFlash('success', 'Votre voyage " ' . $trip->getName() . ' " a été supprimé. Vous serez remboursé ulterieurement.');
@@ -224,7 +256,7 @@ class TripController extends AbstractController
     }
 
     /**
-     * Get the weather forecast when creating a trip
+     * Get the weather forecast when creating a trip (API Request)
      * @Route("/trips/create/weather/{city}/{date}",name="app_ajax_trip_create_ajax")
      */
     public function getWeather(string $date, string $city, CallWeatherApi $callWeatherApi, Request $request)

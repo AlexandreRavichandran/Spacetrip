@@ -36,9 +36,9 @@ class AdminTripController extends AbstractController
     {
         //Check if user connected
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
-        
+
         $trips = $this->paginator->paginate($this->tripRepository->findBy(['reserved' => false]), $request->query->getInt('page', 1), 11);
-        
+
         return $this->render('admin/trip/index.html.twig', [
             'trips' => $trips,
             'order' => null,
@@ -54,7 +54,7 @@ class AdminTripController extends AbstractController
     {
         //Check if user connected
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
-        
+
         $trip = new Trip;
         $form = $this->createForm(TripType::class, $trip);
         $form->handleRequest($request);
@@ -68,7 +68,7 @@ class AdminTripController extends AbstractController
             $this->addFlash('success', 'La création du nouveau voyage a été effectué avec succès.');
             return $this->redirectToRoute('app_trip_show', ['name' => $trip->getName()]);
         }
-        
+
         return $this->render('admin/trip/create.html.twig', [
             'form' => $form->createView(),
             'action' => 'create'
@@ -84,11 +84,11 @@ class AdminTripController extends AbstractController
     {
         //Check if user connected
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
-        
+
         $this->em->remove($trip);
         $this->em->flush();
         $this->addFlash('success', 'La suppression du voyage ' . $trip->getName() . ' a été effectué avec succès.');
-        
+
         return $this->redirectToRoute('app_admin_trip_index');
     }
     /**
@@ -100,7 +100,7 @@ class AdminTripController extends AbstractController
     {
         //Check if user connected
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
-        
+
         $reserved = $trip->getReserved();
         $form = $this->createForm(TripType::class, $trip);
         $form->handleRequest($request);
@@ -111,7 +111,7 @@ class AdminTripController extends AbstractController
             $this->addFlash('success', 'La modification du voyage a été effectué avec succès.');
             return $this->redirectToRoute('app_admin_trip_index');
         }
-        
+
         return $this->render('admin/trip/edit.html.twig', [
             'action' => 'edit',
             'form' => $form->createView(),
@@ -128,9 +128,9 @@ class AdminTripController extends AbstractController
     {
         //Check if user connected
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
-        
+
         $trips = $this->paginator->paginate($this->tripRepository->orderTrips($orderBy, $order), $request->query->getInt('page', 1), 11);
-        
+
         return $this->render('admin/trip/index.html.twig', [
             'trips' => $trips,
             'order' => $order,
@@ -148,9 +148,9 @@ class AdminTripController extends AbstractController
     {
         //Check if user connected
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
-        
+
         $trips = $this->paginator->paginate($this->tripRepository->findBy(['reserved' => true]), $request->query->getInt('page', 1), 11);
-        
+
         return $this->render('admin/trip/index.html.twig', [
             'trips' => $trips,
             'order' => null,

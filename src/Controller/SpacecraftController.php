@@ -6,7 +6,6 @@ use App\Entity\Spacecraft;
 use App\Repository\FeedbackRepository;
 use App\Repository\SpacecraftRepository;
 use App\Repository\TripRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,6 +24,7 @@ class SpacecraftController extends AbstractController
     {
         $spacecrafts = $repo->findAll();
         $spacecrafts = $paginator->paginate($spacecrafts, $request->query->getInt('page', 1), 9);
+
         return $this->render('spacecraft/index.html.twig', [
             'spacecrafts' => $spacecrafts
         ]);
@@ -43,6 +43,7 @@ class SpacecraftController extends AbstractController
             $this->addFlash('warning', 'Ce vaisseau est actuellement en maintenance et non utilisable.');
         }
         $feedbacks = $feedbackrepo->findBy(['spacecraft' => $spacecraft->getId()]);
+
         return $this->render('spacecraft/show.html.twig', [
 
             'spacecraft' => $spacecraft,
@@ -54,7 +55,7 @@ class SpacecraftController extends AbstractController
     }
 
     /**
-     * Ajax response to show spacecraft characteristics when creating a trip
+     * Ajax response to show spacecraft characteristics when creating a trip (AJAX Request)
      * @Route("/spacecrafts/getAjaxData/{id}",name="app_spacecraft_ajax_request")
      */
     public function select(Spacecraft $spacecraft, Request $request): Response

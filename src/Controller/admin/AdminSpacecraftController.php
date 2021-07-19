@@ -157,7 +157,7 @@ class AdminSpacecraftController extends AbstractController
     }
 
     /**
-     * Make a spacecraft available on the admin spacecraft index (AJAX request)
+     * Make a spacecraft available on the admin spacecraft index (AJAX Request)
      * @Route("/admin/spacecraft/available",name="app_admin_spacecraft_available")
      * @return JsonReponse
      */

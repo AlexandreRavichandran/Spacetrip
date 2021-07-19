@@ -22,6 +22,7 @@ class HomeController extends AbstractController
     {
         $trips = $tripRepo->findAvailableTrips(2);
         $feedbacks = $feedbackRepo->findBy([], ['rating' => 'DESC'], 3);
+
         return $this->render('home/index.html.twig', [
             'trips' => $trips,
             'feedbacks' => $feedbacks
@@ -35,7 +36,7 @@ class HomeController extends AbstractController
      */
     public function generateReservationTicket(Trip $trip, Request $request, TCPDFController $tcpdf)
     {
-        // creating pdf 
+        // creating pdf ticket
         $token = $request->request->get('token');
         if ($this->isCsrfTokenValid('getTicket', $token)) {
             $user = $this->getUser();

@@ -23,6 +23,7 @@ class DestinationController extends AbstractController
     public function index(DestinationRepository $repo, PaginatorInterface $paginator, Request $request): Response
     {
         $destinations = $paginator->paginate($repo->findAll(), $request->query->getInt('page', 1), 6);
+
         return $this->render('destination/index.html.twig', [
             'destinations' => $destinations,
         ]);
@@ -34,8 +35,11 @@ class DestinationController extends AbstractController
      */
     public function show(Destination $destination, TripRepository $repo, CallDestinationApi $callDestinationApi): Response
     {
+        //API request to have more informations about the selected destination 
         $informations = $callDestinationApi->getDestinationData($destination->getName());
+
         $trips = $repo->AvailableTripByDestination($destination->getId(), 3);
+
         return $this->render('destination/show.html.twig', [
             'destination' => $destination,
             'trips' => $trips,
@@ -44,7 +48,7 @@ class DestinationController extends AbstractController
     }
 
     /**
-     * Ajax response to show spacecraft characteristics when creating a trip
+     * Ajax response to show spacecraft characteristics when creating a trip (AJAX Request)
      * @Route("/destinations/getAjaxData/{id}",name="app_destination_ajax_request")
      */
     public function select(Destination $destination, Request $request, CallDestinationApi $response): Response

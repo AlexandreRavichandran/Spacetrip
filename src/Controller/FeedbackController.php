@@ -20,10 +20,12 @@ class FeedbackController extends AbstractController
      */
     public function index(Spacecraft $spacecraft, Request $request, EntityManagerInterface $em): Response
     {
+        //Check if user connected
         $this->denyAccessUnlessGranted('ROLE_USER', null, "Veuillez vous connecter.");
+
         $user = $this->getUser();
+
         $feedback = new Feedback;
-        $feedback->setUser($user)->setSpacecraft($spacecraft);
         $form = $this->createForm(FeedbackType::class, $feedback);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -49,14 +51,15 @@ class FeedbackController extends AbstractController
      */
     public function sortFeedbacks(Spacecraft $spacecraft, FeedbackRepository $repo, $orderBy = null, $order = null, Request $request): Response
     {
-      
+
         $feedbacks = $repo->findBy(['spacecraft' => $spacecraft->getId()], [$orderBy => $order]);
+
         return $this->render('spacecraft/show.html.twig', [
             'feedbacks' => $feedbacks,
             'spacecraft' => $spacecraft,
             'orderBy' => $orderBy,
             'order' => $order,
-          
+
         ]);
     }
 }
