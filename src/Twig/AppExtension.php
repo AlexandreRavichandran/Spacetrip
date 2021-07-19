@@ -100,7 +100,7 @@ class AppExtension extends AbstractExtension
 
         switch ($status) {
             case 1:
-                echo '<p class="d-flex justify-content-end"><a href="/trips/' . $tripId . '/payment" class="btn btn-warning w-50 btn-sm text-center"> En attente de paiement </a></p>';
+                echo '<p class="d-flex justify-content-end"><a href="/trips/' . $tripId . '/payment" class="btn btn-warning btn-sm text-center"> En attente de paiement </a></p>';
                 break;
             case 2:
                 echo '<button class="btn btn-success w-50 btn-sm text-center"> Reservé</button>';

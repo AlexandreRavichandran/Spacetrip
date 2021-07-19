@@ -47,12 +47,12 @@ class TripController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_USER', null, "Veuillez vous connecter.");
         $trip = new Trip;
         $user = $this->getUser();
-        $trips = count($this->tripRepository->findUserTrips($user->getEmail())) + 1;
+        $tripIncrementation = count($this->getUser()->getTrip()) + 1;
         $form = $this->createForm(TripType::class, $trip);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $trip = $form->getData();
-            $trip->setName('VR - ' . $user->getEmail() . ' - ' . $trips);
+            $trip->setName('VR - ' . $user->getEmail() . ' - ' . $tripIncrementation);
             $trip->setDescription('Voyage reservé par ' . $user->getEmail());
             $trip->setAvailableSeatNumber(0);
             $trip->setReserved(true);
@@ -66,7 +66,7 @@ class TripController extends AbstractController
         }
         return $this->render('trip/create.html.twig', [
             'form' => $form->createView(),
-            'trips' => $trips
+            'trips' => $tripIncrementation
         ]);
     }
 
@@ -93,7 +93,7 @@ class TripController extends AbstractController
      * show a recap of the trip and proceed to payment
      * @Route("/trips/{id}/payment", name="app_trip_payment")
      */
-    public function reserveTrip(Trip $trip, Request $request): Response
+    public function reserveTrip(Trip $trip): Response
     {
         if ($trip->getReserved() === false && $trip->getAvailableSeatNumber() === 0) {
             $this->addFlash('danger', 'Ce voyage n\'a malheureusement plus de places disponibles.');
@@ -196,7 +196,7 @@ class TripController extends AbstractController
         $user = $this->getUser();
 
         if (!$tripName || $tripName[1] !== $user->getEmail()) {
-            $this->addFlash('danger', 'Une erreur s\'est produite. Vous ne ddddisposez pas des autorisations pour la modification de ce voyage.');
+            $this->addFlash('danger', 'Une erreur s\'est produite. Vous ne disposez pas des autorisations pour la modification de ce voyage.');
             return $this->redirectToRoute('app_home');
         }
         $trips = count($this->tripRepository->findUserTrips($user->getEmail()));
@@ -207,17 +207,15 @@ class TripController extends AbstractController
             $trip = $form->getData();
             $trip->setReserved(true);
             $trip->setPrice();
-            $this->em->flush();
-            if ($trip->getPrice() > $previousPrice) {
-                $trip->setStatus(1);
-                $this->em->flush();
-                $this->addFlash('success', 'Votre précédent voyage a été annulé et un remboursement sera effectué ulterieurement si necessaire. Veuillez procéder au paiement du nouveau voyage.');
-                return $this->redirectToRoute('app_user_profile');
-            } else {
+            if ($trip->getPrice() < $previousPrice && $trip->getStatus() == 2) {
                 $trip->setStatus(2);
                 $this->addFlash('success', 'Votre voyage a été modifié. Si un remboursement est necessaire, il sera effectué ulterieurement.');
-                return $this->redirectToRoute('app_user_profile');
+            } else {
+                $trip->setStatus(1);
+                $this->addFlash('success', 'Votre précédent voyage a été annulé et un remboursement sera effectué ulterieurement si necessaire. Veuillez procéder au paiement du nouveau voyage.');
             }
+            $this->em->flush();
+            return $this->redirectToRoute('app_user_profile');
         }
         return $this->render('trip/edit.html.twig', [
             'form' => $form->createView(),

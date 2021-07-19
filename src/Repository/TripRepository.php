@@ -31,7 +31,8 @@ class TripRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('t')
             ->andWhere('t.reserved = :reserved')
             ->andWhere('t.availableSeatNumber >= :seatNumber')
-            ->setParameters(['reserved' => false, 'seatNumber' => 1])
+            ->andWhere('t.status = :status')
+            ->setParameters(['reserved' => false, 'seatNumber' => 1, 'status' => 2])
             ->addOrderBy('t.departureAt', 'DESC')
             ->setMaxResults($limit)
             ->getQuery()
@@ -48,8 +49,9 @@ class TripRepository extends ServiceEntityRepository
     {
         return $this
             ->createQueryBuilder('t')
+            ->andWhere('t.reserved = :reserved')
             ->andWhere('t.name LIKE :user')
-            ->setParameter('user', '%' . $user . '%')
+            ->setParameters(['user' => '%' . $user . '%', 'reserved' => true])
             ->getQuery()
             ->getResult();
     }
