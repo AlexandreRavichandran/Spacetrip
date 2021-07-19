@@ -39,25 +39,25 @@ class AdminHomeController extends AbstractController
      */
     public function showDashboard(): Response
     {
+        //Check if user connected
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
 
-        //Calculate the percentage of use of each Spacecrafts in trips
-
+        //Calculate the percentage of use of each Spacecrafts in trips & put in array
         $spacecrafts = $this->spacecraftRepository->findAll();
         $spacecraftPercentages = [];
         foreach ($spacecrafts as $spacecraft) {
             $percentage = (count($spacecraft->getTrip()) / count($this->tripRepository->findAll())) * 100;
             array_push($spacecraftPercentages, $percentage);
         }
-
-        //Calculate the percentage of use of each Destinations in trips
-
+        
+        //Calculate the percentage of use of each Destinations in trips & put in array
         $destinations = $this->destinationRepository->findAll();
         $destinationPercentages = [];
         foreach ($destinations as $destination) {
             $percentage = (count($destination->getTrips()) / count($this->tripRepository->findAll())) * 100;
             array_push($destinationPercentages, $percentage);
         }
+        
         return $this->render('admin/index.html.twig', [
             'spacecrafts' => $spacecrafts,
             'spacecraftPercentages' => $spacecraftPercentages,
@@ -73,8 +73,11 @@ class AdminHomeController extends AbstractController
      */
     public function showLatestTrips(): Response
     {
+        //Check if user connected
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
+        
         $trips = $this->tripRepository->findBy(['reserved' => false], ['createdAt' => 'DESC'], 5);
+        
         return $this->render('admin/index.html.twig', [
             'trips' => $trips,
             'class' => 'trip',
@@ -89,7 +92,11 @@ class AdminHomeController extends AbstractController
      */
     public function showLatestSpacecrafts(): Response
     {
+        //Check if user connected
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
+
         $spacecrafts = $this->spacecraftRepository->findLatestSpacecrafts('updatedAt', 5);
+        
         return $this->render('admin/index.html.twig', [
             'spacecrafts' => $spacecrafts,
             'class' => 'spacecraft'
@@ -103,7 +110,11 @@ class AdminHomeController extends AbstractController
      */
     public function showLatestUsers(): Response
     {
+        //Check if user connected
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
+
         $users = $this->userRepository->findBy([], ['createdAt' => 'DESC'], 5);
+        
         return $this->render('admin/index.html.twig', [
             'users' => $users,
             'class' => 'user'
@@ -117,7 +128,11 @@ class AdminHomeController extends AbstractController
      */
     public function showLatestFeedbacks(): Response
     {
+        //Check if user connected
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
+
         $feedbacks = $this->feedbackRepository->findBy([], ['createdAt' => 'DESC'], 5);
+        
         return $this->render('admin/index.html.twig', [
             'feedbacks' => $feedbacks,
             'class' => 'feedback'
@@ -131,7 +146,11 @@ class AdminHomeController extends AbstractController
      */
     public function showLatestReservedTrips(): Response
     {
+        //Check if user connected
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
+
         $trips = $this->tripRepository->findBy(['reserved' => true], ['createdAt' => 'DESC'], 5);
+        
         return $this->render('admin/index.html.twig', [
             'trips' => $trips,
             'class' => 'trip',

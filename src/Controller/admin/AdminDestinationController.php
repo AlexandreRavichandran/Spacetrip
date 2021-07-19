@@ -31,6 +31,9 @@ class AdminDestinationController extends AbstractController
      */
     public function index(Request $request): Response
     {
+        //Check if user connected
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
+
         $destinations = $this->paginator->paginate($this->repo->findAll(), $request->query->getInt('page', 1), 11);
 
         return $this->render('admin/destination/index.html.twig', [
@@ -45,6 +48,9 @@ class AdminDestinationController extends AbstractController
      */
     public function create(Request $request): Response
     {
+        //Check if user connected
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
+
         $form = $this->createForm(DestinationType::class);
 
         $form->handleRequest($request);
@@ -68,6 +74,9 @@ class AdminDestinationController extends AbstractController
      */
     public function edit(Destination $destination): Response
     {
+        //Check if user connected
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
+
         $form = $this->createForm(DestinationType::class, $destination);
 
         return $this->render('admin/destination/edit.html.twig', [
@@ -84,9 +93,12 @@ class AdminDestinationController extends AbstractController
      */
     public function delete(Destination $destination, TripRepository $tripRepo): Response
     {
+        //Check if destination is related to a existant trip
         $checkIfTripExists = $tripRepo->findBy(['destination' => $destination->getId()]);
+
         if ($checkIfTripExists) {
             $tripNames = [];
+            //Set all existant trips into an array to convert to string and add to flash message
             foreach ($checkIfTripExists as $trip) {
                 array_push($tripNames, $trip->getName());
             }
@@ -97,6 +109,7 @@ class AdminDestinationController extends AbstractController
             $this->em->flush();
             $this->addFlash('success', 'La destination ' . $destination->getName() . ' a été supprimé.');
         }
+
         return $this->redirectToRoute('app_admin_destination_index');
     }
 }
