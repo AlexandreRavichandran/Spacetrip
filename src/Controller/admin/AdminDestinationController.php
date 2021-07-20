@@ -72,13 +72,19 @@ class AdminDestinationController extends AbstractController
      * @Route("/admin/destinations/{id}/edit",name="app_admin_destination_edit")
      * @return Response
      */
-    public function edit(Destination $destination): Response
+    public function edit(Destination $destination, Request $request): Response
     {
         //Check if user connected
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
 
         $form = $this->createForm(DestinationType::class, $destination);
-
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $destination = $form->getData();
+            $this->em->flush();
+            $this->addFlash('success', 'La modification de la destination a été effectué avec succès.');
+            return $this->redirectToRoute('app_admin_destination_index');
+        }
         return $this->render('admin/destination/edit.html.twig', [
             'form' => $form->createView(),
             'destination' => $destination,
