@@ -5,17 +5,17 @@ vich_uploader:
         pictures_destination:
             uri_prefix: /images/pictures_destinations
             upload_destination: '%kernel.project_dir%/public/images/pictures_destinations'
-            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
 
         pictures_spacecrafts:
             uri_prefix: /images/pictures_spacecrafts
             upload_destination: '%kernel.project_dir%/public/images/pictures_spacecrafts'
-            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
 
         pictures_spacecrafts_brands:
             uri_prefix: /images/pictures_spacecrafts/pictures_spacecrafts_brands
             upload_destination: '%kernel.project_dir%/public/images/pictures_spacecrafts/pictures_spacecrafts_brands'
-            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
         
 
 

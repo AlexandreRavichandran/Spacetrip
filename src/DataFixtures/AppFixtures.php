@@ -50,7 +50,8 @@ class AppFixtures extends Fixture
             $destination = new Destination;
             $destination->setName($response['bodies'][$i]['name'])
                 ->setDescription($faker->sentence(6))
-                ->setDistance($distance);
+                ->setDistance($distance)
+                ->setImageName('picture_' . $destination->getName() . '.jpg');
             $manager->persist($destination);
             $manager->flush();
             array_push($destinations, $destination);
