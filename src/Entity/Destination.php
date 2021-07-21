@@ -61,11 +61,19 @@ class Destination
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      * 
-     * @Vich\UploadableField(mapping="pictures_destination", fileNameProperty="name")
+     * @Vich\UploadableField(mapping="pictures_destination", fileNameProperty="imageName")
      * 
      * @var File|null
      */
     private $imageFile;
+
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @var string|null
+     */
+    private $imageName;
+
 
     public function __construct()
     {
@@ -223,5 +231,15 @@ class Destination
     public function getImageFile(): ?File
     {
         return $this->imageFile;
+    }
+
+    public function setImageName(?string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
     }
 }
