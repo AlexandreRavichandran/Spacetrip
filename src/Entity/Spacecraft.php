@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
+ * @Vich\Uploadable
  * @ORM\Entity(repositoryClass=SpacecraftRepository::class)
  * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity(
