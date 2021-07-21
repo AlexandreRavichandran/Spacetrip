@@ -18,7 +18,7 @@ vich_uploader:
 
         pictures_spacecrafts_brands:
             uri_prefix: /images/pictures_spacecrafts/pictures_spacecrafts_brands
-            upload_destination: '%kernel.project_dir%/public//images/pictures_spacecrafts/pictures_spacecrafts_brands'
+            upload_destination: '%kernel.project_dir%/public/images/pictures_spacecrafts/pictures_spacecrafts_brands'
             namer: 
                 service: Vich\UploaderBundle\Naming\PropertyNamer
                 options: {property: 'name'}

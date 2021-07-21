@@ -11,6 +11,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Vich\UploaderBundle\Form\Type\VichFileType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class DestinationType extends AbstractType
 {
@@ -31,7 +33,9 @@ class DestinationType extends AbstractType
                 'choice_label' => 'name',
                 'label' => 'Vaisseau disponibles pour cette destination',
                 'multiple' => true
-            ]);
+
+            ])
+            ->add('image', VichImageType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
