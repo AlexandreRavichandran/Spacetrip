@@ -61,7 +61,7 @@ class Destination
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      * 
-     * @Vich\UploadableField(mapping="product_image", fileNameProperty="name")
+     * @Vich\UploadableField(mapping="pictures_destination", fileNameProperty="name")
      * 
      * @var File|null
      */
@@ -205,7 +205,11 @@ class Destination
         return $this;
     }
 
-    public function setImageFile(?File $imageFile = null): void
+    /**
+     *
+     * @param File|UploadedFile|null $imageFile
+     */
+    public function setImageFile(?File $imageFile = null)
     {
         $this->imageFile = $imageFile;
 

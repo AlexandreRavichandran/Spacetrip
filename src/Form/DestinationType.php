@@ -35,7 +35,16 @@ class DestinationType extends AbstractType
                 'multiple' => true
 
             ])
-            ->add('image', VichImageType::class);
+            ->add('imageFile', VichImageType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => '...',
+                'download_label' => '...',
+                'download_uri' => true,
+                'image_uri' => true,
+                //'imagine_pattern' => '...',
+                'asset_helper' => true,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
