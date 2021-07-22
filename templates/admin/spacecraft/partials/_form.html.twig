@@ -21,6 +21,9 @@
         {{form_row(form.pricePerDistance)}}
         </div>
     </div>
+    <div class="row d-flex justify-content-center">
+        {{form_row(form.imageFile)}}
+    </div>
         {{form_row(form.description)}}
     <div class="row">
         <button class="btn btn-primary w-25 ml-auto mr-auto">{% if action is same as 'create' %} Créer un nouveau{% else %} Modifier un {% endif %} vaisseau</button>

@@ -72,6 +72,7 @@ class AppFixtures extends Fixture
             for ($i = 0; $i <= mt_rand(1, 6); $i++) {
                 $spacecraft->addPossibleDestination($destinations[mt_rand(0, count($destinations) - 1)]);
             }
+            $spacecraft->setImageName('picture_' . $spacecraft->getName() . '.jpg');
             $manager->persist($spacecraft);
             $manager->flush();
             array_push($spacecrafts_object, $spacecraft);

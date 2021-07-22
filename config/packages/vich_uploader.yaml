@@ -7,10 +7,10 @@ vich_uploader:
             upload_destination: '%kernel.project_dir%/public/images/pictures_destinations'
             namer: App\Service\ImageNamer
 
-        pictures_spacecrafts:
+        pictures_spacecraft:
             uri_prefix: /images/pictures_spacecrafts
             upload_destination: '%kernel.project_dir%/public/images/pictures_spacecrafts'
-            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            namer: App\Service\ImageNamer
 
         pictures_spacecrafts_brands:
             uri_prefix: /images/pictures_spacecrafts/pictures_spacecrafts_brands

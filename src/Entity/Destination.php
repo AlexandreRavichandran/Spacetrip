@@ -8,11 +8,16 @@ use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Vich\UploaderBundle\Naming\NamerInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @Vich\Uploadable
  * @ORM\Entity(repositoryClass=DestinationRepository::class)
+ * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity(
+ *              fields={"name"},
+ *              message="Cette destination existe déja dans la base."
+ *)
  */
 class Destination
 {

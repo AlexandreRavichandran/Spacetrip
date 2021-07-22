@@ -54,7 +54,7 @@
         <div class="col-xs-12 col-md-12 col-lg-4 ">
             <h3 class="text-center"> Le vaisseau </h3>
             <div class="row">
-                <img class="ml-auto mr-auto w-75 m-2" src="/images/pictures_spacecrafts/picture_{{trip.spacecraft.name}}.jpg" alt="" >
+                <img class="ml-auto mr-auto w-75 m-2" src="/images/pictures_spacecrafts/{{trip.spacecraft.imageName}}" alt="" >
             </div>
             <div class="row mt-2">
                 <h4 class="ml-auto mr-auto"> <a class="d-block" href="{{path('app_spacecraft_show',{'id':trip.spacecraft.id})}}">{{trip.spacecraft.name}} ({{trip.spacecraft.brand}})</a></h4>
