@@ -11,6 +11,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Vich\UploaderBundle\Form\Type\VichFileType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class DestinationType extends AbstractType
 {
@@ -31,6 +33,16 @@ class DestinationType extends AbstractType
                 'choice_label' => 'name',
                 'label' => 'Vaisseau disponibles pour cette destination',
                 'multiple' => true
+
+            ])
+            ->add('imageFile', VichImageType::class, [
+                'label' => 'Image de la destination (formats acceptés : JPG, PNG)',
+                'required' => false,
+                'allow_delete' => false,
+                'download_uri' => false,
+                'image_uri' => true,
+                //'imagine_pattern' => '...',
+                'asset_helper' => true,
             ]);
     }
 

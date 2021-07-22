@@ -2,13 +2,22 @@
 
 namespace App\Entity;
 
-use App\Repository\DestinationRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\DestinationRepository;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
+ * @Vich\Uploadable
  * @ORM\Entity(repositoryClass=DestinationRepository::class)
+ * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity(
+ *              fields={"name"},
+ *              message="Cette destination existe déja dans la base."
+ *)
  */
 class Destination
 {
@@ -35,6 +44,16 @@ class Destination
     private $distance;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
+    /**
      * @ORM\OneToMany(targetEntity=Trip::class, mappedBy="destination")
      */
     private $trips;
@@ -43,6 +62,23 @@ class Destination
      * @ORM\ManyToMany(targetEntity=Spacecraft::class, mappedBy="possibleDestination")
      */
     private $spacecrafts;
+
+    /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     * 
+     * @Vich\UploadableField(mapping="pictures_destination", fileNameProperty="imageName")
+     * 
+     * @var File|null
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @var string|null
+     */
+    private $imageName;
+
 
     public function __construct()
     {
@@ -87,6 +123,40 @@ class Destination
     public function setDistance(float $distance): self
     {
         $this->distance = $distance;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set automatically the date of creation
+     * @ORM\PrePersist
+     * @return self
+     */
+    public function setCreatedAt(): self
+    {
+        $this->createdAt = new \DateTimeImmutable();
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set automatically the date of update
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     * @return self
+     */
+    public function setUpdatedAt(): self
+    {
+        $this->updatedAt = new \DateTimeImmutable();
 
         return $this;
     }
@@ -146,5 +216,35 @@ class Destination
         }
 
         return $this;
+    }
+
+    /**
+     *
+     * @param File|UploadedFile|null $imageFile
+     */
+    public function setImageFile(?File $imageFile = null)
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->setUpdatedAt(new \DateTimeImmutable());
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageName(?string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
     }
 }

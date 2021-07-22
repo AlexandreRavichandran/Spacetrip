@@ -6,6 +6,7 @@ use App\Entity\Spacecraft;
 use App\Entity\Destination;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -48,6 +49,15 @@ class SpacecraftType extends AbstractType
             ])
             ->add('speed', NumberType::class, [
                 'label' => 'Vitesse du vaisseau (km/h)'
+            ])
+            ->add('imageFile', VichImageType::class, [
+                'label' => 'Image du vaisseau (formats acceptés : JPG, PNG)',
+                'required' => true,
+                'allow_delete' => false,
+                'download_uri' => false,
+                'image_uri' => true,
+                //'imagine_pattern' => '...',
+                'asset_helper' => true,
             ]);
     }
 

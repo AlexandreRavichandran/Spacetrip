@@ -1,0 +1,21 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        pictures_destination:
+            uri_prefix: /images/pictures_destinations
+            upload_destination: '%kernel.project_dir%/public/images/pictures_destinations'
+            namer: App\Service\ImageNamer
+
+        pictures_spacecraft:
+            uri_prefix: /images/pictures_spacecrafts
+            upload_destination: '%kernel.project_dir%/public/images/pictures_spacecrafts'
+            namer: App\Service\ImageNamer
+
+        pictures_spacecrafts_brands:
+            uri_prefix: /images/pictures_spacecrafts/pictures_spacecrafts_brands
+            upload_destination: '%kernel.project_dir%/public/images/pictures_spacecrafts/pictures_spacecrafts_brands'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+        
+
+
