@@ -51,7 +51,7 @@ class SpacecraftType extends AbstractType
                 'label' => 'Vitesse du vaisseau (km/h)'
             ])
             ->add('imageFile', VichImageType::class, [
-                'label' => 'Image du vaisseau',
+                'label' => 'Image du vaisseau (formats acceptés : JPG, PNG)',
                 'required' => true,
                 'allow_delete' => false,
                 'download_uri' => false,
