@@ -36,11 +36,10 @@ class DestinationType extends AbstractType
 
             ])
             ->add('imageFile', VichImageType::class, [
+                'label' => 'Image de la destination',
                 'required' => false,
-                'allow_delete' => true,
-                'delete_label' => '...',
-                'download_label' => '...',
-                'download_uri' => true,
+                'allow_delete' => false,
+                'download_uri' => false,
                 'image_uri' => true,
                 //'imagine_pattern' => '...',
                 'asset_helper' => true,
