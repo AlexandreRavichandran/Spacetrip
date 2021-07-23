@@ -44,12 +44,14 @@
                     <td scope="col" class="text-center">{{trip.availableSeatNumber}}</td>
                     {% endif %}
                     <td scope="col" class="text-center">
-                        <select name="tripStatus_{{trip.id}}" id="tripStatus_{{trip.id}}" onchange="changeTripStatus({{trip.id}})">
-                            <option {% if trip.status is same as 1 %} selected {% endif %} value="1">Non payé</option>
-                            <option {% if trip.status is same as 2 %} selected {% endif %} value="2">Disponible</option>
-                            <option {% if trip.status is same as 3 %} selected {% endif %} value="3">Complet</option>
-                            <option {% if trip.status is same as 4 %} selected {% endif %} value="4">Terminé</option>
-                        </select>
+                        <div class="form-group">
+                            <select class="form-control" name="tripStatus_{{trip.id}}" id="tripStatus_{{trip.id}}" onchange="changeTripStatus({{trip.id}})">
+                                <option {% if trip.status is same as 1 %} selected {% endif %} value="1">Non payé</option>
+                                <option {% if trip.status is same as 2 %} selected {% endif %} value="2">Disponible</option>
+                                <option {% if trip.status is same as 3 %} selected {% endif %} value="3">Complet</option>
+                                <option {% if trip.status is same as 4 %} selected {% endif %} value="4">Terminé</option>
+                            </select>
+                        </div>
                     </td>
                     <td scope="col" class="d-flex flex-column justify-content-center">
                         <a href="{{path('app_admin_trip_edit',{'id':trip.id})}}" class="btn btn-warning btn-sm mb-2">Editer</a>

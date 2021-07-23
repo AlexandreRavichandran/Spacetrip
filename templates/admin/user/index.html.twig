@@ -29,8 +29,8 @@
                     <td class="text-center" scope="col">{{user.feedback|length}} </td>
                     <td class="text-center" scope="col"> Ecrire la moyenne </td>
                     <td scope="col d-flex justify-content-center flex-row">
-                        <a href="{{path('app_admin_user_show',{'id':user.id})}}" class="d-block btn btn-primary btn-sm"> Voir le profil </a>
-                        <a href="" class="d-block btn btn-info btn-sm"> Contacter</a>
+                        <a href="{{path('app_admin_user_show',{'id':user.id})}}" class="d-block btn btn-info btn-sm"> Voir le profil </a>
+                        <a href="" class="d-block btn btn-warning btn-sm"> Contacter</a>
                     </td>
                 </tr>
             {% endfor %}

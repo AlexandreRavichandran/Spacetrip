@@ -15,6 +15,7 @@
                     <th scope="col" class="text-center">Date de création</th>
                     <th scope="col" class="text-center">Nom</th>
                     <th scope="col" class="text-center">Distance (km)</th>
+                    <th class="text-center">Vaisseaux disponibles</th>
                     <th scope="col" class="text-center">Actions</th>
                 </tr>
             </thead>
@@ -24,6 +25,13 @@
                     <td class="text-center" scope="col">{{destination.createdAt|date('d/m/Y H:i')}}</td>
                     <td class="text-center" scope="col">{{destination.name}}</td>
                     <td class="text-center" scope="col">{{destination.distance|number_format(0,'.',' ')}} km</td>
+                    <td class="text-center">
+                        <ul>
+                        {% for spacecraft in destination.spacecrafts %}
+                            <li>{{spacecraft.name}}</li>
+                        {% endfor %}
+                        </ul>
+                    </td>
                     <td scope="col" class="d-flex flex-column justify-content-center">
                         <a href="{{path('app_admin_destination_edit',{'id':destination.id})}}" class="btn btn-warning btn-sm">Editer</a>
                         <a onclick="event.preventDefault(); confirm('Etes vous sur de supprimer cette destination de la base de données ? Cette action est irréversible.') && document.querySelector('#destination_delete_link_{{destination.id}}').click()"  class="btn btn-sm btn-danger mt-1"> Supprimer </a>
