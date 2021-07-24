@@ -6,27 +6,31 @@
             <th class="text-center">Date</th>
             <th class="text-center">Destination</th>
             <th class="text-center">Distance</th>
-        
+            <th class="text-center">Vaisseaux associés</th>
             <th class="text-center">Actions</th>
         </tr>
     </thead>
     <tbody>
     {% for destination in destinations %}
         <tr class="table">
-            <td class="text-center">{{destination.createdAt|date('d-m-Y H:i')}}</td>
-            <td class="text-center">{{destination.name|upper}}</td>
-            <td class="text-center">{{destination.distance|number_format(0,'.',' ')}} km</td>
-            <td class="text-center">
-                <ul>
-                {% for spacecraft in destination.spacecrafts %}
-                    <li>{{spacecraft.name}}</li>
-                {% endfor %}
-                </ul>
+            <td class="text-center align-middle">{{destination.createdAt|date('d-m-Y H:i')}}</td>
+            <td class="text-center align-middle">{{destination.name|upper}}</td>
+            <td class="text-center align-middle">{{destination.distance|number_format(0,'.',' ')}} km</td>
+            <td class="text-center align-middle">
+                {% if destination.spacecrafts is not same as null %}
+                    <ul>
+                    {% for spacecraft in destination.spacecrafts %}
+                        <li class="mt-2">{{spacecraft.name}} {{addColorByStatus(spacecraft.available)}}</li>
+                    {% endfor %}
+                    </ul>
+                {% else %}
+                    Aucun
+                {% endif %}
             </td>
-            <td class="d-flex flex-row">
-                <a href="{{path('app_admin_destination_edit',{'id':destination.id})}}" class="btn btn-sm btn-warning">Editer</a>
-                <a onclick="event.preventDefault(); confirm('Etes vous sur de supprimer cette destination de la base de données ? Cette action est irréversible.') && document.querySelector('#destination_delete_link').click()"  class="btn btn-sm btn-danger ml-1"> Supprimer </a>
-                <a id="destination_delete_link" style="display:none;" href="{{path('app_admin_destination_delete',{'id':destination.id})}}"></a>
+            <td class="d-flex flex-row justify-content-center">
+                <a href="{{path('app_admin_destination_edit',{'id':destination.id})}}" class="d-block btn btn-sm btn-warning">Editer</a>
+                <a onclick="event.preventDefault(); confirm('Etes vous sur de supprimer cette destination de la base de données ? Cette action est irréversible.') && document.querySelector('#destination_delete_link').click()"  class="d-block btn btn-sm btn-danger ml-1"> Supprimer </a>
+                <a id="destination_delete_link" class="d-none" href="{{path('app_admin_destination_delete',{'id':destination.id})}}"></a>
             </td>
         </tr>
     {% endfor %}

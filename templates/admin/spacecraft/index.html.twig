@@ -29,29 +29,29 @@
             <tbody>
             {% for spacecraft in spacecrafts %}
                 <tr>
-                    <td class="text-center" scope="col">{{spacecraft.createdAt|date('d/m/Y H:i')}}</td>
-                    <td class="text-center" scope="col">{{spacecraft.name|upper}}</td>
-                    <td class="text-center" scope="col">{{spacecraft.brand}}</td>
-                    <td class="text-center" scope="col">{{spacecraft.nationality}}</td>
-                    <td class="text-center" scope="col"> 
+                    <td class="text-center align-middle" scope="col">{{spacecraft.createdAt|date('d/m/Y H:i')}}</td>
+                    <td class="text-center align-middle" scope="col">{{spacecraft.name|upper}}</td>
+                    <td class="text-center align-middle" scope="col">{{spacecraft.brand}}</td>
+                    <td class="text-center align-middle" scope="col">{{spacecraft.nationality}}</td>
+                    <td class="text-center align-middle" scope="col"> 
                         <ul>
                             {% for possibleDestination in spacecraft.possibleDestination %}
                             <li> {{possibleDestination.name}}</li>
                             {% endfor %}
                         </ul>
                     </td>
-                    <td class="text-center" scope="col">{{formatPrice(spacecraft.reservationPrice,0)}} € + {{formatPrice(spacecraft.pricePerDistance,5)}} €/km</td>
-                    <td class="text-center" scope="col">{{displayStarRating(spacecraft.rating)}}</td>
-                    <td class="text-center" scope="col">
+                    <td class="text-center align-middle" scope="col">{{formatPrice(spacecraft.reservationPrice,0)}} € + {{formatPrice(spacecraft.pricePerDistance,5)}} €/km</td>
+                    <td class="text-center align-middle" scope="col">{{displayStarRating(spacecraft.rating)}}</td>
+                    <td class="text-center align-middle" scope="col">
                         <div class="custom-control custom-switch">
                             <input class="custom-control-input" type="checkbox" onchange="ajaxCheckbox({{spacecraft.id}})" {% if spacecraft.available is same as true %} checked value= "1" {% else %} value="0" {% endif %} name="available_checkbox_{{spacecraft.id}}" id="available_checkbox_{{spacecraft.id}}">
                             <label class="switch-custom custom-control-label" for="available_checkbox_{{spacecraft.id}}"></label>
                         </div>    
                     </td>
                     <td scope="col" class="d-flex flex-column justify-content-center">
-                        <a href="{{path('app_admin_spacecraft_edit',{'id':spacecraft.id})}}" class="btn btn-warning btn-sm">Editer</a>
-                        <a onclick="event.preventDefault(); confirm('Etes vous sur de supprimer ce vaisseau de la base de données ? Cette action est irréversible.') && document.querySelector('#spacecraft_delete_link_{{spacecraft.id}}').click()"  class="btn btn-sm btn-danger mt-1"> Supprimer </a>
-                        <a id="spacecraft_delete_link_{{spacecraft.id}}" style="display:none;" href="{{path('app_admin_spacecraft_delete',{'id':spacecraft.id})}}"></a>
+                        <a href="{{path('app_admin_spacecraft_edit',{'id':spacecraft.id})}}" class="d-block btn btn-warning btn-sm">Editer</a>
+                        <a onclick="event.preventDefault(); confirm('Etes vous sur de supprimer ce vaisseau de la base de données ? Cette action est irréversible.') && document.querySelector('#spacecraft_delete_link_{{spacecraft.id}}').click()"  class="d-block btn btn-sm btn-danger mt-1"> Supprimer </a>
+                        <a id="spacecraft_delete_link_{{spacecraft.id}}" class="d-none" href="{{path('app_admin_spacecraft_delete',{'id':spacecraft.id})}}"></a>
                     </td>
                 </tr>
             {% endfor %}

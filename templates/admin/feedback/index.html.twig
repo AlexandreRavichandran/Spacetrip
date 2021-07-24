@@ -24,9 +24,9 @@
                     <td class="text-center" scope="col"><a href="">{{feedback.spacecraft.name|upper}}</a></td>
                     <td class="text-center" scope="col">{{displayStarRating(feedback.rating)}}</td>
                     <td class="text-center" scope="col">{{feedback.content}}</td>
-                    <td scope="col d-flex flex-column justify-content-center">
-                        <a href="" class="btn btn-info btn-sm"> Contacter l'utilisateur </a>
-                        <a href="{{path('app_admin_feedback_delete',{'id':feedback.id})}}" class="btn btn-danger btn-sm mt-1"> Supprimer</a>
+                    <td scope="col" class="d-flex flex-row justify-content-center">
+                        <a href="" class="d-block btn btn-info btn-sm"> Contacter</a>
+                        <a href="{{path('app_admin_feedback_delete',{'id':feedback.id})}}" class="d-block btn btn-danger btn-sm ml-1"> Supprimer</a>
                     </td>
                 </tr>
             {% endfor %}

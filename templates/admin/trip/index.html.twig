@@ -35,15 +35,15 @@
             <tbody>
             {% for trip in trips %}
                 <tr>
-                    <td scope="col" class="text-center">{{trip.createdAt|date('d/m/Y H:i')}}</td>
-                    <td scope="col" class="text-center">{{trip.name}} ({{trip.destination.name|upper}})</td>
-                    <td scope="col" class="text-center">{{trip.departureAt|date('d/m/Y H:i')}}</td>
-                    <td scope="col" class="text-center">{{trip.arrivalAt|date('d/m/Y H:i')}}</td>
-                    <td scope="col" class="text-center">{{trip.spacecraft.name|upper}}</td>
+                    <td scope="col" class="text-center align-middle">{{trip.createdAt|date('d/m/Y H:i')}}</td>
+                    <td scope="col" class="text-center align-middle">{{trip.name}} ({{trip.destination.name|upper}})</td>
+                    <td scope="col" class="text-center align-middle">{{trip.departureAt|date('d/m/Y H:i')}}</td>
+                    <td scope="col" class="text-center align-middle">{{trip.arrivalAt|date('d/m/Y H:i')}}</td>
+                    <td scope="col" class="text-center align-middle">{{trip.spacecraft.name|upper}}</td>
                     {% if trip.reserved is same as false %}
-                    <td scope="col" class="text-center">{{trip.availableSeatNumber}}</td>
+                    <td scope="col" class="text-center align-middle">{{trip.availableSeatNumber}}</td>
                     {% endif %}
-                    <td scope="col" class="text-center">
+                    <td scope="col" class="text-center align-middle">
                         <div class="form-group">
                             <select class="form-control" name="tripStatus_{{trip.id}}" id="tripStatus_{{trip.id}}" onchange="changeTripStatus({{trip.id}})">
                                 <option {% if trip.status is same as 1 %} selected {% endif %} value="1">Non payé</option>
@@ -54,9 +54,9 @@
                         </div>
                     </td>
                     <td scope="col" class="d-flex flex-column justify-content-center">
-                        <a href="{{path('app_admin_trip_edit',{'id':trip.id})}}" class="btn btn-warning btn-sm mb-2">Editer</a>
-                        <a onclick="event.preventDefault(); confirm('Etes vous sur de supprimer ce voyage de la base de données ? Cette action est irréversible.') && document.querySelector('#trip_delete_link_{{trip.id}}').click()"  class="btn btn-sm btn-danger"> Supprimer </a>
-                        <a id="trip_delete_link_{{trip.id}}" style="display:none;" href="{{path('app_admin_trip_delete',{'id':trip.id})}}"></a>
+                        <a href="{{path('app_admin_trip_edit',{'id':trip.id})}}" class="d-block btn btn-warning btn-sm mb-2">Editer</a>
+                        <a onclick="event.preventDefault(); confirm('Etes vous sur de supprimer ce voyage de la base de données ? Cette action est irréversible.') && document.querySelector('#trip_delete_link_{{trip.id}}').click()"  class="d-block btn btn-sm btn-danger"> Supprimer </a>
+                        <a id="trip_delete_link_{{trip.id}}" class="d-none" href="{{path('app_admin_trip_delete',{'id':trip.id})}}"></a>
                     </td>
                 </tr>
             {% endfor %}

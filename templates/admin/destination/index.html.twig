@@ -22,20 +22,24 @@
             <tbody>
             {% for destination in destinations %}
                 <tr>
-                    <td class="text-center" scope="col">{{destination.createdAt|date('d/m/Y H:i')}}</td>
-                    <td class="text-center" scope="col">{{destination.name}}</td>
-                    <td class="text-center" scope="col">{{destination.distance|number_format(0,'.',' ')}} km</td>
-                    <td class="text-center">
+                    <td class="text-center align-middle" scope="col">{{destination.createdAt|date('d/m/Y H:i')}}</td>
+                    <td class="text-center align-middle" scope="col">{{destination.name}}</td>
+                    <td class="text-center align-middle" scope="col">{{destination.distance|number_format(0,'.',' ')}} km</td>
+                    <td class="text-center align-middle">
+                    {% if destination.spacecrafts is not same as null %}
                         <ul>
                         {% for spacecraft in destination.spacecrafts %}
                             <li>{{spacecraft.name}}</li>
                         {% endfor %}
                         </ul>
+                    {% else %}
+                        Aucun
+                    {% endif %}
                     </td>
-                    <td scope="col" class="d-flex flex-column justify-content-center">
-                        <a href="{{path('app_admin_destination_edit',{'id':destination.id})}}" class="btn btn-warning btn-sm">Editer</a>
-                        <a onclick="event.preventDefault(); confirm('Etes vous sur de supprimer cette destination de la base de données ? Cette action est irréversible.') && document.querySelector('#destination_delete_link_{{destination.id}}').click()"  class="btn btn-sm btn-danger mt-1"> Supprimer </a>
-                        <a id="destination_delete_link_{{destination.id}}" style="display:none;" href="{{path('app_admin_destination_delete',{'id':destination.id})}}"></a>
+                    <td class="d-flex flex-row justify-content-center">
+                        <a href="{{path('app_admin_destination_edit',{'id':destination.id})}}" class="d-block btn btn-sm btn-warning">Editer</a>
+                        <a onclick="event.preventDefault(); confirm('Etes vous sur de supprimer cette destination de la base de données ? Cette action est irréversible.') && document.querySelector('#destination_delete_link').click()"  class="d-block btn btn-sm btn-danger ml-1"> Supprimer </a>
+                        <a id="destination_delete_link" class="d-none" href="{{path('app_admin_destination_delete',{'id':destination.id})}}"></a>
                     </td>
                 </tr>
             {% endfor %}

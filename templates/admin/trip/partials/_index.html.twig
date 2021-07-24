@@ -26,10 +26,10 @@
             <td class="text-center">{{trip.availableSeatNumber}}</td>
             <td>{{trip.updatedAt|date('d-m-Y H:i')}}</td>
         {% endif %}
-            <td class="d-flex flex-row">
-                <a href="{{path('app_admin_trip_edit',{'id':trip.id})}}" class="btn btn-sm btn-warning">Editer</a>
-                <a onclick="event.preventDefault(); confirm('Etes vous sur de supprimer ce voyage de la base de données ? Cette action est irréversible.') && document.querySelector('#trip_delete_link').click()"  class="btn btn-sm btn-danger ml-1"> Supprimer </a>
-                <a id="trip_delete_link" style="display:none;" href="{{path('app_admin_trip_delete',{'id':trip.id})}}"></a>
+            <td class="d-flex flex-row justify-content-center">
+                <a href="{{path('app_admin_trip_edit',{'id':trip.id})}}" class="d-block btn btn-sm btn-warning">Editer</a>
+                <a onclick="event.preventDefault(); confirm('Etes vous sur de supprimer ce voyage de la base de données ? Cette action est irréversible.') && document.querySelector('#trip_delete_link').click()"  class="d-block btn btn-sm btn-danger ml-1"> Supprimer </a>
+                <a id="trip_delete_link" class="d-block" href="{{path('app_admin_trip_delete',{'id':trip.id})}}"></a>
             </td>
         </tr>
     {% endfor %}
