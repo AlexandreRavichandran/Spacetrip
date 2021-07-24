@@ -63,11 +63,13 @@ class TripRepository extends ServiceEntityRepository
      * @param string $order
      * @return array
      */
-    public function orderTrips($orderBy, $order): array
+    public function orderTrips($orderBy, $order, $reserved = false): array
     {
         return $this
             ->createQueryBuilder('t')
             ->innerJoin('t.spacecraft', 's')
+            ->andWhere('t.reserved = :reserved')
+            ->setParameter('reserved', $reserved)
             ->addOrderBy($orderBy, $order)
             ->getQuery()
             ->getResult();

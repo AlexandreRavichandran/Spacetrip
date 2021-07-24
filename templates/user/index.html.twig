@@ -111,7 +111,7 @@
                     <p class="mb-1"> Vaisseau : {{reservedTrip.spacecraft.name}}</p>
                     <p class="mb-1">Départ : {{reservedTrip.departureAt|date('d/m/Y H:i')}} à {{reservedTrip.spacecraft.nationality}}</p>
                     <p class="mb-1">Arrivée : {{reservedTrip.arrivalAt|date('d/m/Y H:i')}} à {{reservedTrip.spacecraft.nationality}}</p>
-                    <form {% if reservedTrip.status is same as 2 %} class="d-flex justify-content-end" {% endif %} action="{{path('app_get_ticket',{'trip':reservedTrip.id})}}" method="post" id="crsrForm">
+                    <form {% if reservedTrip.status is same as 2 %} class="d-flex justify-content-end" {% endif %} action="{{path('app_get_ticket',{'trip':reservedTrip.id})}}"  target="_blank" method="post" id="crsrForm">
                         <input type="hidden" name="token" value="{{csrf_token('getTicket')}}">
                         {{getStatus(reservedTrip.status,reservedTrip.id,true)}}
                     </form>

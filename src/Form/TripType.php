@@ -52,7 +52,8 @@ class TripType extends AbstractType
             ])
             ->add('reserved', CheckboxType::class, [
                 'label' => 'Voyage reservé',
-                'required' => false
+                'required' => false,
+                'label_attr' => ['class' => 'switch-custom'],
             ]);
 
         $formModifier = function (FormInterface $form, Destination $destination = null) {

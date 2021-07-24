@@ -1,0 +1,39 @@
+
+<h3 class="text-center"> Les dernières destinations crées/mises à jour </h3>
+<table class="table table-hover border">
+    <thead>
+        <tr class="table">
+            <th class="text-center">Date</th>
+            <th class="text-center">Destination</th>
+            <th class="text-center">Distance</th>
+            <th class="text-center">Vaisseaux associés</th>
+            <th class="text-center">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for destination in destinations %}
+        <tr class="table">
+            <td class="text-center align-middle">{{destination.createdAt|date('d-m-Y H:i')}}</td>
+            <td class="text-center align-middle">{{destination.name|upper}}</td>
+            <td class="text-center align-middle">{{destination.distance|number_format(0,'.',' ')}} km</td>
+            <td class="align-middle">
+                {% if destination.spacecrafts is not empty %}
+                    <ul>
+                    {% for spacecraft in destination.spacecrafts %}
+                        <li class="mt-2">{{spacecraft.name}} {{addColorByStatus(spacecraft.available)}}</li>
+                    {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="text-center align-middle">Aucun</p>
+                {% endif %}
+            </td>
+            <td class="d-flex flex-row justify-content-center">
+                <a href="{{path('app_admin_destination_edit',{'id':destination.id})}}" class="d-block btn btn-sm btn-warning">Editer</a>
+                <a onclick="event.preventDefault(); confirm('Etes vous sur de supprimer cette destination de la base de données ? Cette action est irréversible.') && document.querySelector('#destination_delete_link').click()"  class="d-block btn btn-sm btn-danger ml-1"> Supprimer </a>
+                <a id="destination_delete_link" class="d-none" href="{{path('app_admin_destination_delete',{'id':destination.id})}}"></a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<p class="ml-auto text-right"><a class="btn btn-sm btn-secondary" href="{{path('app_admin_destination_index')}}">Voir Tout</a></p>

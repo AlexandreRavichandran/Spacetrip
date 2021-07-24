@@ -42,7 +42,8 @@ class AdminTripController extends AbstractController
         return $this->render('admin/trip/index.html.twig', [
             'trips' => $trips,
             'order' => null,
-            'orderBy' => null
+            'orderBy' => null,
+            'reserved' => false
         ]);
     }
     /**
@@ -124,17 +125,18 @@ class AdminTripController extends AbstractController
      * @Route("/admin/trips/{orderBy}/{order}",name="app_admin_trip_sort")
      * @return Response
      */
-    public function sort(Request $request, string $orderBy, string $order): Response
+    public function sort(Request $request, string $orderBy, string $order, bool $reserved = false): Response
     {
         //Check if user connected
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
 
-        $trips = $this->paginator->paginate($this->tripRepository->orderTrips($orderBy, $order), $request->query->getInt('page', 1), 11);
+        $trips = $this->paginator->paginate($this->tripRepository->orderTrips($orderBy, $order, $reserved), $request->query->getInt('page', 1), 11);
 
         return $this->render('admin/trip/index.html.twig', [
             'trips' => $trips,
             'order' => $order,
-            'orderBy' => $orderBy
+            'orderBy' => $orderBy,
+            'reserved' => $reserved
         ]);
     }
     /* CRUD FOR RESERVED TRIPS */
@@ -154,7 +156,8 @@ class AdminTripController extends AbstractController
         return $this->render('admin/trip/index.html.twig', [
             'trips' => $trips,
             'order' => null,
-            'orderBy' => null
+            'orderBy' => null,
+            'reserved' => true
         ]);
     }
 

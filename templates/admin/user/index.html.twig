@@ -15,7 +15,6 @@
                     <th scope="col" class="text-center">Prenom <a href="{% if orderBy is same as 'u.firstName' and order is same as 'DESC' %}{{path('app_admin_user_sort',{'orderBy':'u.firstName','order':'ASC'})}}{% else %}{{path('app_admin_user_sort',{'orderBy':'u.firstName','order':'DESC'})}}{% endif %}" class="{{setSortingIcon(orderBy,'u.firstName', order)}}"></a></th>
                     <th scope="col" class="text-center">E-mail <a href="{% if orderBy is same as 'u.email' and order is same as 'DESC' %}{{path('app_admin_user_sort',{'orderBy':'u.email','order':'ASC'})}}{% else %}{{path('app_admin_user_sort',{'orderBy':'u.email','order':'DESC'})}}{% endif %}" class="{{setSortingIcon(orderBy,'u.email', order)}}"></a>
                     <th scope="col" class="text-center">Nombre de commentaires </th>
-                    <th scope="col" class="text-center">Note moyenne <a href="#" class="bi bi-sort-numeric-down"></a></th>
                     <th scope="col" class="text-center">Actions</th>
                 </tr>
             </thead>
@@ -27,10 +26,9 @@
                     <td class="text-center" scope="col">{{user.firstName}}</td>
                     <td class="text-center" scope="col"><a href="{{path('app_admin_user_show',{'id':user.id})}}">{{user.email}}</a></td>
                     <td class="text-center" scope="col">{{user.feedback|length}} </td>
-                    <td class="text-center" scope="col"> Ecrire la moyenne </td>
-                    <td scope="col d-flex justify-content-center flex-column">
-                        <a href="{{path('app_admin_user_show',{'id':user.id})}}" class="btn btn-primary btn-sm"> Voir le profil </a>
-                        <a href="" class="btn btn-info btn-sm mt-1"> Contacter l'utilisateur </a>
+                    <td scope="col" class="d-flex justify-content-center flex-row">
+                        <a href="{{path('app_admin_user_show',{'id':user.id})}}" class="d-block btn btn-info btn-sm"> Voir le profil </a>
+                        <a href="" class="d-block btn btn-warning btn-sm ml-1"> Contacter</a>
                     </td>
                 </tr>
             {% endfor %}

@@ -9,8 +9,6 @@
             <thead>
                 <tr>
                     <th scope="col" class="text-center">Date</th>
-                    <th scope="col" class="text-center">Nom <a href="{% if orderBy is same as 'u.lastName' and order is same as 'DESC' %}{{path('app_admin_feedback_sort',{'orderBy':'u.lastName','order':'ASC'})}}{% else %}{{path('app_admin_feedback_sort',{'orderBy':'u.lastName','order':'DESC'})}}{% endif %}" class="{{setSortingIcon(orderBy,'u.lastName', order)}}"></a></th>
-                    <th scope="col" class="text-center">Prenom <a href="{% if orderBy is same as 'u.firstName' and order is same as 'DESC' %}{{path('app_admin_feedback_sort',{'orderBy':'u.firstName','order':'ASC'})}}{% else %}{{path('app_admin_feedback_sort',{'orderBy':'u.firstName','order':'DESC'})}}{% endif %}" class="{{setSortingIcon(orderBy,'u.firstName', order)}}"></a></th>
                     <th scope="col" class="text-center">E-mail <a href="{% if orderBy is same as 'u.email' and order is same as 'DESC' %}{{path('app_admin_feedback_sort',{'orderBy':'u.email','order':'ASC'})}}{% else %}{{path('app_admin_feedback_sort',{'orderBy':'u.email','order':'DESC'})}}{% endif %}" class="{{setSortingIcon(orderBy,'u.email', order)}}"></a></th>
                     <th scope="col" class="text-center">Vaisseau <a href="{% if orderBy is same as 's.name' and order is same as 'DESC' %}{{path('app_admin_feedback_sort',{'orderBy':'s.name','order':'ASC'})}}{% else %}{{path('app_admin_feedback_sort',{'orderBy':'s.name','order':'DESC'})}}{% endif %}" class="{{setSortingIcon(orderBy,'s.name', order)}}"></a></th>
                     <th scope="col" class="text-center">Note <a href="{% if orderBy is same as 'f.rating' and order is same as 'DESC' %}{{path('app_admin_feedback_sort',{'orderBy':'f.rating','order':'ASC'})}}{% else %}{{path('app_admin_feedback_sort',{'orderBy':'f.rating','order':'DESC'})}}{% endif %}" class="{{setSortingIcon(orderBy,'f.rating', order,'numeric')}}"></a></th>
@@ -21,16 +19,14 @@
             <tbody>
             {% for feedback in feedbacks %}
                 <tr style="height:40px;">
-                    <td class="text-center" scope="col">{{feedback.createdAt|date('d/m/Y H:i:s')}}</td>
-                    <td class="text-center" scope="col">{{feedback.user.lastName}}</td>
-                    <td class="text-center" scope="col">{{feedback.user.firstName}}</td>
+                    <td class="text-center" scope="col">{{feedback.createdAt|date('d/m/Y H:i')}}</td>
                     <td class="text-center" scope="col"><a href="#">{{feedback.user.email}}</a></td>
                     <td class="text-center" scope="col"><a href="">{{feedback.spacecraft.name|upper}}</a></td>
                     <td class="text-center" scope="col">{{displayStarRating(feedback.rating)}}</td>
                     <td class="text-center" scope="col">{{feedback.content}}</td>
-                    <td scope="col d-flex flex-column justify-content-center">
-                        <a href="" class="btn btn-info btn-sm"> Contacter l'utilisateur </a>
-                        <a href="{{path('app_admin_feedback_delete',{'id':feedback.id})}}" class="btn btn-danger btn-sm mt-1"> Supprimer</a>
+                    <td scope="col" class="d-flex flex-row justify-content-center">
+                        <a href="" class="d-block btn btn-info btn-sm"> Contacter</a>
+                        <a href="{{path('app_admin_feedback_delete',{'id':feedback.id})}}" class="d-block btn btn-danger btn-sm ml-1"> Supprimer</a>
                     </td>
                 </tr>
             {% endfor %}

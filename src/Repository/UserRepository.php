@@ -54,7 +54,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     /**
-     * Select users only with a specific role
+     * Select one user only with a specific role
      *
      * @param string $role
      * @param int $numberOfResults
@@ -66,6 +66,25 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->createQueryBuilder('u')
             ->andWhere('u.roles LIKE :role')
             ->setParameter('role', '%"' . $role . '"%')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Select users only with a specific role
+     *
+     * @param string $role
+     * @param integer $limit
+     * @return array
+     */
+    public function showLatestUsers(string $role, int $limit): array
+    {
+        return $this
+            ->createQueryBuilder('u')
+            ->andWhere('u.roles LIKE :role')
+            ->setParameter('role', '%"' . $role . '"%')
+            ->orderBy('u.createdAt', 'DESC')
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult();

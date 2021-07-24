@@ -15,7 +15,8 @@ class AppExtension extends AbstractExtension
             new TwigFunction('setSortingPath', [$this, 'setSortingPath']),
             new TwigFunction('setSortingIcon', [$this, 'setSortingIcon']),
             new TwigFunction('formatPrice', [$this, 'formatPrice']),
-            new TwigFunction('getStatus', [$this, 'getStatus'])
+            new TwigFunction('getStatus', [$this, 'getStatus']),
+            new TwigFunction('addColorByStatus', [$this, 'addColorByStatus'])
         ];
     }
     /**
@@ -111,6 +112,20 @@ class AppExtension extends AbstractExtension
             case 4:
                 echo '<p class="bg-primary w-50 ml-auto p-1 text-center text-white"> Voyage terminé </p>';
                 break;
+        }
+    }
+
+    /**
+     * Function to set color following the availability of the spacecraft
+     * @param boolean $available
+     * @return void
+     */
+    public function addColorByStatus($available)
+    {
+        if ($available === true) {
+            echo "<span class='badge text-white ml-2 p-2 bg-success'>Disponible</span>";
+        } else {
+            echo "<span class='badge text-white ml-2 p-2 bg-warning'>En maintenance</span>";
         }
     }
 }

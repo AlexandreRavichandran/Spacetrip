@@ -59,7 +59,7 @@
             <p class=   "p-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus quas eos omnis magni neque, earum ut, fugiat commodi fugit tenetur, rerum pariatur nam soluta reiciendis amet. Quia debitis ullam molestiae saepe, ad at explicabo doloremque magnam obcaecati, numquam eum quae, hic minima veniam temporibus! Enim repellendus, officia libero in dolores cumque, delectus porro, consectetur laudantium culpa necessitatibus commodi facere maxime quae. Ipsum accusamus blanditiis illum sed itaque, autem rem consectetur, quia debitis sequi culpa quasi voluptate dicta non ratione id!</p>
         </div>
         <div class="col-xs-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
-            <img class="d-block" src="/images/pictures_spacecrafts/pictures_spacecrafts_brands/picture_{{spacecraft.brand}}.png" alt="Logo de {{spacecraft.brand}}">
+            <img class="d-block" src="/images/pictures_spacecrafts/pictures_spacecrafts_brands/picture_{{spacecraft.brand}}.png" width="100%" alt="Logo de {{spacecraft.brand}}">
         </div>
     </div>
 </div>
@@ -83,7 +83,7 @@
           
             {% for feedback in feedbacks %}
                 <tr>
-                    <td>{{feedback.createdAt|date('d/m/Y H:i:s')}}</td>
+                    <td>{{feedback.createdAt|date('d/m/Y H:i')}}</td>
                     <td>{{feedback.user.firstName}} {{feedback.user.lastName|upper}}</td>
                     <td>{{feedback.content}}</td>
                     <td style="font-size:1rem"> {{displayStarRating(feedback.rating)}}</td>

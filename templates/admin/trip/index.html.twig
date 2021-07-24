@@ -5,15 +5,15 @@
 {% block body %}
 <div class="container-fluid ml-auto mr-auto mt-5 p-4">
     <h1 class="text-center"> Liste des voyages </h1>
-    <div class="row">
-        <div class="col-xs-12 col-lg-6 mt-3">
-            <a href="{{path('app_admin_trip_index')}}" class="d-block btn btn-primary btn-md rounded">Voir les voyages non reservés </a>
+    <div class="row mb-4">
+        <div class="col-xs-12 col-lg-6 mt-3 d-flex justify-content-center ">
+            <a href="{{path('app_admin_trip_index')}}" class="d-block w-50 btn btn-primary btn-md rounded">Voir les voyages non reservés </a>
         </div>
-        <div class="col-xs-12 col-lg-6 mt-3">
-            <a href="{{path('app_admin_reserved_trips_index')}}" class="d-block btn btn-primary btn-md rounded">Voir les voyages réservés </a>
+        <div class="col-xs-12 col-lg-6 mt-3 d-flex justify-content-center">
+            <a href="{{path('app_admin_reserved_trips_index')}}" class="d-block w-50 btn btn-primary btn-md rounded">Voir les voyages réservés </a>
         </div>
     </div>
-    <div class="row d-flex justify-content-end mt-2 mb-0">
+    <div class="row d-flex justify-content-end mt-4 mb-0">
         <p><a href="{{path('app_admin_trip_create')}}">Créer un nouveau voyage</a></p>
     </div>
     <div class="row mt-2" style="overflow:scroll">
@@ -25,7 +25,9 @@
                     <th scope="col" class="text-center">Date de départ</th>
                     <th scope="col" class="text-center">Date d'arrivée</th>
                     <th scope="col" class="text-center">Vaisseau <a href="{% if orderBy is same as 's.name' and order is same as 'DESC' %}{{path('app_admin_trip_sort',{'orderBy':'s.name','order':'ASC'})}}{% else %}{{path('app_admin_trip_sort',{'orderBy':'s.name','order':'DESC'})}}{% endif %}" class="{{setSortingIcon(orderBy,'s.name', order)}}"></a></th>
-                    <th scope="col" class="text-center">Nombre de sièges restants <a href="{% if orderBy is same as 't.availableSeatNumber' and order is same as 'DESC' %}{{path('app_admin_trip_sort',{'orderBy':'t.availableSeatNumber','order':'ASC'})}}{% else %}{{path('app_admin_trip_sort',{'orderBy':'t.availableSeatNumber','order':'DESC'})}}{% endif %}" class="{{setSortingIcon(orderBy,'t.availableSeatNumber', order)}}"></a></th>
+                    {% if reserved is same as false %}
+                    <th scope="col" class="text-center">Sièges restants <a href="{% if orderBy is same as 't.availableSeatNumber' and order is same as 'DESC' %}{{path('app_admin_trip_sort',{'orderBy':'t.availableSeatNumber','order':'ASC'})}}{% else %}{{path('app_admin_trip_sort',{'orderBy':'t.availableSeatNumber','order':'DESC'})}}{% endif %}" class="{{setSortingIcon(orderBy,'t.availableSeatNumber', order)}}"></a></th>
+                    {% endif %}
                     <th scope="col" class="text-center">Statut <a href="{% if orderBy is same as 't.status' and order is same as 'DESC' %}{{path('app_admin_trip_sort',{'orderBy':'t.status','order':'ASC'})}}{% else %}{{path('app_admin_trip_sort',{'orderBy':'t.status','order':'DESC'})}}{% endif %}" class="{{setSortingIcon(orderBy,'t.status', order)}}"></a></th>
                     <th scope="col" class="text-center">Actions</th>
                 </tr>
@@ -33,24 +35,28 @@
             <tbody>
             {% for trip in trips %}
                 <tr>
-                    <td scope="col" class="text-center">{{trip.createdAt|date('d/m/Y H:i:s')}}</td>
-                    <td scope="col" class="text-center">{{trip.name}} ({{trip.destination.name|upper}})</td>
-                    <td scope="col" class="text-center">{{trip.departureAt|date('d/m/Y H:i:s')}}</td>
-                    <td scope="col" class="text-center">{{trip.arrivalAt|date('d/m/Y H:i:s')}}</td>
-                    <td scope="col" class="text-center">{{trip.spacecraft.name|upper}}</td>
-                    <td scope="col" class="text-center">{{trip.availableSeatNumber}}</td>
-                    <td scope="col" class="text-center">
-                        <select name="tripStatus_{{trip.id}}" id="tripStatus_{{trip.id}}" onchange="changeTripStatus({{trip.id}})">
-                            <option {% if trip.status is same as 1 %} selected {% endif %} value="1">Non payé</option>
-                            <option {% if trip.status is same as 2 %} selected {% endif %} value="2">Disponible</option>
-                            <option {% if trip.status is same as 3 %} selected {% endif %} value="3">Complet</option>
-                            <option {% if trip.status is same as 4 %} selected {% endif %} value="4">Terminé</option>
-                        </select>
+                    <td scope="col" class="text-center align-middle">{{trip.createdAt|date('d/m/Y H:i')}}</td>
+                    <td scope="col" class="text-center align-middle">{{trip.name}} ({{trip.destination.name|upper}})</td>
+                    <td scope="col" class="text-center align-middle">{{trip.departureAt|date('d/m/Y H:i')}}</td>
+                    <td scope="col" class="text-center align-middle">{{trip.arrivalAt|date('d/m/Y H:i')}}</td>
+                    <td scope="col" class="text-center align-middle">{{trip.spacecraft.name|upper}}</td>
+                    {% if trip.reserved is same as false %}
+                    <td scope="col" class="text-center align-middle">{{trip.availableSeatNumber}}</td>
+                    {% endif %}
+                    <td scope="col" class="text-center align-middle">
+                        <div class="form-group">
+                            <select class="form-control" name="tripStatus_{{trip.id}}" id="tripStatus_{{trip.id}}" onchange="changeTripStatus({{trip.id}})">
+                                <option {% if trip.status is same as 1 %} selected {% endif %} value="1">Non payé</option>
+                                <option {% if trip.status is same as 2 %} selected {% endif %} value="2">Disponible</option>
+                                <option {% if trip.status is same as 3 %} selected {% endif %} value="3">Complet</option>
+                                <option {% if trip.status is same as 4 %} selected {% endif %} value="4">Terminé</option>
+                            </select>
+                        </div>
                     </td>
                     <td scope="col" class="d-flex flex-column justify-content-center">
-                        <a href="{{path('app_admin_trip_edit',{'id':trip.id})}}" class="btn btn-warning btn-sm mb-2">Editer</a>
-                        <a onclick="event.preventDefault(); confirm('Etes vous sur de supprimer ce voyage de la base de données ? Cette action est irréversible.') && document.querySelector('#trip_delete_link_{{trip.id}}').click()"  class="btn btn-sm btn-danger"> Supprimer </a>
-                        <a id="trip_delete_link_{{trip.id}}" style="display:none;" href="{{path('app_admin_trip_delete',{'id':trip.id})}}"></a>
+                        <a href="{{path('app_admin_trip_edit',{'id':trip.id})}}" class="d-block btn btn-warning btn-sm mb-2">Editer</a>
+                        <a onclick="event.preventDefault(); confirm('Etes vous sur de supprimer ce voyage de la base de données ? Cette action est irréversible.') && document.querySelector('#trip_delete_link_{{trip.id}}').click()"  class="d-block btn btn-sm btn-danger"> Supprimer </a>
+                        <a id="trip_delete_link_{{trip.id}}" class="d-none" href="{{path('app_admin_trip_delete',{'id':trip.id})}}"></a>
                     </td>
                 </tr>
             {% endfor %}

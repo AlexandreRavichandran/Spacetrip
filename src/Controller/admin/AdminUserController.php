@@ -33,9 +33,9 @@ class AdminUserController extends AbstractController
     {
         //Check if user connected
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
-        
-        $users = $this->paginator->paginate($this->userRepository->findAll(), $request->query->getInt('page', 1), 11);
-        
+
+        $users = $this->paginator->paginate($this->userRepository->filterByRoles('ROLE_USER'), $request->query->getInt('page', 1), 11);
+
         return $this->render('admin/user/index.html.twig', [
             'users' => $users,
             'order' => null,
@@ -52,9 +52,9 @@ class AdminUserController extends AbstractController
     {
         //Check if user connected
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
-        
+
         $feedbacks = $repo->findBy(['user' => $user->getId()]);
-        
+
         return $this->render('admin/user/show.html.twig', [
             'user' => $user,
             'feedbacks' => $feedbacks
@@ -70,9 +70,9 @@ class AdminUserController extends AbstractController
     {
         //Check if user connected
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
-        
+
         $users = $this->paginator->paginate($this->userRepository->orderUsers($orderBy, $order), $request->query->getInt('page', 1), 11);
-        
+
         return $this->render('admin/user/index.html.twig', [
             'users' => $users,
             'order' => $order,

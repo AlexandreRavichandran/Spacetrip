@@ -1,6 +1,4 @@
-<div class="comment">
-    <p>Here you can have a chart of the most used spacecrafts and the favorites destinations of users.</p>
-</div>
+
 <h3 class="text-center"> Les derniers commentaires </h3>
 <table class="table table-hover border">
     <thead>
@@ -15,7 +13,7 @@
     <tbody>
     {% for feedback in feedbacks %}
         <tr class="table">
-            <td class="text-center">{{feedback.createdAt|date('d-m-Y H:i:s')}}</td>
+            <td class="text-center">{{feedback.createdAt|date('d-m-Y H:i')}}</td>
             <td>{{feedback.user.lastName}} - {{feedback.user.firstName}}</td>
             <td class="text-center">{{feedback.spacecraft.name|upper}}</td>
             <td style="width:35%;" class="text-center">{{feedback.content}}</td>

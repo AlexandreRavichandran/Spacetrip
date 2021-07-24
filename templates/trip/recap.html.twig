@@ -13,7 +13,7 @@
                 </div>
                 <p class="text-center mt-4"> 1) Téléchargez votre ticket de transport contenant vos informations </p>
                 <div class="row d-flex justify-content-center">
-                    <form id="csrf" method="POST" action="{{path('app_get_ticket',{'trip':trip.id})}}">
+                    <form id="csrf" method="POST" action="{{path('app_get_ticket',{'trip':trip.id})}}" target="_blank">
                         <input type="hidden" name="token" value="{{csrf_token('getTicket')}}">
                         <button class="btn btn-primary btn-md d-flex ml-auto mr-auto rounded"> Télécharger mon ticket </button>
                     </form>
