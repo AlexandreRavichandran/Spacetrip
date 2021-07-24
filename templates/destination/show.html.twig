@@ -36,7 +36,7 @@
     <div class="row d-flex justify-content-center">
 
         {% if informations['moons'] is not same as null %}
-            <button class="btn btn-primary" data-toggle="modal" data-target="#satellites"> Voir les satellites de {{destination.name}} </button>
+            <button class="btn btn-sm btn-success rounded" data-toggle="modal" data-target="#satellites"> Voir les satellites de {{destination.name}} </button>
         {% else %}
             <p class="ml-auto mr-auto"> Aucune </p>
         {% endif %}
@@ -95,7 +95,7 @@
 </div>
 <div class="modal fade" id="satellites">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
+        <div class="modal-content" id="satellitesModal">
             <div class="modal-header">
                 <h4 class="modal-title text-centeer">Satellites de {{destination.name}}</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -122,7 +122,7 @@
             </div>
                     
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-sm btn-danger rounded" data-dismiss="modal">Close</button>
             </div>    
         </div>
     </div>

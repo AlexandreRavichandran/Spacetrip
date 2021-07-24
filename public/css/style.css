@@ -131,6 +131,10 @@ img{
 .adminNav{
     background-color: rgb(190, 190, 190);
 }
+
+#satellitesModal{
+    background-color: rgb(219, 219, 219);
+}
 @media screen and (max-width:900px)   {
     
     #helpBox{
