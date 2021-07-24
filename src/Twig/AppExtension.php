@@ -123,9 +123,9 @@ class AppExtension extends AbstractExtension
     public function addColorByStatus($available)
     {
         if ($available === true) {
-            echo "<span class='badge text-white ml-2 p-1 bg-success'>Disponible</span>";
+            echo "<span class='badge text-white ml-2 p-2 bg-success'>Disponible</span>";
         } else {
-            echo "<span class='badge text-white ml-2 p-1 bg-warning'>En maintenance</span>";
+            echo "<span class='badge text-white ml-2 p-2 bg-warning'>En maintenance</span>";
         }
     }
 }

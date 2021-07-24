@@ -25,16 +25,16 @@
                     <td class="text-center align-middle" scope="col">{{destination.createdAt|date('d/m/Y H:i')}}</td>
                     <td class="text-center align-middle" scope="col">{{destination.name}}</td>
                     <td class="text-center align-middle" scope="col">{{destination.distance|number_format(0,'.',' ')}} km</td>
-                    <td class="text-center align-middle">
-                    {% if destination.spacecrafts is not same as null %}
+                    <td class="align-middle">
+                        {% if destination.spacecrafts is not empty %}
                         <ul>
                         {% for spacecraft in destination.spacecrafts %}
-                            <li>{{spacecraft.name}}</li>
+                            <li class="mt-2">{{spacecraft.name}} {{addColorByStatus(spacecraft.available)}}</li>
                         {% endfor %}
                         </ul>
-                    {% else %}
-                        Aucun
-                    {% endif %}
+                        {% else %}
+                            <p class="text-center align-middle">Aucun</p>
+                        {% endif %}
                     </td>
                     <td class="d-flex flex-row justify-content-center">
                         <a href="{{path('app_admin_destination_edit',{'id':destination.id})}}" class="d-block btn btn-sm btn-warning">Editer</a>

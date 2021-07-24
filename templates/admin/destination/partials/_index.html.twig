@@ -16,15 +16,15 @@
             <td class="text-center align-middle">{{destination.createdAt|date('d-m-Y H:i')}}</td>
             <td class="text-center align-middle">{{destination.name|upper}}</td>
             <td class="text-center align-middle">{{destination.distance|number_format(0,'.',' ')}} km</td>
-            <td class="text-center align-middle">
-                {% if destination.spacecrafts is not same as null %}
+            <td class="align-middle">
+                {% if destination.spacecrafts is not empty %}
                     <ul>
                     {% for spacecraft in destination.spacecrafts %}
                         <li class="mt-2">{{spacecraft.name}} {{addColorByStatus(spacecraft.available)}}</li>
                     {% endfor %}
                     </ul>
                 {% else %}
-                    Aucun
+                    <p class="text-center align-middle">Aucun</p>
                 {% endif %}
             </td>
             <td class="d-flex flex-row justify-content-center">
