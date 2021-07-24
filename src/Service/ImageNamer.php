@@ -5,7 +5,7 @@ namespace App\Service;
 use Vich\UploaderBundle\Mapping\PropertyMapping;
 use Vich\UploaderBundle\Naming\NamerInterface;
 
-class imageNamer implements NamerInterface
+class ImageNamer implements NamerInterface
 {
     /**
      * Creates a name for the file being uploaded.
