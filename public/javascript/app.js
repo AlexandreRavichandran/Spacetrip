@@ -386,3 +386,12 @@ function calculateDestinationDistance() {
     const distance = 149597870 - (aphelionValue * (1 - eccentricityValue));
     $("#destination_distance").val(Math.round(distance));
 }
+
+/**
+ * Function to generate the name of the file upladed
+ * @param Event e 
+ */
+function generateFileName(e) {
+    const fileName = e.currentTarget;
+    $(fileName).parent().find('.custom-file-label').html(fileName.files[0].name);
+}

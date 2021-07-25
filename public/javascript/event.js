@@ -20,7 +20,7 @@ function init() {
     //ADMIN TRIP CREATING EVENTS
     $('#reserved_button').on('change', forbidAdminModifications);
     $('#trip_destination').on('change', ajaxSpacecraftField);
-    
+
     //FEEDBACK MAKING EVENTS
     $("#goFeedback").on('click', goFeedbackSection);
     $("#content").keyup(manageFeedbackSpace);
@@ -44,4 +44,6 @@ function init() {
     $("#aphelion").focusout(calculateDestinationDistance);
     $("#eccentricity").focusout(calculateDestinationDistance);
 
+    // ADMIN DESTINATION & SPACECRAFT CREATING EVENTS
+    $('.custom-file-input').on('change', generateFileName);
 }
