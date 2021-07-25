@@ -32,9 +32,9 @@
                     <h4 class="card-subtitle text-muted text-center"> {{trip.departureAt|date('d-m-Y')}} - {{trip.arrivalAt|date('d-m-Y')}} </h4>
                 </div>
                 <div class="mb-4 ml-auto mr-auto pictureGroup ">
-                    <img src="/images/pictures_destinations/{{trip.destination.imageName}}" alt="Image de {{trip.destination.name}}" class="destinationImage" width="100%">
+                    <img src="{{ vich_uploader_asset(destination, 'imageFile') }}" alt="Image de {{trip.destination.name}}" class="destinationImage" width="100%">
                     <div class="spacecraftImage">
-                        <img src="/images/pictures_spacecrafts/{{trip.spacecraft.imageName}}" alt="Image de {{trip.spacecraft.name}}"width="100%">
+                        <img src="{{ vich_uploader_asset(spacecraft, 'imageFile') }}" alt="Image de {{trip.spacecraft.name}}"width="100%">
                     </div>
                 </div>
                 <div class="text-muted text-center">

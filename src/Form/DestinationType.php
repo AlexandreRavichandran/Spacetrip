@@ -41,7 +41,7 @@ class DestinationType extends AbstractType
                 'allow_delete' => false,
                 'download_uri' => false,
                 'image_uri' => true,
-                //'imagine_pattern' => '...',
+                'imagine_pattern' => 'small_thumbnail',
                 'asset_helper' => true,
             ]);
     }

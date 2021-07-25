@@ -30,7 +30,7 @@
                     {% endif %}
                 </div>
                 <div class="p-4">
-                    <img src="/images/pictures_spacecrafts/{{spacecraft.imageName}}" alt="Image de {{spacecraft.name}}" class="mb-2 d-block destinationImage">
+                    <img src="{{ vich_uploader_asset(spacecraft, 'imageFile') }}" alt="Image de {{spacecraft.name}}" class="mb-2 d-block destinationImage">
                 </div>
                 <div class="text-muted text-center">
                     <a href="{{path('app_spacecraft_show',{'id':spacecraft.id})}}" class="card-link stretched-link">En savoir plus</a>
