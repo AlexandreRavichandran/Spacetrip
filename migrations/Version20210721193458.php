@@ -14,7 +14,7 @@ final class Version20210721193458 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Add image_name field for Destiantion table';
     }
 
     public function up(Schema $schema): void

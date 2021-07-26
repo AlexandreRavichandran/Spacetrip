@@ -108,6 +108,7 @@ class AppFixtures extends Fixture
                 ->setFirstName($faker->firstName)
                 ->setLastName($faker->lastName)
                 ->setRoles(['ROLE_USER'])
+                ->setIsVerified(true)
                 ->setPassword($this->passwordEncoder->encodePassword($user, 'demo'));
             $manager->persist($user);
 
@@ -131,6 +132,7 @@ class AppFixtures extends Fixture
             ->setLastName('Ravi')
             ->setEmail('admin@spacetrip.com')
             ->setRoles(['ROLE_ADMIN'])
+            ->setIsVerified(true)
             ->setPassword($this->passwordEncoder->encodePassword($user, 'demo'));
         $manager->persist($admin);
         $manager->flush();

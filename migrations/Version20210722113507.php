@@ -14,7 +14,7 @@ final class Version20210722113507 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Make image name not null for destination table and add image name field for spacecraft table';
     }
 
     public function up(Schema $schema): void
