@@ -146,4 +146,7 @@ img{
     border-radius: 20px;
     margin-bottom: 2em;
     }
+    .addScroll{
+    overflow: scroll;
+    }
 }

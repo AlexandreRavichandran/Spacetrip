@@ -55,10 +55,10 @@
 <div class="container mt-2 p-4">
     <h3>l'entreprise</h3>
     <div class="row">
-        <div class="col-xs-12 col-md-12 col-lg-8">
-            <p class=   "p-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus quas eos omnis magni neque, earum ut, fugiat commodi fugit tenetur, rerum pariatur nam soluta reiciendis amet. Quia debitis ullam molestiae saepe, ad at explicabo doloremque magnam obcaecati, numquam eum quae, hic minima veniam temporibus! Enim repellendus, officia libero in dolores cumque, delectus porro, consectetur laudantium culpa necessitatibus commodi facere maxime quae. Ipsum accusamus blanditiis illum sed itaque, autem rem consectetur, quia debitis sequi culpa quasi voluptate dicta non ratione id!</p>
+        <div class="col-xs-12 col-md-12 col-lg-9">
+            <p class="p-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus quas eos omnis magni neque, earum ut, fugiat commodi fugit tenetur, rerum pariatur nam soluta reiciendis amet. Quia debitis ullam molestiae saepe, ad at explicabo doloremque magnam obcaecati, numquam eum quae, hic minima veniam temporibus! Enim repellendus, officia libero in dolores cumque, delectus porro, consectetur laudantium culpa necessitatibus commodi facere maxime quae. Ipsum accusamus blanditiis illum sed itaque, autem rem consectetur, quia debitis sequi culpa quasi voluptate dicta non ratione id!</p>
         </div>
-        <div class="col-xs-12 col-md-12 col-lg-4 d-flex justify-content-center align-items-center">
+        <div class="col-xs-12 col-md-12 col-lg-3 d-flex justify-content-center align-items-center">
             <img class="d-block" src="/images/pictures_spacecrafts/pictures_spacecrafts_brands/picture_{{spacecraft.brand}}.png" width="100%" alt="Logo de {{spacecraft.brand}}">
         </div>
     </div>
@@ -66,11 +66,11 @@
 <div class="container-fluid mt-3 p-4">
     <h3 id="feedback"> Les derniers commentaires </h3>
     <a class="d-flex justify-content-end" href="{{path('app_feedback_create',{id:spacecraft.id})}}">Vous avez déja eu une experience avec ce vaisseau ? Donnez nous votre avis !</a>
-    <div class="row" style="overflow:scroll">
+    <div class="row addScroll">
         {% if feedbacks is empty %}
         <p class="h3 ml-auto mr-auto mt-4 mb-4"> Il n'y a actuellement aucun commentaire pour ce vaisseau. <a href="{{path('app_feedback_create',{id:spacecraft.id})}}" class="text-danger">Soyez le premier ! </a></p>
         {% else %}
-        <table class="table table-hover w-100 overflow-auto">
+        <table style="width:2000px;" class="table table-hover">
             <thead>
                 <tr>
                     <th scope="col">Date <a href="{% if orderBy is same as 'createdAt' and order is same as 'DESC'%}{{path('app_spacecraft_feedback_sort',{'id':spacecraft.id,'orderBy':'createdAt','order':'ASC'})}}{% else %}{{path('app_spacecraft_feedback_sort',{'id':spacecraft.id,'orderBy':'createdAt','order':'DESC'})}}{% endif %}" class="{{setSortingIcon(orderBy,'createdAt',order)}}"></a></th>
