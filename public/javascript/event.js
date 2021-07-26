@@ -36,7 +36,7 @@ function init() {
 
     //USER LOGIN EVENTS
     $("#randomUserButton").click(randomUserGenerator);
-    //$("#clipboardLogo").click(copyToClipboard);
+    $("#clipboardLogo").click(copyToClipboard);
 
     //ADMIN DESTINATION CREATING EVENTS
     $("#calculateDistanceOff").click(hideDestinationDistanceCalculateFields);

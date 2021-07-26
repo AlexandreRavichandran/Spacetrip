@@ -395,3 +395,19 @@ function generateFileName(e) {
     const fileName = e.currentTarget;
     $(fileName).parent().find('.custom-file-label').html(fileName.files[0].name);
 }
+
+/**
+ * Function to copy to clipboard
+ * @param Event e 
+ */
+function copyToClipboard(e) {
+    e.preventDefault();
+    const fakeElement = document.createElement('textarea');
+    fakeElement.value = $('#commentRandomUsername').html();
+    document.body.appendChild(fakeElement);
+    fakeElement.select();
+    document.execCommand('copy');
+    fakeElement.remove();
+    $('#clipboardLogo').html('<i class="h3 bi bi-check2"></i>')
+
+}
