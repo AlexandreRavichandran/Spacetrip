@@ -1,3 +1,6 @@
+body{
+    background-color: #fdfdfd;
+}
 
 .tripBackground{
     height: 200px;
@@ -118,7 +121,8 @@ img{
 }
 
 .card{
-    border:2px solid white;   
+    border:2px solid white;
+    box-shadow: 0px 7px 5px -2px #5B5B5B;
 }
 
 .card:hover{
