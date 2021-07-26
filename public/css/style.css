@@ -16,7 +16,7 @@ body{
 
 .tripBackground h1, .tripBackground h2{
     color:white;
-    text-shadow: 1px 1px 2px rgb(255, 255, 255), 0 0 1em rgb(255, 255, 255);
+    text-shadow: 1px 1px 1em rgb(255, 255, 255), 0 0 1em rgb(255, 255, 255);
 }
 
 img{
@@ -122,7 +122,7 @@ img{
 
 .card{
     border:2px solid white;
-    box-shadow: 0px 7px 5px -2px #5B5B5B;
+    box-shadow: 0px 7px 5px -2px #A3A3A3;
 }
 
 .card:hover{
