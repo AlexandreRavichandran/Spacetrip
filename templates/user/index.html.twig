@@ -4,6 +4,11 @@
 
 {% block body %}
 <div class="container mt-4 p-4">
+{% if app.user.isVerified == false %}
+    <div class="bg-danger text-white h4 p-4 rounded">
+        <p class="text-center mb-0">Votre compte n'a pas encore été vérifié. <a class="text-warning" href="{{path('app_user_confirmation_send')}}"> Cliquez ici pour renvoyer un mail de confirmation</a></p>
+    </div>
+    {% endif %}
     <div class="row mt-5 d-flex justify-content-between">
         <div class="comment">
             <p>This page is the user's profile page, the user can edit his informations, see his latest feedbacks and his next and previous trips.</p>

@@ -24,7 +24,11 @@ class FeedbackController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_USER', null, "Veuillez vous connecter.");
 
         $user = $this->getUser();
-
+        //Check if user's account is verified
+        if ($user->isVerified() === false) {
+            $this->addFlash('warning', 'Vous devez verifier votre compte avant de pouvoir poster un commentaire.');
+            return $this->redirectToRoute('app_user_profile');
+        }
         $feedback = new Feedback;
         $form = $this->createForm(FeedbackType::class, $feedback);
         $form->handleRequest($request);

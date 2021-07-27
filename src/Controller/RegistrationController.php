@@ -43,6 +43,7 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            $user->setRoles(['ROLE_USER']);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
@@ -58,7 +59,7 @@ class RegistrationController extends AbstractController
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
             // do anything else you need here, like send an email
-            
+
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
                 $request,
@@ -92,5 +93,26 @@ class RegistrationController extends AbstractController
         $this->addFlash('success', 'Votre e-mail a été vérifié.');
 
         return $this->redirectToRoute('app_home');
+    }
+
+    /**
+     * Function to re-send an e-mail confirmation to verify account
+     * @Route("/profile/sendEmail",name="app_user_confirmation_send")
+     * @return void
+     */
+    public function sendEmailConfirmation()
+    {
+        $user = $this->getUser();
+        $this->emailVerifier->sendEmailConfirmation(
+            'app_verify_email',
+            $user,
+            (new TemplatedEmail())
+                ->from(new Address('admin@spacetrip.com', 'Contact Spacetrip'))
+                ->to($user->getEmail())
+                ->subject('Bienvenue chez Spacetrip ! ')
+                ->htmlTemplate('registration/confirmation_email.html.twig')
+        );
+        $this->addFlash('success', 'Un mail de confirmation a été envoyé');
+        return $this->redirectToRoute('app_user_profile');
     }
 }

@@ -97,7 +97,7 @@ class ConnectionFormAuthenticator extends AbstractFormLoginAuthenticator impleme
         }
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $request->request->get('email')]);
 
-        if (in_array('ROLE_ADMIN', $user->getRoles())) {
+        if (isset($user) && in_array('ROLE_ADMIN', $user->getRoles())) {
             return new RedirectResponse($this->urlGenerator->generate('app_admin_home'));
         } else {
             return new RedirectResponse($this->urlGenerator->generate('app_user_profile'));
