@@ -46,15 +46,18 @@ class AppFixtures extends Fixture
         $spacecrafts_object = [];
 
         for ($i = 0; $i < 13; $i++) {
-            $distance = abs(149597870 - ($response['bodies'][$i]['aphelion'] * (1 - $response['bodies'][$i]['eccentricity'])));
-            $destination = new Destination;
-            $destination->setName($response['bodies'][$i]['name'])
-                ->setDescription($faker->sentence(6))
-                ->setDistance($distance)
-                ->setImageName('picture_' . $destination->getName() . '.jpg');
-            $manager->persist($destination);
-            $manager->flush();
-            array_push($destinations, $destination);
+            //this condition permit to not have Earth as a destination (Earth will always be the departure planet)
+            if ($response['bodies'][$i]['name'] !== 'La Terre') {
+                $distance = abs(149597870 - ($response['bodies'][$i]['aphelion'] * (1 - $response['bodies'][$i]['eccentricity'])));
+                $destination = new Destination;
+                $destination->setName($response['bodies'][$i]['name'])
+                    ->setDescription($faker->sentence(6))
+                    ->setDistance($distance)
+                    ->setImageName('picture_' . $destination->getName() . '.jpg');
+                $manager->persist($destination);
+                $manager->flush();
+                array_push($destinations, $destination);
+            }
         }
 
         for ($h = 0; $h < count($spacecrafts); $h++) {
