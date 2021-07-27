@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Inscription{% endblock %}
 
 {% block body %}
     {% for flashError in app.flashes('verify_email_error') %}
@@ -8,7 +8,7 @@
     {% endfor %}
 
 <div class="container ml-auto mr-auto border mt-5 loginForm p-4">
-    <h1 class="mb-3 mt-5 text-center" style="font-size:1.8rem"> Page de connexion</h1>
+    <h1 class="mb-3 mt-5 text-center" style="font-size:1.8rem"> Page d'inscription </h1>
     {{ form_start(registrationForm) }} 
     <div class="row">
         <div class="col-xs-12 col-lg-6">
@@ -29,7 +29,7 @@
         </div>
     </div>
     <div class="row d-flex justify-content-center">
-        <button type="submit" class="btn btn-primary rounded mb-3">Créer mon compte Spacetrip</button>
+        <button type="submit" class="btn btn-primary rounded mb-5">Créer mon compte Spacetrip</button>
     </div>
     <div class="row">
         <a href="{{path('app_login')}}" class="d-block btn btn-success btn-sm ml-auto mr-auto mb-5 rounded"> J'ai déja un compte Spacetrip</a>
