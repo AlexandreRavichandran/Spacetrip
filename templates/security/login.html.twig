@@ -17,17 +17,6 @@
                 <label for="inputPassword" class="text-center mt-3">Mot de passe : </label>
                 <input type="password" name="password" id="inputPassword" class="w-75 form-control ml-auto mr-auto" required>
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-                {#
-                    Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-                    See https://symfony.com/doc/current/security/remember_me.html
-
-                    <div class="checkbox mb-3">
-                        <label>
-                            <input type="checkbox" name="_remember_me"> Remember me
-                        </label>
-                    </div>
-                #}
                 <div class="row mt-5">
                     <button class="btn btn-primary mb-5 ml-auto mr-auto " type="submit"> Se connecter </button>
                 </div>
