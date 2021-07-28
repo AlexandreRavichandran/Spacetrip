@@ -271,6 +271,12 @@ class Trip
         return $this->status;
     }
 
+    /**
+     * Status 1 : Unpayed,
+     * Status 2 : Created/available,
+     * Status 3 : Sold out,
+     * Status 4 : Ended
+     */
     public function setStatus(int $status): self
     {
         $this->status = $status;
