@@ -49,9 +49,10 @@ class AdminHomeController extends AbstractController
 
         //Calculate the percentage of use of each Spacecrafts in trips & put in array
         $spacecrafts = $this->spacecraftRepository->findAll();
+        $trips = count($this->tripRepository->findAll());
         $spacecraftPercentages = [];
         foreach ($spacecrafts as $spacecraft) {
-            $percentage = (count($spacecraft->getTrip()) / count($this->tripRepository->findAll())) * 100;
+            $percentage = (count($spacecraft->getTrip()) / $trips) * 100;
             array_push($spacecraftPercentages, $percentage);
         }
 
@@ -59,7 +60,7 @@ class AdminHomeController extends AbstractController
         $destinations = $this->destinationRepository->findAll();
         $destinationPercentages = [];
         foreach ($destinations as $destination) {
-            $percentage = (count($destination->getTrips()) / count($this->tripRepository->findAll())) * 100;
+            $percentage = (count($destination->getTrips()) / $trips) * 100;
             array_push($destinationPercentages, $percentage);
         }
 
