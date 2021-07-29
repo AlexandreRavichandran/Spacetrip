@@ -153,6 +153,10 @@ img{
     background-color: rgb(219, 219, 219);
 }
 
+.spacecraftSection{
+    background-color: #cecece;
+}
+
 @media screen and (max-width:1520px)   {
     .homeJumbotron .jumbotron{
         width: 70%;

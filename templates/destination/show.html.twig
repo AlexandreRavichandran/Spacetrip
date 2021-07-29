@@ -3,51 +3,63 @@
 {% block title %} Destination {{destination.name}} {% endblock %}
 
 {% block body %}
-<div class="container mt-4 p-4">
+<div class="container mt-4 p-1">
     <h1 class="text-center"> {{destination.name }} </h1>
     <div class="row">
-        <div class="col-xs-12 col-lg-4">
+        <div class="col-xs-12 col-lg-4 p-4">
             <img src="{{ vich_uploader_asset(destination, 'imageFile') }}" alt="Image de {{destination.name}}" class="w-100">
         </div>
-        <div class="col-xs-12 col-lg-8">
-            <div class="row">
+        <div class="col-xs-12 col-lg-8 bg-white p-1 rounded">
+            <h2 class="h4 text-center mt-4"> Quelques caracteristiques</h2> 
+            <div class="comment">
+                <p>These datas below are not from the database. they can be displayed thanks to an API that i call to have data about a planet (name of his moons, discovery date... ) following his name.</p>
+                <p>Used API : <a class="text-danger" target="_blank" href="https://api.le-systeme-solaire.net/en/">API-le-systeme-solaire.</a></p>
+            </div>
+            <table class="table table-hover border">
+                <tbody>
+                    <tr class="table">
+                        <th scope="col">Découverte : </th>
+                        <td class="text-center">
+                        {% if informations['discoveryDate'] is not same as "" %}
+                       Le {{informations['discoveryDate']}} par {{informations['discoveredBy']}}
+                        {% else %}
+                        Inconnue
+                        {% endif %}
+                        </td>
+                    </tr>
+                    <tr class="table">
+                        <th scope="col">Distance par rapport à la terre : </th>
+                        <td class="text-center">{{destination.distance|number_format(0,'.',' ')}} km</td>
+                    </tr>
+                    <tr class="table">
+                        <th scope="col">Gravité : </th>
+                        <td class="text-center">{{informations['gravity']}} m.s</td>
+                    </tr>
+
+                    <tr class="table">
+                        <th scope="col">Satellites : </th>
+                        <td class="text-center">
+                         {% if informations['moons'] is not same as null %}
+                            <button class="btn btn-sm btn-success rounded" data-toggle="modal" data-target="#satellites"> Voir les satellites de {{destination.name}} </button>
+                        {% else %}
+                            Aucune
+                        {% endif %}            
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row mt-3 bg-white rounded">
+        <div class="row">
+            <div class="col">
                 <p class="p-2"> {{destination.description}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure commodi quod, laudantium veritatis deserunt blanditiis nihil iste doloribus? Repudiandae asperiores eligendi voluptates laboriosam architecto ut laborum eaque ipsum odio? Adipisci officia veritatis quisquam pariatur. Officia animi nobis adipisci veniam, ipsam eos inventore ratione recusandae rerum alias dignissimos. Voluptatum obcaecati fugit ullam dolor, ratione ab voluptatem exercitationem velit explicabo eaque consequatur aliquid itaque quisquam corporis hic libero id sequi cumque nulla non corrupti et suscipit ducimus eum? Pariatur quos deserunt eaque suscipit, hic natus quibusdam a minus aspernatur fugiat, nulla eius!</p>
-                <p class="p-2">Vous voulez en savoir plus ? Voir <a class="text-danger" href="https://fr.wikipedia.org/wiki/{{destination.name}}_%28plan%C3%A8te%29">ici</a></p>
+                <p class="p-2 ml-auto mr-auto">Vous voulez en savoir plus ? Voir <a class="text-danger" href="https://fr.wikipedia.org/wiki/{{destination.name}}_%28plan%C3%A8te%29">ici</a></p>
             </div>
         </div>
     </div>
-    <div class="row mt-3">
-        <h4 class="ml-auto mr-auto"> Quelques caracteristiques</h4>
-        <div class="comment">
-            <p>These datas below are not from the database. they can be displayed thanks to an API that i call to have data about a planet (name of his moons, discovery date... ) following his name.</p>
-            <p>Used API : <a class="text-danger" target="_blank" href="https://api.le-systeme-solaire.net/en/">API-le-systeme-solaire.</a></p>
-        </div>
-    </div>
-    <div class="row">
-        {% if informations['discoveryDate'] is not same as "" %}
-        <p class="p-2">Découvert le {{informations['discoveryDate']}} par {{informations['discoveredBy']}}</p>
-        {% endif %}
-    </div>
-    <div class="row">
-        <p class="p-2"> Distance par rapport à la terre : {{destination.distance|number_format(0,'.',' ')}} km</p>
-    </div>
-
-    <p class="text-center"> Satellites associés à cette planète : </p>
-    <div class="row d-flex justify-content-center">
-
-        {% if informations['moons'] is not same as null %}
-            <button class="btn btn-sm btn-success rounded" data-toggle="modal" data-target="#satellites"> Voir les satellites de {{destination.name}} </button>
-        {% else %}
-            <p class="ml-auto mr-auto"> Aucune </p>
-        {% endif %}
-       
-    </div>
-    <div class="row">
-        <p class="p-2"> Gravité : {{informations['gravity']}} m.s</p>
-    </div>
-</div>
-<div class="container mt-4 p-4">
-    <h4 style="font-size:1.5rem" class="text-center">Interessé par cette destination ?</h4>
+<div class="container mt-4 p-4 bg-white rounded">
+    <h2 class="h4 text-center">Interessé par cette destination ?</h2>
     <div class="row mt-4">
         <div class="colx-xs-12 col-md-12 col-lg-8">
             <h5 style="font-size:1.2rem" class="text-center">Voyez nos voyages actuels...</h5>
@@ -128,3 +140,4 @@
     </div>
 </div>
 {% endblock %}
+
