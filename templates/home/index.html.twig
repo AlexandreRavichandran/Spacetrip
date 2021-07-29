@@ -3,9 +3,9 @@
 {% block title %} Accueil{% endblock %}
 
 {% block body %}
-<div class="container mt-2 p-4">
+<div class="container-fluid  p-4 homeJumbotron d-flex flex-column justify-content-end">
     <p class="comment"> Welcome ! This website is a fake space trip agency. When discovering this website, you can activate the comments to see more information about this website's features.</p>
-    <div class="jumbotron">
+    <div class="jumbotron align-self-start ">
         <h1 style="font-size:4rem" class="display-3">PROPULSEZ VOUS AVEC SPACETRIP !</h1>
         <p class="lead"> Vous êtes-vous déjà demandé ce qu'il y avait au-dessus de vous? Avez-vous toujours révé d'aller dans l'espace ? Passez du rêve à la réalité avec SPACETRIP* !</p>
         <hr class="my-4">
@@ -23,7 +23,7 @@
     {% endif %}
     {% for trip in trips %}
         <div class="col-xs-12 col-lg-6">
-            <div class="card mb-5 pt-4 pb-4">
+            <div class="card mb-5 pt-4 pb-4 rounded">
                 <div>
                     <h4 class="text-center"> {{trip.name}}</h4>
                     <h5 class="text-center"> {{trip.destination.name}}</h5>
@@ -45,7 +45,7 @@
     {% endfor %}
     </div>
 </div>
-<div class="container mt-4 p-4">
+<div class="container mt-4 p-4 rounded bg-white">
     <h1> Ils ont adoré !  </h1>
     <div class="row mt-2">
     {% for feedback in feedbacks %}
