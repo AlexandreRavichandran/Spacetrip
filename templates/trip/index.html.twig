@@ -3,11 +3,32 @@
 {% block title %}Les voyages{% endblock %}
 
 {% block body %}
-{# <div class="container mt-3 p-4">
+<div class="container mt-3 p-4">
     <div class="jumbotron">
+            {{form_start(form)}}
+        <div class="row">
+            <div class="col">
+            {{form_row(form.Destination)}}
+            </div>
+            <div class="col">
+            {{form_row(form.spacecrafts)}}
+            </div>
+            <div class="col">
+            {{form_row(form.price)}}
+              
+            </div>
+            <div class="col">
+            {{form_row(form.availableSeatNumber)}}
+               
+            </div>
 
+        </div>
+        <div class="d-flex justify-content-center mt-3">
+            <button class="btn rounded btn-primary">Appliquer le filtre</button>
+        </div>
+             {{form_end(form)}}
     </div>
-</div> #}
+</div>
 <div class="container mt-4 p-4">
     <h1> Les voyages actuels </h1>
     <a href="{{path('app_trip_create')}}"><p class="text-danger text-right"> Interessé par aucun voyage ? Spacetrip vous propose désormais de reserver des voyages sur-mesure !  </p></a>
