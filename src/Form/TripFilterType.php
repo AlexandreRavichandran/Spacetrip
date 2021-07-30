@@ -22,12 +22,14 @@ class TripFilterType extends AbstractType
                 'required' => false,
             ])
             ->add('Destinations', EntityType::class, [
+                'placeholder' => 'Selectionnez une destination',
                 'label' => 'Destination',
                 'class' => Destination::class,
                 'choice_label' => 'name',
                 'required' => false,
             ])
             ->add('Spacecrafts', EntityType::class, [
+                'placeholder' => 'Selectionnez un vaisseau',
                 'class' => Spacecraft::class,
                 'choice_label' => 'name',
                 'label' => 'Vaisseaux',
