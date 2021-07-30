@@ -3,13 +3,13 @@
 {% block title %} Destination {{destination.name}} {% endblock %}
 
 {% block body %}
-<div class="container mt-4 p-1">
+<div class="container mt-4 bg-white p-3 rounded">
     <h1 class="text-center"> {{destination.name }} </h1>
     <div class="row">
         <div class="col-xs-12 col-lg-4 p-4">
             <img src="{{ vich_uploader_asset(destination, 'imageFile') }}" alt="Image de {{destination.name}}" class="w-100">
         </div>
-        <div class="col-xs-12 col-lg-8 bg-white p-1 rounded">
+        <div class="col-xs-12 col-lg-8">
             <h2 class="h4 text-center mt-4"> Quelques caracteristiques</h2> 
             <div class="comment">
                 <p>These datas below are not from the database. they can be displayed thanks to an API that i call to have data about a planet (name of his moons, discovery date... ) following his name.</p>
@@ -50,7 +50,7 @@
             </table>
         </div>
     </div>
-    <div class="row mt-3 bg-white rounded">
+    <div class="row mt-3">
         <div class="row">
             <div class="col">
                 <p class="p-2"> {{destination.description}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure commodi quod, laudantium veritatis deserunt blanditiis nihil iste doloribus? Repudiandae asperiores eligendi voluptates laboriosam architecto ut laborum eaque ipsum odio? Adipisci officia veritatis quisquam pariatur. Officia animi nobis adipisci veniam, ipsam eos inventore ratione recusandae rerum alias dignissimos. Voluptatum obcaecati fugit ullam dolor, ratione ab voluptatem exercitationem velit explicabo eaque consequatur aliquid itaque quisquam corporis hic libero id sequi cumque nulla non corrupti et suscipit ducimus eum? Pariatur quos deserunt eaque suscipit, hic natus quibusdam a minus aspernatur fugiat, nulla eius!</p>
@@ -58,6 +58,7 @@
             </div>
         </div>
     </div>
+</div>
 <div class="container mt-4 p-4 bg-white rounded">
     <h2 class="h4 text-center">Interessé par cette destination ?</h2>
     <div class="row mt-4">
