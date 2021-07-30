@@ -1,10 +1,24 @@
 body{
-    background-color: #fdfdfd;
+    background-color: #e8e8e8;
 }
 
+.homeJumbotron{
+    background-image: url('../images/background_jumbotron.jpg');
+    width: 100%;
+    height: 720px;
+    background-repeat: no-repeat;
+}
+.homeJumbotron .jumbotron{
+    width: 45%;
+    opacity: 0.8;
+    
+}
+.homeJumbotron .btn:hover{
+    opacity: 1;
+}
 .tripBackground{
     height: 200px;
-    background-image: url('../images/background_trip_name_title.PNG');
+    background-image: url('../images/background_trip_name_title.png');
     background-repeat: no-repeat;
     width: 100%;
     padding-top: 20px;
@@ -109,7 +123,6 @@ img{
 }
 .destinationImage{
     width: 100%; 
-    height:300px;
 }
 
 #calculateDistanceOff{
@@ -143,8 +156,29 @@ img{
 #satellitesModal{
     background-color: rgb(219, 219, 219);
 }
+
+.spacecraftSection{
+    background-color: #cecece;
+}
+
+@media screen and (max-width:1520px)   {
+    .homeJumbotron .jumbotron{
+        width: 70%;
+        opacity: 0.8;
+        
+    }
+}
 @media screen and (max-width:900px)   {
-    
+
+    .homeJumbotron{
+        background-image: none;
+
+    }
+    .homeJumbotron .jumbotron{
+        width: 100%;
+        opacity: 1;
+        
+    }
     #helpBox{
     position: sticky;
     top:0px;

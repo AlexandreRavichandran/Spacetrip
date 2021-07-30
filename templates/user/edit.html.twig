@@ -3,7 +3,7 @@
 
 
 {% block body %}
-<div class="container mt-4 p-4">
+<div class="container mt-4 p-4 bg-white rounded">
 <h1 class="text-center"> Editer mon profil </h1>
 {{form_start(form)}}
     <div class="row">
@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col">
+        <div class="col d-flex justify-content-center">
             {{form_row(form.email)}}
         </div>
     </div>

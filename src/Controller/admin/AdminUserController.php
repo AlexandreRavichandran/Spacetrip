@@ -54,10 +54,12 @@ class AdminUserController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Veuillez vous connecter.");
 
         $feedbacks = $repo->findBy(['user' => $user->getId()]);
+        $userTrips = $user->getTrip();
 
         return $this->render('admin/user/show.html.twig', [
             'user' => $user,
-            'feedbacks' => $feedbacks
+            'feedbacks' => $feedbacks,
+            'userTrips' => $userTrips
         ]);
     }
 

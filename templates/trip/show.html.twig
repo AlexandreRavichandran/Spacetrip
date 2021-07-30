@@ -12,14 +12,14 @@
     <h1> VOYAGE {{trip.name}} - {{trip.destination.name}}</h1>
     <h2> {{trip.departureAt|date('d-m-Y')}} - {{trip.arrivalAt|date('d-m-Y')}}</h2>
 </div>
-<div class="container mt-4 p-4">
+<div class="container pb-4">
  {% if trip.availableSeatNumber <= 2 and trip.availableSeatNumber is not same as 0 %}
     <div class="row">
         <p class="text-center badge badge-pill badge-danger ml-auto mr-auto p-2"> Il reste actuellement {{trip.availableSeatNumber}} place(s) disponibles. N'attendez plus pour reserver ! </p>
     </div>
     {% endif %}
     <div class="row">
-        <div class="col-xs-12 col-md-12 col-lg-8 ">
+        <div class="col-xs-12 col-md-12 col-lg-8 p-4 bg-white rounded">
             <h3 class="text-center"> La destination </h3>
             <h4 class="text-center"> {{trip.destination.name|upper}}</h4>
             <div class="row">
@@ -51,13 +51,13 @@
                 </table>
             </div>
         </div>
-        <div class="col-xs-12 col-md-12 col-lg-4 ">
+        <div class="col-xs-12 col-md-12 col-lg-4 p-4 spacecraftSection rounded">
             <h3 class="text-center"> Le vaisseau </h3>
             <div class="row">
                 <img class="ml-auto mr-auto w-75 m-2" src="{{ vich_uploader_asset(trip.spacecraft, 'imageFile') }}" alt="" >
             </div>
             <div class="row mt-2">
-                <h4 class="ml-auto mr-auto"> <a class="d-block" href="{{path('app_spacecraft_show',{'id':trip.spacecraft.id})}}">{{trip.spacecraft.name}} ({{trip.spacecraft.brand}})</a></h4>
+                <h5 class="ml-auto mr-auto"> <a class="d-block" href="{{path('app_spacecraft_show',{'id':trip.spacecraft.id})}}">{{trip.spacecraft.name}} ({{trip.spacecraft.brand}})</a></h5>
             </div>
             <div class="row ml-auto mr-auto">
                 <p class="ml-auto mr-auto"> Note moyenne des utilisateurs : {{displayStarRating(trip.spacecraft.rating)}}</p>
@@ -79,7 +79,7 @@
             </div>
         </div>
     </div>
-    <div class="row mt-4">
+    <div class="row mt-4 bg-white rounded p-4 ">
         <div class="col">
             <h3 class="text-center"> Détails du voyage </h3>
             <div class="row">

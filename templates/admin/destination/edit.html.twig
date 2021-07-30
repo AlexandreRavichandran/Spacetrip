@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block title %} {{destination.name}} - Edition{% endblock %}
 {% block body %}
-<div class="container mt-4 p-4">
+<div class="container mt-4 p-4 bg-white rounded">
     <h1>Modification de la destination {{destination.name}} </h1>
     {% include('admin/destination/partials/_form.html.twig')%}
 </div>

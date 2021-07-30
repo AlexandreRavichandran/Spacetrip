@@ -5,7 +5,7 @@
 
     
 
-<div class="container mt-4 p-4">
+<div class="container mt-4 p-4 bg-white rounded">
     <h1 class="text-center"> Vaisseau {{spacecraft.name|upper}}</h1>
     <div class="row">
         <div class="comment">
@@ -52,7 +52,7 @@
         </div>
     </div>
 </div>
-<div class="container mt-2 p-4">
+<div class="container mt-2 p-4 bg-white rounded">
     <h3>l'entreprise</h3>
     <div class="row">
         <div class="col-xs-12 col-md-12 col-lg-9">
@@ -63,7 +63,7 @@
         </div>
     </div>
 </div>
-<div class="container-fluid mt-3 p-4">
+<div class="container-fluid mt-3 p-4 bg-white rounded">
     <h3 id="feedback"> Les derniers commentaires </h3>
     <a class="d-flex justify-content-end" href="{{path('app_feedback_create',{id:spacecraft.id})}}">Vous avez déja eu une experience avec ce vaisseau ? Donnez nous votre avis !</a>
     <div class="row addScroll">
