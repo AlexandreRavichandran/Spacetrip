@@ -3,14 +3,13 @@
 {% block title %} [ADMIN] Liste des utilisateurs {% endblock %}
 
 {% block body %}
-<div class="container-fluid ml-auto mr-auto mt-5 p-4">
+<div class="container-fluid ml-auto mr-auto mt-5 p-4 bg-white rounded">
     <h1 class="text-center"> Liste des utilisateurs </h1>
     <div class="row mt-2 addScroll">
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col" class="text-center">Date d'inscription</th>
-                                                            
+                    <th scope="col" class="text-center">Date d'inscription</th>     
                     <th scope="col" class="text-center">Nom <a href="{% if orderBy is same as 'u.lastName' and order is same as 'DESC' %}{{path('app_admin_user_sort',{'orderBy':'u.lastName','order':'ASC'})}}{% else %}{{path('app_admin_user_sort',{'orderBy':'u.lastName','order':'DESC'})}}{% endif %}" class="{{setSortingIcon(orderBy,'u.lastName', order)}}"></a></th>
                     <th scope="col" class="text-center">Prenom <a href="{% if orderBy is same as 'u.firstName' and order is same as 'DESC' %}{{path('app_admin_user_sort',{'orderBy':'u.firstName','order':'ASC'})}}{% else %}{{path('app_admin_user_sort',{'orderBy':'u.firstName','order':'DESC'})}}{% endif %}" class="{{setSortingIcon(orderBy,'u.firstName', order)}}"></a></th>
                     <th scope="col" class="text-center">E-mail <a href="{% if orderBy is same as 'u.email' and order is same as 'DESC' %}{{path('app_admin_user_sort',{'orderBy':'u.email','order':'ASC'})}}{% else %}{{path('app_admin_user_sort',{'orderBy':'u.email','order':'DESC'})}}{% endif %}" class="{{setSortingIcon(orderBy,'u.email', order)}}"></a>
