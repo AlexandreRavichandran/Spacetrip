@@ -3,7 +3,7 @@
 {% block title %} [ADMIN] Profil de {{user.email}} {% endblock %}
 {% block body %}
 
-<div class="container mt-4 p-4">
+<div class="container mt-4 p-4 bg-white rounded">
     <h1 style="font-size:1.5rem" class="text-center">Profil de {{user.email}}</h1>
     <h4 style="font-size:1rem" class="text-center"> ({{user.firstName}} {{user.lastName}} )</h4>
     <div class="row">
@@ -47,7 +47,7 @@
                         <small>{{feedback.createdAt|date('d/m/Y H:i:s')}}</small>
                     </div>
                     <p class="mb-1">{{feedback.content}}</p>
-                    <p class="text-right">Note : {{feedback.rating}}/5</p>
+                    <p class="text-right">{{displayStarRating(feedback.rating)}}</p>
                     {% endfor %}
                 </div>              
             </div>
@@ -55,7 +55,20 @@
     </div>
     <h5 class="text-center">Ses derniers voyages</h5>
     <div class="row">
-        
+        <table class="table table-hover m-auto">
+            <tbody>
+           {% for trip in userTrips %}
+                <tr class="table">
+                    <td class="text-center"> 
+                        <p>Nom : {{trip.name|upper}}</p> 
+                        <p>Départ : {{trip.departureAt|date('d/m/Y')}}</p>
+                        <p>Arrivée : {{trip.arrivalAt|date('d/m/Y')}}</p>
+                        <p>Voyage {% if trip.reserved is same as true %}réservé{% else %}non réservé{% endif %}</p>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 
