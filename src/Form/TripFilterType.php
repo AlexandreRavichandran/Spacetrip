@@ -17,28 +17,26 @@ class TripFilterType extends AbstractType
     {
         $builder
 
-            ->add('availableSeatNumber', NumberType::class)
             ->add('price', NumberType::class, [
-                'label' => 'Prix maximum'
+                'label' => 'Prix maximum',
+                'required' => false,
             ])
-            ->add('Destination', EntityType::class, [
+            ->add('Destinations', EntityType::class, [
                 'label' => 'Destination',
                 'class' => Destination::class,
                 'choice_label' => 'name',
-                'multiple' => true
+                'required' => false,
             ])
-            ->add('spacecrafts', EntityType::class, [
+            ->add('Spacecrafts', EntityType::class, [
                 'class' => Spacecraft::class,
                 'choice_label' => 'name',
                 'label' => 'Vaisseaux',
-                'multiple' => true
+                'required' => false,
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => Trip::class,
-        ]);
+        $resolver->setDefaults([]);
     }
 }

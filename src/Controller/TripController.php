@@ -27,14 +27,47 @@ class TripController extends AbstractController
     }
     /**
      * Show all trips available
-     * @Route("/trips", name="app_trip_index", methods={"GET"})
+     * @Route("/trips", name="app_trip_index")
      * @return Response
      */
     public function index(PaginatorInterface $paginator, Request $request): Response
     {
         $trips = $paginator->paginate($this->tripRepository->findAvailableTrips(), $request->query->getInt('page', 1), 12);
         $form = $this->createForm(TripFilterType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $filter = $form->getData();
 
+            if (!isset($filter['Destinations'])) {
+                $filter['Destinations'] = null;
+            } else {
+                $filter['Destinations'] = $filter['Destinations']->getId();
+            }
+            if (!isset($filter['Spacecrafts'])) {
+                $filter['Spacecrafts'] = null;
+            } else {
+                $filter['Spacecrafts'] = $filter['Spacecrafts']->getId();
+            }
+            if (!isset($filter['price'])) {
+                $filter['price'] = null;
+            } else {
+                $filter['price'] = $filter['price'];
+            }
+            $trips = $paginator->paginate(
+                $this->tripRepository->sortTrips(
+                    $filter['Spacecrafts'],
+                    $filter['Destinations'],
+                    $filter['price']
+                ),
+                $request->query->getInt('page', 1),
+                12
+            );
+
+            return $this->render('trip/index.html.twig', [
+                'trips' => $trips,
+                'form' => $form->createView()
+            ]);
+        }
         return $this->render('trip/index.html.twig', [
             'trips' => $trips,
             'form' => $form->createView()

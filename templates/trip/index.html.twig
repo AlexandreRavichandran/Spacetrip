@@ -4,32 +4,29 @@
 
 {% block body %}
 <div class="container mt-3 p-4">
-    <div class="jumbotron">
-            {{form_start(form)}}
+    <div class="jumbotron filterTrip rounded">
+        {{form_start(form)}}
         <div class="row">
-            <div class="col">
-            {{form_row(form.Destination)}}
+            <div class="col-xs-12 col-lg-5">
+            {{form_row(form.Destinations)}}
             </div>
-            <div class="col">
-            {{form_row(form.spacecrafts)}}
+            <div class="col-xs-12 col-lg-5">
+            {{form_row(form.Spacecrafts)}}
             </div>
-            <div class="col">
+            <div class="col-xs-12 col-lg-2">
             {{form_row(form.price)}}
-              
             </div>
-            <div class="col">
-            {{form_row(form.availableSeatNumber)}}
-               
-            </div>
-
         </div>
-        <div class="d-flex justify-content-center mt-3">
+        <div class="row d-flex justify-content-center mt-3">
             <button class="btn rounded btn-primary">Appliquer le filtre</button>
         </div>
-             {{form_end(form)}}
+        {{form_end(form)}}
+        <div class="row d-flex justify-content-center mt-3">
+            <a href="{{path('app_trip_index')}}" class="d-block btn rounded btn-sm btn-danger">Reinitialiser le filtre</a>
+        </div>
     </div>
 </div>
-<div class="container mt-4 p-4">
+<div class="container p-4">
     <h1> Les voyages actuels </h1>
     <a href="{{path('app_trip_create')}}"><p class="text-danger text-right"> Interessé par aucun voyage ? Spacetrip vous propose désormais de reserver des voyages sur-mesure !  </p></a>
     <div class="row mt-2">

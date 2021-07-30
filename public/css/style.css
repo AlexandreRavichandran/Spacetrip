@@ -19,6 +19,10 @@ body{
     text-shadow: 1px 1px 1em rgb(255, 255, 255), 0 0 1em rgb(255, 255, 255);
 }
 
+.filterTrip{
+    background-color: #d0ccc9;
+}
+
 img{
     border-radius: 8px;
 }

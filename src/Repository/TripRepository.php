@@ -94,6 +94,33 @@ class TripRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * Manage trip filter
+     *
+     * @param int $spacecraft
+     * @param int $destination
+     * @param int $price
+     * @return array
+     */
+    public function sortTrips($spacecraft = null, $destination = null, $price = null): array
+    {
+        $response = $this->createQueryBuilder('t');
+
+        if ($spacecraft !== null) {
+            $response->orWhere('t.spacecraft = :spacecraft')
+                ->setParameter('spacecraft', $spacecraft);
+        }
+        if ($destination !== null) {
+            $response->andWhere('t.destination = :destination')
+                ->setParameter('destination', $destination);
+        }
+        if ($price !== null) {
+            $response->andWhere('t.price < :price')
+                ->setParameter('price', $price);
+        }
+        return $response->getQuery()
+            ->getResult();
+    }
     // /**
     //  * @return Trip[] Returns an array of Trip objects
     //  */
