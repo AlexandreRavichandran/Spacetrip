@@ -62,7 +62,11 @@ img{
     background: rgba(255,255,255,0.2);
     z-index: 99;
 
+
 }
+.addScroll{
+    overflow: scroll;
+    }
 
 #helpBox:hover{
     opacity:1;
@@ -76,7 +80,7 @@ img{
     font-size:1.2em;
     padding:1.5em;
     border-radius: 7px;
-    background-color: #E8E8E8;
+    background-color: #c1effa;
     margin-top: 1em;
     margin-bottom: 1em;
 
@@ -188,7 +192,5 @@ img{
     border-radius: 20px;
     margin-bottom: 2em;
     }
-    .addScroll{
-    overflow: scroll;
-    }
+
 }
