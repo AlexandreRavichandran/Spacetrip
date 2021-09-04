@@ -31,8 +31,8 @@ class AppFixtures extends Fixture
 
         $destinations = [];
         $spacecrafts = [
-            ['name' => 'Mercury', 'nationality' => 'Etats-Unis', 'brand' => 'McDonnell Aircraft Corporation'],
-            ['name' => 'Gemini', 'nationality' => 'Etats-Unis', 'brand' => 'McDonnell Aircraft Corporation'],
+            ['name' => 'Mercury', 'nationality' => 'Etats-Unis', 'brand' => 'McDonnell-Aircraft-Corporation'],
+            ['name' => 'Gemini', 'nationality' => 'Etats-Unis', 'brand' => 'McDonnell-Aircraft-Corporation'],
             ['name' => 'Soyouz', 'nationality' => 'Russie', 'brand' => 'RKK Energuia'],
             ['name' => 'Vostok', 'nationality' => 'Russie', 'brand' => 'Russie'],
             ['name' => 'Voskhod', 'nationality' => 'Russie', 'brand' => 'Russie'],
@@ -40,8 +40,8 @@ class AppFixtures extends Fixture
             ['name' => 'Shenzhou', 'nationality' => 'Chine', 'brand' => 'Chine'],
             ['name' => 'Startliner', 'nationality' => 'Etats-Unis', 'brand' => 'Boeing'],
             ['name' => 'Crew Dragon', 'nationality' => 'Etats-Unis', 'brand' => 'SpaceX'],
-            ['name' => 'Dream Chaser', 'nationality' => 'Etats-Unis', 'brand' => 'Sierra Nevada Corporation'],
-            ['name' => 'Orion', 'nationality' => 'Etats-Unis', 'brand' => 'Sierra Nevada Corporation'],
+            ['name' => 'Dream Chaser', 'nationality' => 'Etats-Unis', 'brand' => 'Sierra-Nevada-Corporation'],
+            ['name' => 'Orion', 'nationality' => 'Etats-Unis', 'brand' => 'Sierra-Nevada-Corporation'],
         ];
         $spacecrafts_object = [];
 
