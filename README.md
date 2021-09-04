@@ -46,9 +46,17 @@ or
 
 You can see here all features that Spacetrip provides : 
 
-- [Make a trip reservation on an existing trip](http://github.com/AlexandreRavichandran/Spacetrip/blob/master/docs/standard_trip.md) 
-- [Make payment via Paypal](http://github.com/AlexandreRavichandran/Spacetrip/blob/master/docs/payment.md)
-- [Create your own trip](http://github.com/AlexandreRavichandran/Spacetrip/blob/master/docs/reserved_trip.md)
-- [Make a feedback](http://github.com/AlexandreRavichandran/Spacetrip/blob/master/docs/feedback.md)
-- [See documentations about destinations and spacecrafts provided by Spacetrip](http://github.com/AlexandreRavichandran/Spacetrip/blob/master/docs/documentation.md)
-- [An admin part to manage all new databases entries or updates, and charts to easily have an view of customers feedbacks](http://github.com/AlexandreRavichandran/Spacetrip/blob/master/docs/admin.md)
+- Make a trip reservation on an existing trip
+- Make payment via Paypal
+- Create your own trip
+- Make a feedback
+- See documentations about destinations and spacecrafts provided by Spacetrip
+- An admin part to manage all new databases entries or updates, and charts to easily have an view of customers feedbacks
+
+
+# Origin of the project
+This project was the first one which has been made with the symfony framework. I tried to use everything I learned into a project, like CRUD, API requests, Form managing while having a good code writing and of course a good security of the website. I wanted to create a E-commerce website, because I think that practicing a E-commerce style of website allows to cover all skills expected for a Back-end developer. 
+
+I never saw a website about space trips on Github. This motivated me to create a fake agency website that organize trips to space.Most of the features used in this project are also normally used for E-commerce website, except some features (like creating a trip) which are used specifically for this project.
+
+In this project, I had particulary made attention on good-working of every features instead of the website's design (altough I know that website's design is as important as goodworking of features)
