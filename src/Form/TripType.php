@@ -31,6 +31,7 @@ class TripType extends AbstractType
             ])
             ->add('departureAt', DateTimeType::class, [
                 'label' => 'Date de départ du voyage',
+                'widget' => 'single_text',
                 'attr' => [
                     'class' => 'd-flex justify-content-center',
                 ]
@@ -43,6 +44,7 @@ class TripType extends AbstractType
             ])
             ->add('arrivalAt', DateTimeType::class, [
                 'label' => 'Date d\'arrivée du voyage',
+                'widget' => 'single_text',
                 'attr' => [
                     'class' => 'd-flex justify-content-center',
                 ]
